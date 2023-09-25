@@ -1,3 +1,18 @@
+<style>
+  body {
+  background: url("../img/1.jpeg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: "HelveticaNeue", "Arial", sans-serif;
+}
+
+.card-body:hover{
+  filter: invert(1);
+}
+</style>
 <?php
 require "koneksi.php";
 error_reporting(0);
@@ -18,7 +33,7 @@ error_reporting(0);
   <link rel="stylesheet" href="css/style-index.css">
 </head>
 <body>
-<div id="formWrapper">
+
 
 	<?php
 ?> <script src="js/sweetalert2.all.min.js"></script> <?php
