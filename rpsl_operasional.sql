@@ -30,6 +30,20 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -57,7 +71,7 @@ CREATE TABLE public.operasional (
     produksi_id uuid NOT NULL,
     pemakaian_id uuid NOT NULL,
     pemakaian_bahan_bakar_id uuid NOT NULL,
-    supervisor uuid NOT NULL,
+    users_id uuid NOT NULL,
     shift_id uuid NOT NULL,
     tanggal_waktu timestamp without time zone NOT NULL,
     keterangan character varying(300)
@@ -138,11 +152,11 @@ CREATE TABLE public.shift (
 ALTER TABLE public.shift OWNER TO postgres;
 
 --
--- Name: supervisor; Type: TABLE; Schema: public; Owner: postgres
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.supervisor (
-    supervisor_id uuid NOT NULL,
+CREATE TABLE public.users (
+    users_id uuid NOT NULL,
     role_id uuid NOT NULL,
     nama character varying(100) NOT NULL,
     nomor_karyawan integer NOT NULL,
@@ -151,7 +165,7 @@ CREATE TABLE public.supervisor (
 );
 
 
-ALTER TABLE public.supervisor OWNER TO postgres;
+ALTER TABLE public.users OWNER TO postgres;
 
 --
 -- Data for Name: bahan_bakar; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -165,7 +179,7 @@ COPY public.bahan_bakar (bahan_bakar_id, bahan_bakar, rp_per_kg, kcal_effective)
 -- Data for Name: operasional; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift_id, tanggal_waktu, keterangan) FROM stdin;
+COPY public.operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, users_id, shift_id, tanggal_waktu, keterangan) FROM stdin;
 \.
 
 
@@ -198,6 +212,10 @@ COPY public.produksi_kwh (produksi_id, shift_id, generation, pm_kwh_pltbm, tangg
 --
 
 COPY public.role (role_id, role, keterangan_akses) FROM stdin;
+10bb8e91-9a07-4f53-abf6-1d3b2322d688	admin	Akses penuh untuk melakukan Create, Read, Update, Delete
+d5585617-2c57-46b9-852d-c5af4ce5c152	head	Akses Read saja terhadap data seluruh divisi
+2e840351-d4c0-47e9-8f32-086feca52aa3	supervisor	Akses untuk melakukan Create, Read, Update hanya pada divisinya
+e4847848-1a8a-48aa-a22e-e73d43d5447f	operator	Akses untuk melakukan Create dan Read hanya pada divisinya
 \.
 
 
@@ -210,10 +228,11 @@ COPY public.shift (shift_id, shift) FROM stdin;
 
 
 --
--- Data for Name: supervisor; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.supervisor (supervisor_id, role_id, nama, nomor_karyawan, username, password) FROM stdin;
+COPY public.users (users_id, role_id, nama, nomor_karyawan, username, password) FROM stdin;
+5e92446b-60d1-4f61-b084-61008547d132	10bb8e91-9a07-4f53-abf6-1d3b2322d688	admin1	0	admin	admin
 \.
 
 
@@ -298,19 +317,27 @@ ALTER TABLE ONLY public.shift
 
 
 --
--- Name: supervisor supervisor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_nomor_karyawan_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.supervisor
-    ADD CONSTRAINT supervisor_pkey PRIMARY KEY (supervisor_id);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_nomor_karyawan_key UNIQUE (nomor_karyawan);
 
 
 --
--- Name: supervisor supervisor_username_nomor_karyawan_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY public.supervisor
-    ADD CONSTRAINT supervisor_username_nomor_karyawan_key UNIQUE (username, nomor_karyawan);
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (users_id);
+
+
+--
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
 
 
 --
@@ -378,11 +405,19 @@ ALTER TABLE ONLY public.operasional
 
 
 --
--- Name: operasional operasional_supervisor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: operasional operasional_users_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_supervisor_fkey FOREIGN KEY (supervisor) REFERENCES public.supervisor(supervisor_id);
+    ADD CONSTRAINT operasional_users_id_fkey FOREIGN KEY (users_id) REFERENCES public.users(users_id);
+
+
+--
+-- Name: users users_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_role_id_fkey FOREIGN KEY (role_id) REFERENCES public.role(role_id);
 
 
 --

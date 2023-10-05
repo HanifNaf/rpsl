@@ -1,6 +1,6 @@
 <style>
   body {
-  background: url("../img/1.jpeg")
+  background: url("img/1.jpeg")
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -22,7 +22,7 @@ error_reporting(0);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
+    <link href='img/rpsl1.png' rel='icon' type='image/x-icon'/>
   <title>Sistem Informasi Operasional PT RPSL</title>
   <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
