@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <style>
   body {
   background: url("img/1.jpeg")
@@ -13,6 +14,8 @@
   filter: invert(1);
 }
 </style>
+=======
+>>>>>>> Stashed changes
 <?php
 require "koneksi.php";
 error_reporting(0);
