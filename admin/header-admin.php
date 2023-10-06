@@ -35,7 +35,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <img id="logoBrand" src="../img/rpsl1.png" width="35px"></a>
+        <a href="index" class="navbar-brand">
+        <img id="logoBrand" src="../img/rpsl1.png" width="35px">
+        </a>
       </li>
        <li class="nav-item">
         <a href="operasional" class="nav-item nav-link"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
