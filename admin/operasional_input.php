@@ -1,7 +1,7 @@
 <?php 
 	require_once("../koneksi.php"); 
 	require_once("header-admin.php");
-	error_reporting(0);
+	error_reporting(0); //UNtuk menonaktifkan error di production 
 ?>
 	<div class="container">
 	<?php 
