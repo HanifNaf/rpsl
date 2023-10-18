@@ -71,10 +71,11 @@ CREATE TABLE public.operasional (
     produksi_id uuid NOT NULL,
     pemakaian_id uuid NOT NULL,
     pemakaian_bahan_bakar_id uuid NOT NULL,
-    users_id uuid NOT NULL,
-    shift_id uuid NOT NULL,
-    tanggal_waktu timestamp without time zone NOT NULL,
-    keterangan character varying(300)
+    keterangan character varying(300),
+    tanggal date NOT NULL,
+    waktu time without time zone DEFAULT LOCALTIME NOT NULL,
+    shift integer NOT NULL,
+    supervisor character varying(100)
 );
 
 
@@ -86,10 +87,30 @@ ALTER TABLE public.operasional OWNER TO postgres;
 
 CREATE TABLE public.pemakaian_bahan_bakar (
     pemakaian_bahan_bakar_id uuid NOT NULL,
-    bahan_bakar_id uuid NOT NULL,
-    shift_id uuid NOT NULL,
-    pemakaian_kg integer NOT NULL,
-    tanggal_waktu timestamp without time zone NOT NULL
+    tanggal date NOT NULL,
+    waktu time without time zone DEFAULT LOCALTIME NOT NULL,
+    rpkg_cangkang integer DEFAULT 876,
+    kcal_cangkang integer DEFAULT 2177,
+    rpkg_palmfiber integer DEFAULT 266,
+    kcal_palmfiber integer DEFAULT 2040,
+    rpkg_woodchips integer DEFAULT 313,
+    kcal_woodchips integer DEFAULT 2084,
+    rpkg_serbukkayu integer DEFAULT 200,
+    kcal_serbukkayu integer DEFAULT 1789,
+    rpkg_sabutkelapa integer DEFAULT 200,
+    kcal_sabutkelapa integer DEFAULT 1615,
+    rpkg_efbpress integer DEFAULT 210,
+    kcal_efbpress integer DEFAULT 1906,
+    rpkg_opt integer DEFAULT 200,
+    kcal_opt integer DEFAULT 1630,
+    shift integer NOT NULL,
+    kg_cangkang integer DEFAULT 0,
+    kg_palmfiber integer DEFAULT 0,
+    kg_woodchips integer DEFAULT 0,
+    kg_serbukkayu integer DEFAULT 0,
+    kg_sabutkelapa integer DEFAULT 0,
+    kg_efbpress integer DEFAULT 0,
+    kg_opt integer DEFAULT 0
 );
 
 
@@ -101,11 +122,12 @@ ALTER TABLE public.pemakaian_bahan_bakar OWNER TO postgres;
 
 CREATE TABLE public.pemakaian_kwh (
     pemakaian_id uuid NOT NULL,
-    shift_id uuid NOT NULL,
     ekspor integer NOT NULL,
     pemakaian_sendiri integer NOT NULL,
     kwh_loss integer,
-    tanggal_waktu timestamp without time zone NOT NULL
+    tanggal date NOT NULL,
+    waktu time without time zone DEFAULT LOCALTIME NOT NULL,
+    shift integer NOT NULL
 );
 
 
@@ -117,10 +139,11 @@ ALTER TABLE public.pemakaian_kwh OWNER TO postgres;
 
 CREATE TABLE public.produksi_kwh (
     produksi_id uuid NOT NULL,
-    shift_id uuid NOT NULL,
     generation integer NOT NULL,
     pm_kwh_pltbm integer NOT NULL,
-    tanggal_waktu timestamp without time zone NOT NULL
+    tanggal date NOT NULL,
+    waktu time without time zone DEFAULT LOCALTIME NOT NULL,
+    shift integer NOT NULL
 );
 
 
@@ -172,6 +195,13 @@ ALTER TABLE public.users OWNER TO postgres;
 --
 
 COPY public.bahan_bakar (bahan_bakar_id, bahan_bakar, rp_per_kg, kcal_effective) FROM stdin;
+6fb92473-d918-4491-bc72-a6dfc8e45778	Palm Fiber	266	2040
+fc842001-5b47-46b7-9855-10d07df78317	Wood Chips	313	2084
+9072d39a-20c8-4993-9f29-840c53274e4c	Serbuk Kayu	200	1789
+b4be32ad-4a92-4165-ba60-ce73a9dbb5a0	Sabut Kelapa	200	1615
+bd3ef050-e081-4a4d-b897-7595e8014897	EFB Press	210	1906
+544353ed-7d7a-4a30-a54d-313e4f1dd143	OPT	200	1630
+7fe1e197-533f-4e41-8ded-e51ff7084596	Cangkang	876	2177
 \.
 
 
@@ -179,7 +209,10 @@ COPY public.bahan_bakar (bahan_bakar_id, bahan_bakar, rp_per_kg, kcal_effective)
 -- Data for Name: operasional; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, users_id, shift_id, tanggal_waktu, keterangan) FROM stdin;
+COPY public.operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, keterangan, tanggal, waktu, shift, supervisor) FROM stdin;
+447f0b87-b984-4310-82cf-f555154253e7	d7225f4c-79ee-4a50-a442-2c2948301b12	fefc0e49-9cd3-4389-aac9-8eaee4fdad6c	ec4eab11-bbea-45db-bbae-85412f0312fe	Tidak ada keterangan	2023-05-01	11:31:10.455154	1	admin1
+6c5d26c3-3625-438b-83e3-d37e4b09ec7d	60b47843-e7a1-4245-b585-fa46d1a2215f	f05e39ff-16a0-4249-af62-397040f396de	bc1b2e80-eb1c-4c8a-8546-e42552cc060c	Tidak ada keterangan	2023-05-01	14:05:37.77547	2	admin1
+d4a01a77-23f8-4fe2-967c-16cab31c9c81	aae61c97-f6d3-44df-9eae-a2e0f3f39187	c92a6cf9-ea3a-4daf-96ef-8676789bb518	416556b2-3647-47af-b4b0-beadca6f5851	\N	2023-05-01	11:23:16.537236	3	admin1
 \.
 
 
@@ -187,7 +220,11 @@ COPY public.operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_ba
 -- Data for Name: pemakaian_bahan_bakar; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, bahan_bakar_id, shift_id, pemakaian_kg, tanggal_waktu) FROM stdin;
+COPY public.pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, tanggal, waktu, rpkg_cangkang, kcal_cangkang, rpkg_palmfiber, kcal_palmfiber, rpkg_woodchips, kcal_woodchips, rpkg_serbukkayu, kcal_serbukkayu, rpkg_sabutkelapa, kcal_sabutkelapa, rpkg_efbpress, kcal_efbpress, rpkg_opt, kcal_opt, shift, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) FROM stdin;
+ec4eab11-bbea-45db-bbae-85412f0312fe	2023-05-01	16:17:46.506069	876	2177	266	2040	313	2084	200	1789	200	1615	210	1906	200	1630	1	\N	\N	147459	8745	\N	11000	\N
+bc1b2e80-eb1c-4c8a-8546-e42552cc060c	2023-05-01	13:19:26.566841	876	2177	266	2040	313	2084	200	1789	200	1615	210	1906	200	1630	2	\N	\N	118209	6996	\N	17580	\N
+c9f689ad-9d9a-474b-b31d-d744aeb9765d	2023-05-01	11:28:03.514207	876	2177	266	2040	313	2084	200	1789	200	1615	210	1906	200	1630	3	0	0	120081	15741	0	11000	0
+416556b2-3647-47af-b4b0-beadca6f5851	2023-05-01	11:23:16.537236	876	2177	266	2040	313	2084	200	1789	200	1615	210	1906	200	1630	3	0	0	120081	15741	0	11000	0
 \.
 
 
@@ -195,7 +232,10 @@ COPY public.pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, bahan_bakar_id, shi
 -- Data for Name: pemakaian_kwh; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.pemakaian_kwh (pemakaian_id, shift_id, ekspor, pemakaian_sendiri, kwh_loss, tanggal_waktu) FROM stdin;
+COPY public.pemakaian_kwh (pemakaian_id, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu, shift) FROM stdin;
+fefc0e49-9cd3-4389-aac9-8eaee4fdad6c	93408	8278	883	2023-05-01	15:49:20.653401	1
+f05e39ff-16a0-4249-af62-397040f396de	78112	7490	687	2023-05-01	14:01:56.020441	2
+c92a6cf9-ea3a-4daf-96ef-8676789bb518	79840	7395	706	2023-05-01	11:23:16.537236	3
 \.
 
 
@@ -203,7 +243,10 @@ COPY public.pemakaian_kwh (pemakaian_id, shift_id, ekspor, pemakaian_sendiri, kw
 -- Data for Name: produksi_kwh; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.produksi_kwh (produksi_id, shift_id, generation, pm_kwh_pltbm, tanggal_waktu) FROM stdin;
+COPY public.produksi_kwh (produksi_id, generation, pm_kwh_pltbm, tanggal, waktu, shift) FROM stdin;
+d7225f4c-79ee-4a50-a442-2c2948301b12	102569	238880	2023-05-01	15:29:24.648226	1
+60b47843-e7a1-4245-b585-fa46d1a2215f	86289	238880	2023-05-01	12:55:16.84071	2
+aae61c97-f6d3-44df-9eae-a2e0f3f39187	87941	238880	2023-05-01	11:23:16.537236	3
 \.
 
 
@@ -224,6 +267,9 @@ e4847848-1a8a-48aa-a22e-e73d43d5447f	operator	Akses untuk melakukan Create dan R
 --
 
 COPY public.shift (shift_id, shift) FROM stdin;
+0de48f1f-9c0c-43a7-ad66-8f327e991a77	1
+ea72e679-8428-4c6a-bf8d-7dca7403bdae	2
+6cd3f344-fb39-40c8-845e-e4bfd5ef1863	3
 \.
 
 
@@ -341,43 +387,11 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: pemakaian_bahan_bakar fk_bahan_bakar_pemakaian_bahan_bakar; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pemakaian_bahan_bakar
-    ADD CONSTRAINT fk_bahan_bakar_pemakaian_bahan_bakar FOREIGN KEY (bahan_bakar_id) REFERENCES public.bahan_bakar(bahan_bakar_id);
-
-
---
--- Name: pemakaian_kwh fk_shift_pemakaian; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pemakaian_kwh
-    ADD CONSTRAINT fk_shift_pemakaian FOREIGN KEY (shift_id) REFERENCES public.shift(shift_id);
-
-
---
--- Name: pemakaian_bahan_bakar fk_shift_pemakaian_bahan_bakar; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.pemakaian_bahan_bakar
-    ADD CONSTRAINT fk_shift_pemakaian_bahan_bakar FOREIGN KEY (shift_id) REFERENCES public.shift(shift_id);
-
-
---
--- Name: produksi_kwh fk_shift_produksi; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.produksi_kwh
-    ADD CONSTRAINT fk_shift_produksi FOREIGN KEY (shift_id) REFERENCES public.shift(shift_id);
-
-
---
--- Name: operasional operasional_pemakaian_bahan_bakar_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: operasional operasional_pemakaian_bahan_bakar_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_pemakaian_bahan_bakar_id_fkey FOREIGN KEY (pemakaian_bahan_bakar_id) REFERENCES public.pemakaian_bahan_bakar(pemakaian_bahan_bakar_id);
+    ADD CONSTRAINT operasional_pemakaian_bahan_bakar_fkey FOREIGN KEY (pemakaian_bahan_bakar_id) REFERENCES public.pemakaian_bahan_bakar(pemakaian_bahan_bakar_id) ON DELETE CASCADE;
 
 
 --
@@ -385,7 +399,7 @@ ALTER TABLE ONLY public.operasional
 --
 
 ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_pemakaian_id_fkey FOREIGN KEY (pemakaian_id) REFERENCES public.pemakaian_kwh(pemakaian_id);
+    ADD CONSTRAINT operasional_pemakaian_id_fkey FOREIGN KEY (pemakaian_id) REFERENCES public.pemakaian_kwh(pemakaian_id) ON DELETE CASCADE;
 
 
 --
@@ -393,23 +407,7 @@ ALTER TABLE ONLY public.operasional
 --
 
 ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_produksi_id_fkey FOREIGN KEY (produksi_id) REFERENCES public.produksi_kwh(produksi_id);
-
-
---
--- Name: operasional operasional_shift_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_shift_id_fkey FOREIGN KEY (shift_id) REFERENCES public.shift(shift_id);
-
-
---
--- Name: operasional operasional_users_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.operasional
-    ADD CONSTRAINT operasional_users_id_fkey FOREIGN KEY (users_id) REFERENCES public.users(users_id);
+    ADD CONSTRAINT operasional_produksi_id_fkey FOREIGN KEY (produksi_id) REFERENCES public.produksi_kwh(produksi_id) ON DELETE CASCADE;
 
 
 --
