@@ -1,7 +1,7 @@
 <?php
-require("../operasional_data.php");
-require("header-admin.php");
-require("footer-admin.php");
+require("operasional_data.php");
+require("admin/header-admin.php");
+require("admin/footer-admin.php");
 ?>
 
 <head>
@@ -50,7 +50,7 @@ require("footer-admin.php");
                 <!--Header Tabel berwarna gelap-->    
                 <thead class="thead-dark">
                     <tr class="text-center">
-                        <th>No</th>
+						<th>No</th>
                         <th>Tanggal</th>
                         <th>Shift</th>
                         <th>Generasi</th>
@@ -58,8 +58,15 @@ require("footer-admin.php");
                         <th>Ekspor</th>
                         <th>Pemakaian Sendiri</th>
                         <th>Kwh Loss</th>
-                        <th>Bahan Bakar</th>
+                        <th>Pemakaian Cangkang (kg)</th>
+                        <th>Pemakaian Palm Fiber (kg)</th>
+                        <th>Pemakaian Wood Chips (kg)</th>
+                        <th>Pemakaian Serbuk Kayu (kg)</th>
+                        <th>Pemakaian Sabut Kelapa (kg)</th>
+                        <th>Pemakaian EFB Press (kg)</th>
+                        <th>Pemakaian OPT (kg)</th>
                         <th>Supervisor</th>
+                        <th>Keterangan</th>
                     </tr>
 
                     <?php 
@@ -100,12 +107,36 @@ require("footer-admin.php");
 									<?= $array['kwh_loss']; ?>	
 								</td>
 								<td>
-									<!--Bahan Bakar-->
-									<?= $array['bahan_bakar']; ?>
+									<!--kg palm fiber-->
+									<?= $array['kg_palmfiber']; ?>
+								</td>
+								<td>
+									<!--kg wood chips-->
+									<?= $array['kg_woodchips']; ?>
+								</td>
+								<td>
+									<!--kg serbuk kayu-->
+									<?= $array['kg_serbukkayu']; ?>
+								</td>
+								<td>
+									<!--kg sabut kelapa-->
+									<?= $array['kg_sabutkelapa']; ?>
+								</td>
+								<td>
+									<!--kg efb-->
+									<?= $array['kg_efbpress']; ?>
+								</td>
+								<td>
+									<!--kg opt-->
+									<?= $array['kg_opt']; ?>
 								</td>
 								<td>
 									<!--Supervisor-->
-									<?= $array['nama']; ?>
+									<?= $array['supervisor']; ?>
+								</td>
+								<td>
+									<!--Keterangan-->
+									<?= $array['keterangan']; ?>
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
