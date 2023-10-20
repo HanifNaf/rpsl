@@ -32,8 +32,8 @@
 	            }
 	        }
 	    }
-	    else{ 
-	    	?> <script>window.location='produksi?m=mana';</script> <?php 
+	    else{ echo "halaman edit";
+	    	?> <script>//window.location='produksi?m=mana';</script> <?php 
 	    }
 	}else{
 ?>
