@@ -30,6 +30,10 @@ require("footer-admin.php");
   vertical-align: middle;
   border: 1px solid black;
 }
+.custom-button {
+    width: 70px; /* Ganti dengan lebar yang Anda inginkan */
+    height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
+  }
 </style>
 </head>
 
@@ -157,8 +161,8 @@ require("footer-admin.php");
 									<?= $array['keterangan']; ?>
 								</td>
 								<td>
-									<a href="operasional_edit"><button class="btn btn-warning" type="button" title="Edit">Edit</button></a>
-            			<a href="operasional_delete"><button class="btn btn-danger" type="button" title="Hapus">Hapus</button></a>
+									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
+            			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";

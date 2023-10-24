@@ -1,7 +1,7 @@
 <?php 
 	require_once("../koneksi.php"); 
 	require_once("header-admin.php");
-	error_reporting(0);
+	/*error_reporting(0);
 
 	$chk = $_POST['checked_produksi'];
 	if(!isset($chk)){
@@ -36,7 +36,7 @@
 	    	?> <script>//window.location='produksi?m=mana';</script> <?php 
 	    }
 	}else{
-?>
+?>*/
 	<div class="container">
 	<div class="col-md-6 col-sm-12 col" style="margin-left: -15px;">
 		<h3 style="display: flex; float: left;">PRODUKSI BATUBARA</h3></div> 

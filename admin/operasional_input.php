@@ -161,8 +161,8 @@ require ("../koneksi.php");
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"></i> TAMBAH DATA</button>
-            </div>
+                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> TAMBAH DATA</button>
+            	</div>
             </form>
         </div> 
     </div> <!--Akhir Container-->
