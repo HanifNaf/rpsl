@@ -22,13 +22,16 @@ require("footer-admin.php");
   border-collapse: collapse;
 }
 
-.flexible-table th{
+.flexible-table th {
   padding: 8px;
   text-align: center;
-  background-color: black; /* Warna latar belakang hitam */
+  background-color: #000; /* Warna latar belakang hitam */
   color: white; /* Warna teks putih untuk kontras */
   vertical-align: middle;
   border: 1px solid black;
+}
+.flexible-table td {
+         border-bottom: 1px solid #ddd;
 }
 .custom-button {
     width: 70px; /* Ganti dengan lebar yang Anda inginkan */
@@ -92,7 +95,7 @@ require("footer-admin.php");
                     $no = 1;
                     if($row_operasional>0){
                         foreach($operasional_arr as $array){ ?>
-                        <tr class="text-center">
+                        <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
 									<?= $no++; ?>
