@@ -18,7 +18,7 @@ require ("../koneksi.php");
 </head>
 <style>
 	.custom-black-bg {
-    background-color: #228B22;
+    background-color: #2ca143;
     color: white;
 }
 
@@ -75,7 +75,7 @@ require ("../koneksi.php");
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
                         <tr>
                             <!-- Nomor -->
-                           	<td class="custom-black-bg">NO</td>
+                           	<td class="custom-black-bg">Nomor</td>
                             <td><?= $i ?> </td>
                         </tr>
                         <tr>
@@ -135,7 +135,7 @@ require ("../koneksi.php");
                         </tr>
                         <tr>
                             <!-- Pemakaian Sabut Kelapa -->
-                            <td class="custom-black-bg">Pemakaian Serbuk Kelapa</td>
+                            <td class="custom-black-bg">Pemakaian Sabut Kelapa</td>
                             <td><input type="number" name="sabut-kelapa-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
@@ -157,6 +157,11 @@ require ("../koneksi.php");
                             <!-- keterangan -->
                             <td class="custom-black-bg">Keterangan</td>
                             <td><input type="text" name="keterangan-<?=$i?>" style="form-control"></td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                            </td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -204,12 +209,6 @@ require ("../koneksi.php");
                 SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
             $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
             $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
-
-
-            $rs = pg_fetch_assoc($exec_input);
-            if (!$rs) {
-            echo "0 records";
-            }
             ?> 
             
             <?php

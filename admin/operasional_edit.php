@@ -32,7 +32,7 @@
 	            }
 	        }
 	    }
-	    else{ echo "halaman edit";
+	    else{ echo "halaman edit"; 
 	    	?> <script>//window.location='produksi?m=mana';</script> <?php 
 	    }
 	}else{
