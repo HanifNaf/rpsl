@@ -1,5 +1,5 @@
 <?php
-require("../operasional_data.php");
+require("../boiler_data.php");
 require("header-admin.php");
 require("footer-admin.php");
 ?>
@@ -179,9 +179,9 @@ require("footer-admin.php");
                     </tr>
 
                    <?php 
-                    /*$no = 1;
-                    if($row_operasional>0){
-                        foreach($operasional_arr as $array){ ?>
+                    $no = 1;
+                    if($row_boiler>0){
+                        foreach($boiler_arr as $array){ ?>
                         <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
@@ -192,64 +192,276 @@ require("footer-admin.php");
 									<?= $array['tanggal']; ?>
 								</td>
 								<td>
-									<!--Shift-->
-									<?= $array['shift']; ?>
+									<!--jam-->
+									<?= $array['jam']; ?>
 								</td>
 								<td>
-									<!--Generasi-->
-									<?= $array['generation']; ?>
+								<!--Drum Level-->
+									<!-- Level 1 -->
+									<?= $array['level1']; ?>
 								</td>
 								<td>
-									<!--PM-Kwh-PLTBM-->
-									<?= $array['pm_kwh_pltbm']; ?>
+									<!--Level 2-->
+									<?= $array['level2']; ?>
 								</td>
 								<td>
-									<!--Ekspor-->
-									<?= $array['ekspor']; ?>	
+									<!--Pressure-->
+									<?= $array['presure']; ?>	
 								</td>
 								<td>
-									<!--Pemakaian Sendiri-->
-									<?= $array['pemakaian_sendiri']; ?>	
+								<!--Main Stream-->
+									<!--Temperature-->
+									<?= $array['temperature']; ?>	
 								</td>
 								<td>
-									<!--Kwh Loss-->
-									<?= $array['kwh_loss']; ?>	
+									<!--Flow-->
+									<?= $array['flow']; ?>	
 								</td>
 								<td>
-									<!--kg cangkang-->
-									<?= $array['kg_cangkang']; ?>
+									<!--Flow Total-->
+									<?= $array['flow_total']; ?>
 								</td>
 								<td>
-									<!--kg palm fiber-->
-									<?= $array['kg_palmfiber']; ?>
+								<!--Furnace-->
+									<!--Temperature L-->
+									<?= $array['temperature_l']; ?>
 								</td>
 								<td>
-									<!--kg wood chips-->
-									<?= $array['kg_woodchips']; ?>
+									<!--Temperature R-->
+									<?= $array['temperature_r']; ?>
 								</td>
 								<td>
-									<!--kg serbuk kayu-->
-									<?= $array['kg_serbukkayu']; ?>
+									<!--Pressure L-->
+									<?= $array['pressure_l']; ?>
 								</td>
 								<td>
-									<!--kg sabut kelapa-->
-									<?= $array['kg_sabutkelapa']; ?>
+									<!--Pressure R-->
+									<?= $array['pressure_r']; ?>
 								</td>
 								<td>
-									<!--kg efb-->
-									<?= $array['kg_efbpress']; ?>
+								<!--Feed Pump-->
+									<!--Freq 1-->
+									<?= $array['freq1']; ?>
 								</td>
 								<td>
-									<!--kg opt-->
-									<?= $array['kg_opt']; ?>
+									<!--Freq 2-->
+									<?= $array['freq2']; ?>
 								</td>
 								<td>
-									<!--Supervisor-->
-									<?= $array['supervisor']; ?>
+									<!--Curr 1-->
+									<?= $array['curr1']; ?>
 								</td>
 								<td>
-									<!--Keterangan-->
-									<?= $array['keterangan']; ?>
+									<!--Curr 2-->
+									<?= $array['curr2']; ?>
+								</td>
+								<td>
+								<!--Superheater-->
+									<!--Temperature L-->
+									<?= $array['temperature_l']; ?>
+								</td>
+								<td>
+									<!--Temperature R-->
+									<?= $array['temperature_r']; ?>
+								</td>
+								<td>
+									<!--Pressure L-->
+									<?= $array['pressure_l']; ?>
+								</td>
+								<td>
+									<!--Pressure R-->
+									<?= $array['pressure_r']; ?>
+								</td>
+								<td>
+								<!--IDF-->
+									<!--Freq 1-->
+									<?= $array['freq1']; ?>
+								</td>
+								<td>
+									<!--Freq 2-->
+									<?= $array['freq2']; ?>
+								</td>
+								<td>
+									<!--Curr 1-->
+									<?= $array['curr1']; ?>
+								</td>
+								<td>
+									<!--Curr 2-->
+									<?= $array['curr2']; ?>
+								</td>
+								<td>
+								<!--AIR-->
+									<!--Primary Temperature-->
+									<?= $array['primary_temperature']; ?>
+								</td>
+								<td>
+									<!--Secondary Temperature-->
+									<?= $array['secondary_temperature']; ?>
+								</td>
+								<td>
+									<!--Primary Pressure-->
+									<?= $array['primary_pressure']; ?>
+								</td>
+								<td>
+									<!--Pressure R-->
+									<?= $array['secondary_pressure']; ?>
+								</td>
+								<td>
+								<!--Feed Water-->
+									<!--Temperature-->
+									<?= $array['temperature']; ?>
+								</td>
+								<td>
+									<!--Flow-->
+									<?= $array['flow']; ?>
+								</td>
+								<td>
+									<!--Flow Total-->
+									<?= $array['flow_total']; ?>
+								</td>
+								<td>
+									<!--Pressure-->
+									<?= $array['pressure']; ?>
+								</td>
+								<td>
+								<!--Desuperheater-->
+									<!--Temperature-->
+									<?= $array['temperature']; ?>
+								</td>
+								<td>
+									<!--Flow-->
+									<?= $array['flow']; ?>
+								</td>
+								<td>
+									<!--Flow Total-->
+									<?= $array['flow_total']; ?>
+								</td>
+								<td>
+								<!--Header-->
+									<!--Temperature-->
+									<?= $array['temperature']; ?>
+								</td>
+								<td>
+									<!--Pressure-->
+									<?= $array['pressure']; ?>
+								</td>
+								<td>
+								<!--Exhaust Gas-->
+									<!--Temperature L-->
+									<?= $array['temperature_l']; ?>
+								</td>
+								<td>
+									<!--Temperature R-->
+									<?= $array['temperature_r']; ?>
+								</td>
+								<td>
+									<!--Pressure L-->
+									<?= $array['pressure_l']; ?>
+								</td>
+								<td>
+									<!--Pressure R-->
+									<?= $array['pressure_r']; ?>
+								</td>
+								<td>
+								<!--Scraper-->
+									<!--Freq-->
+									<?= $array['freq']; ?>
+								</td>
+								<td>
+									<!--Curr-->
+									<?= $array['curr']; ?>
+								</td>
+								<td>
+								<!--Soot-->
+									<!--Temperature-->
+									<?= $array['temperature']; ?>
+								</td>
+								<td>
+									<!--Pressure-->
+									<?= $array['pressure']; ?>
+								</td>
+								<td>
+								<!--Fuel-->
+									<!--Freq 1-->
+									<?= $array['freq1']; ?>
+								</td>
+								<td>
+									<!--Freq 2-->
+									<?= $array['freq2']; ?>
+								</td>
+								<td>
+									<!--Freq 3-->
+									<?= $array['freq3']; ?>
+								</td>
+								<td>
+									<!--Freq 4-->
+									<?= $array['freq4']; ?>
+								</td>
+								<td>
+								<!--FDF-->
+									<!--Out Pressure-->
+									<?= $array['outpressure']; ?>
+								</td>
+								<td>
+									<!--Freq-->
+									<?= $array['freq']; ?>
+								</td>
+								<td>
+									<!--Curr-->
+									<?= $array['curr']; ?>
+								</td>
+								<td>
+								<!--SDF-->
+									<!--Out Pressure-->
+									<?= $array['outpressure']; ?>
+								</td>
+								<td>
+									<!--Freq-->
+									<?= $array['freq']; ?>
+								</td>
+								<td>
+									<!--Curr-->
+									<?= $array['curr']; ?>
+								<td>
+								<!--Economizer-->
+									<!--In Temperature L-->
+									<?= $array['intemperature_l']; ?>
+								</td>
+								<td>
+									<!--In Temperature R-->
+									<?= $array['intemperature_r']; ?>
+								</td>
+								<td>
+									<!--Out Temperature R-->
+									<?= $array['outtemperature_r']; ?>
+								</td>
+								<td>
+									<!--Out Temperature R-->
+									<?= $array['outtemperature_r']; ?>
+								</td>
+								<td>
+									<!--In Pressure L-->
+									<?= $array['inpressure_l']; ?>
+								</td>
+								<td>
+									<!--In Pressure R-->
+									<?= $array['inpressure_r']; ?>
+								</td>
+								<td>
+									<!--Out Pressure L-->
+									<?= $array['outpressure_l']; ?>
+								</td>
+								<td>
+									<!--Out Pressure L-->
+									<?= $array['outpressure_l']; ?>
+								</td>
+								<td>
+									<!--In Temperature Water-->
+									<?= $array['intemperature_water']; ?>
+								</td>
+								<td>
+									<!--Out Temperature Water-->
+									<?= $array['outtemperature_water']; ?>
 								</td>
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
@@ -257,7 +469,7 @@ require("footer-admin.php");
 								</td> 
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    }*/ ?>
+                    } ?>
             </table>
 </div>
 
