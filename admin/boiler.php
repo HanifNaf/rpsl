@@ -42,6 +42,7 @@ require("footer-admin.php");
 
 
 <body>
+	<?php echo($boiler_arr); ?>
     <div class="container">	
 		<form action="" method="POST">
 			<h2 style="display: flex; float: left;">DATA BOILER</h2> 

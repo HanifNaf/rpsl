@@ -44,7 +44,7 @@ require("footer-admin.php");
 <body>
     <div class="container">	
 		<form action="" method="POST">
-			<h2 style="display: flex; float: left;">DATA BOILER</h2> 
+			<h2 style="display: flex; float: left;">DATA TURBIN</h2> 
 			<div style="display: flex; float: right" id="pencarian1">
 				<input type="text" placeholder="Cari.." name="cari" autofocus>
 				<button type="submit" class="btn-sm btn-dark" style="border:none;"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg></button>
@@ -54,6 +54,7 @@ require("footer-admin.php");
 	<hr>
 
     <!-- Menampilkan Tombol CRUD -->
+    <?php print_r($casing_arr); ?>
     <div class="container">
 		<form name="produksi_proses" method="POST">
 			<div class="form-group">
@@ -171,9 +172,22 @@ require("footer-admin.php");
                     </tr>
 
                    <?php 
-                    /*$no = 1;
-                    if($row_operasional>0){
-                        foreach($operasional_arr as $array){ ?>
+                    $no = 1;
+                    $no = 1;
+					if ($row_casing > 0) { // Modify the variable name to match your actual variable
+					    $numRecords = count($turbin_arr); // Choose one array to determine the loop length
+
+					    for ($i = 0; $i < $numRecords; $i++) {
+					        $array_turbin = $turbin_arr[$i];
+					        $array_vibration = $vibration_arr[$i];
+					        $array_steam = $steam_arr[$i];
+					        $array_bearing = $bearing_arr[$i];
+					        $array_casing = $casing_arr[$i];
+					        $array_generator = $generator_arr[$i];
+					        $array_condensor = $condensor_temperature_arr[$i];
+					        $array_oil = $oil_cooler_temperature_arr[$i];
+					        $array_thrust = $thrust_pad_arr[$i];
+                        	{ ?>
                         <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
@@ -181,75 +195,316 @@ require("footer-admin.php");
 								</td>
 								<td>
 									<!--Tanggal-->
-									<?= $array['tanggal']; ?>
+									<?= $array_turbin['tanggal']; ?>
 								</td>
 								<td>
-									<!--Shift-->
-									<?= $array['shift']; ?>
+									<!--jam-->
+									<?= $array_turbin['jam']; ?>
 								</td>
 								<td>
-									<!--Generasi-->
-									<?= $array['generation']; ?>
+								<!--Turbin-->
+									<!-- Axial Disp -->
+									<?= $array_turbin['axial_disp']; ?>
 								</td>
 								<td>
-									<!--PM-Kwh-PLTBM-->
-									<?= $array['pm_kwh_pltbm']; ?>
+									<!--Heat Exp-->
+									<?= $array_turbin['heat_exp']; ?>
 								</td>
 								<td>
-									<!--Ekspor-->
-									<?= $array['ekspor']; ?>	
+									<!--Stroke Position-->
+									<?= $array_turbin['stroke_position']; ?>	
 								</td>
 								<td>
-									<!--Pemakaian Sendiri-->
-									<?= $array['pemakaian_sendiri']; ?>	
+									<!--Oil Tank Level-->
+									<?= $array_turbin['oil_tank_level']; ?>	
 								</td>
 								<td>
-									<!--Kwh Loss-->
-									<?= $array['kwh_loss']; ?>	
+									<!--Safety Oil Pressure-->
+									<?= $array_turbin['safety_oil_pressure']; ?>	
 								</td>
 								<td>
-									<!--kg cangkang-->
-									<?= $array['kg_cangkang']; ?>
+									<!--Lube Oil Pressure-->
+									<?= $array_turbin['lube_oil_pressure']; ?>	
 								</td>
 								<td>
-									<!--kg palm fiber-->
-									<?= $array['kg_palmfiber']; ?>
+									<!--Speed-->
+									<?= $array_turbin['speed']; ?>	
 								</td>
 								<td>
-									<!--kg wood chips-->
-									<?= $array['kg_woodchips']; ?>
+									<!--Vacuum-->
+									<?= $array_turbin['vacuum']; ?>	
 								</td>
 								<td>
-									<!--kg serbuk kayu-->
-									<?= $array['kg_serbukkayu']; ?>
+								<!--Vibration-->
+									<!--Bearing 1-->
+									<?= $array_vibration['bearing1']; ?>	
 								</td>
 								<td>
-									<!--kg sabut kelapa-->
-									<?= $array['kg_sabutkelapa']; ?>
+									<!--Bearing 2-->
+									<?= $array_vibration['bearing2']; ?>	
 								</td>
 								<td>
-									<!--kg efb-->
-									<?= $array['kg_efbpress']; ?>
+									<!--Bearing 3-->
+									<?= $array_vibration['bearing3']; ?>	
 								</td>
 								<td>
-									<!--kg opt-->
-									<?= $array['kg_opt']; ?>
+									<!--Bearing 4-->
+									<?= $array_vibration['bearing4']; ?>	
 								</td>
 								<td>
-									<!--Supervisor-->
-									<?= $array['supervisor']; ?>
+								<!--Steam-->
+									<!--Pressure-->
+									<?= $array_steam['pressure']; ?>
 								</td>
 								<td>
-									<!--Keterangan-->
-									<?= $array['keterangan']; ?>
+									<!--Before MSV Temp-->
+									<?= $array_steam['before_msv_temp']; ?>
+								</td>
+								<td>
+									<!--After Stage 1 Temp-->
+									<?= $array_steam['after_stage_1_temp']; ?>
+								</td>
+								<td>
+									<!--After MSV Temp-->
+									<?= $array_steam['after_msv_temp']; ?>
+								</td>
+								<td>
+									<!--Exhaust Chamber Temp-->
+									<?= $array_steam['exhaust_chamber_temp']; ?>
+								</td>
+								<td>
+								<!--Bearing-->
+									<!--Temperature 1 A-->
+									<?= $array_bearing['temperature_1_a']; ?>
+								</td>
+								<td>
+									<!--Temperature 1 B-->
+									<?= $array_bearing['temperature_1_b']; ?>
+								</td>
+								<td>
+									<!--Temperature 2 A-->
+									<?= $array_bearing['temperature_2_a']; ?>
+								</td>
+								<td>
+									<!--Temperature 2 B-->
+									<?= $array_bearing['temperature_2_b']; ?>
+								</td>
+								<td>
+									<!--Temperature 3 A-->
+									<?= $array_bearing['temperature_3_a']; ?>
+								</td>
+								<td>
+									<!--Temperature 3 B-->
+									<?= $array_bearing['temperature_3_b']; ?>
+								</td>
+								<td>
+									<!--Temperature 4 -->
+									<?= $array_bearing['temperature_4']; ?>
+								</td>
+								<td>
+									<!--Return Oil Temperature 1 -->
+									<?= $array_bearing['return_oil_temp_1']; ?>
+								</td>
+								<td>
+									<!--Return Oil Temperature 2 -->
+									<?= $array_bearing['return_oil_temp_2']; ?>
+								</td>
+								<td>
+									<!--Return Oil Temperature 3 -->
+									<?= $array_bearing['return_oil_temp_3']; ?>
+								</td>
+								<td>
+									<!--Return Oil Temperature 4 -->
+									<?= $array_bearing['return_oil_temp_4']; ?>
+								</td>
+								<td>
+									<!--Thrust Pad A -->
+									<?= $array_bearing['thrust_pad_a']; ?>
+								</td>
+								<td>
+									<!--Thrust Pad B-->
+									<?= $array_bearing['thrust_pad_b']; ?>
+								</td>
+								<td>
+								<!--Casing-->
+									<!--Upper Temperature-->
+									<?= $array_casing['upper_temp']; ?>
+								</td>
+								<td>
+									<!--Lower Temperature-->
+									<?= $array_casing['lower_temp']; ?>
+								</td>
+								<td>
+									<!--Flange Temperature A-->
+									<?= $array_casing['flange_temp_a']; ?>
+								</td>
+								<td>
+									<!--Flange Temperature B-->
+									<?= $array_casing['flange_temp_b']; ?>
+								</td>
+								<td>
+								<!--Generator-->
+									<!--Outlet Air-->
+									<?= $array_generator['outlet_air']; ?>
+								</td>
+								<td>
+									<!--Inlet Air-->
+									<?= $array_generator['inlet_air']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 1-->
+									<?= $array_generator['stator_coil_temp_1']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 2-->
+									<?= $array_generator['stator_coil_temp_2']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 3-->
+									<?= $array_generator['stator_coil_temp_3']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 4-->
+									<?= $array_generator['stator_coil_temp_4']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 5-->
+									<?= $array_generator['stator_coil_temp_5']; ?>
+								</td>
+								<td>
+									<!--Stator Coil Temperature 6-->
+									<?= $array_generator['stator_coil_temp_6']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 7-->
+									<?= $array_generator['stator_core_temp_7']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 8-->
+									<?= $array_generator['stator_core_temp_8']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 9-->
+									<?= $array_generator['stator_core_temp_9']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 10-->
+									<?= $array_generator['stator_core_temp_10']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 11-->
+									<?= $array_generator['stator_core_temp_11']; ?>
+								</td>
+								<td>
+									<!--Stator Core Temperature 12-->
+									<?= $array_generator['stator_core_temp_12']; ?>
+								</td>
+								<td>
+								<!--Condensor Temperature-->
+									<!--Inlet Steam-->
+									<?= $array_condensor['inlet_steam']; ?>
+								</td>
+								<td>
+									<!--Cond-->
+									<?= $array_condensor['cond']; ?>
+								</td>
+								<td>
+									<!--Cooling Inlet A-->
+									<?= $array_condensor['cooling_inlet_a']; ?>
+								</td>
+								<td>
+									<!--Cooling Inlet B-->
+									<?= $array_condensor['cooling_inlet_b']; ?>
+								</td>
+								<td>
+									<!--Cooling Outlet A-->
+									<?= $array_condensor['cooling_outlet_a']; ?>
+								</td>
+								<td>
+									<!--Cooling Outlet B-->
+									<?= $array_condensor['cooling_outlet_b']; ?>
+								</td>
+								<td>
+								<!--Oil Cooler Temperature -->
+									<!--Cooling Inlet A-->
+									<?= $array_oil['cooling_inlet_a']; ?>
+								</td>
+								<td>
+									<!--Cooling Inlet B-->
+									<?= $array_oil['cooling_inlet_b']; ?>
+								</td>
+								<td>
+									<!--Cooling Outlet A-->
+									<?= $array_oil['cooling_outlet_a']; ?>
+								</td>
+								<td>
+									<!--Cooling Outlet B-->
+									<?= $array_oil['cooling_outlet_b']; ?>
+								</td>
+								<td>
+									<!--Oil Inlet A-->
+									<?= $array_oil['oil_inlet_a']; ?>
+								</td>
+								<td>
+									<!--Oil Inlet B-->
+									<?= $array_oil['oil_inlet_b']; ?>
+								</td>
+								<td>
+									<!--Oil Outlet A-->
+									<?= $array_oil['oil_outlet_a']; ?>
+								</td>
+								<td>
+									<!--Oil Outlet B-->
+									<?= $array_oil['oil_outlet_b']; ?>
+								</td>
+								<td>
+								<!--Thrust Pad-->
+									<!--Pad A-->
+									<?= $array_thrust['pad_a']; ?>
+								</td>
+								<td>
+									<!--Pad B-->
+									<?= $array_thrust['pad_b']; ?>
+								</td>
+								<td>
+									<!--Pad C-->
+									<?= $array_thrust['pad_c']; ?>
+								</td>
+								<td>
+									<!--Pad D-->
+									<?= $array_thrust['pad_d']; ?>
+								</td>
+								<td>
+									<!--Pad E-->
+									<?= $array_thrust['pad_e']; ?>
+								</td>
+								<td>
+									<!--Pad F-->
+									<?= $array_thrust['pad_f']; ?>
+								</td>
+								<td>
+									<!--Pad G-->
+									<?= $array_thrust['pad_g']; ?>
+								</td>
+								<td>
+									<!--Pad H-->
+									<?= $array_thrust['pad_h']; ?>
+								</td>
+								<td>
+									<!--Pad I-->
+									<?= $array_thrust['pad_i']; ?>
+								</td>
+								<td>
+									<!--Pad J-->
+									<?= $array_thrust['pad_j']; ?>
 								</td>
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
             			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td> 
-                    <?php }} else{
+                    <?php }}} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    }*/ ?>
+                    } ?>
             </table>
 </div>
 

@@ -21,6 +21,6 @@ $economizer = pg_query($koneksi_boiler, "SELECT * FROM economizer");
 
 $boiler_arr = pg_fetch_all($drum_level, $main_stream, $furnace, $feed_pump, $superheater, $idf, $air, $feed_water, $desuperheater, $header, $exhaust_gas, $scraper, $soot, $fuel, $fdf, $sdf, $economizer);
 
-$row_boiler = pg_num_rows($drum_level, $main_stream, $furnace, $feed_pump, $superheater, $idf, $air, $feed_water, $desuperheater, $header, $exhaust_gas, $scraper, $soot, $fuel, $fdf, $sdf, $economizer);
+$row_boiler = pg_num_rows($boiler_arr);
 
 ?>
