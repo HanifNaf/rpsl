@@ -50,7 +50,7 @@ if ($_GET['m'] == "gagal") {?>
 
 <div id="form">
 <div class="logo">
-	<a href="/operasional/"><img src="img/rpsl1.png" max-width="200px"></a>
+	<a href="/pltu"><img src="img/rpsl1.png" max-width="200px"></a>
 </div>
 		<div class="row">
 				<div class="col">
