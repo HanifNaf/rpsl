@@ -1,5 +1,5 @@
 <?php
-require("../turbin_data.php");
+require("../operasional_data.php");
 require("header-admin.php");
 require("footer-admin.php");
 ?>
@@ -54,6 +54,7 @@ require("footer-admin.php");
 	<hr>
 
     <!-- Menampilkan Tombol CRUD -->
+    <?php print_r($casing_arr); ?>
     <div class="container">
 		<form name="produksi_proses" method="POST">
 			<div class="form-group">
@@ -171,14 +172,22 @@ require("footer-admin.php");
                     </tr>
 
                    <?php 
-                   	
-                    $merged = array_merge($casing_arr, $vibration_arr);
-    				print_r($merged);
                     $no = 1;
+                    $no = 1;
+					if ($row_casing > 0) { // Modify the variable name to match your actual variable
+					    $numRecords = count($turbin_arr); // Choose one array to determine the loop length
 
-                    if($row_casing>0){ //nama variablenya disesuaikan lagi
-                         /*foreach ($merged as $merged)*/ {
-                        ?>
+					    for ($i = 0; $i < $numRecords; $i++) {
+					        $array_turbin = $turbin_arr[$i];
+					        $array_vibration = $vibration_arr[$i];
+					        $array_steam = $steam_arr[$i];
+					        $array_bearing = $bearing_arr[$i];
+					        $array_casing = $casing_arr[$i];
+					        $array_generator = $generator_arr[$i];
+					        $array_condensor = $condensor_temperature_arr[$i];
+					        $array_oil = $oil_cooler_temperature_arr[$i];
+					        $array_thrust = $thrust_pad_arr[$i];
+                        	{ ?>
                         <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
@@ -195,7 +204,7 @@ require("footer-admin.php");
 								<td>
 								<!--Turbin-->
 									<!-- Axial Disp -->
-									<?php echo $array[0]['axial_disp']; ?>
+									<?= $array_turbin['axial_disp']; ?>
 								</td>
 								<td>
 									<!--Heat Exp-->
@@ -228,19 +237,19 @@ require("footer-admin.php");
 								<td>
 								<!--Vibration-->
 									<!--Bearing 1-->
-									<?php echo $merged[1]['bearing1']; ?>	
+									<?= $array_vibration['bearing1']; ?>	
 								</td>
 								<td>
 									<!--Bearing 2-->
-									<?php echo $merged[1]['bearing2']; ?>	
+									<?= $array_vibration['bearing2']; ?>	
 								</td>
 								<td>
 									<!--Bearing 3-->
-									<?php echo $merged[1]['bearing3']; ?>	
+									<?= $array_vibration['bearing3']; ?>	
 								</td>
 								<td>
 									<!--Bearing 4-->
-									<?php echo $merged[1]['bearing4']; ?>	
+									<?= $array_vibration['bearing4']; ?>	
 								</td>
 								<td>
 								<!--Steam-->
@@ -319,19 +328,19 @@ require("footer-admin.php");
 								<td>
 								<!--Casing-->
 									<!--Upper Temperature-->
-									<?php echo $merged[0]['upper_temp']; ?>
+									<?= $array_casing['upper_temp']; ?>
 								</td>
 								<td>
 									<!--Lower Temperature-->
-									<?php echo $merged[0]['lower_temp']; ?>
+									<?= $array_casing['lower_temp']; ?>
 								</td>
 								<td>
 									<!--Flange Temperature A-->
-									<?php echo $merged[0]['flange_temp_a']; ?>
+									<?= $array_casing['flange_temp_a']; ?>
 								</td>
 								<td>
 									<!--Flange Temperature B-->
-									<?php echo $merged[0]['flange_temp_b']; ?>
+									<?= $array_casing['flange_temp_b']; ?>
 								</td>
 								<td>
 								<!--Generator-->
@@ -493,12 +502,10 @@ require("footer-admin.php");
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
             			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td> 
-                    <?php }} else{
+                    <?php }}} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
                     } ?>
             </table>
-
-            <?php echo $merged[1]['bearing1']; ?>
 </div>
 
 
