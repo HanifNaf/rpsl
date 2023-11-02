@@ -1,5 +1,5 @@
 <?php
-$koneksi_turbin = pg_connect("host=localhost dbname=rpsl_boiler user=rpsl password=pass_rpsl");
+$koneksi_turbin = pg_connect("host=localhost dbname=rpsl_turbin user=rpsl password=pass_rpsl");
 
 $turbin = pg_query($koneksi_turbin, "SELECT * FROM turbin");
 $vibration = pg_query($koneksi_turbin, "SELECT * FROM vibration");
