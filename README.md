@@ -1,2 +1,0 @@
-# PLTU
- Projek PLTU

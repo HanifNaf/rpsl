@@ -137,7 +137,7 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Safety Oil Pressure -->
                             <td class="custom-black-bg" width="30%">Safety Oil Pressure (SAFETY_O)</td>
-                            <td><input type="number" name="safety_oil_pressurE-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="safety_oil_pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Lube Oil Pressure -->
@@ -157,22 +157,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Bearing 1 -->
                             <td class="custom-black-bg" width="30%">Bearing 1 (VE5190)</td>
-                            <td><input type="number" name="bearing_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="bearing1-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Bearing 2 -->
                             <td class="custom-black-bg" width="30%">Bearing 2 (VE5191)</td>
-                            <td><input type="number" name="bearing_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="bearing2-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Bearing 3 -->
                             <td class="custom-black-bg" width="30%">Bearing 3 (VE5192)</td>
-                            <td><input type="number" name="bearing_3-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="bearing3-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Bearing 4 -->
                             <td class="custom-black-bg" width="30%">Bearing 4 (VE5193)</td>
-                            <td><input type="number" name="bearing_4-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="bearing4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -182,27 +182,27 @@ require ("../koneksi.php");
                          <tr>    
                             <!-- Pressure Boiler 1 -->
                             <td class="custom-black-bg">Pressure (Boiler 1)</td>
-                            <td><input type="number" name="pressure_boiler1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Before MSV Temperature -->
                             <td class="custom-black-bg">Before MSV Temperature (TE2100)</td>
-                            <td><input type="number" name="before_msv_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="before_msv_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- After 1st Stage Temperature -->
                             <td class="custom-black-bg">After 1st Stage Temperature (TE2120)</td>
-                            <td><input type="number" name="before_msv_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="after_1st_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- After MSV Temperature -->
                             <td class="custom-black-bg">After MSV Temperature (TE2123)</td>
-                            <td><input type="number" name="after_msv_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="after_msv_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Exhaust Chamber Temperature -->
                             <td class="custom-black-bg">Exhaust Chamber Temperature (TIE2140)</td>
-                            <td><input type="number" name="before_msv_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="exhaust_chamber_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -212,32 +212,32 @@ require ("../koneksi.php");
                        <tr>    
                             <!-- Temperatur 1 A -->
                             <td class="custom-black-bg">Temperature 1 A (TE201A)</td>
-                            <td><input type="number" name="temperature_1_a-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_1a-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur 1 B -->
                             <td class="custom-black-bg">Temperature 1 B (TE201B)</td>
-                            <td><input type="number" name="temperature_1_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_1b-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Temperatur 2 A -->
                             <td class="custom-black-bg">Temperature 2 A (TE4203A)</td>
-                            <td><input type="number" name="temperature_2_a-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_2a-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur 2 B -->
                             <td class="custom-black-bg">Temperature 2 B (TE4203B)</td>
-                            <td><input type="number" name="temperature_2_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_2b-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperature 3 A -->
                             <td class="custom-black-bg">Temperature 3 A (TE4204A)</td>
-                            <td><input type="number" name="temperature_3_a-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_3a-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur 3 B -->
                             <td class="custom-black-bg">Temperature 3 B (TE4204B)</td>
-                            <td><input type="number" name="temperature_3_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature_3b-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur 4 -->
@@ -247,22 +247,22 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Return Oil Temperature 1 -->
                             <td class="custom-black-bg">Return Oil Temperature 1 (TIE4101)</td>
-                            <td><input type="number" name="temperature_3_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="return_oil_temp_1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Return Oil Temperature 2 -->
                             <td class="custom-black-bg">Return Oil Temperature 2 (TIE4102)</td>
-                            <td><input type="number" name="temperature_3_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="return_oil_temp_2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Return Oil Temperature 3 -->
                             <td class="custom-black-bg">Return Oil Temperature 3 (TIE4103)</td>
-                            <td><input type="number" name="temperature_3_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="return_oil_temp_3-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Return Oil Temperature 4 -->
                             <td class="custom-black-bg">Return Oil Temperature 4 (TIE4104)</td>
-                            <td><input type="number" name="temperature_3_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="return_oil_temp_4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Thrust Pad A -->
@@ -282,22 +282,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Upper Temperature -->
                             <td class="custom-black-bg">Upper Temperature (TE2110)</td>
-                            <td><input type="number" name="upper_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="upper_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Lower Temperature -->
                             <td class="custom-black-bg">Lower Temperature (TE2111)</td>
-                            <td><input type="number" name="lower_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="lower_temp-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flange Temperature A -->
                             <td class="custom-black-bg">flange Temperature A (TE2121A)</td>
-                            <td><input type="number" name="flange_temperature_a-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="flange_temp_a-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flange Temperature B -->
                             <td class="custom-black-bg">flange Temperature B (TE2121B)</td>
-                            <td><input type="number" name="flange_temperature_b-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="flange_temp_b-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -307,72 +307,72 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Outlet Air Temperature -->
                             <td class="custom-black-bg">Outlet Air Temperature</td>
-                            <td><input type="number" name="outlet_air_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="outlet_air-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Inlet Air Temperature -->
                             <td class="custom-black-bg">Inlet Air Temperature</td>
-                            <td><input type="number" name="inlet_air_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="inlet_air-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 1 (T1_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 2 (T2_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 3 (T3_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_3-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_3-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 4 (T4_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_4-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 5 (T5_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_5-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_5-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 6 (T6_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_6-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_6-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 7 (T7_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_7-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_7-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 8 (T8_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_8-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_8-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 9 (T9_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_9-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_9-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 10 (T10_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_10-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_10-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 11 (T11_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_11-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_11-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 12 (T12_GEN) </td>
-                            <td><input type="number" name="stator_coil_temperature_12-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="stator_coil_temp_12-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -507,7 +507,7 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Pad J -->
                             <td class="custom-black-bg">Pad J (TIE4100A)</td>
-                            <td><input type="number" name="pad_J-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pad_j-<?=$i?>" style="form-control"></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -525,21 +525,79 @@ require ("../koneksi.php");
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
-            $shift = $_REQUEST['shift-'.$i];
-            $generasi = $_REQUEST['generasi-'.$i];
-            $pm_kwh_pltbm = $_REQUEST['pm-kwh-pltbm-'.$i];
-            $ekspor = $_REQUEST['ekspor-'.$i];
-            $pemakaian_sendiri = $_REQUEST['pemakaian-sendiri-'.$i];
-            $kwh_loss = $_REQUEST['kwh-loss-'.$i];
-            $cangkang = $_REQUEST['cangkang-'.$i];
-            $palm_fiber = $_REQUEST['palm-fiber-'.$i];
-            $wood_chips = $_REQUEST['wood-chips-'.$i];
-            $serbuk_kayu = $_REQUEST['serbuk-kayu-'.$i];
-            $sabut_kelapa = $_REQUEST['sabut-kelapa-'.$i];
-            $efb = $_REQUEST['efb-press-'.$i];
-            $opt = $_REQUEST['opt-'.$i];
-            $supervisor = $_REQUEST['supervisor-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];
+            $jam = $_REQUEST['jam-'.$i];
+            $turbin_axial = $_REQUEST['axial_disp-'.$i];
+            $turbin_heat = $_REQUEST['heat_exp-'.$i];
+            $turbin_stroke = $_REQUEST['stroke_position-'.$i];
+            $turbin_tank = $_REQUEST['oil_tank_level-'.$i];
+            $turbin_safety = $_REQUEST['safety_oil_pressure-'.$i];
+            $turbin_lube = $_REQUEST['lube_oil_pressure-'.$i];
+            $turbin_speed = $_REQUEST['speed-'.$i];
+            $turbin_vacuum = $_REQUEST['vacuum-'.$i];
+            $vibration_bearing1 = $_REQUEST['bearing1-'.$i];
+            $vibration_bearing2 = $_REQUEST['bearing2-'.$i];
+            $vibration_bearing3 = $_REQUEST['bearing3-'.$i];
+            $vibration_bearing4 = $_REQUEST['bearing4-'.$i];
+            $steam_pressure = $_REQUEST['pressure-'.$i];
+            $steam_before_msv = $_REQUEST['before_msv_temp-'.$i];
+            $steam_after_1st = $_REQUEST['after_stage_1_temp-'.$i];
+            $steam_after_msv = $_REQUEST['after_msv_temp-'.$i];
+            $steam_exhaust = $_REQUEST['exhaust_chamber_temp-'.$i];
+            $bearing_temp_1a = $_REQUEST['temperature_1_a-'.$i];
+            $bearing_temp_1b = $_REQUEST['temperature_1_b-'.$i];
+            $bearing_temp_2a = $_REQUEST['temperature_2_a-'.$i];
+            $bearing_temp_2b = $_REQUEST['temperature_2_b-'.$i];
+            $bearing_temp_3a = $_REQUEST['temperature_3_a-'.$i];
+            $bearing_temp_3b = $_REQUEST['temperature_3_b-'.$i];
+            $bearing_temp_4 = $_REQUEST['temperature_4-'.$i];
+            $bearing_return_1 = $_REQUEST['return_oil_temp_1-'.$i];
+            $bearing_return_2 = $_REQUEST['return_oil_temp_2-'.$i];
+            $bearing_return_3 = $_REQUEST['return_oil_temp_3-'.$i];
+            $bearing_return_4 = $_REQUEST['return_oil_temp_4-'.$i];  
+            $bearing_pad_a = $_REQUEST['thrust_pad_a-'.$i];
+            $bearing_pad_b = $_REQUEST['thrust_pad_b-'.$i]; 
+            $casing_upper = $_REQUEST['upper_temp-'.$i];
+            $casing_lower = $_REQUEST['lower_temp-'.$i];
+            $casing_flange_a = $_REQUEST['flange_temp_a-'.$i];
+            $casing_flange_b = $_REQUEST['flange_temp_b-'.$i];
+            $generator_outlet = $_REQUEST['outlet_air-'.$i];
+            $generator_inlet = $_REQUEST['inlet_air-'.$i];
+            $generator_coil_1 = $_REQUEST['stator_coil_temp_1-'.$i];
+            $generator_coil_2 = $_REQUEST['stator_coil_temp_2-'.$i];
+            $generator_coil_3 = $_REQUEST['stator_coil_temp_3-'.$i];
+            $generator_coil_4 = $_REQUEST['stator_coil_temp_4-'.$i];
+            $generator_coil_5 = $_REQUEST['stator_coil_temp_5-'.$i];
+            $generator_coil_6 = $_REQUEST['stator_coil_temp_6-'.$i];
+            $generator_core_7 = $_REQUEST['stator_core_temp_7-'.$i];
+            $generator_core_8 = $_REQUEST['stator_core_temp_8-'.$i];
+            $generator_core_9 = $_REQUEST['stator_core_temp_9-'.$i];
+            $generator_core_10 = $_REQUEST['stator_core_temp_10-'.$i];
+            $generator_core_11 = $_REQUEST['stator_core_temp_11-'.$i];
+            $generator_core_12 = $_REQUEST['stator_core_temp_12-'.$i];
+            $condensor_inlet = $_REQUEST['inlet_steam-'.$i];
+            $condensor_cond = $_REQUEST['cond-'.$i];
+            $condensor_inlet_a = $_REQUEST['cooling_inlet_a-'.$i];
+            $condensor_inlet_b = $_REQUEST['cooling_inlet_b-'.$i];
+            $condensor_outlet_a = $_REQUEST['cooling_outlet_a-'.$i];
+            $condensor_outlet_b = $_REQUEST['cooling_outlet_b-'.$i];
+            $oil_cooling_inlet_a = $_REQUEST['cooling_inlet_a-'.$i];
+            $oil_cooling_inlet_b = $_REQUEST['cooling_inlet_b-'.$i];
+            $oil_cooling_outlet_a = $_REQUEST['cooling_outlet_a-'.$i];
+            $oil_cooling_outlet_b = $_REQUEST['cooling_outlet_b-'.$i];
+            $oil_inlet_a = $_REQUEST['oil_inlet_a-'.$i];
+            $oil_inlet_b = $_REQUEST['oil_inlet_b-'.$i];
+            $oil_outlet_a = $_REQUEST['oil_outlet_a-'.$i];
+            $oil_outlet_b = $_REQUEST['oil_outlet_b-'.$i];
+            $thrust_pad_a = $_REQUEST['thrust_pad_a-'.$i];
+            $thrust_pad_b = $_REQUEST['thrust_pad_b-'.$i];
+            $thrust_pad_c = $_REQUEST['thrust_pad_c-'.$i];
+            $thrust_pad_d = $_REQUEST['thrust_pad_d-'.$i];
+            $thrust_pad_e = $_REQUEST['thrust_pad_e-'.$i];
+            $thrust_pad_f = $_REQUEST['thrust_pad_f-'.$i];
+            $thrust_pad_g = $_REQUEST['thrust_pad_g-'.$i];
+            $thrust_pad_h = $_REQUEST['thrust_pad_h-'.$i];
+            $thrust_pad_i = $_REQUEST['thrust_pad_i-'.$i];
+            $thrust_pad_j = $_REQUEST['thrust_pad_j-'.$i];
 
             //Insert ke database
             $insert_query = "WITH in1 AS(

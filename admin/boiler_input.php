@@ -136,8 +136,8 @@ require ("../koneksi.php");
                         <th> Main Stream </th>
                         <tr>    
                             <!-- Temperatur -->
-                            <td class="custom-black-bg">Temperatur</td>
-                            <td><input type="number" name="temperatur-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature</td>
+                            <td><input type="number" name="temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
@@ -161,13 +161,13 @@ require ("../koneksi.php");
                         <th> Furnace </th>
                        <tr>    
                             <!-- Temperatur L -->
-                            <td class="custom-black-bg">Temperatur L</td>
-                            <td><input type="number" name="temperatur_l-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature L</td>
+                            <td><input type="number" name="temperature_l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
-                            <td class="custom-black-bg">Temperatur R</td>
-                            <td><input type="number" name="temperatur_r-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature R</td>
+                            <td><input type="number" name="temperature_r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
@@ -211,13 +211,13 @@ require ("../koneksi.php");
                         <th> Superheater </th>
                          <tr>    
                             <!-- Temperatur L -->
-                            <td class="custom-black-bg">Temperatur L</td>
-                            <td><input type="number" name="temperatur_l-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature L</td>
+                            <td><input type="number" name="temperature_l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
-                            <td class="custom-black-bg">Temperatur R</td>
-                            <td><input type="number" name="temperatur_r-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature R</td>
+                            <td><input type="number" name="temperature_r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
@@ -286,8 +286,8 @@ require ("../koneksi.php");
                         <th> Feed Water </th>
                         <tr>    
                             <!-- Temperatur -->
-                            <td class="custom-black-bg">Temperatur</td>
-                            <td><input type="number" name="temperatur-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature</td>
+                            <td><input type="number" name="temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow -->
@@ -311,8 +311,8 @@ require ("../koneksi.php");
                         <th> Desuperheater </th>
                         <tr>    
                             <!-- Temperatur -->
-                            <td class="custom-black-bg">Temperatur</td>
-                            <td><input type="number" name="temperatur-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature</td>
+                            <td><input type="number" name="temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow -->
@@ -331,8 +331,8 @@ require ("../koneksi.php");
                         <th> Header </th>
                         <tr>    
                             <!-- Temperatur -->
-                            <td class="custom-black-bg">Temperatur</td>
-                            <td><input type="number" name="temperatur-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature</td>
+                            <td><input type="number" name="temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
@@ -346,13 +346,13 @@ require ("../koneksi.php");
                         <th> Exhaust Gas </th>
                          <tr>    
                             <!-- Temperatur L -->
-                            <td class="custom-black-bg">Temperatur L</td>
-                            <td><input type="number" name="temperatur_l-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature L</td>
+                            <td><input type="number" name="temperature_l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
-                            <td class="custom-black-bg">Temperatur R</td>
-                            <td><input type="number" name="temperatur_r-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Temperature R</td>
+                            <td><input type="number" name="temperature_r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
@@ -387,7 +387,7 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperature -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="temperatur-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
@@ -412,12 +412,12 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Freq 3 -->
                             <td class="custom-black-bg">Freq 3</td>
-                            <td><input type="number" name="freq_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="freq_3-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 4 -->
                             <td class="custom-black-bg">Freq 4</td>
-                            <td><input type="number" name="freq_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="freq_4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -466,13 +466,13 @@ require ("../koneksi.php");
                         <th> Economizer </th>
                         <tr>    
                             <!-- In Temperatur L -->
-                            <td class="custom-black-bg">In Temperatur L</td>
-                            <td><input type="number" name="intemperatur_l-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">In Temperature L</td>
+                            <td><input type="number" name="intemperature_l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- In Temperatur R-->
-                            <td class="custom-black-bg">In Temperatur R</td>
-                            <td><input type="number" name="intemperatur_r-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">In Temperature R</td>
+                            <td><input type="number" name="intemperature_r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- In Pressure L -->
@@ -486,23 +486,23 @@ require ("../koneksi.php");
                         </tr>
                         <tr>    
                             <!-- Out Temperatur Water -->
-                            <td class="custom-black-bg">Out Temperatur Water</td>
-                            <td><input type="number" name="out_temperatur_water-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Out Temperature Water</td>
+                            <td><input type="number" name="out_temperature_water-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- In Temperatur Water -->
-                            <td class="custom-black-bg">In Temperatur Water</td>
-                            <td><input type="number" name="in_temperatur_water-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">In Temperature Water</td>
+                            <td><input type="number" name="in_temperature_water-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Temperatur L -->
-                            <td class="custom-black-bg">Out Temperatur L</td>
-                            <td><input type="number" name="outtemperatur_l-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Out Temperature L</td>
+                            <td><input type="number" name="outtemperature_l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Temperatur R-->
-                            <td class="custom-black-bg">Out Temperatur R</td>
-                            <td><input type="number" name="outtemperatur_r-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Out Temperature R</td>
+                            <td><input type="number" name="outtemperature_r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Out Pressure L -->
@@ -530,38 +530,108 @@ require ("../koneksi.php");
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
-            $shift = $_REQUEST['shift-'.$i];
-            $generasi = $_REQUEST['generasi-'.$i];
-            $pm_kwh_pltbm = $_REQUEST['pm-kwh-pltbm-'.$i];
-            $ekspor = $_REQUEST['ekspor-'.$i];
-            $pemakaian_sendiri = $_REQUEST['pemakaian-sendiri-'.$i];
-            $kwh_loss = $_REQUEST['kwh-loss-'.$i];
-            $cangkang = $_REQUEST['cangkang-'.$i];
-            $palm_fiber = $_REQUEST['palm-fiber-'.$i];
-            $wood_chips = $_REQUEST['wood-chips-'.$i];
-            $serbuk_kayu = $_REQUEST['serbuk-kayu-'.$i];
-            $sabut_kelapa = $_REQUEST['sabut-kelapa-'.$i];
-            $efb = $_REQUEST['efb-press-'.$i];
-            $opt = $_REQUEST['opt-'.$i];
-            $supervisor = $_REQUEST['supervisor-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];
+            $jam = $_REQUEST['jam-'.$i];
+            $drum_level1 = $_REQUEST['level1-'.$i];
+            $drum_level2 = $_REQUEST['level2-'.$i];
+            $drum_pressure = $_REQUEST['pressure-'.$i];
+            $stream_temperature = $_REQUEST['temperature-'.$i];
+            $stream_pressure = $_REQUEST['pressure-'.$i];
+            $stream_flow = $_REQUEST['flow-'.$i];
+            $stream_flowtotal = $_REQUEST['flow_total-'.$i];
+            $furnace_temperature_l = $_REQUEST['temperature_l-'.$i];
+            $furnace_temperature_r = $_REQUEST['temperature_r-'.$i];
+            $furnace_pressure_l = $_REQUEST['pressure_l-'.$i];
+            $furnace_pressure_r = $_REQUEST['pressure_r-'.$i];
+            $pump_freq_1 = $_REQUEST['freq1-'.$i];
+            $pump_freq_2 = $_REQUEST['freq2-'.$i];
+            $pump_curr_1 = $_REQUEST['curr1-'.$i];
+            $pump_curr_2 = $_REQUEST['curr2-'.$i];
+            $superheater_temperature_l = $_REQUEST['temperature_l-'.$i];
+            $superheater_temperature_r = $_REQUEST['temperature_r-'.$i];
+            $superheater_pressure_l = $_REQUEST['pressure_l-'.$i];
+            $superheater_pressure_r = $_REQUEST['pressure_r-'.$i];
+            $idf_freq_1 = $_REQUEST['freq1-'.$i];
+            $idf_freq_2 = $_REQUEST['freq2-'.$i];
+            $idf_curr_1 = $_REQUEST['curr1-'.$i];
+            $idf_curr_2 = $_REQUEST['curr2-'.$i];
+            $air_primary_temperature = $_REQUEST['primary_temperature-'.$i];
+            $air_secondary_temperature = $_REQUEST['secondary_temperature-'.$i];
+            $air_primary_pressure = $_REQUEST['primary_pressure-'.$i];
+            $air_secondary_pressure = $_REQUEST['secondary_pressure-'.$i];
+            $water_temperature = $_REQUEST['temperature-'.$i];
+            $water_flow = $_REQUEST['flow-'.$i];
+            $water_flowtotal = $_REQUEST['flow_total-'.$i];
+            $water_pressure = $_REQUEST['pressure-'.$i];
+            $desuperheater_temperature = $_REQUEST['temperature-'.$i];
+            $desuuperheater_flow = $_REQUEST['flow-'.$i];
+            $desuperheater_flowtotal = $_REQUEST['flow_total-'.$i];
+            $header_temperature = $_REQUEST['temperature-'.$i];
+            $header_pressure = $_REQUEST['pressure-'.$i];
+            $exhaust_temperature_l = $_REQUEST['temperature_l-'.$i];
+            $exhaust_temperature_r = $_REQUEST['temperature_r-'.$i];
+            $exhaust_pressure_l = $_REQUEST['pressure_l-'.$i];
+            $exhaust_pressure_r = $_REQUEST['pressure_r-'.$i];
+            $scraper_freq = $_REQUEST['freq-'.$i];
+            $scraper_curr = $_REQUEST['curr-'.$i];
+            $soot_temperature = $_REQUEST['temperature-'.$i];
+            $soot_pressure = $_REQUEST['pressure-'.$i];
+            $fuel_freq_1 = $_REQUEST['freq1-'.$i];
+            $fuel_freq_2 = $_REQUEST['freq2-'.$i];
+            $fuel_freq_3 = $_REQUEST['freq3-'.$i];
+            $fuel_freq_4 = $_REQUEST['freq4-'.$i];
+            $fdf_outpressure = $_REQUEST['out_pressure-'.$i];
+            $fdf_freq = $_REQUEST['freq-'.$i];
+            $fdf_curr = $_REQUEST['curr-'.$i];
+            $sdf_outpressure = $_REQUEST['out_pressure-'.$i];
+            $sdf_freq = $_REQUEST['freq-'.$i];
+            $sdf_curr = $_REQUEST['curr-'.$i];
+            $economizer_intemperature_l = $_REQUEST['intemperature_l-'.$i];
+            $economizer_intemperature_r = $_REQUEST['intemperature_r-'.$i];
+            $economizer_inpressure_l = $_REQUEST['inpressure_l-'.$i];
+            $economizer_inpressure_r = $_REQUEST['pressure_r-'.$i];
+            $economizer_outtemperature_water = $_REQUEST['outtemperature_water-'.$i];
+            $economizer_intemperature_water = $_REQUEST['intemperature_water-'.$i];
+            $economizer_outtemperature_l = $_REQUEST['outtemperature_l-'.$i];
+            $economizer_outtemperature_r = $_REQUEST['outtemperature_r-'.$i];
+            $economizer_outpressure_l = $_REQUEST['outpressure_l-'.$i];
+            $economizer_outpressure_r = $_REQUEST['outpressure_r-'.$i];
 
             //Insert ke database
-            $insert_query = "WITH in1 AS(
-                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $2, $3, $4, LOCALTIME)
-                RETURNING produksi_id AS produksi),
-                in2 AS (
-                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $5, $6, $7, $4, LOCALTIME)
-                RETURNING pemakaian_id AS pakai),
-                in3 AS (
-                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), $1, $4, LOCALTIME, $8, $9, $10, $11, $12, $13, $14)
-                RETURNING pemakaian_bahan_bakar_id AS bahan_bakar)
-                INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
-                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
-            $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
-            $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
-
-
+            $insert_query = "INSERT INTO drum_level (drum_level_id, tanggal, jam, level1, level2, pressure) 
+                    VALUES (uuid_generate_v4(), $1, $2, $drum_level1, $drum_level2, $drum_pressure),
+                INSERT INTO main_stream (main_stream_id, tanggal, jam, temperature, pressure, flow, flow_total) 
+                    VALUES (uuid_generate_v4(), $1, $2, $stream_temperature, $stream_pressure, $stream_flow, $stream_flowtotal),
+                INSERT INTO furnace (furnace_id, tanggal, jam, temperature_l, temperature_r, pressure_l, pressure_r) VALUES (uuid_generate_v4(), $1, $2, $furnace_temperature_l, $furnace_temperature_r, $furnace_pressure_r, $furnace_pressure_l),
+                INSERT INTO feed_pump ((feed_pump_id, tanggal, jam, freq1, freq2, curr1, curr2) 
+                    VALUES (uuid_generate_v4(), $1, $2, $pump_freq_1, $pump_freq_2, $pump_curr_1, $pump_curr_2),
+                INSERT INTO superheater (superheater_id, tanggal, jam, temperature_l, temperature_r, pressure_l, pressure_r) 
+                    VALUES (uuid_generate_v4(), $1, $2, $superheater_temperature_l, $superheater_temperature_r, $superheater_pressure_r, $superheater_pressure_l),
+                INSERT INTO idf ((idf_id, tanggal, jam, freq1, freq2, curr1, curr2) 
+                    VALUES (uuid_generate_v4(), $1, $2, $idf_freq_1, $idf_freq_2, $idf_curr_1, $idf_curr_2),
+                INSERT INTO air (air_id, tanggal, jam, primary_temperature, secondary_temperature, primary_pressure, secondary_pressure) 
+                    VALUES (uuid_generate_v4(), $1, $2, $air_primary_temperature, $air_secondary_temperature, $air_primary_pressure, $air_secondary_pressure),
+                INSERT INTO feed_water (feed_water_id, tanggal, jam, temperature, flow, flow_total, pressure) 
+                    VALUES (uuid_generate_v4(), $1, $2, $water_temperature, $water_flow, $water_flowtotal, $water_pressure),
+                INSERT INTO desuperheater (desuperheater_id, tanggal, jam, temperature, flow, flow_total) 
+                    VALUES (uuid_generate_v4(), $1, $2, $desuperheater_temperature, $desuperheater_flow, $desuperheater_flowtotal),
+                INSERT INTO header (header_id, tanggal, jam, temperature, pressure) 
+                    VALUES (uuid_generate_v4(), $1, $2, $header_temperature, $header_pressure),
+                INSERT INTO exhaust_gas (exhaust_gas_id, tanggal, jam, temperature_l, temperature_r, pressure_l, pressure_r) 
+                    VALUES (uuid_generate_v4(), $1, $2, $exhaust_temperature_l, $exhaust_temperature_r, $exhaust_pressure_l, $exhaust_pressure_r),
+                INSERT INTO scraper (scraper_id, tanggal, jam, freq, curr) 
+                    VALUES (uuid_generate_v4(), $1, $2, $scraper_freq,$scraper_curr),
+                INSERT INTO soot (soot_id, tanggal, jam, temperature, pressure) 
+                    VALUES (uuid_generate_v4(), $1, $2, $soot_temperature, $soot_pressure),
+                INSERT INTO fuel ((fuel_id, tanggal, jam, freq1, freq2, freq3, freq4) 
+                    VALUES (uuid_generate_v4(), $1, $2, $fuel_freq_1, $fuel_freq_2, $fuel_freq_3, $fuel_freq_4),
+                INSERT INTO fdf (fdf_id, tanggal, jam, out_pressure, freq, curr) 
+                    VALUES (uuid_generate_v4(), $1, $2, $fdf_out_pressure $fdf_freq, $fdf_curr),
+                INSERT INTO sdf (sdf_id, tanggal, jam, out_pressure, freq, curr) 
+                    VALUES (uuid_generate_v4(), $1, $2, $sdf_out_pressure $sdf_freq, $sdf_curr),
+                INSERT INTO economizer (economizer_id, tanggal, jam, intemperature_l, intemperature_r, inpressure_l, inpressure_r, outtemperature_water, intemperature_water, outtemperature_l, outtemperature_r, out_pressure_l, out_pressure_r) VALUES (uuid_generate_v4(), $1, $2, $economizer_intemperature_l, $economizer_intemperature_r, $economizer_inpressure_l, $economizer_inpressure_r, $economizer_outtemperature_water, $economizer_intemperature_water, $economizer_outtemperature_l, $economizer_outtemperature_r, $economizer_outpressure_l, $economizer_outpressure_r)"
+                            
+            $prepare_input = pg_prepare($koneksi_boiler, "my_insert", $insert_query);
+            $exec_input = pg_execute($koneksi_boiler, "my_insert", array($tanggal, $jam));
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
             echo "0 records";
