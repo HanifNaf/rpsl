@@ -588,29 +588,38 @@ require ("../koneksi.php");
             $oil_inlet_b = $_REQUEST['oil_inlet_b-'.$i];
             $oil_outlet_a = $_REQUEST['oil_outlet_a-'.$i];
             $oil_outlet_b = $_REQUEST['oil_outlet_b-'.$i];
-            $thrust_pad_a = $_REQUEST['thrust_pad_a-'.$i];
-            $thrust_pad_b = $_REQUEST['thrust_pad_b-'.$i];
-            $thrust_pad_c = $_REQUEST['thrust_pad_c-'.$i];
-            $thrust_pad_d = $_REQUEST['thrust_pad_d-'.$i];
-            $thrust_pad_e = $_REQUEST['thrust_pad_e-'.$i];
-            $thrust_pad_f = $_REQUEST['thrust_pad_f-'.$i];
-            $thrust_pad_g = $_REQUEST['thrust_pad_g-'.$i];
-            $thrust_pad_h = $_REQUEST['thrust_pad_h-'.$i];
-            $thrust_pad_i = $_REQUEST['thrust_pad_i-'.$i];
-            $thrust_pad_j = $_REQUEST['thrust_pad_j-'.$i];
+            $thrust_pad_a = $_REQUEST['pad_a-'.$i];
+            $thrust_pad_b = $_REQUEST['pad_b-'.$i];
+            $thrust_pad_c = $_REQUEST['pad_c-'.$i];
+            $thrust_pad_d = $_REQUEST['pad_d-'.$i];
+            $thrust_pad_e = $_REQUEST['pad_e-'.$i];
+            $thrust_pad_f = $_REQUEST['pad_f-'.$i];
+            $thrust_pad_g = $_REQUEST['pad_g-'.$i];
+            $thrust_pad_h = $_REQUEST['pad_h-'.$i];
+            $thrust_pad_i = $_REQUEST['pad_i-'.$i];
+            $thrust_pad_j = $_REQUEST['pad_j-'.$i];
 
             //Insert ke database
-            $insert_query = "WITH in1 AS(
-                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $2, $3, $4, LOCALTIME)
-                RETURNING produksi_id AS produksi),
-                in2 AS (
-                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $5, $6, $7, $4, LOCALTIME)
-                RETURNING pemakaian_id AS pakai),
-                in3 AS (
-                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), $1, $4, LOCALTIME, $8, $9, $10, $11, $12, $13, $14)
-                RETURNING pemakaian_bahan_bakar_id AS bahan_bakar)
-                INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
-                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
+            $insert_query = "WITH in1 AS(INSERT INTO turbin (turbin_id, tanggal, jam, axial_disp, heat_exp, stroke_position, oil_tank_level, safety_oil_pressure, lube_oil_pressure, speed, vacuum) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $turbin_axial, $turbin_heat, $turbin_stroke, $turbin_tank, $turbin_safety, $turbin_lube, $turbin_speed, $turbin_vacuum)),
+                                in2 AS( INSERT INTO vibration (vibration_id, tanggal, jam, bearing1, bearing2, bearing3, bearing4) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $vibration_bearing1, $vibration_bearing2, $vibration_bearing3, $vibration_bearing4)),
+                                in3 AS (INSERT INTO steam (steam_id, tanggal, jam, pressure, before_msv_temp, after_stage_1_temp, after_msv_temp, exhaust_chamber_temp) VALUES (uuid_generate_v4(), $1, $2, $steam_pressure, $steam_before_msv, $steam_after_1st, $steam_after_msv, $steam_exhaust)),
+                                in4 AS(INSERT INTO bearing (bearing_id, tanggal, jam, temperature_1_a, temperature_1_b, temperature_2_a, temperature_2_b, temperature_3_a, temperature_3_b, temperature_4, return_oil_temp_1, return_oil_temp_2, return_oil_temp_3, return_oil_temp_4, thrust_pad_a, thrust_pad_b) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $bearing_temp_1a, $bearing_temp_1b, $bearing_temp_2a, $bearing_temp_2b, $bearing_temp_3a, $bearing_temp_3b, $bearing_temp_4, $bearing_return_1, $bearing_return_2, $bearing_return_3, $bearing_return_4, $bearing_pad_a, $ bearing_pad_b)),
+                                in5 AS(INSERT INTO casing (casing_id, tanggal, jam, upper_temp, lower_temp, flange_temp_a, flange_temp_b) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $casing_upper, $casing_lower, $casing_flange_a, $casing_flange_b)),
+                                in6 AS(INSERT INTO generator (generator_id, tanggal, jam, outlet_air, inlet_air, stator_coil_temp_1, stator_coil_temp_2, stator_coil_temp_3, stator_coil_temp_4, stator_coil_temp_5, stator_coil_temp_6, stator_core_temp_7, stator_core_temp_8, stator_core_temp_9, stator_core_temp_9, stator_core_temp_10, stator_core_temp_11, stator_core_temp_12) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $generator_outlet, $generator_inlet, $generator_coil_1, $generator_coil_2, $generator_coil_3, $generator_coil_4, $generator_coil_5, $generator_coil_6, $generator_core_7, $generator_core_8, $generator_core_9, $generator_core_10, $generator_core_11, $generator_core_12)),
+                                in7 AS(INSERT INTO condensor_temperature (condensor_id, tanggal, jam, inlet_steam, cond, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $, $condensor_inlet, $condensor_cond, $condensor_inlet_a, $condensor_inlet_b, $condensor_outlet_a, $condensor_outlet_b)),
+                                in8 AS(INSERT INTO oil_cooler_temperature (oil_id, tanggal, jam, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b, oil_inlet_a, oil_inlet_b, oil_outlet_a, oil_outlet_b) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $oil_cooling_inlet_a, $oil_cooling_inlet_b, $oil_cooling_outlet_a, $oil_cooling_outlet_b, $oil_inlet_a, $oil_inlet_b, $oil_outlet_a, $oil_outlet_b, $oil)),
+                                in9 AS(INSERT INTO thrust_pad (thrust_pad_id, tanggal, jam, pad_a, pad_b, pad_c, pad_d, pad_e, pad_f, pad_g, pad_h, pad_i, pad_j) 
+                                    VALUES (uuid_generate_v4(), $1, $2, $thrust_pad_a, $thrust_pad_b, $thrust_pad_c, $thrust_pad_d, $thrust_pad_e, $thrust_pad_f, $thrust_pad_g, $thrust_pad_h, $thrust_pad_i, $thrust_pad_j)),
+
+                                INSERT INTO economizer (economizer_id, tanggal, jam, intemperature_l, intemperature_r, inpressure_l, inpressure_r, outtemperature_water, intemperature_water, outtemperature_l, outtemperature_r, out_pressure_l, out_pressure_r) 
+                SELECT uuid_generate_v4(), $1, $2, $economizer_intemperature_l, $economizer_intemperature_r, $economizer_inpressure_l, $economizer_inpressure_r, $economizer_outtemperature_water, $economizer_intemperature_water, $economizer_outtemperature_l, $economizer_outtemperature_r, $economizer_outpressure_l, $economizer_outpressure_r"; 
             $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
             $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
 

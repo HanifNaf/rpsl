@@ -19,8 +19,40 @@ $fdf = pg_query($koneksi_boiler, "SELECT * FROM fdf");
 $sdf = pg_query($koneksi_boiler, "SELECT * FROM sdf");
 $economizer = pg_query($koneksi_boiler, "SELECT * FROM economizer");
 
-$boiler_arr = pg_fetch_all($drum_level, $main_stream, $furnace, $feed_pump, $superheater, $idf, $air, $feed_water, $desuperheater, $header, $exhaust_gas, $scraper, $soot, $fuel, $fdf, $sdf, $economizer);
+$drum_level_arr = pg_fetch_all($drum_level);
+$main_stream_arr = pg_fetch_all($main_stream);
+$furnace_arr = pg_fetch_all($furnace);
+$feed_pump_arr = pg_fetch_all($feed_pump);
+$superheater_arr = pg_fetch_all($superheater);
+$idf_arr = pg_fetch_all($idf);
+$air_arr = pg_fetch_all($air);
+$feed_water_arr = pg_fetch_all($feed_water);
+$desuperheater_arr = pg_fetch_all($desuperheater);
+$header_arr = pg_fetch_all($header);
+$exhaust_gas_arr = pg_fetch_all($exhaust_gas);
+$scraper_arr = pg_fetch_all($scraper);
+$soot_arr = pg_fetch_all($soot);
+$fuel_arr = pg_fetch_all($fuel);
+$fdf_arr = pg_fetch_all($fdf);
+$sdf_arr = pg_fetch_all($sdf);
+$economizer_arr = pg_fetch_all($economizer);
 
-$row_boiler = pg_num_rows($boiler_arr);
+$row_drum_level = pg_num_rows($drum_level);
+$row_main_stream = pg_num_rows($main_stream);
+$row_furnace = pg_num_rows($furnace);
+$row_feed_pump = pg_num_rows($feed_pump);
+$row_superheater = pg_num_rows($superheater);
+$row_idf = pg_num_rows($idf);
+$row_air = pg_num_rows($air);
+$row_feed_water = pg_num_rows($feed_water);
+$row_desuperheater = pg_num_rows($desuperheater);
+$row_header = pg_num_rows($header);
+$row_exhaust_gas = pg_num_rows($exhaust_gas);
+$row_scraper = pg_num_rows($scraper);
+$row_soot = pg_num_rows($soot);
+$row_fuel = pg_num_rows($fuel);
+$row_fdf = pg_num_rows($fdf);
+$row_sdf = pg_num_rows($sdf);
+$row_economizer = pg_num_rows($economizer);
 
 ?>
