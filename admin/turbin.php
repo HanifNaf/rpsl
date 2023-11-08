@@ -172,7 +172,7 @@ require("footer-admin.php");
 
                    <?php 
                     $no = 1;
-                    if($row_casing>0){ //nama variablenya disesuaikan lagi
+                    if($row_turbin>0){ //nama variablenya disesuaikan lagi
                        for ($i = 0; $i < $row_casing; $i++) {
                        	$array_turbin = $turbin_arr[$i];
                        	$array_vibration = $vibration_arr[$i];
@@ -272,27 +272,27 @@ require("footer-admin.php");
 								<td>
 								<!--Bearing-->
 									<!--Temperature 1 A-->
-									<?= $array_bearing['temperature_1_a']; ?>
+									<?= $array_bearing['temperature_1a']; ?>
 								</td>
 								<td>
 									<!--Temperature 1 B-->
-									<?= $array_bearing['temperature_1_b']; ?>
+									<?= $array_bearing['temperature_1b']; ?>
 								</td>
 								<td>
 									<!--Temperature 2 A-->
-									<?= $array_bearing['temperature_2_a']; ?>
+									<?= $array_bearing['temperature_2a']; ?>
 								</td>
 								<td>
 									<!--Temperature 2 B-->
-									<?= $array_bearing['temperature_2_b']; ?>
+									<?= $array_bearing['temperature_2b']; ?>
 								</td>
 								<td>
 									<!--Temperature 3 A-->
-									<?= $array_bearing['temperature_3_a']; ?>
+									<?= $array_bearing['temperature_3a']; ?>
 								</td>
 								<td>
 									<!--Temperature 3 B-->
-									<?= $array_bearing['temperature_3_b']; ?>
+									<?= $array_bearing['temperature_3b']; ?>
 								</td>
 								<td>
 									<!--Temperature 4 -->

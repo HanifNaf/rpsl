@@ -82,52 +82,52 @@ require ("../koneksi.php");
                             <!-- Jam -->
                             <td class="custom-black-bg">Jam</td>
                                 <td><select name="jam-<?= $i ?>" class="form-control">
-                                        <option value="00.00.00">00.00</option>
-                                        <option value="01.00.00">01.00</option>
-                                        <option value="02.00.00">02.00</option>
-                                        <option value="03.00.00">03.00</option>
-                                        <option value="04.00.00">04.00</option>
-                                        <option value="05.00.00">05.00</option>
-                                        <option value="06.00.00">06.00</option>
-                                        <option value="07.00.00">07.00</option>
-                                        <option value="08.00.00">08.00</option>
-                                        <option value="09.00.00">09.00</option>
-                                        <option value="10.00.00">10.00</option>
-                                        <option value="11.00.00">11.00</option>
-                                        <option value="12.00.00">12.00</option>
-                                        <option value="13.00.00">13.00</option>
-                                        <option value="14.00.00">14.00</option>
-                                        <option value="15.00.00">15.00</option>
-                                        <option value="16.00.00">16.00</option>
-                                        <option value="17.00.00">17.00</option>
-                                        <option value="18.00.00">18.00</option>
-                                        <option value="19.00.00">19.00</option>
-                                        <option value="20.00.00">20.00</option>
-                                        <option value="21.00.00">21.00</option>
-                                        <option value="22.00.00">22.00</option>
-                                        <option value="23.00.00">23.00</option>
+                                        <option value="00:00:00">00.00</option>
+                                        <option value="01:00:00">01.00</option>
+                                        <option value="02:00:00">02.00</option>
+                                        <option value="03:00:00">03.00</option>
+                                        <option value="04:00:00">04.00</option>
+                                        <option value="05:00:00">05.00</option>
+                                        <option value="06:00:00">06.00</option>
+                                        <option value="07:00:00">07.00</option>
+                                        <option value="08:00:00">08.00</option>
+                                        <option value="09:00:00">09.00</option>
+                                        <option value="10:00:00">10.00</option>
+                                        <option value="11:00:00">11.00</option>
+                                        <option value="12:00:00">12.00</option>
+                                        <option value="13:00:00">13.00</option>
+                                        <option value="14:00:00">14.00</option>
+                                        <option value="15:00:00">15.00</option>
+                                        <option value="16:00:00">16.00</option>
+                                        <option value="17:00:00">17.00</option>
+                                        <option value="18:00:00">18.00</option>
+                                        <option value="19:00:00">19.00</option>
+                                        <option value="20:00:00">20.00</option>
+                                        <option value="21:00:00">21.00</option>
+                                        <option value="22:00:00">22.00</option>
+                                        <option value="23:00:00">23.00</option>
                                 </select>
                                 </td>
                         </tr>
                         <tr>
-                            <!-- Pemisah -->
-                            <td> </td>
+                           <!-- Pemisah -->
+                           <td> </td>
                         </tr>
-                        <th>DRUM LEVEL</th>
+                        <th>DRUM LEVEL</th>f
                         <tr>
                             <!-- Level 1 -->
                             <td class="custom-black-bg" width="30%">Level 1</td>
-                            <td><input type="number" name="drum_level1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="drum-level1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Level 2 -->
                             <td class="custom-black-bg">Level 2</td>
-                            <td><input type="number" name="drum_level2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="drum-level2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
                             <td class="custom-black-bg">Pressure</td>
-                            <td><input type="number" name="drum_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="drum-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -137,22 +137,22 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperatur -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="stream_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" step="any" name="stream-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
                             <td class="custom-black-bg">Pressure</td>
-                            <td><input type="number" name="stream_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" step="any" name="stream-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow -->
                             <td class="custom-black-bg">Flow</td>
-                            <td><input type="number" name="stream_flow-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" step="any" name="stream-flow-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow Total -->
                             <td class="custom-black-bg">Flow Total</td>
-                            <td><input type="number" name="stream_flow_total-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" step="any" name="stream-flow-total-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -162,22 +162,22 @@ require ("../koneksi.php");
                        <tr>    
                             <!-- Temperatur L -->
                             <td class="custom-black-bg">Temperature L</td>
-                            <td><input type="number" name="furnace_temperature_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="furnace-temperature-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
                             <td class="custom-black-bg">Temperature R</td>
-                            <td><input type="number" name="furnace_temperature_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="furnace-temperature-r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
                             <td class="custom-black-bg">Pressure L</td>
-                            <td><input type="number" name="furnace_pressure_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="furnace-pressure-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure R -->
                             <td class="custom-black-bg">Pressure R</td>
-                            <td><input type="number" name="furnace_pressure_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="furnace-pressure-r-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -187,22 +187,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Freq 1 -->
                             <td class="custom-black-bg">Freq 1</td>
-                            <td><input type="number" name="pump_freq_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pump-freq-1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 2 -->
                             <td class="custom-black-bg">Freq 2</td>
-                            <td><input type="number" name="pump_freq_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pump-freq-2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Curr 1 -->
                             <td class="custom-black-bg">Curr 1</td>
-                            <td><input type="number" name="pump_curr_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pump-curr-1-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Curr 2 -->
                             <td class="custom-black-bg">Curr 2</td>
-                            <td><input type="number" name="pump_curr_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="pump-curr-2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -212,22 +212,22 @@ require ("../koneksi.php");
                          <tr>    
                             <!-- Temperatur L -->
                             <td class="custom-black-bg">Temperature L</td>
-                            <td><input type="number" name="superheater_temperature_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="superheater-temperature-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
                             <td class="custom-black-bg">Temperature R</td>
-                            <td><input type="number" name="superheater_temperature_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="superheater-temperature-r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
                             <td class="custom-black-bg">Pressure L</td>
-                            <td><input type="number" name="superheater_pressure_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="superheater-pressure-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure R -->
                             <td class="custom-black-bg">Pressure R</td>
-                            <td><input type="number" name="superheater_pressure_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="superheater-pressure-r-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -237,22 +237,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Freq 1 -->
                             <td class="custom-black-bg">Freq 1</td>
-                            <td><input type="number" name="idf_freq_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="idf-freq-1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 2 -->
                             <td class="custom-black-bg">Freq 2</td>
-                            <td><input type="number" name="idf_freq_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="idf-freq-2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Curr 1 -->
                             <td class="custom-black-bg">Curr 1</td>
-                            <td><input type="number" name="idf_curr_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="idf-curr-1-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Curr 2 -->
                             <td class="custom-black-bg">Curr 2</td>
-                            <td><input type="number" name="idf_curr_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="idf-curr-2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -262,22 +262,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Primary Temperature -->
                             <td class="custom-black-bg"> Primary Temperature </td>
-                            <td><input type="number" name="air_primary_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="air-primary-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Secondary Temperature -->
                             <td class="custom-black-bg"> Secondary Temperature </td>
-                            <td><input type="number" name="air_secondary_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="air-secondary-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Primary Pressure -->
                             <td class="custom-black-bg"> Primary Pressure </td>
-                            <td><input type="number" name="air_primary_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="air-primary-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Secondary Pressure -->
                             <td class="custom-black-bg"> Secondary Pressure </td>
-                            <td><input type="number" name="air_secondary_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="air-secondary-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -287,22 +287,22 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperatur -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="water_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="water-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow -->
                             <td class="custom-black-bg">Flow</td>
-                            <td><input type="number" name="water_flow-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="water-flow-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow Total -->
                             <td class="custom-black-bg">Flow Total</td>
-                            <td><input type="number" name="water_flow_total-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="water-flow-total-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
                             <td class="custom-black-bg">Pressure</td>
-                            <td><input type="number" name="water_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="water-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                          <tr>
                             <!-- Pemisah -->
@@ -312,17 +312,17 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperatur -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="desuperheater_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="desuperheater-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow -->
                             <td class="custom-black-bg">Flow</td>
-                            <td><input type="number" name="desuperheater_flow-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="desuperheater-flow-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Flow Total -->
                             <td class="custom-black-bg">Flow Total</td>
-                            <td><input type="number" name="desuperheater_flow_total-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="desuperheater-flow-total-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -332,12 +332,12 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperatur -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="header_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="header-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
                             <td class="custom-black-bg">Pressure</td>
-                            <td><input type="number" name="header_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="header-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -347,22 +347,22 @@ require ("../koneksi.php");
                          <tr>    
                             <!-- Temperatur L -->
                             <td class="custom-black-bg">Temperature L</td>
-                            <td><input type="number" name="exhaust_temperature_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="exhaust-temperature-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Temperatur R-->
                             <td class="custom-black-bg">Temperature R</td>
-                            <td><input type="number" name="exhaust_temperature_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="exhaust-temperature-r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Pressure L -->
                             <td class="custom-black-bg">Pressure L</td>
-                            <td><input type="number" name="exhaust_pressure_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="exhaust-pressure-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure R -->
                             <td class="custom-black-bg">Pressure R</td>
-                            <td><input type="number" name="exhaust_pressure_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="exhaust-pressure-r-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -372,12 +372,12 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Freq -->
                             <td class="custom-black-bg">Freq</td>
-                            <td><input type="number" name="scraper_freq-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="scraper-freq-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Curr -->
                             <td class="custom-black-bg">Curr</td>
-                            <td><input type="number" name="scraper_curr-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="scraper-curr-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -387,12 +387,12 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- Temperature -->
                             <td class="custom-black-bg">Temperature</td>
-                            <td><input type="number" name="soot_temperature-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="soot-temperature-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pressure -->
                             <td class="custom-black-bg">Pressure</td>
-                            <td><input type="number" name="soot_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="soot-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -402,22 +402,22 @@ require ("../koneksi.php");
                         <tr>
                             <!-- Freq 1 -->
                             <td class="custom-black-bg">Freq 1</td>
-                            <td><input type="number" name="fuel_freq_1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fuel-freq-1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 2 -->
                             <td class="custom-black-bg">Freq 2</td>
-                            <td><input type="number" name="fuel_freq_2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fuel-freq-2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 3 -->
                             <td class="custom-black-bg">Freq 3</td>
-                            <td><input type="number" name="fuel_freq_3-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fuel-freq-3-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq 4 -->
                             <td class="custom-black-bg">Freq 4</td>
-                            <td><input type="number" name="fuel_freq_4-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fuel-freq-4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -427,17 +427,17 @@ require ("../koneksi.php");
                          <tr>
                             <!-- Out Pressure -->
                             <td class="custom-black-bg">Out Pressure</td>
-                            <td><input type="number" name="fdf_out_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fdf-out-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq -->
                             <td class="custom-black-bg">Freq</td>
-                            <td><input type="number" name="fdf_freq-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fdf-freq-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Curr -->
                             <td class="custom-black-bg">Curr</td>
-                            <td><input type="number" name="fdf_curr-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="fdf-curr-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -447,17 +447,17 @@ require ("../koneksi.php");
                          <tr>
                             <!-- Out Pressure -->
                             <td class="custom-black-bg">Out Pressure</td>
-                            <td><input type="number" name="sdf_out_pressure-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="sdf-out-pressure-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Freq -->
                             <td class="custom-black-bg">Freq</td>
-                            <td><input type="number" name="sdf_freq-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="sdf-freq-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Curr -->
                             <td class="custom-black-bg">Curr</td>
-                            <td><input type="number" name="sdf_curr-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="sdf-curr-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -467,57 +467,57 @@ require ("../koneksi.php");
                         <tr>    
                             <!-- In Temperatur L -->
                             <td class="custom-black-bg">In Temperature L</td>
-                            <td><input type="number" name="economizer_intemperature_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-intemperature-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- In Temperatur R-->
                             <td class="custom-black-bg">In Temperature R</td>
-                            <td><input type="number" name="economizer_intemperature_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-intemperature-r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- In Pressure L -->
                             <td class="custom-black-bg">In Pressure L</td>
-                            <td><input type="number" name="economizer_inpressure_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-inpressure-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- In Pressure R -->
                             <td class="custom-black-bg">In Pressure R</td>
-                            <td><input type="number" name="economizer_inpressure_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-inpressure-r-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Temperatur Water -->
                             <td class="custom-black-bg">Out Temperature Water</td>
-                            <td><input type="number" name="economizer_outtemperature_water-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-outtemperature-water-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- In Temperatur Water -->
                             <td class="custom-black-bg">In Temperature Water</td>
-                            <td><input type="number" name="economizer_intemperature_water-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-intemperature-water-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Temperatur L -->
                             <td class="custom-black-bg">Out Temperature L</td>
-                            <td><input type="number" name="economizer_outtemperature_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-outtemperature-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Temperatur R-->
                             <td class="custom-black-bg">Out Temperature R</td>
-                            <td><input type="number" name="economizer_outtemperature_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-outtemperature-r-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Out Pressure L -->
                             <td class="custom-black-bg">Out Pressure L</td>
-                            <td><input type="number" name="economizer_outpressure_l-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-outpressure-l-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Out Pressure R -->
                             <td class="custom-black-bg">Out Pressure R</td>
-                            <td><input type="number" name="economizer_outpressure_r-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="economizer-outpressure-r-<?=$i?>" style="form-control"></td>
                         </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> TAMBAH DATA</button>
+                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="boiler"></a></i> TAMBAH DATA</button>
             	</div>
             </form>
         </div> 
@@ -531,71 +531,71 @@ require ("../koneksi.php");
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
             $jam = $_REQUEST['jam-'.$i];
-            $drum_level1 = $_REQUEST['drum_level1-'.$i];
-            $drum_level2 = $_REQUEST['drum_level2-'.$i];
-            $drum_pressure = $_REQUEST['drum_pressure-'.$i];
-            $stream_temperature = $_REQUEST['steam_temperature-'.$i];
-            $stream_pressure = $_REQUEST['steam_pressure-'.$i];
-            $stream_flow = $_REQUEST['steam_flow-'.$i];
-            $stream_flowtotal = $_REQUEST['steam_flow_total-'.$i];
-            $furnace_temperature_l = $_REQUEST['furnace_temperature_l-'.$i];
-            $furnace_temperature_r = $_REQUEST['furnace_temperature_r-'.$i];
-            $furnace_pressure_l = $_REQUEST['furnace_pressure_l-'.$i];
-            $furnace_pressure_r = $_REQUEST['furnace_pressure_r-'.$i];
-            $pump_freq_1 = $_REQUEST['pump_freq1-'.$i];
-            $pump_freq_2 = $_REQUEST['pump_freq2-'.$i];
-            $pump_curr_1 = $_REQUEST['pump_curr1-'.$i];
-            $pump_curr_2 = $_REQUEST['pump_curr2-'.$i];
-            $superheater_temperature_l = $_REQUEST['superheater_temperature_l-'.$i];
-            $superheater_temperature_r = $_REQUEST['superheater_temperature_r-'.$i];
-            $superheater_pressure_l = $_REQUEST['superheater_pressure_l-'.$i];
-            $superheater_pressure_r = $_REQUEST['superheater_pressure_r-'.$i];
-            $idf_freq_1 = $_REQUEST['idf_freq1-'.$i];
-            $idf_freq_2 = $_REQUEST['idf_freq2-'.$i];
-            $idf_curr_1 = $_REQUEST['idf_curr1-'.$i];
-            $idf_curr_2 = $_REQUEST['idf_curr2-'.$i];
-            $air_primary_temperature = $_REQUEST['air_primary_temperature-'.$i];
-            $air_secondary_temperature = $_REQUEST['air_secondary_temperature-'.$i];
-            $air_primary_pressure = $_REQUEST['air_primary_pressure-'.$i];
-            $air_secondary_pressure = $_REQUEST['air_secondary_pressure-'.$i];
-            $water_temperature = $_REQUEST['water_temperature-'.$i];
-            $water_flow = $_REQUEST['water_flow-'.$i];
-            $water_flowtotal = $_REQUEST['water_flow_total-'.$i];
-            $water_pressure = $_REQUEST['water_pressure-'.$i];
-            $desuperheater_temperature = $_REQUEST['desuperheater_temperature-'.$i];
-            $desuuperheater_flow = $_REQUEST['desuperheater_flow-'.$i];
-            $desuperheater_flowtotal = $_REQUEST['desuperheater_flow_total-'.$i];
-            $header_temperature = $_REQUEST['header_temperature-'.$i];
-            $header_pressure = $_REQUEST['header_pressure-'.$i];
-            $exhaust_temperature_l = $_REQUEST['exhaust_temperature_l-'.$i];
-            $exhaust_temperature_r = $_REQUEST['exhaust_temperature_r-'.$i];
-            $exhaust_pressure_l = $_REQUEST['exhaust_pressure_l-'.$i];
-            $exhaust_pressure_r = $_REQUEST['exhaust_pressure_r-'.$i];
-            $scraper_freq = $_REQUEST['scraper_freq-'.$i];
-            $scraper_curr = $_REQUEST['scraper_curr-'.$i];
-            $soot_temperature = $_REQUEST['soot_temperature-'.$i];
-            $soot_pressure = $_REQUEST['soot_pressure-'.$i];
-            $fuel_freq_1 = $_REQUEST['fuel_freq1-'.$i];
-            $fuel_freq_2 = $_REQUEST['fuel_freq2-'.$i];
-            $fuel_freq_3 = $_REQUEST['fuel_freq3-'.$i];
-            $fuel_freq_4 = $_REQUEST['fuel_freq4-'.$i];
-            $fdf_outpressure = $_REQUEST['fdf_out_pressure-'.$i];
-            $fdf_freq = $_REQUEST['fdf_freq-'.$i];
-            $fdf_curr = $_REQUEST['fdf_curr-'.$i];
-            $sdf_outpressure = $_REQUEST['sdf_out_pressure-'.$i];
-            $sdf_freq = $_REQUEST['sdf_freq-'.$i];
-            $sdf_curr = $_REQUEST['sdf_curr-'.$i];
-            $economizer_intemperature_l = $_REQUEST['economizer_intemperature_l-'.$i];
-            $economizer_intemperature_r = $_REQUEST['economizer_intemperature_r-'.$i];
-            $economizer_inpressure_l = $_REQUEST['economizer_inpressure_l-'.$i];
-            $economizer_inpressure_r = $_REQUEST['economizer_pressure_r-'.$i];
-            $economizer_outtemperature_water = $_REQUEST['economizer_outtemperature_water-'.$i];
-            $economizer_intemperature_water = $_REQUEST['economizer_intemperature_water-'.$i];
-            $economizer_outtemperature_l = $_REQUEST['economizer_outtemperature_l-'.$i];
-            $economizer_outtemperature_r = $_REQUEST['economizer_outtemperature_r-'.$i];
-            $economizer_outpressure_l = $_REQUEST['economizer_outpressure_l-'.$i];
-            $economizer_outpressure_r = $_REQUEST['economizer_outpressure_r-'.$i];
-
+            $drum_level1 = $_REQUEST['drum-level1-'.$i];
+            $drum_level2 = $_REQUEST['drum-level2-'.$i];
+            $drum_pressure = $_REQUEST['drum-pressure-'.$i];
+            $stream_temperature = $_REQUEST['stream-temperature-'.$i];
+            $stream_pressure = $_REQUEST['stream-pressure-'.$i];
+            $stream_flow = $_REQUEST['stream-flow-'.$i];
+            $stream_flowtotal = $_REQUEST['stream-flow-total-'.$i];
+            $furnace_temperature_l = $_REQUEST['furnace-temperature-l-'.$i];
+            $furnace_temperature_r = $_REQUEST['furnace-temperature-r-'.$i];
+            $furnace_pressure_l = $_REQUEST['furnace-pressure-l-'.$i];
+            $furnace_pressure_r = $_REQUEST['furnace-pressure-r-'.$i];
+            $pump_freq_1 = $_REQUEST['pump-freq-1-'.$i];
+            $pump_freq_2 = $_REQUEST['pump-freq-2-'.$i];
+            $pump_curr_1 = $_REQUEST['pump-curr-1-'.$i];
+            $pump_curr_2 = $_REQUEST['pump-curr-2-'.$i];
+            $superheater_temperature_l = $_REQUEST['superheater-temperature-l-'.$i];
+            $superheater_temperature_r = $_REQUEST['superheater-temperature-r-'.$i];
+            $superheater_pressure_l = $_REQUEST['superheater-pressure-l-'.$i];
+            $superheater_pressure_r = $_REQUEST['superheater-pressure-r-'.$i];
+            $idf_freq_1 = $_REQUEST['idf-freq-1-'.$i];
+            $idf_freq_2 = $_REQUEST['idf-freq-2-'.$i];
+            $idf_curr_1 = $_REQUEST['idf-curr-1-'.$i];
+            $idf_curr_2 = $_REQUEST['idf-curr-2-'.$i];
+            $air_primary_temperature = $_REQUEST['air-primary-temperature-'.$i];
+            $air_secondary_temperature = $_REQUEST['air-secondary-temperature-'.$i];
+            $air_primary_pressure = $_REQUEST['air-primary-pressure-'.$i];
+            $air_secondary_pressure = $_REQUEST['air-secondary-pressure-'.$i];
+            $water_temperature = $_REQUEST['water-temperature-'.$i];
+            $water_flow = $_REQUEST['water-flow-'.$i];
+            $water_flowtotal = $_REQUEST['water-flow-total-'.$i];
+            $water_pressure = $_REQUEST['water-pressure-'.$i];
+            $desuperheater_temperature = $_REQUEST['desuperheater-temperature-'.$i];
+            $desuperheater_flow = $_REQUEST['desuperheater-flow-'.$i];
+            $desuperheater_flowtotal = $_REQUEST['desuperheater-flow-total-'.$i];
+            $header_temperature = $_REQUEST['header-temperature-'.$i];
+            $header_pressure = $_REQUEST['header-pressure-'.$i];
+            $exhaust_temperature_l = $_REQUEST['exhaust-temperature-l-'.$i];
+            $exhaust_temperature_r = $_REQUEST['exhaust-temperature-r-'.$i];
+            $exhaust_pressure_l = $_REQUEST['exhaust-pressure-l-'.$i];
+            $exhaust_pressure_r = $_REQUEST['exhaust-pressure-r-'.$i];
+            $scraper_freq = $_REQUEST['scraper-freq-'.$i];
+            $scraper_curr = $_REQUEST['scraper-curr-'.$i];
+            $soot_temperature = $_REQUEST['soot-temperature-'.$i];
+            $soot_pressure = $_REQUEST['soot-pressure-'.$i];
+            $fuel_freq_1 = $_REQUEST['fuel-freq-1-'.$i];
+            $fuel_freq_2 = $_REQUEST['fuel-freq-2-'.$i];
+            $fuel_freq_3 = $_REQUEST['fuel-freq-3-'.$i];
+            $fuel_freq_4 = $_REQUEST['fuel-freq-4-'.$i];
+            $fdf_outpressure = $_REQUEST['fdf-out-pressure-'.$i];
+            $fdf_freq = $_REQUEST['fdf-freq-'.$i];
+            $fdf_curr = $_REQUEST['fdf-curr-'.$i];
+            $sdf_outpressure = $_REQUEST['sdf-out-pressure-'.$i];
+            $sdf_freq = $_REQUEST['sdf-freq-'.$i];
+            $sdf_curr = $_REQUEST['sdf-curr-'.$i];
+            $economizer_intemperature_l = $_REQUEST['economizer-intemperature-l-'.$i];
+            $economizer_intemperature_r = $_REQUEST['economizer-intemperature-r-'.$i];
+            $economizer_inpressure_l = $_REQUEST['economizer-inpressure-l-'.$i];
+            $economizer_inpressure_r = $_REQUEST['economizer-inpressure-r-'.$i];
+            $economizer_outtemperature_water = $_REQUEST['economizer-outtemperature-water-'.$i];
+            $economizer_intemperature_water = $_REQUEST['economizer-intemperature-water-'.$i];
+            $economizer_outtemperature_l = $_REQUEST['economizer-outtemperature-l-'.$i];
+            $economizer_outtemperature_r = $_REQUEST['economizer-outtemperature-r-'.$i];
+            $economizer_outpressure_l = $_REQUEST['economizer-outpressure-l-'.$i];
+            $economizer_outpressure_r = $_REQUEST['economizer-outpressure-r-'.$i];
+                        
             //Insert ke database
             $insert_query = "WITH in1 AS(INSERT INTO drum_level (drum_id, tanggal, jam, level1, level2, pressure) 
                 VALUES (uuid_generate_v4(), $1, $2, $drum_level1, $drum_level2, $drum_pressure))
@@ -640,10 +640,10 @@ require ("../koneksi.php");
                 VALUES (uuid_generate_v4(), $1, $2, $fuel_freq_1, $fuel_freq_2, $fuel_freq_3, $fuel_freq_4))
                 ,
                 in15 AS(INSERT INTO fdf (fdf_id, tanggal, jam, outpressure, freq, curr) 
-                VALUES (uuid_generate_v4(), $1, $2, $fdf_out_pressure, $fdf_freq, $fdf_curr))
+                VALUES (uuid_generate_v4(), $1, $2, $fdf_outpressure, $fdf_freq, $fdf_curr))
                 ,
                 in16 AS(INSERT INTO sdf (sdf_id, tanggal, jam, outpressure, freq, curr) 
-                VALUES (uuid_generate_v4(), $1, $2, $sdf_out_pressure, $sdf_freq, $sdf_curr))
+                VALUES (uuid_generate_v4(), $1, $2, $sdf_outpressure, $sdf_freq, $sdf_curr))
                 
                 INSERT INTO economizer (economizer_id, tanggal, jam, intemperature_l, intemperature_r, inpressure_l, inpressure_r, outtemperature_water, intemperature_water, outtemperature_l, outtemperature_r, outpressure_l, outpressure_r) 
                 SELECT uuid_generate_v4(), $1, $2, $economizer_intemperature_l, $economizer_intemperature_r, $economizer_inpressure_l, $economizer_inpressure_r, $economizer_outtemperature_water, $economizer_intemperature_water, $economizer_outtemperature_l, $economizer_outtemperature_r, $economizer_outpressure_l, $economizer_outpressure_r";

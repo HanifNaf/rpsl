@@ -75,7 +75,7 @@ require("footer-admin.php");
 			            <th rowspan="2">Tanggal</th>
 			            <th rowspan="2">Jam</th>
 			            <th colspan="3">Drum Level</th>
-			            <th colspan="4">Main Stream</th>
+			            <th colspan="3">Main Stream</th>
 			            <th colspan="4">Furnace</th>
 			            <th colspan="4">Feed Pump</th>
 			            <th colspan="4">Superheater</th>
@@ -85,7 +85,7 @@ require("footer-admin.php");
 			            <th colspan="3">Desuperheater</th>
 			            <th colspan="2">Header</th>
 			            <th colspan="4">Exhaust Gas</th>
-			            <th colspan="3">Scraper</th>
+			            <th colspan="2">Scraper</th>
 			            <th colspan="2">Soot</th>
 			            <th colspan="4">Fuel</th>
 			            <th colspan="3">FDF</th>
@@ -100,7 +100,6 @@ require("footer-admin.php");
 				            <th>Pressure</th>
 				            <!-- Main Stream -->
 				            <th>Temperature</th>
-	                        <th>Pressure</th>
 	                        <th>Flow</th>
 	                        <th>Flow Total</th>
 	                        <!-- Furnace -->
@@ -130,9 +129,9 @@ require("footer-admin.php");
 	                        <th>Secondary Pressure</th>
 	                        <!-- Feed Water -->
 	                        <th>Temperature</th>
-	                        <th>Pressure</th>
 	                        <th>Flow</th>
 	                        <th>Flow Total</th>
+	                        <th>Pressure</th>
 	                        <!-- Desuperheater -->
 	                        <th>Temperature</th>
 	                        <th>Flow</th>
@@ -207,11 +206,11 @@ require("footer-admin.php");
 								</td>
 								<td>
 									<!--Tanggal-->
-									<?= $array['tanggal']; ?>
+									<?= $array_drum_level['tanggal']; ?>
 								</td>
 								<td>
 									<!--jam-->
-									<?= $array['jam']; ?>
+									<?= $array_drum_level['jam']; ?>
 								</td>
 								<td>
 								<!--Drum Level-->
@@ -224,7 +223,7 @@ require("footer-admin.php");
 								</td>
 								<td>
 									<!--Pressure-->
-									<?= $array_drum_level['presure']; ?>	
+									<?= $array_drum_level['pressure']; ?>	
 								</td>
 								<td>
 								<!--Main Stream-->
@@ -339,7 +338,7 @@ require("footer-admin.php");
 								</td>
 								<td>
 									<!--Pressure-->
-									<?= $array_feed_pump['pressure']; ?>
+									<?= $array_feed_water['pressure']; ?>
 								</td>
 								<td>
 								<!--Desuperheater-->
