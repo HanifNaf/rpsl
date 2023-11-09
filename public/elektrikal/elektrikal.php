@@ -5,38 +5,29 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 ?>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Website PT RPSL</title>
-  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 <style>
 	.flexible-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  	width: 100%;
+  	border-collapse: collapse;
+	}
 
-.flexible-table th {
-  padding: 8px;
-  text-align: center;
-  background-color: #000; /* Warna latar belakang hitam */
-  color: white; /* Warna teks putih untuk kontras */
-  vertical-align: middle;
-  border: 1px solid black;
-}
-.flexible-table td {
-         border-bottom: 1px solid #ddd;
-}
-.custom-button {
-    width: 70px; /* Ganti dengan lebar yang Anda inginkan */
-    height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
-  }
+	.flexible-table th {
+	padding: 8px;
+	text-align: center;
+	background-color: #000; /* Warna latar belakang hitam */
+	color: white; /* Warna teks putih untuk kontras */
+	vertical-align: middle;
+	border: 1px solid black;
+	}
+
+	.flexible-table td {
+	border-bottom: 1px solid #ddd;
+	}
+
+	.custom-button {
+	width: 70px; /* Ganti dengan lebar yang Anda inginkan */
+	height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
+	}
 </style>
 </head>
 
