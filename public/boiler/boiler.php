@@ -123,7 +123,7 @@ require_once (SITE_ROOT."/src/footer-admin.php");
 	                        <th>Temperature</th>
 	                        <th>Flow</th>
 	                        <th>Flow Total</th>
-	                        <th>Pressure</th>
+	                        <th>Pressure</th>	
 	                        <!-- Desuperheater -->
 	                        <th>Temperature</th>
 	                        <th>Flow</th>

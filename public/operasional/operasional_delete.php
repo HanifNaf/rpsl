@@ -1,4 +1,8 @@
 <?php
+require("../operasional_data.php");
+require("header-admin.php");
+require("footer-admin.php");
+?>
 	error_reporting(0); 
 	require('../../koneksi.php');
 	$chk = $_POST['checked_produksi'];
