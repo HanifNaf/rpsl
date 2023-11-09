@@ -1,20 +1,20 @@
 <?php 
-require ("../header-admin.php");
-require_once ("../../koneksi.php");
+require ("header-admin.php");
+require ("../koneksi.php");
 ?>
 
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../../img/rpsl1.png' rel='icon' type='image/x-icon'/>
+  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
   <title>Input Data Boiler PT. Rezeki Perkasa Sejahera Lestari</title>
-  <link rel="stylesheet" href="../../css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css.map">
+  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 <style>
 	.custom-black-bg {
@@ -26,7 +26,7 @@ require_once ("../../koneksi.php");
 <body>
     <div class="container">
         <!-- Import JS Sweet Alert -->
-        <script src="../../js/sweetalert2.all.min.js"></script>
+        <script src="../js/sweetalert2.all.min.js"></script>
 
         <!-- Buat Konfirmasi Penambahan Data -->
         <?php if($_GET['m']=="simpan"){ ?>
@@ -638,7 +638,7 @@ require_once ("../../koneksi.php");
             $exec_input = pg_execute($koneksi_turbin, "my_insert", array($tanggal, $jam));
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
-            echo "input gagal";
+            echo "0 records";
             }
             ?> 
             
