@@ -72,7 +72,6 @@ require("footer-admin.php");
                     <tr class="text-center">
 						<th>No.</th>
                         <th>Tanggal</th>
-<<<<<<< Updated upstream:admin/laporan_listrik.php
                         <th>Mulai</th>
                         <th>Selesai</th>
                         <th>Area Kerja</th>
@@ -82,17 +81,6 @@ require("footer-admin.php");
                         <th>Personil</th>
                         <th>Status/Progres</th>
 						<th>Opsi</th>
-=======
-                        <th>Shift</th>
-                        <th>Generasi</th>
-                        <th>PM Kwh PLTBM</th>
-                        <th>Ekspor</th>
-                        <th>Pemakaian Sendiri</th>
-                        <th>Kwh Loss</th>
-                        <th>Bahan Bakar</th>
-                        <th>Supervisor</th>
-                        <th><input type="checkbox" id="operasional_select"></th>
->>>>>>> Stashed changes:admin/operasional.php
                     </tr>
 
                     <?php /* 
@@ -171,9 +159,6 @@ require("footer-admin.php");
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
             			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
-								</td>
-								<td>
-									<input type="checkbox" name="checked_operasional[]" class="operasional_cek" value="<?= $data['id_produksi'] ?>">
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
