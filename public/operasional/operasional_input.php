@@ -1,33 +1,23 @@
 <?php 
-require("../header-admin.php");
-require("../footer-admin.php");
-require ("../../koneksi.php");
+require_once ("../../config/config.php");
+require(SITE_ROOT."/src/header-admin.php");
+require(SITE_ROOT."/src/footer-admin.php");
+require (SITE_ROOT."/src/koneksi.php");
 ?>
 
 <head>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Input Data Operasional PT. Rezeki Perkasa Sejahera Lestari</title>
-  <link rel="stylesheet" href="../../css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css.map">
+    <style>
+    	.custom-black-bg {
+        background-color: #2ca143;
+        color: white;
+        }
+    </style>
 </head>
-<style>
-	.custom-black-bg {
-    background-color: #2ca143;
-    color: white;
-}
 
-</style>
 <body>
     <div class="container">
         <!-- Import JS Sweet Alert -->
-        <script src="../../js/sweetalert2.all.min.js"></script>
+        <script src="<?= SITE_URL?>/public/assets/js/sweetalert2.all.min.js"></script>
 
         <!-- Buat Konfirmasi Penambahan Data -->
         <?php if($_GET['m']=="simpan"){ ?>
