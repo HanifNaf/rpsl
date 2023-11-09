@@ -12,13 +12,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel= "icon" href="<?= SITE_URL?>/public/assets/img/rpsl1.png" type='image/png'/>
   <title>Dashboard PT RPSL</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../bootstrap4/dist/css/bootstrap-reboot.min.css.map">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/css/style.css">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css.map">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-grid.min.css.map">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 
 <body>

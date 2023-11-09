@@ -1,6 +1,9 @@
 <?php 
 session_start();
-require_once("koneksi.php");
+require_once("../config/config.php");
+echo SITE_URL;
+echo SITE_ROOT;
+require_once(SITE_ROOT. "../src/koneksi.php");
 
 	$username 	= $_REQUEST['username'];
 	$password	= $_REQUEST['password'];
@@ -12,8 +15,8 @@ require_once("koneksi.php");
 
 	if($cek>0){
 		$_SESSION['username'] = $username;
-		header("location:admin/index");	
+		header("location:../public/index");	
 	}else{
-		header("location:gagal");
+		header("location:../index");
 	}			
 ?>
