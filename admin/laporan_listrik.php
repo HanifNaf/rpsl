@@ -8,7 +8,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Dashboard PT RPSL</title>
+  <title>Website PT RPSL</title>
   <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
   <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
@@ -28,7 +28,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
   background-color: #000; /* Warna latar belakang hitam */
   color: white; /* Warna teks putih untuk kontras */
   vertical-align: middle;
-  border: 1px solid #ddd;
+  border: 1px solid black;
 }
 .flexible-table td {
          border-bottom: 1px solid #ddd;
@@ -44,7 +44,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 <body>
     <div class="container">	
 		<form action="" method="POST">
-			<h2 style="display: flex; float: left;">DATA BOILER</h2> 
+			<h2 style="display: flex; float: left;">DATA LAPORAN KERJA LISTRIK</h2> 
 			<div style="display: flex; float: right" id="pencarian1">
 				<input type="text" placeholder="Cari.." name="cari" autofocus>
 				<button type="submit" class="btn-sm btn-dark" style="border:none;"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg></button>
@@ -58,7 +58,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 		<form name="produksi_proses" method="POST">
 			<div class="form-group">
                 <!--Menempatkan icon cetak dan tambah-->
-          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="maintenance_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
+          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="listrik_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
 			    <div style="display: inline; float: right;">
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
 			  </div>
@@ -70,26 +70,21 @@ require_once(SITE_ROOT."/src/footer-admin.php");
                 <!--Header Tabel berwarna gelap-->    
                 <thead class="thead-dark">
                     <tr class="text-center">
-						<tr>
-			            <th rowspan="2">No.</th>
-			            <th rowspan="2">Divisi</th>
-			            <th rowspan="2">Unit</th>
-			            <th rowspan="2">Problem</th>
-			            <th rowspan="2">Evaluasi</th>
-			            <th rowspan="2">Penanganan</th>
-			            <th colspan="2">Tanggal</th>
-			            <th rowspan="2">Jumlah Problem</th>
-			            <th rowspan="2">Opsi</th>
-			        	</tr>
-			        	<tr>
-			        		<!-- Tanggal -->
-				            <th>Before</th>
-				            <th>After</th>
-			       	 	</tr>
+						<th>No.</th>
+                        <th>Tanggal</th>
+                        <th>Mulai</th>
+                        <th>Selesai</th>
+                        <th>Area Kerja</th>
+                        <th>Pekerjaan</th>
+                        <th>Permasalahan</th>
+                        <th>Alat Yang Digunakan</th>
+                        <th>Personil</th>
+                        <th>Status/Progres</th>
+						<th>Opsi</th>
                     </tr>
 
-                   <?php 
-                    /*$no = 1;
+                    <?php /* 
+                    $no = 1;
                     if($row_operasional>0){
                         foreach($operasional_arr as $array){ ?>
                         <tr class="text-center table-row-border">
@@ -164,10 +159,10 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
             			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
-								</td> 
+								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    }*/ ?>
+                    } */?>
             </table>
 </div>
 

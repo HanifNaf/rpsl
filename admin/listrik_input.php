@@ -19,7 +19,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
   <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 <style>
-    .custom-black-bg {
+	.custom-black-bg {
     background-color: #228B22;
     color: white;
 }
@@ -32,43 +32,43 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
         <!-- Buat Konfirmasi Penambahan Data -->
         <?php if($_GET['m']=="simpan"){ ?>
-                <script type="text/javascript">
-                    Swal.fire({
-                      title: 'Tambah Data Lagi?',
-                      text: "Data Berhasil disimpan!",
-                      type: 'success',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Iya!',
-                      cancelButtonText : 'Tidak!',
-                    }).then((result) => {
-                      if (result.value) {
-                        window.location = 'operasional_input';
-                      }else{
-                        window.location = 'operasional';
-                      }
-                    })
-                </script>
-        <?php } ?>
+				<script type="text/javascript">
+					Swal.fire({
+					  title: 'Tambah Data Lagi?',
+					  text: "Data Berhasil disimpan!",
+					  type: 'success',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: 'Iya!',
+					  cancelButtonText : 'Tidak!',
+					}).then((result) => {
+					  if (result.value) {
+					    window.location = 'operasional_input';
+					  }else{
+					  	window.location = 'operasional';
+					  }
+					})
+				</script>
+		<?php } ?>
 
 
         <div class="row">
             <!--Nama Divisi-->
-            <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">OPERASIONAL</h2>
+		    <div class="col-md-6 col-sm-12 col">
+		    <h2 style="display: flex; float: left;">OPERASIONAL</h2>
             </div> 
             <!--Input Jumlah Kolom-->
-            <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
+		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
                 <form action="" method="post">
-                    <div class="input-group mb-3">
-                        <input type="text" name="count_add" id="count_add" maxlength="2" pattern="[0-9]+" placeholder="Isi Jumlah Kolom" class="form-control" aria-label="" aria-describedby="basic-addon1" required>
-                            <div class="input-group-prepend">
-                                <button class="btn btn-success" type="submit" name="generate"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#ffffff" d="M14 12L10 8V11H2V13H10V16M22 12A10 10 0 0 1 2.46 15H4.59A8 8 0 1 0 4.59 9H2.46A10 10 0 0 1 22 12Z" /></svg></button>
-                            </div>
-                    </div>
-                </form>
-            </div>
+				    <div class="input-group mb-3">
+					    <input type="text" name="count_add" id="count_add" maxlength="2" pattern="[0-9]+" placeholder="Isi Jumlah Kolom" class="form-control" aria-label="" aria-describedby="basic-addon1" required>
+					        <div class="input-group-prepend">
+						        <button class="btn btn-success" type="submit" name="generate"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#ffffff" d="M14 12L10 8V11H2V13H10V16M22 12A10 10 0 0 1 2.46 15H4.59A8 8 0 1 0 4.59 9H2.46A10 10 0 0 1 22 12Z" /></svg></button>
+					        </div>
+				    </div>
+			    </form>
+		    </div>
         </div>
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post">
@@ -77,79 +77,59 @@ require_once(SITE_ROOT."/src/koneksi.php");
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
                         <tr>
                             <!-- Nomor -->
-                            <td class="custom-black-bg">NO</td>
+                           	<td class="custom-black-bg">No</td>
                             <td><?= $i ?> </td>
                         </tr>
                         <tr>
-                            <!-- Divisi -->
-                            <td class="custom-black-bg">Divisi</td>
-                                <td><select name="divisi-<?= $i ?>" class="form-control">
-                                        <option value="00.00">Chiper</option>
-                                        <option value="Malam">Boiler</option>
-                                        <option value="00.00">WTP</option>
-                                        <option value="Malam">Turbin</option>
-                                </select>
-                                </td>
+                            <!-- Tanggal -->
+                            <td class="custom-black-bg">Tanggal</td>
+                            <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
-                            <!-- Unit -->
-                            <td class="custom-black-bg">Unit</td>
-                            <td><input type="text" name="unit-<?=$i?>" style="form-control"></td>
+                            <!-- Mulai -->
+                            <td class="custom-black-bg">Mulai</td>
+                            <td><input type="number" name="mulai-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
-                            <!-- Problem -->
-                            <td class="custom-black-bg">Problem</td>
-                            <td><input type="text" name="problem-<?=$i?>" style="form-control"></td>
+                            <!-- Selesai -->
+                            <td class="custom-black-bg">Selesai</td>
+                            <td><input type="number" name="selesai-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
-                            <!-- Evaluasi -->
-                            <td class="custom-black-bg">Evaluasi</td>
-                            <td><input type="number" name="evaluasi-<?=$i?>" style="form-control"></td>
+                            <!-- Area Kerja -->
+                            <td class="custom-black-bg">Area Kerja</td>
+                            <td><input type="number" name="area-kerja-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
-                            <!-- Penanganan -->
-                            <td class="custom-black-bg">Penanganan</td>
-                            <td><input type="text" name="penanganan-<?=$i?>" style="form-control"></td>
+                            <!-- Pekerjaan -->
+                            <td class="custom-black-bg">Pekerjaan</td>
+                            <td><input type="number" name="pekerjaan-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
-                            <!-- Tingkat Kerusakan -->
-                            <td class="custom-black-bg">Tingkat Kerusakan</td>
-                            <td>
-                            <input type="checkbox" id="checkbox" value="Major" name="major-<?=$i?>" style="form-control">
-                            <label for="checkbox">Major</label><br>
-                            <input type="checkbox" id="checkbox"value="Minor" name="minor-<?=$i?>" style="form-control">
-                            <label for="checkbox">Minor</label>
-                            </td>
+                            <!-- Permasalahan -->
+                            <td class="custom-black-bg">Permasalahan</td>
+                            <td><input type="number" name="permasalahan-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
-                            <!-- Pemisah -->
-                            <td> </td>
+                            <!-- Alat Yang Digunakan -->
+                            <td class="custom-black-bg">Alat Yang Digunakan</td>
+                            <td><input type="number" name="alat-<?=$i?>" style="form-control"></td>
                         </tr>
-                        <th>Tanggal</th>
-                        <tr>
-                            <!-- Before -->
-                            <td class="custom-black-bg" width="30%">Before</td>
-                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
-                        </tr>
-                        <tr>
-                            <!-- After -->
-                            <td class="custom-black-bg" width="30%">After</td>
-                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
+                        <tr>    
+                            <!-- Personil -->
+                            <td class="custom-black-bg">Personil</td>
+                            <td><input type="number" name="personil-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
-                            <!-- Pemisah -->
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <!-- Jumlah Problem -->
-                            <td class="custom-black-bg">Jumlah Problem</td>
-                            <td><input type="number" name="jumlah_problem-<?=$i?>" style="form-control"></td>
+                            <!-- Status/Progres -->
+                            <td class="custom-black-bg">Status/Progres</td>
+                            <td><input type="number" name="status-<?=$i?>" style="form-control"></td>
                         </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
                 <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> TAMBAH DATA</button>
-                </div>
+            	</div>
             </form>
         </div> 
     </div> <!--Akhir Container-->

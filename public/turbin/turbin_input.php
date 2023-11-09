@@ -1,20 +1,22 @@
 <?php 
-require ("../header-admin.php");
-require_once ("../../koneksi.php");
+require_once("../../config/config.php");
+require_once(SITE_ROOT."/src/header-admin.php");
+require_once(SITE_ROOT."/src/footer-admin.php");
+require_once(SITE_ROOT."/src/koneksi.php");
 ?>
 
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../../img/rpsl1.png' rel='icon' type='image/x-icon'/>
+  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
   <title>Input Data Boiler PT. Rezeki Perkasa Sejahera Lestari</title>
-  <link rel="stylesheet" href="../../css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="../../bootstrap4/dist/css/bootstrap-reboot.min.css.map">
+  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 <style>
 	.custom-black-bg {
@@ -26,7 +28,7 @@ require_once ("../../koneksi.php");
 <body>
     <div class="container">
         <!-- Import JS Sweet Alert -->
-        <script src="../../js/sweetalert2.all.min.js"></script>
+        <script src="../js/sweetalert2.all.min.js"></script>
 
         <!-- Buat Konfirmasi Penambahan Data -->
         <?php if($_GET['m']=="simpan"){ ?>
@@ -113,7 +115,7 @@ require_once ("../../koneksi.php");
                             <!-- Pemisah -->
                             <td> </td>
                         </tr>
-                        <?php /*<th>Turbin</th>
+                        <th>Turbin</th>
                         <tr>
                             <!-- Axial Disp -->
                             <td class="custom-black-bg" width="30%">Axial Disp (ZE5140)</td>
@@ -308,7 +310,7 @@ require_once ("../../koneksi.php");
                             <!-- Pemisah -->
                             <td> </td>
                         </tr>
-                        */ ?><th> Generator </th>
+                        <th> Generator </th>
                         <tr>    
                             <!-- Outlet Air Temperature -->
                             <td class="custom-black-bg">Outlet Air Temperature</td>
@@ -322,68 +324,68 @@ require_once ("../../koneksi.php");
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 1 (T1_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-1-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp1-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 2 (T2_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-2-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp2-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 3 (T3_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-3-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp3-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 4 (T4_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-4-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp4-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 5 (T5_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-5-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp5-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Coil Temperature-->
                             <td class="custom-black-bg">Stator Coil Temperature 6 (T6_GEN) </td>
-                            <td><input type="number" name="generator-stator-coil-temp-6-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-coil-temp6-<?=$i?>" style="form-control"></td>
                         </tr>
                        <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 7 (T7_GEN) </td>
-                            <td><input type="number" name="generator-stator-core-temp-7-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp7-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 8 (T8_GEN) </td>
-                            <td><input type="number" name="generator-stator-core-temp-8-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp8-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 9 (T9_GEN) </td>
-                            <td><input type="number" name="generator-stator-core-temp-9-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp9-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 10 (T10_GEN) </td>
-                            <td><input type="number" name="generator-stator-core-temp-10-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp10-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 11 (T11_GEN) </td>
-                            <td><input type="number" name="stator-core-temp-11-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp11-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Stator Core Temperature-->
                             <td class="custom-black-bg">Stator Core Temperature 12 (T12_GEN) </td>
-                            <td><input type="number" name="generator-stator-core-temp-12-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generator-stator-core-temp12-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
                             <td> </td>
                         </tr>
-                        <?php /*<th> Condensor Temperature </th>
+                        <th> Condensor Temperature </th>
                         <tr>
                             <!-- Inlet Steam -->
                             <td class="custom-black-bg">Inlet Steam (TE2201)</td>
@@ -513,7 +515,7 @@ require_once ("../../koneksi.php");
                             <!-- Pad J -->
                             <td class="custom-black-bg">Pad J (TIE4100A)</td>
                             <td><input type="number" name="thrust-pad-j-<?=$i?>" style="form-control"></td>
-                        </tr> */ ?>
+                        </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
@@ -531,7 +533,6 @@ require_once ("../../koneksi.php");
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
             $jam = $_REQUEST['jam-'.$i];
-            /*
             $turbin_axial = $_REQUEST['turbin-axial-'.$i];
             $turbin_heat = $_REQUEST['turbin-heat-'.$i];
             $turbin_stroke = $_REQUEST['turbin-stroke-'.$i];
@@ -566,23 +567,21 @@ require_once ("../../koneksi.php");
             $casing_lower = $_REQUEST['casing-lower-temp-'.$i];
             $casing_flange_a = $_REQUEST['casing-flange-temp-a-'.$i];
             $casing_flange_b = $_REQUEST['casing-flange-temp-b-'.$i];
-            */
             $generator_outlet = $_REQUEST['generator-outlet-air-'.$i];
             $generator_inlet = $_REQUEST['generator-inlet-air-'.$i];
-            $generator_coil_1 = $_REQUEST['generator-stator-coil-temp-1-'.$i];
-            $generator_coil_2 = $_REQUEST['generator-stator-coil-temp_2-'.$i];
-            $generator_coil_3 = $_REQUEST['generator-stator-coil-temp-3-'.$i];
-            $generator_coil_4 = $_REQUEST['generator-stator-coil-temp-4-'.$i];
-            $generator_coil_5 = $_REQUEST['generator-stator-coil-temp-5-'.$i];
-            $generator_coil_6 = $_REQUEST['generator-stator-coil-temp-6-'.$i];
-            $generator_core_7 = $_REQUEST['generator-stator-core-temp-7-'.$i];
-            $generator_core_8 = $_REQUEST['generator-stator-core-temp-8-'.$i];
-            $generator_core_9 = $_REQUEST['generator-stator-core-temp-9-'.$i];
-            $generator_core_10 = $_REQUEST['generator-stator-core-temp-10-'.$i];
-            $generator_core_11 = $_REQUEST['generator-stator-core-temp-11-'.$i];
-            $generator_core_12 = $_REQUEST['generator-stator-core-temp-12-'.$i];
-            /*
-            $condensor_inlet = $_REQUEST['condensor-inlet-steam-'.$i];
+            $generator_coil_1 = $_REQUEST['generator-stator-coil-temp1-'.$i];
+            $generator_coil_2 = $_REQUEST['generator-stator-coil-temp2-'.$i];
+            $generator_coil_3 = $_REQUEST['generator-stator-coil-temp3-'.$i];
+            $generator_coil_4 = $_REQUEST['generator-stator-coil-temp4-'.$i];
+            $generator_coil_5 = $_REQUEST['generator-stator-coil-temp5-'.$i];
+            $generator_coil_6 = $_REQUEST['generator-stator-coil-temp6-'.$i];
+            $generator_core_7 = $_REQUEST['generator-stator-core-temp7-'.$i];
+            $generator_core_8 = $_REQUEST['generator-stator-core-temp8-'.$i];
+            $generator_core_9 = $_REQUEST['generator-stator-core-temp9-'.$i];
+            $generator_core_10 = $_REQUEST['generator-stator-core-temp10-'.$i];
+            $generator_core_11 = $_REQUEST['generator-stator-core-temp11-'.$i];
+            $generator_core_12 = $_REQUEST['generator-stator-core-temp12-'.$i];
+            $condensor_inlet_steam = $_REQUEST['condensor-inlet-steam-'.$i];
             $condensor_cond = $_REQUEST['condensor-cond-'.$i];
             $condensor_inlet_a = $_REQUEST['condensor-cooling-inlet-a-'.$i];
             $condensor_inlet_b = $_REQUEST['condensor-cooling-inlet-b-'.$i];
@@ -606,39 +605,39 @@ require_once ("../../koneksi.php");
             $thrust_pad_h = $_REQUEST['thrust-pad-h-'.$i];
             $thrust_pad_i = $_REQUEST['thrust-pad-i-'.$i];
             $thrust_pad_j = $_REQUEST['thrust-pad-j-'.$i];
-            */
+            
             //Insert ke database
-            $insert_query = /*"INSERT INTO turbin (turbin_id, tanggal, jam, axial_disp, heat_exp, stroke_position, oil_tank_level, safety_oil_pressure, lube_oil_pressure, speed, vacuum) 
-                VALUES (uuid_generate_v4(),  $1, $2, $turbin_axial, $turbin_heat, $turbin_stroke, $turbin_tank, $turbin_safety, $turbin_lube, $turbin_speed, $turbin_vacuum)";
+            $insert_query = "WITH in1 AS (INSERT INTO turbin (turbin_id, tanggal, jam, axial_disp, heat_exp, stroke_position, oil_tank_level, safety_oil_pressure, lube_oil_pressure, speed, vacuum) 
+                VALUES (uuid_generate_v4(),  $1, $2, $turbin_axial, $turbin_heat, $turbin_stroke, $turbin_tank, $turbin_safety, $turbin_lube, $turbin_speed, $turbin_vacuum))
                 ,
-                "INSERT INTO vibration (vibration_id, tanggal, jam, bearing1, bearing2, bearing3, bearing4) 
-                VALUES (uuid_generate_v4(), $1, $2, $vibration_bearing1, $vibration_bearing2, $vibration_bearing3, $vibration_bearing4)";
-        ,
-                "INSERT INTO steam (steam_id, tanggal, jam, pressure, before_msv_temp, after_stage_1_temp, after_msv_temp, exhaust_chamber_temp) 
-        VALUES (uuid_generate_v4(), $1, $2, $steam_pressure, $steam_before_msv, $steam_after_1st, $steam_after_msv, $steam_exhaust)";
+                in2 AS (INSERT INTO vibration (vibration_id, tanggal, jam, bearing1, bearing2, bearing3, bearing4) 
+                VALUES (uuid_generate_v4(), $1, $2, $vibration_bearing1, $vibration_bearing2, $vibration_bearing3, $vibration_bearing4))
                 ,
-                "INSERT INTO bearing (bearing_id, tanggal, jam, temperature_1a, temperature_1b, temperature_2a, temperature_2b, temperature_3a, temperature_3b, temperature_4, return_oil_temp_1, return_oil_temp_2, return_oil_temp_3, return_oil_temp_4, thrust_pad_a, thrust_pad_b) 
-                VALUES (uuid_generate_v4(), $1, $2, $bearing_temp_1a, $bearing_temp_1b, $bearing_temp_2a, $bearing_temp_2b, $bearing_temp_3a, $bearing_temp_3b, $bearing_temp_4, $bearing_return_1, $bearing_return_2, $bearing_return_3, $bearing_return_4, $bearing_pad_a, $bearing_pad_b)";
-                ,*/
-                "INSERT INTO casing (casing_id, tanggal, jam, upper_temp, lower_temp, flange_temp_a, flange_temp_b) 
-                VALUES (uuid_generate_v4(), $1, $2, $casing_upper, $casing_lower, $casing_flange_a, $casing_flange_b)";
-                /*,
-                in6 AS(INSERT INTO generator (generator_id, tanggal, jam, outlet_air, inlet_air, stator_coil_temp_1, stator_coil_temp_2, stator_coil_temp_3, stator_coil_temp_4, stator_coil_temp_5, stator_coil_temp_6, stator_core_temp_7, stator_core_temp_8, stator_core_temp_9, stator_core_temp_10, stator_core_temp_11, stator_core_temp_12) 
+                in3 AS (INSERT INTO steam (steam_id, tanggal, jam, pressure, before_msv_temp, after_stage_1_temp, after_msv_temp, exhaust_chamber_temp) 
+                VALUES (uuid_generate_v4(), $1, $2, $steam_pressure, $steam_before_msv, $steam_after_1st, $steam_after_msv, $steam_exhaust))
+                ,
+                in4 AS (INSERT INTO bearing (bearing_id, tanggal, jam, temperature_1a, temperature_1b, temperature_2a, temperature_2b, temperature_3a, temperature_3b, temperature_4, return_oil_temp_1, return_oil_temp_2, return_oil_temp_3, return_oil_temp_4, thrust_pad_a, thrust_pad_b) 
+                VALUES (uuid_generate_v4(), $1, $2, $bearing_temp_1a, $bearing_temp_1b, $bearing_temp_2a, $bearing_temp_2b, $bearing_temp_3a, $bearing_temp_3b, $bearing_temp_4, $bearing_return_1, $bearing_return_2, $bearing_return_3, $bearing_return_4, $bearing_pad_a, $bearing_pad_b))
+                ,
+                in5 AS (INSERT INTO casing (casing_id, tanggal, jam, upper_temp, lower_temp, flange_temp_a, flange_temp_b) 
+                VALUES (uuid_generate_v4(), $1, $2, $casing_upper, $casing_lower, $casing_flange_a, $casing_flange_b))
+                ,
+                in6 AS (INSERT INTO generator (generator_id, tanggal, jam, outlet_air, inlet_air, stator_coil_temp_1, stator_coil_temp_2, stator_coil_temp_3, stator_coil_temp_4, stator_coil_temp_5, stator_coil_temp_6, stator_core_temp_7, stator_core_temp_8, stator_core_temp_9, stator_core_temp_10, stator_core_temp_11, stator_core_temp_12) 
                 VALUES (uuid_generate_v4(), $1, $2, $generator_outlet, $generator_inlet, $generator_coil_1, $generator_coil_2, $generator_coil_3, $generator_coil_4, $generator_coil_5, $generator_coil_6, $generator_core_7, $generator_core_8, $generator_core_9, $generator_core_10, $generator_core_11, $generator_core_12))
                 ,
-                in7 AS(INSERT INTO condensor_temperature (condensor_id, tanggal, jam, inlet_steam, cond, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b) 
-                VALUES (uuid_generate_v4(), $1, $2, $, $condensor_inlet, $condensor_cond, $condensor_inlet_a, $condensor_inlet_b, $condensor_outlet_a, $condensor_outlet_b))
+                in7 AS (INSERT INTO condensor_temperature (condensor_id, tanggal, jam, inlet_steam, cond, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b) 
+                VALUES (uuid_generate_v4(), $1, $2, $condensor_inlet_steam, $condensor_cond, $condensor_inlet_a, $condensor_inlet_b, $condensor_outlet_a, $condensor_outlet_b))
                 ,
-                in8 AS(INSERT INTO oil_cooler_temperature (oil_id, tanggal, jam, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b, oil_inlet_a, oil_inlet_b, oil_outlet_a, oil_outlet_b) 
+                in8 AS (INSERT INTO oil_cooler_temperature (oil_id, tanggal, jam, cooling_inlet_a, cooling_inlet_b, cooling_outlet_a, cooling_outlet_b, oil_inlet_a, oil_inlet_b, oil_outlet_a, oil_outlet_b) 
                 VALUES (uuid_generate_v4(), $1, $2, $oil_cooling_inlet_a, $oil_cooling_inlet_b, $oil_cooling_outlet_a, $oil_cooling_outlet_b, $oil_inlet_a, $oil_inlet_b, $oil_outlet_a, $oil_outlet_b))
                 
                 INSERT INTO thrust_pad (thrust_pad_id, tanggal, jam, pad_a, pad_b, pad_c, pad_d, pad_e, pad_f, pad_g, pad_h, pad_i, pad_j) 
-                    SELECT uuid_generate_v4(), $1, $2, $thrust_pad_a, $thrust_pad_b, $thrust_pad_c, $thrust_pad_d, $thrust_pad_e, $thrust_pad_f, $thrust_pad_g, $thrust_pad_h, $thrust_pad_i, $thrust_pad_j"; */
+                    SELECT uuid_generate_v4(), $1, $2, $thrust_pad_a, $thrust_pad_b, $thrust_pad_c, $thrust_pad_d, $thrust_pad_e, $thrust_pad_f, $thrust_pad_g, $thrust_pad_h, $thrust_pad_i, $thrust_pad_j";
             $prepare_input = pg_prepare($koneksi_turbin, "my_insert", $insert_query);
             $exec_input = pg_execute($koneksi_turbin, "my_insert", array($tanggal, $jam));
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
-            echo "input gagal";
+            echo "0 records";
             }
             ?> 
             
