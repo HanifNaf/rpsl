@@ -19,6 +19,17 @@
   <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-grid.min.css.map">
   <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href= "<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css.map">
+  <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/DataTables/datatables.min.css">
+ 
+  <script src="<?= SITE_URL?>/public/assets/DataTables/datatables.min.js"></script>
+  <script src="<?= SITE_URL?>/public/assets/js/jquery.js"></script>
+	<script src="<?= SITE_URL?>/public/assets/js/sweetalert.min.js"></script>
+	<script src="<?= SITE_URL?>/public/assets/js/sweetalert2.all.min.js"></script>
+
+	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/popper.min.js"></script>
+	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/bootstrap.min.js"></script>
+	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -77,8 +88,8 @@
               </svg>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="<?= ROOT_PATH; ?> /logout" id="log" data-toggle="tooltip" data-placement="bottom" title="Keluar" class="nav-item nav-link">
+          <li class="nav-item"> <!--Bikin laman logout yang sesuai-->
+            <a href="<?= SITE_URL ?> /index" id="log" data-toggle="tooltip" data-placement="bottom" title="Keluar" class="nav-item nav-link">
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#FFFFFF" d="M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20.5,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V9.67L19,7.67V5H5V19H19V16.33L21,14.33V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19Z" />
               </svg>
