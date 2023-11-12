@@ -54,24 +54,24 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
 			  </div>
 			    
-		  </div>
-		    		<div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
+		</div>
+		<div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
             <!--Menampilkan tabel-->
             <table class="flexible-table">
                 <!--Header Tabel berwarna gelap-->    
                 <thead class="thead-dark">
                     <tr class="text-center">
 						<tr>
-			            <th rowspan="2">No.</th>
-			            <th rowspan="2">Divisi</th>
-			            <th rowspan="2">Unit</th>
-			            <th rowspan="2">Problem</th>
-			            <th rowspan="2">Evaluasi</th>
-			            <th rowspan="2">Penanganan</th>
-						<th rowspan="2">Tingkat Kerusakan</th>
-			            <th colspan="2">Tanggal</th>
-						<th rowspan="2">Status</th>
-			            <th rowspan="2">Opsi</th>
+			            	<th rowspan="2">No.</th>
+			            	<th rowspan="2">Divisi</th>
+			            	<th rowspan="2">Unit</th>
+			            	<th rowspan="2">Problem</th>
+			            	<th rowspan="2">Evaluasi</th>
+			            	<th rowspan="2">Penanganan</th>
+							<th rowspan="2">Tingkat Kerusakan</th>
+			            	<th colspan="2">Tanggal</th>
+							<th rowspan="2">Status</th>
+			            	<th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>
 			        		<!-- Tanggal -->
@@ -127,7 +127,7 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
 								</td>
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
-            			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
+            						<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td> 
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";

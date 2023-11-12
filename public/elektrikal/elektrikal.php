@@ -2,6 +2,7 @@
 require_once("../../config/config.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
+require_once("elektrikal_data.php");
 ?>
 
 <head>
@@ -49,35 +50,42 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 		<form name="produksi_proses" method="POST">
 			<div class="form-group">
                 <!--Menempatkan icon cetak dan tambah-->
-          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="listrik_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
+          		<button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="elektrikal_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
 			    <div style="display: inline; float: right;">
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
 			  </div>
 			    
-		  </div>
-		    		<div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
+		</div>
+		<div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
             <!--Menampilkan tabel-->
             <table class="flexible-table">
                 <!--Header Tabel berwarna gelap-->    
                 <thead class="thead-dark">
-                    <tr class="text-center">
-						<th>No.</th>
-                        <th>Tanggal</th>
-                        <th>Mulai</th>
-                        <th>Selesai</th>
-                        <th>Area Kerja</th>
-                        <th>Pekerjaan</th>
-                        <th>Permasalahan</th>
-                        <th>Alat Yang Digunakan</th>
-                        <th>Personil</th>
-                        <th>Status/Progres</th>
-						<th>Opsi</th>
+				<tr class="text-center">
+						<tr>
+			            	<th rowspan="2">No.</th>
+							<th rowspan="2">Tanggal</th>
+							<th colspan="2">Jam</th>
+			            	<th rowspan="2">Area Kerja</th>
+							<th rowspan="2">Pekerjaan</th>
+			            	<th rowspan="2">Permasalahan</th>
+			            	<th rowspan="2">Alat Yang Digunakan</th>
+			            	<th rowspan="2">Personil</th>
+							<th rowspan="2">Status</th>
+							<th rowspan="2">Keterangan</th>
+			            	<th rowspan="2">Opsi</th>
+			        	</tr>
+			        	<tr>
+			        		<!-- Tanggal -->
+				            <th>  Mulai  </th>
+				            <th>  Selesai   </th>
+			       	 	</tr>
                     </tr>
 
-                    <?php /* 
+                    <?php 
                     $no = 1;
-                    if($row_operasional>0){
-                        foreach($operasional_arr as $array){ ?>
+                    if($elektrikal_row>0){
+                        foreach($elektrikal_arr as $array){ ?>
                         <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
@@ -88,73 +96,50 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['tanggal']; ?>
 								</td>
 								<td>
-									<!--Shift-->
-									<?= $array['shift']; ?>
+									<!--Jam Mulai-->
+									<?= $array['jam_mulai']; ?>
 								</td>
 								<td>
-									<!--Generasi-->
-									<?= $array['generation']; ?>
+									<!--Jam Selesai-->
+									<?= $array['jam_selesai']; ?>
 								</td>
 								<td>
-									<!--PM-Kwh-PLTBM-->
-									<?= $array['pm_kwh_pltbm']; ?>
+									<!--Area Kerja-->
+									<?= $array['area_kerja']; ?>
 								</td>
 								<td>
-									<!--Ekspor-->
-									<?= $array['ekspor']; ?>	
+									<!--Pekerjaan-->
+									<?= $array['pekerjaan']; ?>
 								</td>
 								<td>
-									<!--Pemakaian Sendiri-->
-									<?= $array['pemakaian_sendiri']; ?>	
+									<!--Permasalahan-->
+									<?= $array['permasalahan']; ?>
 								</td>
 								<td>
-									<!--Kwh Loss-->
-									<?= $array['kwh_loss']; ?>	
+									<!--Alat-->
+									<?= $array['alat']; ?>
 								</td>
 								<td>
-									<!--kg cangkang-->
-									<?= $array['kg_cangkang']; ?>
+									<!--Personil-->
+									<?= $array['personil']; ?>
 								</td>
 								<td>
-									<!--kg palm fiber-->
-									<?= $array['kg_palmfiber']; ?>
-								</td>
-								<td>
-									<!--kg wood chips-->
-									<?= $array['kg_woodchips']; ?>
-								</td>
-								<td>
-									<!--kg serbuk kayu-->
-									<?= $array['kg_serbukkayu']; ?>
-								</td>
-								<td>
-									<!--kg sabut kelapa-->
-									<?= $array['kg_sabutkelapa']; ?>
-								</td>
-								<td>
-									<!--kg efb-->
-									<?= $array['kg_efbpress']; ?>
-								</td>
-								<td>
-									<!--kg opt-->
-									<?= $array['kg_opt']; ?>
-								</td>
-								<td>
-									<!--Supervisor-->
-									<?= $array['supervisor']; ?>
+									<!--Status-->
+									<?= $array['status']; ?>	
 								</td>
 								<td>
 									<!--Keterangan-->
-									<?= $array['keterangan']; ?>
+									<?= $array['keterangan']; ?>	
 								</td>
 								<td>
-									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
-            			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
+									<a href="elektrikal_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
+            						<a href="elektrikal_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    } */?>
+                    } ?>
             </table>
+			
 </div>
 
 

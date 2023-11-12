@@ -7,12 +7,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
 <head>
 </head>
-<style>
-	.custom-black-bg {
-    background-color: #228B22;
-    color: white;
-    }
-</style>
+    <style>
+    	.custom-black-bg {
+        background-color: #228B22;
+        color: white;
+        }
+    </style>
 <body>
     <div class="container">
         <!-- Import JS Sweet Alert -->
@@ -44,7 +44,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
-		    <h2 style="display: flex; float: left;">OPERASIONAL</h2>
+		    <h2 style="display: flex; float: left;">Elektrikal</h2>
             </div> 
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -75,52 +75,63 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         </tr>
                         <tr>
                             <!-- Mulai -->
-                            <td class="custom-black-bg">Mulai</td>
-                            <td><input type="number" name="mulai-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Jam Mulai</td>
+                            <td><input type="time" name="mulai-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Selesai -->
-                            <td class="custom-black-bg">Selesai</td>
-                            <td><input type="number" name="selesai-<?=$i?>" style="form-control"></td>
+                            <td class="custom-black-bg">Jam Selesai</td>
+                            <td><input type="time" name="selesai-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Area Kerja -->
                             <td class="custom-black-bg">Area Kerja</td>
-                            <td><input type="number" name="area-kerja-<?=$i?>" style="form-control"></td>
+                            <td><input type="text" name="area-kerja-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Pekerjaan -->
                             <td class="custom-black-bg">Pekerjaan</td>
-                            <td><input type="number" name="pekerjaan-<?=$i?>" style="form-control"></td>
+                            <td><input type="text" name="pekerjaan-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Permasalahan -->
                             <td class="custom-black-bg">Permasalahan</td>
-                            <td><input type="number" name="permasalahan-<?=$i?>" style="form-control"></td>
+                            <td><input type="text" name="permasalahan-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- Alat Yang Digunakan -->
                             <td class="custom-black-bg">Alat Yang Digunakan</td>
-                            <td><input type="number" name="alat-<?=$i?>" style="form-control"></td>
+                            <td><input type="text" name="alat-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>    
                             <!-- Personil -->
                             <td class="custom-black-bg">Personil</td>
-                            <td><input type="number" name="personil-<?=$i?>" style="form-control"></td>
+                            <td><input type="text" name="personil-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
-                            <!-- Status/Progres -->
-                            <td class="custom-black-bg">Status/Progres</td>
-                            <td><input type="number" name="status-<?=$i?>" style="form-control"></td>
+                            <!--Status-->
+                            <td class="custom-black-bg">Status</td>
+                                <td>
+                                    <select name="status-<?= $i ?>" class="form-control">
+                                        <option value="OK">OK</option>
+                                        <option value="Tidak OK">Tidak OK</option>
+                                    </select>
+                                </td>
+                        </tr>
+                        <tr>
+                            <!-- Keterangan -->
+                            <td class="custom-black-bg">Keterangan</td>
+                            <td><input type="text" name="keterangan-<?=$i?>" style="form-control"></td>
                         </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> TAMBAH DATA</button>
+                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="elektrikal"></a></i> TAMBAH DATA</button>
             	</div>
             </form>
         </div> 
     </div> <!--Akhir Container-->
+
 <!-- Menambahan ke Database -->
 <?php 
     if(isset($_POST['add'])){
@@ -129,41 +140,29 @@ require_once(SITE_ROOT."/src/koneksi.php");
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
-            $shift = $_REQUEST['shift-'.$i];
-            $generasi = $_REQUEST['generasi-'.$i];
-            $pm_kwh_pltbm = $_REQUEST['pm-kwh-pltbm-'.$i];
-            $ekspor = $_REQUEST['ekspor-'.$i];
-            $pemakaian_sendiri = $_REQUEST['pemakaian-sendiri-'.$i];
-            $kwh_loss = $_REQUEST['kwh-loss-'.$i];
-            $cangkang = $_REQUEST['cangkang-'.$i];
-            $palm_fiber = $_REQUEST['palm-fiber-'.$i];
-            $wood_chips = $_REQUEST['wood-chips-'.$i];
-            $serbuk_kayu = $_REQUEST['serbuk-kayu-'.$i];
-            $sabut_kelapa = $_REQUEST['sabut-kelapa-'.$i];
-            $efb = $_REQUEST['efb-press-'.$i];
-            $opt = $_REQUEST['opt-'.$i];
-            $supervisor = $_REQUEST['supervisor-'.$i];
+            $jam_mulai = $_REQUEST['mulai-'.$i].':00';
+            $jam_selesai = $_REQUEST['selesai-'.$i].':00';
+            $area_kerja = $_REQUEST['area-kerja-'.$i];
+            $permasalahan = $_REQUEST['permasalahan-'.$i];
+            $personil = $_REQUEST['personil-'.$i];
+            $alat = $_REQUEST['alat-'.$i];
+            $status = $_REQUEST['status-'.$i];
             $keterangan = $_REQUEST['keterangan-'.$i];
+            $pekerjaan = $_REQUEST['pekerjaan-'.$i];
 
             //Insert ke database
-            $insert_query = "WITH in1 AS(
-                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $2, $3, $4, LOCALTIME)
-                RETURNING produksi_id AS produksi),
-                in2 AS (
-                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $5, $6, $7, $4, LOCALTIME)
-                RETURNING pemakaian_id AS pakai),
-                in3 AS (
-                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), $1, $4, LOCALTIME, $8, $9, $10, $11, $12, $13, $14)
-                RETURNING pemakaian_bahan_bakar_id AS bahan_bakar)
-                INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
-                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
-            $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
-            $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
+            $insert_query = "INSERT INTO elektrikal (elektrikal_id, tanggal, jam_mulai, jam_selesai, area_kerja, permasalahan, personil, alat, status, keterangan, pekerjaan)
+            VALUES(uuid_generate_v4(), $1, $2, $3, $4, $5, $6, $7, $8, $9, $10);";
+            
+            $prepare_input = pg_prepare($koneksi_elektrikal, "my_insert", $insert_query);
+            $exec_input = pg_execute($koneksi_elektrikal, "my_insert", array($tanggal, $jam_mulai, $jam_selesai, $area_kerja, $permasalahan, $personil, $alat, $status, $keterangan, $pekerjaan));
 
 
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
             echo "0 records";
+            echo $jam_mulai;
+            echo $jam_selesai;
             }
             ?> 
             
