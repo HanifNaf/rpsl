@@ -33,7 +33,7 @@
 
   $data1 = pg_num_rows($operasional);
   $data2 = pg_num_rows($timbangan);
-  $data3 = pg_num_rows($boiler);
+  $data_boiler = pg_num_rows($boiler);
   $data4 = pg_num_rows($wtp);
   $data5 = pg_num_rows($turbin);
 ?>
@@ -86,7 +86,7 @@
   <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
   <div class="card-body">
     <svg style="width:40px;height:40px; float: right; margin-top: 5px;" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M5 5C5 2.79086 6.79086 1 9 1H15C17.2091 1 19 2.79086 19 5V21H15.144L15.8865 22.9999H13.8865L13.144 21H11.144L11.8865 22.9999H9.88653L9.14397 21H5V5ZM9 3H15C16.1046 3 17 3.89543 17 5V7H7V5C7 3.89543 7.89543 3 9 3ZM7 9H17V19H7V9Z" /></svg>
-    <h1 class="card-title" style="display: inline;"><?= $data3 ?></h1>
+    <h1 class="card-title" style="display: inline;"><?= 3 ?></h1> <!--Jangan lupa diubah ke data boiler-->
     <p class="card-text">BOILER</p>
   </div>
 </div>

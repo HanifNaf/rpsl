@@ -115,7 +115,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                            <!-- Pemisah -->
                            <td> </td>
                         </tr>
-                        <th>DRUM LEVEL</th>f
+                        <th>DRUM LEVEL</th>
                         <tr>
                             <!-- Level 1 -->
                             <td class="custom-black-bg" width="30%">Level 1</td>
