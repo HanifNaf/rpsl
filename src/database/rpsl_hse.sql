@@ -90,7 +90,8 @@ CREATE TABLE public.pengawasan (
     pengawasan_bahan_bakar character varying(50) NOT NULL,
     keterangan_pengawasan_bahan_bakar character varying(500) NOT NULL,
     kondisi_5r_bahan_bakar character varying(50) NOT NULL,
-    keterangan_5r_bahan_bakar character varying(500) NOT NULL
+    keterangan_5r_bahan_bakar character varying(500) NOT NULL,
+    pemeriksa character varying(100) NOT NULL
 );
 
 
@@ -167,7 +168,7 @@ COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_ker
 -- Data for Name: pengawasan; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan, keterangan_pengawasan_timbangan, kondisi_5r_timbangan, keterangan_5r_timbangan, pengawasan_chipper, keterangan_pengawasan_chipper, kondisi_5r_chipper, keterangan_5r_chipper, pengawasan_boiler, keterangan_pengawasan_boiler, kondisi_5r_boiler, keterangan_5r_boiler, pengawasan_wtp, keterangan_pengawasan_wtp, kondisi_5r_wtp, keterangan_5r_wtp, pengawasan_turbin, keterangan_pengawasan_turbin, kondisi_5r_turbin, keterangan_5r_turbin, pengawasan_mekanik, keterangan_pengawasan_mekanik, kondisi_5r_mekanik, keterangan_5r_mekanik, pengawasan_listrik, keterangan_pengawasan_listrik, kondisi_5r_listrik, keterangan_5r_listrik, pengawasan_bahan_bakar, keterangan_pengawasan_bahan_bakar, kondisi_5r_bahan_bakar, keterangan_5r_bahan_bakar) FROM stdin;
+COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan, keterangan_pengawasan_timbangan, kondisi_5r_timbangan, keterangan_5r_timbangan, pengawasan_chipper, keterangan_pengawasan_chipper, kondisi_5r_chipper, keterangan_5r_chipper, pengawasan_boiler, keterangan_pengawasan_boiler, kondisi_5r_boiler, keterangan_5r_boiler, pengawasan_wtp, keterangan_pengawasan_wtp, kondisi_5r_wtp, keterangan_5r_wtp, pengawasan_turbin, keterangan_pengawasan_turbin, kondisi_5r_turbin, keterangan_5r_turbin, pengawasan_mekanik, keterangan_pengawasan_mekanik, kondisi_5r_mekanik, keterangan_5r_mekanik, pengawasan_listrik, keterangan_pengawasan_listrik, kondisi_5r_listrik, keterangan_5r_listrik, pengawasan_bahan_bakar, keterangan_pengawasan_bahan_bakar, kondisi_5r_bahan_bakar, keterangan_5r_bahan_bakar, pemeriksa) FROM stdin;
 \.
 
 
