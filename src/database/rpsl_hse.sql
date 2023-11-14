@@ -52,6 +52,24 @@ CREATE TABLE public.kecelakaan_kerja (
 ALTER TABLE public.kecelakaan_kerja OWNER TO rpsl;
 
 --
+-- Name: pelanggaran; Type: TABLE; Schema: public; Owner: rpsl
+--
+
+CREATE TABLE public.pelanggaran (
+    pelanggaran_id uuid NOT NULL,
+    nama character varying(100) NOT NULL,
+    nik integer NOT NULL,
+    bagian character varying(100) NOT NULL,
+    jenis_pelanggaran character varying(100) NOT NULL,
+    keterangan character varying(500) NOT NULL,
+    pemberian_apd character varying(200),
+    jumlah_apd integer
+);
+
+
+ALTER TABLE public.pelanggaran OWNER TO rpsl;
+
+--
 -- Name: pengawasan; Type: TABLE; Schema: public; Owner: rpsl
 --
 
@@ -148,7 +166,8 @@ CREATE TABLE public.potensi_bahaya (
     tindak_lanjut_bahan_bakar character varying(200) NOT NULL,
     keterangan_bahan_bakar character varying(500) NOT NULL,
     kendala_bahan_bakar character varying(200) NOT NULL,
-    pemeriksa character varying(100) NOT NULL
+    pemeriksa character varying(100) NOT NULL,
+    jam_kerja time without time zone NOT NULL
 );
 
 
@@ -165,6 +184,14 @@ COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_ker
 
 
 --
+-- Data for Name: pelanggaran; Type: TABLE DATA; Schema: public; Owner: rpsl
+--
+
+COPY public.pelanggaran (pelanggaran_id, nama, nik, bagian, jenis_pelanggaran, keterangan, pemberian_apd, jumlah_apd) FROM stdin;
+\.
+
+
+--
 -- Data for Name: pengawasan; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
@@ -176,7 +203,7 @@ COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan,
 -- Data for Name: potensi_bahaya; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.potensi_bahaya (potensi_bahaya_id, potensi_bahaya_timbangan, jenis_potensi_timbangan, tindak_lanjut_timbangan, keterangan_timbangan, kendala_timbangan, potensi_bahaya_chipper, jenis_potensi_chipper, tindak_lanjut_chipper, keterangan_chipper, kendala_chipper, potensi_bahaya_boiler, jenis_potensi_boiler, tindak_lanjut_boiler, keterangan_boiler, kendala_boiler, potensi_bahaya_wtp, jenis_potensi_wtp, tindak_lanjut_wtp, keterangan_wtp, kendala_wtp, potensi_bahaya_turbin, jenis_potensi_turbin, tindak_lanjut_turbin, keterangan_turbin, kendala_turbin, potensi_bahaya_mekanik, jenis_potensi_mekanik, tindak_lanjut_mekanik, keterangan_mekanik, kendala_mekanik, potensi_bahaya_listrik, jenis_potensi_listrik, tindak_lanjut_listrik, keterangan_listrik, kendala_listrik, potensi_bahaya_jalan, jenis_potensi_jalan, tindak_lanjut_jalan, keterangan_jalan, kendala_jalan, potensi_bahaya_bahan_bakar, jenis_potensi_bahan_bakar, tindak_lanjut_bahan_bakar, keterangan_bahan_bakar, kendala_bahan_bakar, pemeriksa) FROM stdin;
+COPY public.potensi_bahaya (potensi_bahaya_id, potensi_bahaya_timbangan, jenis_potensi_timbangan, tindak_lanjut_timbangan, keterangan_timbangan, kendala_timbangan, potensi_bahaya_chipper, jenis_potensi_chipper, tindak_lanjut_chipper, keterangan_chipper, kendala_chipper, potensi_bahaya_boiler, jenis_potensi_boiler, tindak_lanjut_boiler, keterangan_boiler, kendala_boiler, potensi_bahaya_wtp, jenis_potensi_wtp, tindak_lanjut_wtp, keterangan_wtp, kendala_wtp, potensi_bahaya_turbin, jenis_potensi_turbin, tindak_lanjut_turbin, keterangan_turbin, kendala_turbin, potensi_bahaya_mekanik, jenis_potensi_mekanik, tindak_lanjut_mekanik, keterangan_mekanik, kendala_mekanik, potensi_bahaya_listrik, jenis_potensi_listrik, tindak_lanjut_listrik, keterangan_listrik, kendala_listrik, potensi_bahaya_jalan, jenis_potensi_jalan, tindak_lanjut_jalan, keterangan_jalan, kendala_jalan, potensi_bahaya_bahan_bakar, jenis_potensi_bahan_bakar, tindak_lanjut_bahan_bakar, keterangan_bahan_bakar, kendala_bahan_bakar, pemeriksa, jam_kerja) FROM stdin;
 \.
 
 
@@ -186,6 +213,14 @@ COPY public.potensi_bahaya (potensi_bahaya_id, potensi_bahaya_timbangan, jenis_p
 
 ALTER TABLE ONLY public.kecelakaan_kerja
     ADD CONSTRAINT kecelakaan_kerja_pkey PRIMARY KEY (kecelakaan_kerja_id);
+
+
+--
+-- Name: pelanggaran pelanggaran_pkey; Type: CONSTRAINT; Schema: public; Owner: rpsl
+--
+
+ALTER TABLE ONLY public.pelanggaran
+    ADD CONSTRAINT pelanggaran_pkey PRIMARY KEY (pelanggaran_id);
 
 
 --
