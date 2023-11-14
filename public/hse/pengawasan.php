@@ -6,38 +6,29 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 ?>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Dashboard PT RPSL</title>
-  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 <style>
 	.flexible-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+  		width: 100%;
+  		border-collapse: collapse;
+	}
 
-.flexible-table th {
-  padding: 8px;
-  text-align: center;
-  background-color: #000; /* Warna latar belakang hitam */
-  color: white; /* Warna teks putih untuk kontras */
-  vertical-align: middle;
-  border: 1px solid #ddd;
-}
-.flexible-table td {
-         border-bottom: 1px solid #ddd;
-}
-.custom-button {
-    width: 70px; /* Ganti dengan lebar yang Anda inginkan */
-    height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
-  }
+	.flexible-table th {
+		padding: 8px;
+		text-align: center;
+		background-color: #000; /* Warna latar belakang hitam */
+		color: white; /* Warna teks putih untuk kontras */
+		vertical-align: middle;
+		border: 1px solid #ddd;
+	}
+
+	.flexible-table td {
+		border-bottom: 1px solid #ddd;
+	}
+
+	.custom-button {
+		width: 70px; /* Ganti dengan lebar yang Anda inginkan */
+		height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
+	}
 </style>
 </head>
 
@@ -75,6 +66,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 			            <th rowspan="2">No.</th>
 			            <th rowspan="2">Tanggal</th>
 			            <th rowspan="2">Jam Kerja</th>
+						<th rowspan="2">Personil HSE</th>
 			            <th colspan="4">Timbangan</th>
 			            <th colspan="4">Chipper dan Moving Floor</th>
 			            <th colspan="4">Boiler</th>
@@ -144,6 +136,10 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!--Jam Kerja-->
 									<?= $array['jam_kerja']; ?>
+								</td>
+								<td>
+									<!--Personil HSE-->
+									<?= $array['personil_hse']; ?>
 								</td>
 								<td>
 									<!--Timbangan-->
