@@ -482,7 +482,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array_economizer['outtemperature_water']; ?>
 								</td>
 								<td>
-									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
+									<a href="boiler_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
             			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td> 
                     <?php }}} else{

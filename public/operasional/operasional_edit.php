@@ -1,7 +1,8 @@
-<?php 
-require("../operasional_data.php");
-require ("header-admin.php");
-require ("../koneksi.php");
+<?php
+require_once ("../../config/config.php");
+require_once("operasional_data.php");
+require_once(SITE_ROOT. "/src/header-admin.php");
+require_once(SITE_ROOT. "/src/footer-admin.php");
 ?>
 
 <head>
