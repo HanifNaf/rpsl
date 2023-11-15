@@ -168,7 +168,8 @@ CREATE TABLE public.potensi_bahaya (
     keterangan_bahan_bakar character varying(500) NOT NULL,
     kendala_bahan_bakar character varying(200) NOT NULL,
     personil_hse character varying(100) NOT NULL,
-    jam_kerja time without time zone NOT NULL
+    jam_kerja character varying(50) NOT NULL,
+    tanggal date NOT NULL
 );
 
 
@@ -204,7 +205,8 @@ COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan,
 -- Data for Name: potensi_bahaya; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.potensi_bahaya (potensi_bahaya_id, potensi_bahaya_timbangan, jenis_potensi_timbangan, tindak_lanjut_timbangan, keterangan_timbangan, kendala_timbangan, potensi_bahaya_chipper, jenis_potensi_chipper, tindak_lanjut_chipper, keterangan_chipper, kendala_chipper, potensi_bahaya_boiler, jenis_potensi_boiler, tindak_lanjut_boiler, keterangan_boiler, kendala_boiler, potensi_bahaya_wtp, jenis_potensi_wtp, tindak_lanjut_wtp, keterangan_wtp, kendala_wtp, potensi_bahaya_turbin, jenis_potensi_turbin, tindak_lanjut_turbin, keterangan_turbin, kendala_turbin, potensi_bahaya_mekanik, jenis_potensi_mekanik, tindak_lanjut_mekanik, keterangan_mekanik, kendala_mekanik, potensi_bahaya_listrik, jenis_potensi_listrik, tindak_lanjut_listrik, keterangan_listrik, kendala_listrik, potensi_bahaya_jalan, jenis_potensi_jalan, tindak_lanjut_jalan, keterangan_jalan, kendala_jalan, potensi_bahaya_bahan_bakar, jenis_potensi_bahan_bakar, tindak_lanjut_bahan_bakar, keterangan_bahan_bakar, kendala_bahan_bakar, personil_hse, jam_kerja) FROM stdin;
+COPY public.potensi_bahaya (potensi_bahaya_id, potensi_bahaya_timbangan, jenis_potensi_timbangan, tindak_lanjut_timbangan, keterangan_timbangan, kendala_timbangan, potensi_bahaya_chipper, jenis_potensi_chipper, tindak_lanjut_chipper, keterangan_chipper, kendala_chipper, potensi_bahaya_boiler, jenis_potensi_boiler, tindak_lanjut_boiler, keterangan_boiler, kendala_boiler, potensi_bahaya_wtp, jenis_potensi_wtp, tindak_lanjut_wtp, keterangan_wtp, kendala_wtp, potensi_bahaya_turbin, jenis_potensi_turbin, tindak_lanjut_turbin, keterangan_turbin, kendala_turbin, potensi_bahaya_mekanik, jenis_potensi_mekanik, tindak_lanjut_mekanik, keterangan_mekanik, kendala_mekanik, potensi_bahaya_listrik, jenis_potensi_listrik, tindak_lanjut_listrik, keterangan_listrik, kendala_listrik, potensi_bahaya_jalan, jenis_potensi_jalan, tindak_lanjut_jalan, keterangan_jalan, kendala_jalan, potensi_bahaya_bahan_bakar, jenis_potensi_bahan_bakar, tindak_lanjut_bahan_bakar, keterangan_bahan_bakar, kendala_bahan_bakar, personil_hse, jam_kerja, tanggal) FROM stdin;
+9d706231-5723-4a23-b1b7-ed811f821b86	Ya	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	Tidak	-	-	-	-	personil a	Malam	2023-11-14
 \.
 
 
