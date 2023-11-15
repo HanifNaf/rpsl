@@ -2,7 +2,7 @@
 require_once("../../config/config.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
-require_once("elektrikal_data.php");
+//require_once("elektrikal_data.php");
 ?>
 
 <head>
@@ -36,7 +36,7 @@ require_once("elektrikal_data.php");
 <body>
     <div class="container">	
 		<form action="" method="POST">
-			<h2 style="display: flex; float: left;">DATA LAPORAN KERJA LISTRIK</h2> 
+			<h2 style="display: flex; float: left;">DATA LAPORAN KERJA MEKANIK</h2> 
 			<div style="display: flex; float: right" id="pencarian1">
 				<input type="text" placeholder="Cari.." name="cari" autofocus>
 				<button type="submit" class="btn-sm btn-dark" style="border:none;"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg></button>
@@ -65,24 +65,27 @@ require_once("elektrikal_data.php");
 						<tr>
 			            	<th rowspan="2">No.</th>
 							<th rowspan="2">Tanggal</th>
-							<th colspan="2">Jam</th>
-			            	<th rowspan="2">Area Kerja</th>
-							<th rowspan="2">Pekerjaan</th>
-			            	<th rowspan="2">Permasalahan</th>
-			            	<th rowspan="2">Alat Yang Digunakan</th>
-			            	<th rowspan="2">Personil</th>
-							<th rowspan="2">Status</th>
+							<th rowspan="2">Permasalahan/Progres</th>
+			            	<th rowspan="2">Tindak Lanjut</th>
+							<th colspan="3">Sparepart</th>
 							<th rowspan="2">Keterangan</th>
+			            	<th colspan="2">Absensi</th>
+			            	<th rowspan="2">Catatan</th>
 			            	<th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>
-			        		<!-- Tanggal -->
-				            <th>  Mulai  </th>
-				            <th>  Selesai   </th>
+			        		<!-- Sparepart -->
+				            <th>Sparepart</th>
+				            <th>Quantity</th>
+				            <th>Satuan</th>
+			        		<!-- Absensi -->
+				            <th>Nama</th>
+				            <th>Keterangan</th>
 			       	 	</tr>
                     </tr>
 
                     <?php 
+                    /*
                     $no = 1;
                     if($elektrikal_row>0){
                         foreach($elektrikal_arr as $array){ ?>
@@ -137,7 +140,7 @@ require_once("elektrikal_data.php");
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    } ?>
+                    } */?>
             </table>
 			
 </div>
