@@ -2,7 +2,7 @@
 require_once("../../config/config.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
-//require_once("elektrikal_data.php");
+require_once("mekanikal_data.php");
 ?>
 
 <head>
@@ -34,7 +34,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 
 
 <body>
-    <div class="container">	
+    <div class="container">
 		<form action="" method="POST">
 			<h2 style="display: flex; float: left;">DATA LAPORAN KERJA MEKANIK</h2> 
 			<div style="display: flex; float: right" id="pencarian1">
@@ -50,7 +50,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 		<form name="produksi_proses" method="POST">
 			<div class="form-group">
                 <!--Menempatkan icon cetak dan tambah-->
-          		<button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="elektrikal_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
+          		<button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="mekanikal_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
 			    <div style="display: inline; float: right;">
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
 			  </div>
@@ -68,8 +68,8 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 							<th rowspan="2">Permasalahan/Progres</th>
 			            	<th rowspan="2">Tindak Lanjut</th>
 							<th colspan="3">Sparepart</th>
-							<th rowspan="2">Keterangan</th>
 			            	<th colspan="2">Absensi</th>
+							<th rowspan="2">Keterangan</th>
 			            	<th rowspan="2">Catatan</th>
 			            	<th rowspan="2">Opsi</th>
 			        	</tr>
@@ -85,10 +85,9 @@ require_once(SITE_ROOT."/src/footer-admin.php");
                     </tr>
 
                     <?php 
-                    /*
                     $no = 1;
-                    if($elektrikal_row>0){
-                        foreach($elektrikal_arr as $array){ ?>
+                    if($mekanikal_row>0){
+                        foreach($mekanikal_arr as $array){ ?>
                         <tr class="text-center table-row-border">
 								<td>
 									<!--Nomor-->
@@ -99,48 +98,48 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['tanggal']; ?>
 								</td>
 								<td>
-									<!--Jam Mulai-->
-									<?= $array['jam_mulai']; ?>
-								</td>
-								<td>
-									<!--Jam Selesai-->
-									<?= $array['jam_selesai']; ?>
-								</td>
-								<td>
-									<!--Area Kerja-->
-									<?= $array['area_kerja']; ?>
-								</td>
-								<td>
-									<!--Pekerjaan-->
-									<?= $array['pekerjaan']; ?>
-								</td>
-								<td>
 									<!--Permasalahan-->
 									<?= $array['permasalahan']; ?>
 								</td>
 								<td>
-									<!--Alat-->
-									<?= $array['alat']; ?>
+									<!--Tindak Lanjut-->
+									<?= $array['tindak_lanjut']; ?>
 								</td>
 								<td>
-									<!--Personil-->
-									<?= $array['personil']; ?>
+									<!--Sparepart-->
+									<?= $array['sparepart']; ?>
 								</td>
 								<td>
-									<!--Status-->
-									<?= $array['status']; ?>	
+									<!--Jumlah Sparepart-->
+									<?= $array['jumlah_sparepart']; ?>
+								</td>
+								<td>
+									<!--Satuan Sparepart-->
+									<?= $array['satuan_sparepart']; ?>
+								</td>
+								<td>
+									<!--Nama Absensi-->
+									<?= $array['nama_absensi']; ?>
+								</td>
+								<td>
+									<!--Keterangan Absensi-->
+									<?= $array['keterangan_absensi']; ?>	
 								</td>
 								<td>
 									<!--Keterangan-->
-									<?= $array['keterangan']; ?>	
+									<?= $array['keterangan']; ?>
 								</td>
 								<td>
-									<a href="elektrikal_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
-            						<a href="elektrikal_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
+									<!--Catatan-->
+									<?= $array['catatan']; ?>	
+								</td>
+								<td>
+									<a href="mekanikal_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
+            						<a href="mekanikal_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    } */?>
+                    } ?>
             </table>
 			
 </div>
