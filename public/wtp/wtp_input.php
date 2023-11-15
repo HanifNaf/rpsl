@@ -45,7 +45,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
-		    <h2 style="display: flex; float: left;">LAPORAN KERJA MEKANIK</h2>
+		    <h2 style="display: flex; float: left;">LAPORAN KERJA WTP</h2>
             </div> 
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -87,17 +87,17 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         <tr>
                             <!-- Sparepart -->
                             <td class="custom-black-bg">Sparepart</td>
-                            <td> <input type="text" name="sparepart-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="text" name="sparepart-<?=$i?>" value =" " class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- Sparepart Quantity -->
                             <td class="custom-black-bg">Quantity Sparepart</td>
-                            <td> <input type="number" name="quantity-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="number" name="quantity-<?=$i?>" value =" " class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- Sparepart Satuan-->
                             <td class="custom-black-bg">Satuan Sparepart</td>
-                            <td> <input type="text" name="satuan-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="text" name="satuan-<?=$i?>" value =" " class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -107,12 +107,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         <tr>
                             <!-- Nama -->
                             <td class="custom-black-bg">Nama</td>
-                            <td> <input type="text" name="nama-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="text" name="nama-<?=$i?>" value =" " class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- Keterangan Absensi-->
                             <td class="custom-black-bg">Keterangan Absensi</td>
-                            <td> <input type="text" name="keterangan-absensi-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="text" name="keterangan-absensi-<?=$i?>" value =" " class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -156,7 +156,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
                         
             //Insert ke database
-            $insert_query = "INSERT INTO mekanikal (mekanikal_id, tanggal, permasalahan, tindak_lanjut, 
+            $insert_query = "INSERT INTO wtp (wtp_id, tanggal, permasalahan, tindak_lanjut, 
                             sparepart, jumlah_sparepart, satuan_sparepart, 
                             nama_absensi, keterangan_absensi, 
                             keterangan, catatan) 
@@ -166,14 +166,14 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             $9, $10);";
              
                
-            $prepare_input = pg_prepare($koneksi_mekanikal, "insert_mekanikal", $insert_query);
-            $exec_input = pg_execute($koneksi_mekanikal, "insert_mekanikal", array($tanggal, $permasalahan, $tindak_lanjut,
+            $prepare_input = pg_prepare($koneksi_wtp, "insert_wtp", $insert_query);
+            $exec_input = pg_execute($koneksi_wtp, "insert_wtp", array($tanggal, $permasalahan, $tindak_lanjut,
                         $sparepart, $quantity, $satuan,
                         $nama, $keterangan_absensi, 
                         $keterangan, $catatan));
             
             //Cek Error
-            if(!$koneksi_mekanikal){
+            if(!$koneksi_wtp){
                 echo "Koneksi gagal! ". pg_last_error(); 
             }
 
@@ -194,7 +194,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
-            echo "Fail! ". pg_last_error($koneksi_mekanikal);
+            echo "Fail! ". pg_last_error($koneksi_wtp);
             }
             ?> 
             

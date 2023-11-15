@@ -2,6 +2,7 @@
   require_once(realpath(dirname(dirname(__FILE__)))."/config/config.php");
   require_once("koneksi.php");
   require_once("footer-admin.php");
+  require_once("functions.php");
   error_reporting(0);
 ?>
 
