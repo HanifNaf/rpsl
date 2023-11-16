@@ -45,7 +45,7 @@ CREATE TABLE public.kecelakaan_kerja (
     waktu_kejadian time without time zone NOT NULL,
     area_kejadian character varying(100) NOT NULL,
     jam_kerja_kejadian character varying(50) NOT NULL,
-    keterangan character varying(500) NOT NULL
+    penyebab character varying(500) NOT NULL
 );
 
 
@@ -179,7 +179,7 @@ ALTER TABLE public.potensi_bahaya OWNER TO rpsl;
 -- Data for Name: kecelakaan_kerja; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, waktu_kejadian, area_kejadian, jam_kerja_kejadian, keterangan) FROM stdin;
+COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, waktu_kejadian, area_kejadian, jam_kerja_kejadian, penyebab) FROM stdin;
 32ee2c77-1cdd-49b7-9e32-81300dde3461	2023-01-05	sedang	15:21:00	chipper	sore	keterangan 1
 39ac99d7-0eb9-43a4-96e4-e993969737f0	2023-10-11	ringan	10:16:00	wtp	pagi	keterangan 2
 \.
