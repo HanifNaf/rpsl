@@ -8,4 +8,5 @@ $koneksi_wtp = pg_connect("host=localhost dbname=rpsl_wtp user=rpsl password=pas
 $koneksi_elektrikal = pg_connect("host=localhost dbname=rpsl_elektrikal user=rpsl password=pass_rpsl") or die ("Koneksi Gagal");
 $koneksi_hse = pg_connect("host=localhost dbname=rpsl_hse user=rpsl password=pass_rpsl") or die ("Koneksi Gagal");
 $koneksi_mekanikal = pg_connect("host=localhost dbname=rpsl_mekanikal user=rpsl password=pass_rpsl") or die ("Koneksi Gagal");
+$koneksi_hrd = pg_connect("host=localhost dbname=rpsl_hrd user=rpsl password=pass_rpsl") or die ("Koneksi Gagal");
 ?>
