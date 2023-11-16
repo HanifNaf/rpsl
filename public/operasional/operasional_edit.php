@@ -66,11 +66,6 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
             <form action="" method="post">
                 <table class="table table-hover table-bordered table-sm">
                         <tr>
-                            <!-- Tanggal -->
-                            <td class="custom-black-bg">Tanggal</td>
-                            <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
-                        </tr>
-                        <tr>
                             <!-- Shift -->
                             <td class="custom-black-bg">Shift</td>
                             <td><input type="number" name="shift-<?=$i?>" style="form-control" value="<?= $array['shift']; ?>"></td>
