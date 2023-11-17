@@ -19,29 +19,6 @@ require (SITE_ROOT."/src/koneksi.php");
         <!-- Import JS Sweet Alert -->
         <script src="<?= SITE_URL?>/public/assets/js/sweetalert2.all.min.js"></script>
 
-        <!-- Buat Konfirmasi Penambahan Data -->
-        <?php if($_GET['m']=="simpan"){ ?>
-				<script type="text/javascript">
-					Swal.fire({
-					  title: 'Tambah Data Lagi?',
-					  text: "Data Berhasil disimpan!",
-					  type: 'success',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Iya!',
-					  cancelButtonText : 'Tidak!',
-					}).then((result) => {
-					  if (result.value) {
-					    window.location = 'operasional_input';
-					  }else{
-					  	window.location = 'operasional';
-					  }
-					})
-				</script>
-		<?php } ?>
-
-
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
@@ -200,7 +177,25 @@ require (SITE_ROOT."/src/koneksi.php");
                 SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
             $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
             $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
-            ?> 
+            ?>
+            <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'operasional_input';
+            } else {
+                window.location = 'operasional';
+            }
+        })
+    </script>
             
             <?php
         }

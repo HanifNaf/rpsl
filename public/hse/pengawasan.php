@@ -67,14 +67,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 			            <th rowspan="2">Tanggal</th>
 			            <th rowspan="2">Jam Kerja</th>
 						<th rowspan="2">Personil HSE</th>
-			            <th colspan="4">Timbangan</th>
-			            <th colspan="4">Chipper dan Moving Floor</th>
-			            <th colspan="4">Boiler</th>
-			            <th colspan="4">WTP</th>
-			            <th colspan="4">Turbin</th>
-			            <th colspan="4">Mekanik</th>
-			            <th colspan="4">Listrik</th>
-			            <th colspan="4">Bahan Bakar</th>
+			            <th colspan="6">Timbangan</th>
+			            <th colspan="6">Chipper dan Moving Floor</th>
+			            <th colspan="6">Boiler</th>
+			            <th colspan="6">WTP</th>
+			            <th colspan="6">Turbin</th>
+			            <th colspan="6">Mekanik</th>
+			            <th colspan="6">Listrik</th>
+			            <th colspan="6">Bahan Bakar</th>
 			            <th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>
@@ -83,41 +83,57 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Chipper dan Moving Floor -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Boiler -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- WTP -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Turbin -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Mekanik -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Listrik -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 				            <!-- Bahan Bakar -->
 				            <th>Pengawasan</th>
 				            <th>Keterangan Pengawasan</th>
 			            	<th>Kondisi 5R</th>
 			            	<th>Keterangan 5R</th>
+			            	<th>Pemberian APD</th>
+				            <th>Jumlah</th>
 			       	 	</tr>
                     </tr>
                   <?php 
@@ -159,6 +175,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['keterangan_5r_timbangan']; ?>
 								</td>
 								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_timbangan']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_timbangan']; ?>
+								</td>
+								<td>
 									<!--Chiper dan Moving Floor-->
 									<!--Pengawasan-->
 									<?= $array['pengawasan_chipper']; ?>
@@ -174,6 +198,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!--Keterangan 5R-->
 									<?= $array['keterangan_5r_chipper']; ?>
+								</td>
+								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_chipper']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_chipper']; ?>
 								</td>
 								<td>
 									<!--Boiler-->
@@ -193,6 +225,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['keterangan_5r_boiler']; ?>
 								</td>
 								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_boiler']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_boiler']; ?>
+								</td>
+								<td>
 									<!--WTP-->
 									<!--Pengawasan-->
 									<?= $array['pengawasan_wtp']; ?>
@@ -208,6 +248,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!--Keterangan 5R-->
 									<?= $array['keterangan_5r_wtp']; ?>
+								</td>
+								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_wtp']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_wtp']; ?>
 								</td>
 								<td>
 									<!--Turbin-->
@@ -227,6 +275,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['keterangan_5r_turbin']; ?>
 								</td>
 								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_turbin']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_turbin']; ?>
+								</td>
+								<td>
 									<!--Mekanik-->
 									<!--Pengawasan-->
 									<?= $array['pengawasan_mekanik']; ?>
@@ -244,6 +300,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['keterangan_5r_mekanik']; ?>
 								</td>
 								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_mekanik']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_mekanik']; ?>
+								</td>
+								<td>
 									<!--Listrik-->
 									<!--Pengawasan-->
 									<?= $array['pengawasan_listrik']; ?>
@@ -259,6 +323,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!--Keterangan 5R-->
 									<?= $array['keterangan_5r_listrik']; ?>
+									<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_listrik']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_listrik']; ?>
+								</td>
 								</td>
 								<td>
 									<!--Bahan Bakar-->
@@ -276,6 +348,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!--Keterangan 5R-->
 									<?= $array['keterangan_5r_bahan_bakar']; ?>
+								</td>
+								<td>
+									<!--Pemberian APD-->
+									<?= $array['pemberian_apd_bahan_bakar']; ?>
+								</td>
+								<td>
+									<!--Jumlah-->
+									<?= $array['jumlah_apd_bahan_bakar']; ?>
 								</td>
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>

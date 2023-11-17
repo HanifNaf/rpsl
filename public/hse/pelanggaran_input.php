@@ -30,29 +30,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <!-- Import JS Sweet Alert -->
         <script src="../js/sweetalert2.all.min.js"></script>
 
-        <!-- Buat Konfirmasi Penambahan Data -->
-        <?php if($_GET['m']=="simpan"){ ?>
-				<script type="text/javascript">
-					Swal.fire({
-					  title: 'Tambah Data Lagi?',
-					  text: "Data Berhasil disimpan!",
-					  type: 'success',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Iya!',
-					  cancelButtonText : 'Tidak!',
-					}).then((result) => {
-					  if (result.value) {
-					    window.location = 'kecelakaan_kerja_input';
-					  }else{
-					  	window.location = 'kecelakaan_kerja';
-					  }
-					})
-				</script>
-		<?php } ?>
-
-
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
@@ -113,7 +90,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <label for="radio">APD</label> &nbsp &nbsp &nbsp &nbsp
                             <input type="radio" id="radio"value="Merokok" name="jenis-<?=$i?>" style="form-control">
                             <label for="radio">Merokok</label> &nbsp &nbsp &nbsp &nbsp
-                            <input type="radio" id="radio"value="Merokok" name="merokok-<?=$i?>" style="form-control">
+                            <input type="radio" id="radio"value="Tidur" name="jenis-<?=$i?>" style="form-control">
                             <label for="radio">Tidur</label> &nbsp &nbsp &nbsp &nbsp
                             </td>
                         </tr>
@@ -122,20 +99,10 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td class="custom-black-bg" width="30%">Keterangan</td>
                             <td><input type="text" name="keterangan-<?=$i?>" style="form-control"></td>
                         </tr>
-                        <tr>
-                            <!-- Nama Barang -->
-                            <td class="custom-black-bg" width="30%">Nama Barang</td>
-                            <td><input type="text" name="barang-<?=$i?>" style="form-control"></td>
-                        </tr>
-                        <tr>
-                            <!-- Jumlah -->
-                            <td class="custom-black-bg" width="30%">Jumlah</td>
-                            <td><input type="number" name="jumlah-<?=$i?>" style="form-control"></td>
-                        </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="kecelakaan_kerja"></a></i> TAMBAH DATA</button>
+                <a href="pelanggaran"><button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"></i> TAMBAH DATA</button></a>
             	</div>
             </form>
         </div> 
@@ -153,17 +120,14 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $bagian = $_REQUEST['bagian-'.$i];
             $jenis = $_REQUEST['jenis-'.$i];
             $keterangan = $_REQUEST['keterangan-'.$i];
-            $nama_barang = $_REQUEST['barang-'.$i];
-            $jumlah = $_REQUEST['jumlah-'.$i];
-           
                         
             //Insert ke database
-            $insert_query = "INSERT INTO pelanggaran (pelanggaran_id, tanggal, nik, nama, bagian, jenis_pelanggaran, keterangan, pemberian_apd, jumlah_apd) 
-            VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, $7, $8);";
+            $insert_query = "INSERT INTO pelanggaran (pelanggaran_id, tanggal, nik, nama, bagian, jenis_pelanggaran, keterangan) 
+            VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6);";
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
             $prepare_input = pg_prepare($koneksi_hse, "my_insert", $insert_query);
-            $exec_input = pg_execute($koneksi_hse, "my_insert", array($tanggal, $nik, $nama, $bagian, $jenis, $keterangan, $nama_barang, $jumlah));
+            $exec_input = pg_execute($koneksi_hse, "my_insert", array($tanggal, $nik, $nama, $bagian, $jenis, $keterangan));
 
             if (!$exec_input) {
                 echo "Error in SQL query: " . pg_last_error($koneksi_hse);
@@ -172,7 +136,24 @@ require_once(SITE_ROOT."/src/koneksi.php");
             }
 
             ?> 
-            
+            <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'pelanggaran_input';
+            } else {
+                window.location = 'pelanggaran';
+            }
+        })
+    </script>
             <?php
         }
     }

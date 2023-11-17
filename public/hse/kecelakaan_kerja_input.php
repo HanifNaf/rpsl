@@ -30,29 +30,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <!-- Import JS Sweet Alert -->
         <script src="../js/sweetalert2.all.min.js"></script>
 
-        <!-- Buat Konfirmasi Penambahan Data -->
-        <?php if($_GET['m']=="simpan"){ ?>
-				<script type="text/javascript">
-					Swal.fire({
-					  title: 'Tambah Data Lagi?',
-					  text: "Data Berhasil disimpan!",
-					  type: 'success',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Iya!',
-					  cancelButtonText : 'Tidak!',
-					}).then((result) => {
-					  if (result.value) {
-					    window.location = 'kecelakaan_kerja_input';
-					  }else{
-					  	window.location = 'kecelakaan_kerja';
-					  }
-					})
-				</script>
-		<?php } ?>
-
-
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
@@ -81,6 +58,11 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
+                           <!-- Pemisah -->
+                           <td> </td>
+                        </tr>
+                        <th>Kecelakaan Kerja</th>
+                        <tr>
                             <!-- Jam -->
                             <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
                                 <td><select name="jenis-<?= $i ?>" class="form-control">
@@ -89,6 +71,11 @@ require_once(SITE_ROOT."/src/koneksi.php");
                                         <option value="Berat">Berat</option>
                                 </select>
                                 </td>
+                        </tr>
+                        <tr>
+                            <!-- Penanganan -->
+                            <td class="custom-black-bg" width="30%">Penanganan</td>
+                            <td><input type="text" name="penanganan-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                            <!-- Pemisah -->
@@ -142,34 +129,44 @@ require_once(SITE_ROOT."/src/koneksi.php");
         for($i=1; $i<=$total; $i++){
             $tanggal = $_REQUEST['tanggal-'.$i];
             $jenis_kecelakaan_kerja = $_REQUEST['jenis-'.$i];
+            $penanganan = $_REQUEST['penanganan-'.$i];
             $area = $_REQUEST['area-'.$i];
             $waktu = $_REQUEST['waktu-'.$i].':00';
             $jam_kerja = $_REQUEST['jam-'.$i];
             $penyebab = $_REQUEST['penyebab-'.$i];
                         
             //Insert ke database
-            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab) 
-    VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6);";
+            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab) 
+    VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, $7);";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $prepare_input = pg_prepare($koneksi_hse, "my_insert", $insert_query);
-$exec_input = pg_execute($koneksi_hse, "my_insert", array($tanggal, $jenis_kecelakaan_kerja, $area, $waktu, $jam_kerja, $penyebab));
+$exec_input = pg_execute($koneksi_hse, "my_insert", array($tanggal, $jenis_kecelakaan_kerja, $penanganan, $area, $waktu, $jam_kerja, $penyebab));
 
 if (!$exec_input) {
     echo "Error in SQL query: " . pg_last_error($koneksi_hse);
 } else {
     echo "Record inserted successfully.";
 }
-
-
-            echo $tanggal;
-            echo $jenis_kecelakaan_kerja;
-            echo $area;
-            echo $waktu;
-            echo $jam_kerja;
-            echo $penyebab;
             ?> 
-            
+            <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'kecelakaan_kerja_input';
+            } else {
+                window.location = 'kecelakaan_kerja';
+            }
+        })
+    </script>
             <?php
         }
     }

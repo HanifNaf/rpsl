@@ -7,6 +7,9 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
 
 <head>
 <style>
+  .card-body:hover{
+  filter: invert(1);
+  }
 	.flexible-table {
   	width: 100%;
   	border-collapse: collapse;
@@ -29,8 +32,6 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
   	}
 </style>
 </head>
-
-
 <body>
     <div class="container">	
 		<form action="" method="POST">
@@ -155,8 +156,8 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
 									<?= $array['keterangan']; ?>
 								</td>
 								<td>
-									<a href="operasional_edit?<?= $array['tanggal'] ?>"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
-            			<a href="operasional_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
+								    <a href="operasional_edit?shift=<?= $array['shift']; ?>"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
+								    <a href="operasional_delete?shift=<?= $array['shift']; ?>"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
 								</td>
                     <?php }} else{
                         echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";

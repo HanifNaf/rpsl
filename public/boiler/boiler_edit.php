@@ -1,5 +1,6 @@
 <?php 
 require_once("../../config/config.php");
+require_once("boiler_data.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
 require_once(SITE_ROOT."/src/koneksi.php");
@@ -124,7 +125,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                            <!-- Pemisah -->
                            <td> </td>
                         </tr>
-                        <th>DRUM LEVEL</th>f
+                        <th>DRUM LEVEL</th>
                         <tr>
                             <!-- Level 1 -->
                             <td class="custom-black-bg" width="30%">Level 1</td>
@@ -606,7 +607,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $economizer_outtemperature_r = $_REQUEST['economizer-outtemperature-r-'.$i];
             $economizer_outpressure_l = $_REQUEST['economizer-outpressure-l-'.$i];
             $economizer_outpressure_r = $_REQUEST['economizer-outpressure-r-'.$i];
-                        
+            error_reporting(E_ALL);
+ini_set('display_errors', 1);             
             //Insert ke database
             $insert_query = "WITH in1 AS(INSERT INTO drum_level (drum_id, tanggal, jam, level1, level2, pressure) 
                 VALUES (uuid_generate_v4(), $1, $2, $drum_level1, $drum_level2, $drum_pressure))

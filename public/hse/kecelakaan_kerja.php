@@ -74,12 +74,15 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 						<tr>
 			            <th rowspan="2">No.</th>
 			            <th rowspan="2">Tanggal</th>
-			            <th rowspan="2">Jenis Kecelakaan Kerja</th>
+			            <th colspan="2">Kecelakaan Kerja</th>
 			            <th colspan="3">Kejadian</th>
 			            <th rowspan="2">Penyebab</th>
 			            <th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>
+			        		<!-- Kecelakaan Kerja -->
+			        		<th>Jenis Kecelakaan Kerja</th>
+				            <th>Penanganan</th>
 			        		<!-- Kejadian -->
 				            <th>Area</th>
 				            <th>Waktu</th>
@@ -100,8 +103,13 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 									<?= $array['tanggal']; ?>
 								</td>
 								<td>
+									<!--Kecelakaan Kerja-->
 									<!--Jenis Kecelakaan Kerja-->
 									<?= $array['jenis_kecelakaan_kerja']; ?>
+								</td>
+								<td>
+									<!--Penanangan-->
+									<?= $array['penanganan']; ?>
 								</td>
 								<td>
 									<!--Area Kejadian-->

@@ -59,7 +59,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 		<form name="boiler_proses" method="POST">
 			<div class="form-group">
                 <!--Menempatkan icon cetak dan tambah-->
-          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="kecelakaan_kerja_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
+          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="pelanggaran_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
 			    <div style="display: inline; float: right;">
 			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
 			  </div>
@@ -72,20 +72,14 @@ require_once(SITE_ROOT."/src/footer-admin.php");
                 <thead class="thead-dark">
                     <tr class="text-center">
 						<tr>
-			            <th rowspan="2">No.</th>
-			            <th rowspan="2">Tanggal</th>
-			            <th rowspan="2">NIK</th>
-			            <th rowspan="2">Nama</th>
-			            <th rowspan="2">Bagian</th>
-			            <th rowspan="2">Jenis Pelanggaran</th>
-			            <th colspan="2">Pemberian APD</th>
-			            <th rowspan="2">Opsi</th>
+			            <th>No.</th>
+			            <th>Tanggal</th>
+			            <th>NIK</th>
+			            <th>Nama</th>
+			            <th>Bagian</th>
+			            <th>Jenis Pelanggaran</th>
+			            <th>Opsi</th>
 			        	</tr>
-			        	<tr>
-			        		<!-- Pemberian APD -->
-				            <th>Nama Barang</th>
-				            <th>Jumlah</th>
-			       	 	</tr>
                     </tr>
                    <?php 
                     $no = 1;
@@ -115,14 +109,6 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!-- Jam Kerja -->
 									<?= $array['jenis_pelanggaran']; ?>	
-								</td>
-								<td>
-									<!--Nama Barang-->
-									<?= $array['pemberian_apd']; ?>	
-								</td>
-								<td>
-									<!--jumlah-->
-									<?= $array['jumlah_apd']; ?>	
 								</td>
 								<td>
 									<a href="operasional_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>

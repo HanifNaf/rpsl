@@ -53,8 +53,7 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
         <?php } ?>
         <?php 
                     $no = 1;
-                    if($row_operasional>0){
-                        foreach($operasional_arr as $array){ ?>
+                    ($operasional_arr as $array){ ?>
 
         <div class="row">
             <!--Nama Divisi-->
@@ -143,6 +142,7 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
                 </table>
              <?php }} ?>
                 <div class="form-group text-center" style="margin-top: 10px;">
+                <input type="hidden" name="total" value="<?= $no; ?>">
                 <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> EDIT DATA</button>
                 </div>
             </form>

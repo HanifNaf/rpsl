@@ -30,29 +30,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <!-- Import JS Sweet Alert -->
         <script src="../js/sweetalert2.all.min.js"></script>
 
-        <!-- Buat Konfirmasi Penambahan Data -->
-        <?php if($_GET['m']=="simpan"){ ?>
-				<script type="text/javascript">
-					Swal.fire({
-					  title: 'Tambah Data Lagi?',
-					  text: "Data Berhasil disimpan!",
-					  type: 'success',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Iya!',
-					  cancelButtonText : 'Tidak!',
-					}).then((result) => {
-					  if (result.value) {
-					    window.location = 'boiler_input';
-					  }else{
-					  	window.location = 'boiler';
-					  }
-					})
-				</script>
-		<?php } ?>
-
-
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
@@ -401,6 +378,24 @@ ini_set('display_errors', 1);
             echo "0 records";
             }
             ?> 
+            <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'pengawasan_input';
+            } else {
+                window.location = 'pengawasan';
+            }
+        })
+    </script>
             
             <?php
         }
