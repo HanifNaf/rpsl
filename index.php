@@ -25,8 +25,8 @@ error_reporting(0);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="<?= SITE_URL?>/public/assets/img/rpsl1.png" rel='icon' type='image/x-icon'/>
-  <title>Sistem Informasi Operasional PT RPSL</title>
+   <link href="<?= SITE_URL?>/public/assets/img/rpsl1.png" rel='icon' type='image/x-icon'/>
+  <title>Login Website Inputan PT. RPSL</title>
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css.map">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-grid.min.css">

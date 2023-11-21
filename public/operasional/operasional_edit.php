@@ -52,8 +52,9 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
                 </script>
         <?php } ?>
         <?php 
-                    $no = 1;
-                    ($operasional_arr as $array){ ?>
+                   $no = 1;
+                    if($row_operasional>0){
+                        foreach($operasional_arr as $array){ ?>
 
         <div class="row">
             <!--Nama Divisi-->
@@ -212,7 +213,7 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
             tanggal=$1,
             shift=$2
             WHERE (produksi_id, pemakaian_id, pemakaian_bahan_bakar_id) IN (SELECT (SELECT produksi_id FROM update_produksi_kwh), (SELECT pemakaian_id FROM update_pemakaian_kwh), (SELECT pemakaian_bahan_bakar_id FROM update_pemakaian_bahan_bakar));"; 
-            $prepare_update = pg_prepare($koneksi_operasional, "my_update", $insert_query);
+            $prepare_update = pg_prepare($koneksi_operasional, "my_update", $update_query);
             $exec_update = pg_execute($koneksi_operasional, "my_update", array($tanggal, $shift));
 
 

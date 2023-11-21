@@ -101,6 +101,11 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td class="custom-black-bg">Sanksi</td>
                             <td> <input type="text" name="sanksi-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
+                        <tr>
+                            <!-- Lampiran -->
+                            <td class="custom-black-bg">Lampiran</td>
+                            <td> <input type="file" name="lampiran-<?=$i?>" class="form-control" width=20%> </td>
+                        </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
@@ -126,18 +131,19 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $bentuk_pelanggaran = $_REQUEST['bentuk-pelanggaran-'.$i];
             $potensi_bahaya = EmptyToNull($_REQUEST['potensi-bahaya-'.$i]);
             $sanksi = EmptyToNull($_REQUEST['sanksi-'.$i]);
+            $lampiran = EmptyToNull($_REQUEST['lampiran-'.$i]);
 
                         
             //Insert ke database
             $insert_query = "INSERT INTO hrd (hrd_id, tanggal, nik, nama, bagian, shift, 
-                            waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi)
+                            waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, lampiran)
                             VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, 
-                            $6, $7, $8, $9, $10);";
+                            $6, $7, $8, $9, $10, $11);";
              
                
             $prepare_input = pg_prepare($koneksi_hrd, "insert_hrd", $insert_query);
             $exec_input = pg_execute($koneksi_hrd, "insert_hrd", array($tanggal, $nik, $nama, $bagian, $shift,
-                        $waktu, $tempat, $bentuk_pelanggaran, $potensi_bahaya, $sanksi));
+                        $waktu, $tempat, $bentuk_pelanggaran, $potensi_bahaya, $sanksi, $lampiran));
             
             ?>
             <script type="text/javascript">
@@ -160,7 +166,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             </script>
                         
             <?php //Cek Error
-            if(!$koneksi_mekanikal){
+            if(!$koneksi_hrd){
                 echo "Koneksi gagal! ". pg_last_error(); 
             }
 
@@ -181,10 +187,28 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             $rs = pg_fetch_assoc($exec_input);
             if (!$rs) {
-            echo "Fail! ". pg_last_error($koneksi_mekanikal);
+            echo "Fail! ". pg_last_error($koneksi_hrd);
             }
             ?> 
             
+            <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'pelanggaran_input';
+            } else {
+                window.location = 'pelanggaran';
+            }
+        })
+    </script>     
             <?php
         }
     }

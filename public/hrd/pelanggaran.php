@@ -71,6 +71,7 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 			            <th rowspan="2">Shift</th>
 			            <th colspan="4">Pelanggaran</th>
 			            <th rowspan="2">Sanksi</th>
+			            <th rowspan="2">Lampiran</th>
 						<th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>
@@ -129,6 +130,13 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 								<td>
 									<!-- Sanksi -->
 									<?= $array['sanksi']; ?>	
+								</td>
+								<td>
+									<!-- Lampiran -->
+									<?php
+									    $lampiran = $array['lampiran'];
+									    echo $lampiran;
+									 ?>	
 								</td>
 								<td>
 									<a href="hrd_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
