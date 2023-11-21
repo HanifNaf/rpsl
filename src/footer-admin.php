@@ -12,6 +12,11 @@
 	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script>
+		//Mendapatkan nama file dari form input
+		document.getElementById('fileInput').onchange = function () {
+  		alert('Selected file: ' + this.value);
+		};
+
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip();
 		});

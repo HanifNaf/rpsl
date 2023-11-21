@@ -39,7 +39,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             </div>
         </div>
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
-            <form action="" method="post" id="myForm">
+            <form action="" method="post" id="myForm" enctype="multipart/form-data">
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
@@ -79,6 +79,47 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td class="custom-black-bg">Penanganan</td>
                             <td><input type="text" name="penanganan-<?=$i?>" style="form-control"></td>
                         </tr>
+                        <tr>
+                            <!-- Pemisah -->
+                           <td> </td> 
+                        </tr>
+                        <th>Sparepart</th>
+                        <tr>
+                            <!-- Sparepart -->
+                            <td class="custom-black-bg">Sparepart</td>
+                            <td> <input type="text" name="sparepart-<?=$i?>" class="form-control" width=20%> </td>
+                        </tr>
+                        <tr>
+                            <!-- Sparepart Quantity -->
+                            <td class="custom-black-bg">Quantity Sparepart</td>
+                            <td> <input type="number" name="quantity-<?=$i?>" class="form-control" width=20%> </td>
+                        </tr>
+                        <tr>
+                            <!-- Sparepart Satuan-->
+                            <td class="custom-black-bg">Satuan Sparepart</td>
+                            <td> <input type="text" name="satuan-<?=$i?>" class="form-control" width=20%> </td>
+                        </tr>
+
+                        <tr>
+                            <!-- Pemisah -->
+                            <td></td>
+                        </tr>
+                        <th>Tanggal</th>
+                        <tr>
+                            <!-- Before -->
+                            <td class="custom-black-bg" width="30%">  Mulai  </td>
+                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-mulai-<?=$i?>" class="form-control" width=20%> </td>
+                        </tr>
+                        <tr>
+                            <!-- After -->
+                            <td class="custom-black-bg" width="30%">  Selesai  </td>
+                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-selesai-<?=$i?>" class="form-control" width=20%></td>
+                        </tr>
+
+                        <tr>
+                            <!-- Pemisah -->
+                            <td></td>
+                        </tr>
                         <tr>    
                             <!-- Tingkat Kerusakan -->
                             <td class="custom-black-bg">Tingkat Kerusakan</td>
@@ -100,24 +141,19 @@ require_once(SITE_ROOT."/src/koneksi.php");
                                 </td>
                         </tr>
                         <tr>
-                            <!-- Pemisah -->
-                            <td></td>
-                        </tr>
-                        <th>Tanggal</th>
-                        <tr>
-                            <!-- Before -->
-                            <td class="custom-black-bg" width="30%">  Before  </td>
-                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-mulai-<?=$i?>" class="form-control" width=20%> </td>
+                            <!-- Keterangan -->
+                            <td class="custom-black-bg">Keterangan</td>
+                            <td> <input type="text" name="keterangan-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
-                            <!-- After -->
-                            <td class="custom-black-bg" width="30%">  After  </td>
-                            <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-selesai-<?=$i?>" class="form-control" width=20%></td>
+                            <!-- Lampiran -->
+                            <td class="custom-black-bg">Lampiran</td>
+                            <td> <input type="file" name="lampiran-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="operasional_maintenance"></a></i> TAMBAH DATA</button>
+                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="maintenance"></a></i> TAMBAH DATA</button>
                 </div>
             </form>
         </div> 
@@ -129,15 +165,41 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
+            //Tanggal
             $tanggal_mulai = $_REQUEST['tanggal-mulai-'.$i];
             $tanggal_selesai = $_REQUEST['tanggal-selesai-'.$i];
-            $status = $_REQUEST['status-'.$i];
+
+            //Sparepart
+            $sparepart = $_REQUEST['sparepart-'.$i];
+            $quantity = $_REQUEST['quantity-'.$i];
+            $satuan = $_REQUEST['satuan-'.$i];
+
             $divisi = $_REQUEST['divisi-'.$i];
             $unit = $_REQUEST['unit-'.$i];
             $problem = $_REQUEST['problem-'.$i];
             $evaluasi = $_REQUEST['evaluasi-'.$i];
             $penanganan = $_REQUEST['penanganan-'.$i];
             $tingkat_kerusakan = $_REQUEST['tingkat-kerusakan-'.$i];
+            $status = $_REQUEST['status-'.$i];
+            $keterangan = $_REQUEST['keterangan-'.$i];
+            $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
+            $isi_lampiran = $_FILES['lampiran-'.$i]['size'];
+
+            echo "spare ". gettype($sparepart). "\n"; 
+            echo " echo ". gettype($quantity). "\n";  
+            echo " echo $satuan \n"; 
+            echo " echo $divisi \n"; 
+            echo " echo $unit \n";
+            echo " echo $problem \n";
+            echo " echo $evaluasi \n";
+            echo " echo $penanganan \n";
+            echo " echo $tingkat_kerusakan \n";
+            echo " echo $status \n";
+            echo " echo $keterangan \n";
+            echo " nama lampiran $nama_lampiran \n";
+            echo  " isi lampiran ". gettype($isi_lampiran).  "\n";
+
+            
 
             //Insert ke database
             $insert_query = "INSERT INTO maintenance (maintenance_id, jam, divisi, unit, problem, evaluasi, penanganan, tingkat_kerusakan, status, tanggal_mulai, tanggal_selesai)
@@ -152,22 +214,22 @@ require_once(SITE_ROOT."/src/koneksi.php");
             }*/
 ?>
 <script type="text/javascript">
-        Swal.fire({
-            title: 'Tambah Data Lagi?',
-            text: "Data Berhasil disimpan!",
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Iya!',
-            cancelButtonText: 'Tidak!',
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'operasional_maintenance_input';
-            } else {
-                window.location = 'operasional_maintenance';
-            }
-        })
+        // Swal.fire({
+        //     title: 'Tambah Data Lagi?',
+        //     text: "Data Berhasil disimpan!",
+        //     type: 'success',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Iya!',
+        //     cancelButtonText: 'Tidak!',
+        // }).then((result) => {
+        //     if (result.value) {
+        //         window.location = 'maintenance_input';
+        //     } else {
+        //         window.location = 'maintenance';
+        //     }
+        // })
     </script>
     <?php
         }
