@@ -60,8 +60,9 @@ ini_set('display_errors', 1);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="pelanggaran_edit' + data.pelanggaran_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="pelanggaran_delete' + data.pelanggaran_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var encodedID = encodeURIComponent(row.hrd_id);
+                        var editButton = '<a href="pelanggaran_edit?id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="pelanggaran_delete?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }
@@ -112,7 +113,7 @@ ini_set('display_errors', 1);
 </head>
 
 <body class="container-fluid">
-    <center><h3>DATA KECELAKAAN KERJA</h3></center>
+    <center><h3>DATA PELANGGARAN</h3></center>
     <br>
     <!-- Menampilkan tabel -->
     <table id="myTable" class="table table-bordered">

@@ -58,8 +58,8 @@ ini_set('display_errors', 1);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.kecelakaan_kerja_id);
-                        var editButton = '<a href="kecelakaan_kerja_edit?id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="kecelakaan_kerja_delete?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var editButton = '<a href="contoh_edit?id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="contoh_delete?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }
