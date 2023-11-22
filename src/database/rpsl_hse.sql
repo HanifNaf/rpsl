@@ -45,7 +45,8 @@ CREATE TABLE public.kecelakaan_kerja (
     waktu_kejadian time without time zone NOT NULL,
     area_kejadian character varying(100) NOT NULL,
     jam_kerja_kejadian character varying(50) NOT NULL,
-    penyebab character varying(500) NOT NULL
+    penyebab character varying(500) NOT NULL,
+    penanganan character varying(500)
 );
 
 
@@ -62,8 +63,6 @@ CREATE TABLE public.pelanggaran (
     bagian character varying(100) NOT NULL,
     jenis_pelanggaran character varying(100) NOT NULL,
     keterangan character varying(500) NOT NULL,
-    pemberian_apd character varying(200),
-    jumlah_apd integer,
     tanggal date NOT NULL
 );
 
@@ -110,7 +109,23 @@ CREATE TABLE public.pengawasan (
     keterangan_pengawasan_bahan_bakar character varying(500) NOT NULL,
     kondisi_5r_bahan_bakar character varying(50) NOT NULL,
     keterangan_5r_bahan_bakar character varying(500) NOT NULL,
-    personil_hse character varying(100) NOT NULL
+    personil_hse character varying(100) NOT NULL,
+    pemberian_apd_timbangan character varying(50),
+    jumlah_apd_timbangan integer,
+    pemberian_apd_chipper character varying(50),
+    jumlah_apd_chipper integer,
+    pemberian_apd_boiler character varying(50),
+    jumlah_apd_boiler integer,
+    pemberian_apd_wtp character varying(50),
+    jumlah_apd_wtp integer,
+    pemberian_apd_turbin character varying(50),
+    jumlah_apd_turbin integer,
+    pemberian_apd_listrik character varying(50),
+    jumlah_apd_listrik integer,
+    pemberian_apd_mekanik character varying(50),
+    jumlah_apd_mekanik integer,
+    pemberian_apd_bahan_bakar character varying(50),
+    jumlah_apd_bahan_bakar integer
 );
 
 
@@ -179,9 +194,9 @@ ALTER TABLE public.potensi_bahaya OWNER TO rpsl;
 -- Data for Name: kecelakaan_kerja; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, waktu_kejadian, area_kejadian, jam_kerja_kejadian, penyebab) FROM stdin;
-32ee2c77-1cdd-49b7-9e32-81300dde3461	2023-01-05	sedang	15:21:00	chipper	sore	keterangan 1
-39ac99d7-0eb9-43a4-96e4-e993969737f0	2023-10-11	ringan	10:16:00	wtp	pagi	keterangan 2
+COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, waktu_kejadian, area_kejadian, jam_kerja_kejadian, penyebab, penanganan) FROM stdin;
+769e606a-17ad-4d07-8023-157178676c8e	2023-01-15	Sedang	21:20:00	chipper	Sore	Tidak melakukan prosedur sesuai dengan SOP sehingga menggunakan anggota tubuh untuk memperbaiki mesin yang sedang beroperasi	\N
+26dcda71-ff99-4842-a982-ffc1fb736b13	2023-09-20	Sedang	21:35:00	chipper	Sore	Tertimpa kayu	\N
 \.
 
 
@@ -189,7 +204,7 @@ COPY public.kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_ker
 -- Data for Name: pelanggaran; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.pelanggaran (pelanggaran_id, nama, nik, bagian, jenis_pelanggaran, keterangan, pemberian_apd, jumlah_apd, tanggal) FROM stdin;
+COPY public.pelanggaran (pelanggaran_id, nama, nik, bagian, jenis_pelanggaran, keterangan, tanggal) FROM stdin;
 \.
 
 
@@ -197,7 +212,7 @@ COPY public.pelanggaran (pelanggaran_id, nama, nik, bagian, jenis_pelanggaran, k
 -- Data for Name: pengawasan; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan, keterangan_pengawasan_timbangan, kondisi_5r_timbangan, keterangan_5r_timbangan, pengawasan_chipper, keterangan_pengawasan_chipper, kondisi_5r_chipper, keterangan_5r_chipper, pengawasan_boiler, keterangan_pengawasan_boiler, kondisi_5r_boiler, keterangan_5r_boiler, pengawasan_wtp, keterangan_pengawasan_wtp, kondisi_5r_wtp, keterangan_5r_wtp, pengawasan_turbin, keterangan_pengawasan_turbin, kondisi_5r_turbin, keterangan_5r_turbin, pengawasan_mekanik, keterangan_pengawasan_mekanik, kondisi_5r_mekanik, keterangan_5r_mekanik, pengawasan_listrik, keterangan_pengawasan_listrik, kondisi_5r_listrik, keterangan_5r_listrik, pengawasan_bahan_bakar, keterangan_pengawasan_bahan_bakar, kondisi_5r_bahan_bakar, keterangan_5r_bahan_bakar, personil_hse) FROM stdin;
+COPY public.pengawasan (pengawasan_id, tanggal, jam_kerja, pengawasan_timbangan, keterangan_pengawasan_timbangan, kondisi_5r_timbangan, keterangan_5r_timbangan, pengawasan_chipper, keterangan_pengawasan_chipper, kondisi_5r_chipper, keterangan_5r_chipper, pengawasan_boiler, keterangan_pengawasan_boiler, kondisi_5r_boiler, keterangan_5r_boiler, pengawasan_wtp, keterangan_pengawasan_wtp, kondisi_5r_wtp, keterangan_5r_wtp, pengawasan_turbin, keterangan_pengawasan_turbin, kondisi_5r_turbin, keterangan_5r_turbin, pengawasan_mekanik, keterangan_pengawasan_mekanik, kondisi_5r_mekanik, keterangan_5r_mekanik, pengawasan_listrik, keterangan_pengawasan_listrik, kondisi_5r_listrik, keterangan_5r_listrik, pengawasan_bahan_bakar, keterangan_pengawasan_bahan_bakar, kondisi_5r_bahan_bakar, keterangan_5r_bahan_bakar, personil_hse, pemberian_apd_timbangan, jumlah_apd_timbangan, pemberian_apd_chipper, jumlah_apd_chipper, pemberian_apd_boiler, jumlah_apd_boiler, pemberian_apd_wtp, jumlah_apd_wtp, pemberian_apd_turbin, jumlah_apd_turbin, pemberian_apd_listrik, jumlah_apd_listrik, pemberian_apd_mekanik, jumlah_apd_mekanik, pemberian_apd_bahan_bakar, jumlah_apd_bahan_bakar) FROM stdin;
 \.
 
 
