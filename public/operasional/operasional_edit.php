@@ -6,17 +6,6 @@ require_once(SITE_ROOT. "/src/footer-admin.php");
 ?>
 
 <head>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Input Data Operasional PT. Rezeki Perkasa Sejahera Lestari</title>
-  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 <style>
     .custom-black-bg {

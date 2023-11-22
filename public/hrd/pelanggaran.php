@@ -48,7 +48,7 @@ ini_set('display_errors', 1);
                 { data: 'nomor', title: 'No' }, // Menambah kolom nomor
                 { data: 'tanggal' },
                 { data: 'nik' },
-                { data: 'nama' },
+                { data: 'nama_hrd' },
                 { data: 'bagian' },
                 { data: 'shift' },
                 { data: 'waktu_pelanggaran' },
@@ -56,13 +56,21 @@ ini_set('display_errors', 1);
                 { data: 'bentuk_pelanggaran' },
                 { data: 'potensi_bahaya' },
                 { data: 'sanksi' },
-                { data: 'lampiran' },
+                { data: 'nama_lampiran',
+                  render: function(data, type, row){
+                    if (data){
+                    var encodedLampiranId = encodeURIComponent(row.lampiran_id);
+                    return '<a href= "pelanggaran_lampiran.php?id='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
+                    }else{
+                      return data;
+                    }
+                 }},
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.hrd_id);
-                        var editButton = '<a href="pelanggaran_edit?id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="pelanggaran_delete?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var editButton = '<a href="pelanggaran_edit.?id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="pelanggaran_delete.php?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }
