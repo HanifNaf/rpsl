@@ -49,15 +49,28 @@ $data_json = json_encode($maintenance_arr);
                 { data: 'problem' },
                 { data: 'evaluasi' },
                 { data: 'penanganan' },
+				{ data: 'sparepart' },
+				{ data: 'jumlah_sparepart' },
+				{ data: 'satuan_sparepart' },
                 { data: 'tingkat_kerusakan' },
                 { data: 'tanggal_mulai' },
                 { data: 'tanggal_selesai' },
                 { data: 'status' },
+				{ data: 'keterangan' },
+				{ data: 'nama',
+				  render: function(data, type, row) {
+					if (data){
+						var encodedLampiranId = encodeURIComponent(row.lampiran_id);
+						return '<a href="maintenance_lampiran.php?id='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
+				}else{
+					return data;
+				}
+				  }},
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="operasional_maintenance_edit' + data.maintenance_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="operasional_maintenance_delete' + data.maintenance_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var editButton = '<a href="maintenance_edit/' + data.maintenance_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="maintenance_delete/' + data.maintenance_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }
@@ -121,15 +134,23 @@ $data_json = json_encode($maintenance_arr);
                 <th rowspan="2">Problem</th>
                 <th rowspan="2">Evaluasi</th>
                 <th rowspan="2">Penanganan</th>
+				<th colspan="3">Sparepart</th>
                 <th rowspan="2">Tingkat Kerusakan</th>
                 <th colspan="2">Tanggal</th>
                 <th rowspan="2">Status</th>
+				<th rowspan="2">Keterangan</th>
+				<th rowspan="2">Lampiran</th>
                 <th rowspan="2">Opsi</th>
             </tr>
             <tr>
                 <!-- Tanggal -->
                 <th>Before</th>
                 <th>After</th>
+
+				<!-- Sparepart -->
+                <th>Sparepart</th>
+                <th>Quantity</th>
+				<th>Satuan</th>
             </tr>
         </thead>
     </table>

@@ -66,9 +66,7 @@ require_once("wtp_data.php");
 			            	<th rowspan="2">No.</th>
 							<th rowspan="2">Tanggal</th>
 							<th colspan="3">Pemakaian Chemical</th>
-			            	<th rowspan="2">Meteran Air(m<sup>3</sup>)</th>
 							<th rowspan="2">Cost Harian</th>
-			            	<th rowspan="2">Cost/m<sup>3</sup></th>
 			            	<th rowspan="2">Opsi</th>
 			        	</tr>
 			        	<tr>

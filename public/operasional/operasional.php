@@ -67,8 +67,8 @@ ini_set('display_errors', 1);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="operasional_edit' + data.operasional_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="operasional_delete' + data.operasional_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var editButton = '<a href="operasional_edit.php?operasional_id=' + data.operasional_id + '?produksi_id=' + data.produksi_id + '?pemakaian_id=' + data.pemakaian_id + '?bahan_bakar_id=' + data.pemakaian_bahan_bakar_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="operasional_delete.php?operasional_id=' + data.operasional_id + '?produksi_id=' + data.produksi_id + '?pemakaian_id=' + data.pemakaian_id + '?bahan_bakar_id=' + data.pemakaian_bahan_bakar_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }

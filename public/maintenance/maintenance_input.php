@@ -163,16 +163,21 @@ require_once(SITE_ROOT."/src/koneksi.php");
     if(isset($_POST['add'])){
         $total = $_POST['total'];
 
-        //Menyimpan input dalalm variabel (Menggunakan looping)
+        //Menyimpan input dalam variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
             //Tanggal
             $tanggal_mulai = $_REQUEST['tanggal-mulai-'.$i];
-            $tanggal_selesai = $_REQUEST['tanggal-selesai-'.$i];
+            $tanggal_selesai = emptyToNull($_REQUEST['tanggal-selesai-'.$i]);
 
             //Sparepart
             $sparepart = $_REQUEST['sparepart-'.$i];
-            $quantity = $_REQUEST['quantity-'.$i];
+            $quantity = emptyToNull($_REQUEST['quantity-'.$i]);
             $satuan = $_REQUEST['satuan-'.$i];
+
+            //Lampiran
+            $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
+            $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
+            $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
 
             $divisi = $_REQUEST['divisi-'.$i];
             $unit = $_REQUEST['unit-'.$i];
@@ -181,57 +186,68 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $penanganan = $_REQUEST['penanganan-'.$i];
             $tingkat_kerusakan = $_REQUEST['tingkat-kerusakan-'.$i];
             $status = $_REQUEST['status-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];
-            $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
-            $isi_lampiran = $_FILES['lampiran-'.$i]['size'];
+            $keterangan = $_REQUEST['keterangan-'.$i];            
 
-            echo "spare ". gettype($sparepart). "\n"; 
-            echo " echo ". gettype($quantity). "\n";  
-            echo " echo $satuan \n"; 
-            echo " echo $divisi \n"; 
-            echo " echo $unit \n";
-            echo " echo $problem \n";
-            echo " echo $evaluasi \n";
-            echo " echo $penanganan \n";
-            echo " echo $tingkat_kerusakan \n";
-            echo " echo $status \n";
-            echo " echo $keterangan \n";
-            echo " nama lampiran $nama_lampiran \n";
-            echo  " isi lampiran ". gettype($isi_lampiran).  "\n";
-
+            //Query Insert
+            $query = "WITH in1 AS(INSERT INTO lampiran (lampiran_id, nama, tipe, file) VALUES (uuid_generate_v4(),?,?,?) 
+                    RETURNING lampiran_id AS lampiran)
+                    INSERT INTO maintenance (maintenance_id, lampiran_id, divisi, unit, problem, evaluasi, 
+                                penanganan, tanggal_mulai, tanggal_selesai, status, 
+                                tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
+                                satuan_sparepart)   
+                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;"; 
             
+            //Prepare
+            $prep = $koneksi_maintenance -> prepare($query);
 
-            //Insert ke database
-            $insert_query = "INSERT INTO maintenance (maintenance_id, jam, divisi, unit, problem, evaluasi, penanganan, tingkat_kerusakan, status, tanggal_mulai, tanggal_selesai)
-            VALUES (uuid_generate_v4(), LOCALTIME, $1, $2, $3, $4, $5, $6, $7, $8, $9);"; 
-            $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
-            $exec_input = pg_execute($koneksi_operasional, "my_insert", array($divisi, $unit, $problem, $evaluasi, $penanganan, $tingkat_kerusakan, $status, $tanggal_mulai, $tanggal_selesai));
+            //bind parameter
+            $prep ->bindParam(1, $nama_lampiran);
+            $prep ->bindParam(2, $tipe_lampiran);
+            $prep ->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
 
+            $prep ->bindParam(4, $divisi);
+            $prep ->bindParam(5, $unit);
+            $prep ->bindParam(6, $problem);
+            $prep ->bindParam(7, $evaluasi);
+            $prep ->bindParam(8, $penanganan);
+            $prep ->bindParam(9, $tanggal_mulai);
+            $prep ->bindParam(10, $tanggal_selesai);
+            $prep ->bindParam(11, $status);
+            $prep ->bindParam(12, $tingkat_kerusakan);
+            $prep ->bindParam(13, $keterangan);
+            $prep ->bindParam(14, $sparepart);
+            $prep ->bindParam(15, $quantity);
+            $prep ->bindParam(16, $satuan);
+            
+            //Insert
+            try{
+                $koneksi_maintenance -> beginTransaction();
+                $prep -> execute();
+                $koneksi_maintenance -> commit();
 
-            /*$rs = pg_fetch_assoc($exec_input);
-            if (!$rs) {
-                echo "0 records";
-            }*/
-?>
-<script type="text/javascript">
-        // Swal.fire({
-        //     title: 'Tambah Data Lagi?',
-        //     text: "Data Berhasil disimpan!",
-        //     type: 'success',
-        //     showCancelButton: true,
-        //     confirmButtonColor: '#3085d6',
-        //     cancelButtonColor: '#d33',
-        //     confirmButtonText: 'Iya!',
-        //     cancelButtonText: 'Tidak!',
-        // }).then((result) => {
-        //     if (result.value) {
-        //         window.location = 'maintenance_input';
-        //     } else {
-        //         window.location = 'maintenance';
-        //     }
-        // })
-    </script>
-    <?php
+                ?>
+                <script type="text/javascript">
+                    Swal.fire({
+                        title: 'Tambah Data Lagi?',
+                        text: "Data Berhasil disimpan!",
+                        type: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Iya!',
+                        cancelButtonText: 'Tidak!',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location = 'maintenance_input';
+                        } else {
+                            window.location = 'maintenance';
+                        }
+                    })
+                </script>
+                <?php
+            } catch(PDOException $e) {
+                echo "PDO ERROR: ". $e -> getMessage();
+            }
         }
     }
 ?>
