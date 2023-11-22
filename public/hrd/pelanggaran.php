@@ -1,152 +1,144 @@
 <?php
 require_once("../../config/config.php");
 require_once("hrd_data.php");
-require_once(SITE_ROOT."/src/header-admin.php");
-require_once(SITE_ROOT."/src/footer-admin.php");
+require_once(SITE_ROOT . "/src/header-admin.php");
+require_once(SITE_ROOT . "/src/footer-admin.php");
+
+// Konversi data menjadi format JSON
+$data_json = json_encode($hrd_arr);
+// Tampilkan semua jenis error
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<style>
-	.flexible-table {
-  		width: 100%;
-  		border-collapse: collapse;
-	}
-
-	.flexible-table th {
-	  	padding: 8px;
-	  	text-align: center;
-	  	background-color: #000; /* Warna latar belakang hitam */
-	  	color: white; /* Warna teks putih untuk kontras */
-	  	vertical-align: middle;
-	  	border: 1px solid #ddd;
-	}
-
-	.flexible-table td {
-	    border-bottom: 1px solid #ddd;
-	}
-
-	.custom-button {
-	    width: 70px; /* Ganti dengan lebar yang Anda inginkan */
-	    height: 35px; /* Ganti dengan tinggi yang Anda inginkan */
-	}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRD</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .btn-custom {
+        width: 60px; /* Adjust the width as needed */
+        /* Add any other styles as needed */
+    }
 </style>
+
+    <!-- Inisialisasi variabel JSON -->
+    <script>
+        var jsonData = <?php echo $data_json; ?>;
+    </script>
+
+
+    <!-- Inisialisasi DataTables -->
+   <script>
+    console.log(jsonData);
+    $(document).ready(function () {
+        // Menambah nomor ke setiap objek
+        for (var i = 0; i < jsonData.length; i++) {
+            jsonData[i].nomor = i + 1;
+        }
+        $('#myTable').DataTable({
+            data: jsonData,
+            columns: [
+                { data: 'nomor', title: 'No' }, // Menambah kolom nomor
+                { data: 'tanggal' },
+                { data: 'nik' },
+                { data: 'nama' },
+                { data: 'bagian' },
+                { data: 'shift' },
+                { data: 'waktu_pelanggaran' },
+                { data: 'tempat_pelanggaran' },
+                { data: 'bentuk_pelanggaran' },
+                { data: 'potensi_bahaya' },
+                { data: 'sanksi' },
+                { data: 'lampiran' },
+                {
+                    "data": null,
+                    "render": function(data, type, row, meta) {
+                        var editButton = '<a href="pelanggaran_edit' + data.pelanggaran_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<a href="pelanggaran_delete' + data.pelanggaran_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        return editButton + deleteButton;
+                    }
+                }
+            ],
+            "dom": 'Bfrtip',
+            "buttons": [
+                {
+                    extend: 'excel', className: 'btn-info',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)' // Exclude the last visible column (Opsi column)
+                    }
+                },
+                {
+                    extend: 'pdf', className: 'btn-info',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)' // Exclude the last visible column (Opsi column)
+                    }
+                },
+                {
+                    extend: 'print', className: 'btn-info',
+                    exportOptions: {
+                        columns: ':visible:not(:last-child)' // Exclude the last visible column (Opsi column)
+                    }
+                }
+            ]
+        });
+
+        // Tambahkan tombol Tambah Data
+        var tambahButton = '<button id="tambahButton" class="btn btn-info">Tambah Data</button>';
+        $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons
+
+        // Style untuk menengahkan tombol Tambah Data
+        $('#tambahButton').css({
+            'margin-left': '380px', // Sesuaikan dengan margin yang diinginkan
+            'margin-right': '380px', // Sesuaikan dengan margin yang diinginkan
+        });
+
+        // Center-align the text in the header cells
+        $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
+        
+        // Atur aksi klik untuk tombol Tambah Data
+        $('#tambahButton').on('click', function() {
+            window.location.href = "pelanggaran_input";
+        });
+    });
+</script>
+
 </head>
 
-
-<body>
-    <div class="container">
-		<form action="" method="POST">
-			<h2 style="display: flex; float: left;">Data Pelanggaran HRD</h2> 
-			<div style="display: flex; float: right" id="pencarian1">
-				<input type="text" placeholder="Cari.." name="cari" autofocus>
-				<button type="submit" class="btn-sm btn-dark" style="border:none;"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z" /></svg></button>
-		</form>
-	</div>
-	<br>
-	<hr>
-
-    <!-- Menampilkan Tombol CRUD -->
-    <div class="container">
-		<form name="boiler_proses" method="POST">
-			<div class="form-group">
-                <!--Menempatkan icon cetak dan tambah-->
-          <button type="button" data-toggle="tooltip" data-placement="top" title="Tambah" class="btn btn-success"><a id="log" href="pelanggaran_input"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg></a></button>
-			    <div style="display: inline; float: right;">
-			    <button type="button" data-toggle="tooltip" data-placement="top" title="Cetak" class="btn btn-info"><a href="#" data-toggle="modal" data-target="#cetakperiode"><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M18,3H6V7H18M19,12A1,1 0 0,1 18,11A1,1 0 0,1 19,10A1,1 0 0,1 20,11A1,1 0 0,1 19,12M16,19H8V14H16M19,8H5A3,3 0 0,0 2,11V17H6V21H18V17H22V11A3,3 0 0,0 19,8Z" /></svg></a></button>
-			  </div>
-			    
-		  </div>
-		    		<div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
-            <!--Menampilkan tabel-->
-            <table class="flexible-table">
-                <!--Header Tabel berwarna gelap-->    
-                <thead class="thead-dark">
-                    <tr class="text-center">
-						<tr>
-			            <th rowspan="2">No.</th>
-			            <th rowspan="2">Tanggal</th>
-			            <th rowspan="2">NIK</th>
-			            <th rowspan="2">Nama</th>
-			            <th rowspan="2">Bagian</th>
-			            <th rowspan="2">Shift</th>
-			            <th colspan="4">Pelanggaran</th>
-			            <th rowspan="2">Sanksi</th>
-			            <th rowspan="2">Lampiran</th>
-						<th rowspan="2">Opsi</th>
-			        	</tr>
-			        	<tr>
-			        		<!-- Pelanggaran -->
-				            <th>Waktu</th>
-				            <th>Tempat</th>
-				            <th>Bentuk Pelanggaran</th>
-				            <th>Potensi Bahaya</th>
-			       	 	</tr>
-                    </tr>
-                   <?php 
-                    $no = 1;
-                    if($hrd_row>0){
-                        foreach($hrd_arr as $array){ ?>
-                        <tr class="text-center table-row-border">
-								<td>
-									<!--Nomor-->
-									<?= $no++; ?>
-								</td>
-								<td>
-									<!--Tanggal-->
-									<?= $array['tanggal']; ?>
-								</td>
-								<td>
-									<!--NIK-->
-									<?= $array['nik']; ?>
-								</td>
-								<td>
-									<!--Nama-->
-									<?= $array['nama']; ?>
-								</td>
-								<td>
-									<!--Bagian-->
-									<?= $array['bagian']; ?>
-								</td>
-								<td>
-									<!-- Jam Kerja -->
-									<?= $array['shift']; ?>	
-								</td>
-								<td>
-									<!--Waktu Pelanggaran-->
-									<?= $array['waktu_pelanggaran']; ?>
-								</td>
-								<td>
-									<!--Tempat Pelanggaran-->
-									<?= $array['tempat_pelanggaran']; ?>
-								</td>
-								<td>
-									<!--Bentuk Pelanggaran-->
-									<?= $array['bentuk_pelanggaran']; ?>
-								</td>
-								<td>
-									<!--Potensi Bahaya-->
-									<?= $array['potensi_bahaya']; ?>
-								</td>
-								<td>
-									<!-- Sanksi -->
-									<?= $array['sanksi']; ?>	
-								</td>
-								<td>
-									<!-- Lampiran -->
-									<?php
-									    $lampiran = $array['lampiran'];
-									    echo $lampiran;
-									 ?>	
-								</td>
-								<td>
-									<a href="hrd_edit"><button class="btn btn-warning custom-button my-2" type="button" title="Edit">Edit</button></a>
-            						<a href="hrd_delete"><button class="btn btn-danger custom-button" type="button" title="Hapus">Hapus</button></a>
-								</td> 
-                    <?php }} else{
-                        echo "<tr><td colspan=\"10\" align=\"center\"><b style='font-size:18px;'>DATA TIDAK DAPAT DITEMUKAN!</b></td></tr>";
-                    } ?>
-            </table>
-</div>
-
-
+<body class="container-fluid">
+    <center><h3>DATA KECELAKAAN KERJA</h3></center>
+    <br>
+    <!-- Menampilkan tabel -->
+    <table id="myTable" class="table table-bordered">
+        <!-- Header Tabel berwarna gelap -->
+        <thead class="thead-dark">
+            <tr class="text-center">
+                <tr>
+                    <th rowspan="2">No.</th>
+                    <th rowspan="2">Tanggal</th>
+                    <th rowspan="2">NIK</th>
+                    <th rowspan="2">Nama</th>
+                    <th rowspan="2">Bagian</th>
+                    <th rowspan="2">Shift</th>
+                    <th colspan="4">Pelanggaran</th>
+                    <th rowspan="2">Sanksi</th>
+                    <th rowspan="2">Lampiran</th>
+                    <th rowspan="2">Opsi</th>
+                </tr>
+                <tr>
+                    <!-- Pelanggaran -->
+                    <th>Waktu</th>
+                    <th>Tempat</th>
+                    <th>Bentuk Pelanggaran</th>
+                    <th>Potensi Bahaya</th>
+                </tr>
+        </thead>
+    </table>
 </body>
+</html>

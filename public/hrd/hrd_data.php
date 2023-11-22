@@ -2,7 +2,7 @@
 require_once("../../config/config.php");
 require_once(SITE_ROOT."/src/koneksi.php");
 
-$query = "SELECT tanggal, nik, nama, bagian, shift, waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi
+$query = "SELECT tanggal, nik, nama, bagian, shift, waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, lampiran
         FROM hrd ORDER BY tanggal DESC;";
 
 $prep = pg_prepare($koneksi_hrd, "select_hrd", $query);
