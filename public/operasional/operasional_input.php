@@ -161,43 +161,79 @@ require (SITE_ROOT."/src/koneksi.php");
             $efb = $_REQUEST['efb-press-'.$i];
             $opt = $_REQUEST['opt-'.$i];
             $supervisor = $_REQUEST['supervisor-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];
+            $keterangan = emptyToNull($_REQUEST['keterangan-'.$i]);
 
             //Insert ke database
             $insert_query = "WITH in1 AS(
-                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $2, $3, $4, LOCALTIME)
+                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), ?,?,?,?, LOCALTIME)
                 RETURNING produksi_id AS produksi),
                 in2 AS (
-                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), $1, $5, $6, $7, $4, LOCALTIME)
+                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), ?,?,?,?,?, LOCALTIME)
                 RETURNING pemakaian_id AS pakai),
                 in3 AS (
-                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), $1, $4, LOCALTIME, $8, $9, $10, $11, $12, $13, $14)
+                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), ?,?, LOCALTIME, ?,?,?,?,?,?,?)
                 RETURNING pemakaian_bahan_bakar_id AS bahan_bakar)
                 INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
-                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), $15, $1, $4, LOCALTIME, $16;"; 
-            $prepare_input = pg_prepare($koneksi_operasional, "my_insert", $insert_query);
-            $exec_input = pg_execute($koneksi_operasional, "my_insert", array($shift, $generasi, $pm_kwh_pltbm, $tanggal, $ekspor, $pemakaian_sendiri, $kwh_loss, $cangkang, $palm_fiber, $wood_chips, $serbuk_kayu, $sabut_kelapa, $efb, $opt, $supervisor, $keterangan));
-            ?>
-            <script type="text/javascript">
-        Swal.fire({
-            title: 'Tambah Data Lagi?',
-            text: "Data Berhasil disimpan!",
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Iya!',
-            cancelButtonText: 'Tidak!',
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'operasional_input';
-            } else {
-                window.location = 'operasional';
-            }
-        })
-    </script>
+                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), ?,?,?, LOCALTIME, ?;"; 
             
-            <?php
+            $prep = $koneksi_operasional -> prepare();
+
+            //bind parameter
+            $prep ->bindParam(1, $shift);
+            $prep ->bindParam(2, $generasi);
+            $prep ->bindParam(3, $pm_kwh_pltbm);
+            $prep ->bindParam(4, $tanggal);
+
+            $prep ->bindParam(5, $shift);
+            $prep ->bindParam(6, $ekspor);
+            $prep ->bindParam(7, $pemakaian_sendiri);
+            $prep ->bindParam(8, $kwh_loss);
+            $prep ->bindParam(9, $tanggal);
+
+            $prep ->bindParam(10, $shift);
+            $prep ->bindParam(11, $tanggal);
+            $prep ->bindParam(12, $cangkang);
+            $prep ->bindParam(13, $palm_fiber);
+            $prep ->bindParam(14, $wood_chips);
+            $prep ->bindParam(15, $serbuk_kayu);
+            $prep ->bindParam(16, $sabut_kelapa);
+            $prep ->bindParam(17, $efb);
+            $prep ->bindParam(18, $opt);
+
+            $prep ->bindParam(19, $supervisor);
+            $prep ->bindParam(20, $shift);
+            $prep ->bindParam(21, $tanggal);
+            $prep ->bindParam(22, $keterangan);
+
+            try{
+                $koneksi_operasional -> beginTransaction();
+                $prep -> execute();
+                $koneksi_operasional -> commit();
+
+            ?>
+                <script type="text/javascript">
+                    Swal.fire({
+                        title: 'Tambah Data Lagi?',
+                        text: "Data Berhasil disimpan!",
+                        type: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Iya!',
+                        cancelButtonText: 'Tidak!',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location = 'operasional_input';
+                        } else {
+                            window.location = 'operasional';
+                        }
+                    })
+                </script>
+
+                <?php
+            } catch(PDOException $e) {
+                echo "PDO ERROR: ". $e -> getMessage();
+            }
         }
     }
 ?>

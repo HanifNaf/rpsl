@@ -6,17 +6,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
 ?>
 
 <head>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link href='../img/rpsl1.png' rel='icon' type='image/x-icon'/>
-  <title>Input Data Boiler PT. Rezeki Perkasa Sejahera Lestari</title>
-  <link rel="stylesheet" href="css/style.css"> <!-- Perhatikan Directory (tambahkan ../) -->
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-grid.min.css.map">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="bootstrap4/dist/css/bootstrap-reboot.min.css.map">
 </head>
 <style>
 	.custom-black-bg {
@@ -136,38 +125,54 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $penyebab = $_REQUEST['penyebab-'.$i];
                         
             //Insert ke database
-            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab) 
-    VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, $6, $7);";
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-$prepare_input = pg_prepare($koneksi_hse, "my_insert", $insert_query);
-$exec_input = pg_execute($koneksi_hse, "my_insert", array($tanggal, $jenis_kecelakaan_kerja, $penanganan, $area, $waktu, $jam_kerja, $penyebab));
+            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, penanganan, area_kejadian, 
+                            waktu_kejadian, jam_kerja_kejadian, penyebab, penanganan) 
+                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?,?);";
 
-if (!$exec_input) {
-    echo "Error in SQL query: " . pg_last_error($koneksi_hse);
-} else {
-    echo "Record inserted successfully.";
-}
-            ?> 
-            <script type="text/javascript">
-        Swal.fire({
-            title: 'Tambah Data Lagi?',
-            text: "Data Berhasil disimpan!",
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Iya!',
-            cancelButtonText: 'Tidak!',
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'kecelakaan_kerja_input';
-            } else {
-                window.location = 'kecelakaan_kerja';
+            //Prepare INSERT
+            $prep = $koneksi_hse -> prepare($query);
+
+            //bind parameter
+            $prep ->bindParam(1, $tanggal);
+            $prep ->bindParam(2, $jenis_kecelakaan_kerja);
+            $prep ->bindParam(3, $penanganan);
+
+            $prep ->bindParam(4, $area);
+            $prep ->bindParam(5, $waktu);
+            $prep ->bindParam(6, $nama);
+            $prep ->bindParam(7, $jam_kerja);
+            $prep ->bindParam(8, $penyebab);
+            $prep ->bindParam(9, $penanganan);
+
+            //INSERT
+            try{
+                $koneksi_hse -> beginTransaction();
+                $prep -> execute();
+                $koneksi_hse -> commit();
+
+                ?>
+                <script type="text/javascript">
+                    Swal.fire({
+                        title: 'Tambah Data Lagi?',
+                        text: "Data Berhasil disimpan!",
+                        type: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Iya!',
+                        cancelButtonText: 'Tidak!',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location = 'kecelakaan_kerja_input';
+                        } else {
+                            window.location = 'kecelakaan_kerja';
+                        }
+                    })
+                </script>
+                <?php
+            }catch(PDOException $e){
+                echo "PDO ERROR: ". $e -> getMessage();
             }
-        })
-    </script>
-            <?php
         }
     }
 ?>

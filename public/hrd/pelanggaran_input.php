@@ -19,6 +19,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <!-- Import JS Sweet Alert -->
         <script src="../js/sweetalert2.all.min.js"></script>
 
+
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
@@ -37,7 +38,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 		    </div>
         </div>
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
@@ -120,75 +121,77 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
+            //Lampiran
+            $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
+            $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
+            $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
+
             $tanggal = $_REQUEST['tanggal-'.$i];
-            $nik = EmptyToNull($_REQUEST['nik-'.$i]);
             $nama = $_REQUEST['nama-'.$i];
             $bagian = $_REQUEST['bagian-'.$i];
             $shift = $_REQUEST['shift-'.$i];
+            $bentuk_pelanggaran = $_REQUEST['bentuk-pelanggaran-'.$i];
+            $nik = EmptyToNull($_REQUEST['nik-'.$i]);
             $waktu = EmptyToNull($_REQUEST['waktu-'.$i]).":00";
             $tempat = EmptyToNull($_REQUEST['tempat-'.$i]);
-            $bentuk_pelanggaran = $_REQUEST['bentuk-pelanggaran-'.$i];
             $potensi_bahaya = EmptyToNull($_REQUEST['potensi-bahaya-'.$i]);
             $sanksi = EmptyToNull($_REQUEST['sanksi-'.$i]);
-            $lampiran = EmptyToNull($_REQUEST['lampiran-'.$i]);
-
                         
-            //Insert ke database
-            $insert_query = "INSERT INTO hrd (hrd_id, tanggal, nik, nama, bagian, shift, 
-                            waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, lampiran)
-                            VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, 
-                            $6, $7, $8, $9, $10, $11);";
-             
-               
-            $prepare_input = pg_prepare($koneksi_hrd, "insert_hrd", $insert_query);
-            $exec_input = pg_execute($koneksi_hrd, "insert_hrd", array($tanggal, $nik, $nama, $bagian, $shift,
-                        $waktu, $tempat, $bentuk_pelanggaran, $potensi_bahaya, $sanksi, $lampiran));
+            //QUERY INSERT
+            $query = "WITH in1 AS(INSERT INTO lampiran(lampiran_id, nama, tipe, file) 
+                    VALUES(uuid_generate_v4(), ?, ?, ?) RETURNING lampiran_id AS lampiran)
+                    INSERT INTO hrd (hrd_id, lampiran_id, tanggal, nik, nama, bagian, shift, 
+                    waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi)
+                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;";
             
-            //Cek Error
-            if(!$koneksi_hrd){
-                echo "Koneksi gagal! ". pg_last_error(); 
-            }
+            //Prepare INSERT
+            $prep = $koneksi_hrd -> prepare($query);
 
-            if(!$insert_query){
-                echo "Query gagal! ". pg_last_error(); 
-            }
+            //bind parameter
+            $prep ->bindParam(1, $nama_lampiran);
+            $prep ->bindParam(2, $tipe_lampiran);
+            $prep ->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
 
-            if(!$prepare_input){
-                echo "Prepare gagal! ". pg_last_error(); 
-            }
+            $prep ->bindParam(4, $tanggal);
+            $prep ->bindParam(5, $nik);
+            $prep ->bindParam(6, $nama);
+            $prep ->bindParam(7, $bagian);
+            $prep ->bindParam(8, $shift);
+            $prep ->bindParam(9, $waktu);
+            $prep ->bindParam(10, $tempat);
+            $prep ->bindParam(11, $bentuk_pelanggaran);
+            $prep ->bindParam(12, $potensi_bahaya);
+            $prep ->bindParam(13, $sanksi);
 
-            if(!$exec_input){
-                echo "Input gagal! ". pg_last_error(); 
-            }
+            //INSERT
+            try{
+                $koneksi_hrd -> beginTransaction();
+                $prep -> execute();
+                $koneksi_hrd -> commit();
 
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-
-            $rs = pg_fetch_assoc($exec_input);
-            if (!$rs) {
-            echo "Fail! ". pg_last_error($koneksi_hrd);
+                ?>
+                <script type="text/javascript">
+                    Swal.fire({
+                        title: 'Tambah Data Lagi?',
+                        text: "Data Berhasil disimpan!",
+                        type: 'success',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Iya!',
+                        cancelButtonText: 'Tidak!',
+                    }).then((result) => {
+                        if (result.value) {
+                            window.location = 'pelanggaran_input';
+                        } else {
+                            window.location = 'pelanggaran';
+                        }
+                    })
+                </script>
+                <?php
+            }catch(PDOException $e){
+                echo "PDO ERROR: ". $e -> getMessage();
             }
-            ?> 
-            
-            <script type="text/javascript">
-        Swal.fire({
-            title: 'Tambah Data Lagi?',
-            text: "Data Berhasil disimpan!",
-            type: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Iya!',
-            cancelButtonText: 'Tidak!',
-        }).then((result) => {
-            if (result.value) {
-                window.location = 'pelanggaran_input';
-            } else {
-                window.location = 'pelanggaran';
-            }
-        })
-    </script>     
-            <?php
         }
     }
 ?>
