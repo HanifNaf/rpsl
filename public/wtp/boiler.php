@@ -53,17 +53,29 @@ $data_json = json_encode($boiler_arr);
 				{ data: 'm3_air' },
 				{ data: 'cost_solid_additive', 
 				render: function(data, type, row){ //kolom cost harian
-					return "Rp."+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive))
+					var cost_alkalinity_booster = (row.cost_alkalinity_booster || 0)*row.alkalinity_booster;
+        			var cost_oxygen_scavenger = (row.cost_oxygen_scavenger || 0)*row.oxygen_scavenger;
+        			var cost_internal_treatment = (row.cost_internal_treatment || 0)*row.internal_treatment;
+        			var cost_condensate_treatment = (row.cost_condensate_treatment || 0)*row.condensate_treatment;
+        			var cost_solid_additive = (row.cost_solid_additive || 0)*row.solid_additive;
+
+					return "Rp."+Math.round((cost_alkalinity_booster+cost_oxygen_scavenger+cost_internal_treatment+cost_condensate_treatment+cost_solid_additive))
 				} }, 
 				{ data: 'm3_air',
 				render: function(data, type, row){
-					return "Rp."+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive)/row.m3_air)
+					var cost_alkalinity_booster = (row.cost_alkalinity_booster || 0)*row.alkalinity_booster;
+        			var cost_oxygen_scavenger = (row.cost_oxygen_scavenger || 0)*row.oxygen_scavenger;
+        			var cost_internal_treatment = (row.cost_internal_treatment || 0)*row.internal_treatment;
+        			var cost_condensate_treatment = (row.cost_condensate_treatment || 0)*row.condensate_treatment;
+        			var cost_solid_additive = (row.cost_solid_additive || 0)*row.solid_additive;
+
+					return "Rp."+Math.round((cost_alkalinity_booster+cost_oxygen_scavenger+cost_internal_treatment+cost_condensate_treatment+cost_solid_additive)/row.m3_air)
  				}}, //kolom cost/m3,
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var editButton = '<a href="boiler_edit?id=' + row.boiler_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href=boiler"_delete?id=' + row.boiler_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var deleteButton = '<a href="boiler_delete?id=' + row.boiler_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
                         return editButton + deleteButton;
                     }
                 }
@@ -114,7 +126,7 @@ $data_json = json_encode($boiler_arr);
 </head>
 
 <body class="container-fluid">
-    <center><h3>JADWAL MAINTENANCE</h3></center>
+    <center><h3>PEMAKAIAN CHEMICAL BOILER</h3></center>
     <br>
     <!-- Menampilkan tabel -->
     <table id="myTable" class="table table-bordered">
