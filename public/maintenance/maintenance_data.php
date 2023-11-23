@@ -33,6 +33,4 @@ try{
         //        print_r($maintenance_arr);
         //}
 }
-//$jsonn = json_encode($maintenance_arr);
-//echo $jsonn;
 ?>
