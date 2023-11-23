@@ -68,7 +68,7 @@ ini_set('display_errors', 1);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var editButton = '<a href="operasional_edit.php?operasional_id=' + row.operasional_id + '&produksi_id=' + row.produksi_id + '&pemakaian_id=' + row.pemakaian_id + '&bahan_bakar_id=' + row.pemakaian_bahan_bakar_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="operasional_delete.php?operasional_id=' + data.operasional_id + '?produksi_id=' + data.produksi_id + '?pemakaian_id=' + data.pemakaian_id + '?bahan_bakar_id=' + data.pemakaian_bahan_bakar_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + row.operasional_id + '\', \'' + row.produksi_id + '\', \'' + row.pemakaian_id + '\', \'' + row.pemakaian_bahan_bakar_id + '\')">Hapus</button>';
                         return editButton + deleteButton;
                     }
                 }
@@ -114,6 +114,25 @@ ini_set('display_errors', 1);
             window.location.href = "operasional_input";
         });
     });
+</script>
+<script>
+    function confirmDelete(operasional_id, produksi_id, pemakaian_id, bahan_bakar_id) {
+        Swal.fire({
+            title: 'Konfirmasi Penghapusan',
+            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Ya!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                // Redirect to the delete page if user confirms
+                window.location.href = 'operasional_delete.php?operasional_id=' + operasional_id + '&produksi_id=' + produksi_id + '&pemakaian_id=' + pemakaian_id + '&bahan_bakar_id=' + bahan_bakar_id;
+            }
+        });
+    }
 </script>
 
 </head>

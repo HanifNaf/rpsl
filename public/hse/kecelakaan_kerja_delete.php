@@ -4,14 +4,14 @@ require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Pastikan parameter maintenance_id telah diterima
-if (isset($_GET['hrd_id'])) {
-    $hrd_id = $_GET['hrd_id'];
+if (isset($_GET['kecelakaan_kerja_id'])) {
+    $kecelakaan_kerja_id = $_GET['kecelakaan_kerja_id'];
 
     // Proses penghapusan data berdasarkan ID
     try {
-        $delete_query = "DELETE FROM hrd WHERE hrd_id = ?";
-        $prepare_delete = $koneksi_hrd->prepare($delete_query);
-        $prepare_delete->bindParam(1, $hrd_id, PDO::PARAM_INT);
+        $delete_query = "DELETE FROM kecelakaan_kerja WHERE kecelakaan_kerja_id = ?";
+        $prepare_delete = $koneksi_hse->prepare($delete_query);
+        $prepare_delete->bindParam(1, $kecelakaan_kerja_id, PDO::PARAM_INT);
 
         if ($prepare_delete->execute()) {
             // Set pesan JavaScript untuk notifikasi
@@ -23,7 +23,7 @@ if (isset($_GET['hrd_id'])) {
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href = 'pelanggaran';
+                        window.location.href = 'kecelakaan_kerja';
                     }
                 });
             </script>";
@@ -35,7 +35,7 @@ if (isset($_GET['hrd_id'])) {
     }
 } else {
     // Jika parameter maintenance_id tidak diterima, kembali ke halaman utama
-    header("Location: pelanggaran");
+    header("Location: kecelakaan_kerja");
     exit();
 }
 ?>

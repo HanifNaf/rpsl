@@ -125,24 +125,21 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $penyebab = $_REQUEST['penyebab-'.$i];
                         
             //Insert ke database
-            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, penanganan, area_kejadian, 
-                            waktu_kejadian, jam_kerja_kejadian, penyebab, penanganan) 
-                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?,?);";
+            $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, 
+                            penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab) 
+                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?);";
 
             //Prepare INSERT
-            $prep = $koneksi_hse -> prepare($query);
+            $prep = $koneksi_hse -> prepare($insert_query);
 
             //bind parameter
             $prep ->bindParam(1, $tanggal);
             $prep ->bindParam(2, $jenis_kecelakaan_kerja);
             $prep ->bindParam(3, $penanganan);
-
             $prep ->bindParam(4, $area);
             $prep ->bindParam(5, $waktu);
-            $prep ->bindParam(6, $nama);
-            $prep ->bindParam(7, $jam_kerja);
-            $prep ->bindParam(8, $penyebab);
-            $prep ->bindParam(9, $penanganan);
+            $prep ->bindParam(6, $jam_kerja);
+            $prep ->bindParam(7, $penyebab);
 
             //INSERT
             try{
