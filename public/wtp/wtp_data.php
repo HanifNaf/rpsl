@@ -16,9 +16,15 @@ $query_ct = "SELECT cooling_tower_id, tanggal, corrotion_inhibitor,
                 FROM cooling_tower
                 ORDER BY tanggal DESC;";
 
+$query_sungai = "SELECT sungai_id, tanggal, koagulan, flokulan, soda_ash,
+                cost_koagulan, cost_flokulan, cost_soda_ash, m3_air
+                FROM sungai
+                ORDER BY tanggal DESC;";
+
 //Prepare Statements
 $prep_boiler = $koneksi_wtp -> prepare($query_boiler);
 $prep_ct = $koneksi_wtp -> prepare($query_ct);
+$prep_sungai = $koneksi_wtp -> prepare($query_sungai);
 
 
 try{
@@ -26,6 +32,7 @@ try{
         $koneksi_wtp -> beginTransaction();
         $prep_boiler -> execute();
         $prep_ct -> execute();
+        $prep_sungai -> execute();
         $koneksi_wtp -> commit();
 
 }catch(PDOException $e){
@@ -40,11 +47,14 @@ try{
         $ct_arr = $prep_ct -> fetchAll(PDO::FETCH_ASSOC);
         $ct_row = $koneksi_wtp -> query('select count(*) from cooling_tower') -> fetchColumn();
         
-        //Check Array Hasil
-        //if (!$ct_arr){
+        $sungai_arr = $prep_sungai -> fetchAll(PDO::FETCH_ASSOC);
+        $sungai_row = $koneksi_wtp -> query('select count(*) from sungai') -> fetchColumn();
+        
+        ////Check Array Hasil
+        //if (!$sungai_arr){
         //        echo "error";
         //}else{
-        //        print_r($ct_arr);
+        //        print_r($sungai_arr);
         //}
 }
 ?>
