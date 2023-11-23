@@ -70,7 +70,7 @@ ini_set('display_errors', 1);
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.hrd_id);
                         var editButton = '<a href="pelanggaran_edit.php?hrd_id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="kecelakaan_kerja_delete.php?id=' + encodedID + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return editButton + deleteButton;
                     }
                 }
@@ -117,6 +117,25 @@ ini_set('display_errors', 1);
         });
     });
 </script>
+<script>
+    function confirmDelete(maintenanceID) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Data akan dihapus permanen!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = 'pelanggaran_delete.php?hrd_id=' + hrdID;
+            }
+        });
+    }
+</script>
+
 
 </head>
 
