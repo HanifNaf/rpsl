@@ -50,7 +50,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         </tr>
                         <tr>
                             <!-- Tanggal -->
-                            <td class="custom-black-bg" width="30%">  Mulai  </td>
+                            <td class="custom-black-bg" width="30%">  Tanggal  </td>
                             <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
