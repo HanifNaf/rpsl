@@ -1,5 +1,12 @@
 <?php
 require_once("../../config/config.php");
+
+// Cek role
+if (!in_array($_SESSION['role'], ['elektrikal', 'wtp', 'mekanikal', 'admin', 'manager'])) {
+    print_r($_SESSION);
+    header("location: ../index.php");
+}
+
 require_once("maintenance_data.php");
 
 //Mengambil data file lampiran
