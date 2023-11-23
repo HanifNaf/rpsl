@@ -93,7 +93,7 @@ CREATE TABLE public.ro (
     asam_hcl real,
     cost_asam_hcl real DEFAULT 6000,
     basa_s4243 real,
-    cost_basa_4243 real DEFAULT 92500,
+    cost_basa_s4243 real DEFAULT 92500,
     basa_caustik real,
     cost_basa_caustik real DEFAULT 18000,
     cartridge_40 real,
@@ -169,7 +169,8 @@ COPY public.cooling_tower (cooling_tower_id, tanggal, corrotion_inhibitor, cooli
 -- Data for Name: ro; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.ro (ro_id, tanggal, anti_scalant, cost_anti_scalant, alkalinity_booster, cost_alkalinity_booster, asam_s4241, cost_asam_s4241, asam_hcl, cost_asam_hcl, basa_s4243, cost_basa_4243, basa_caustik, cost_basa_caustik, cartridge_40, cost_cartridge_40, cartridge_30, cost_cartridge_30, m3_air) FROM stdin;
+COPY public.ro (ro_id, tanggal, anti_scalant, cost_anti_scalant, alkalinity_booster, cost_alkalinity_booster, asam_s4241, cost_asam_s4241, asam_hcl, cost_asam_hcl, basa_s4243, cost_basa_s4243, basa_caustik, cost_basa_caustik, cartridge_40, cost_cartridge_40, cartridge_30, cost_cartridge_30, m3_air) FROM stdin;
+91db2f93-77ea-4954-887e-d16897b29536	2023-08-08	\N	52500	37	24500	\N	37500	\N	6000	\N	92500	\N	18000	\N	200000	\N	180000	170904
 \.
 
 
