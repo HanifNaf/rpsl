@@ -86,8 +86,9 @@ $data_json = json_encode($ro_arr);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="ro_edit?id=' + row.ro_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="ro_delete?id=' + row.ro_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var encodedID = encodeURIComponent(row.ro_id);
+                        var editButton = '<a href="ro_edit.php?ro_id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return editButton + deleteButton;
                     }
                 }
@@ -133,6 +134,24 @@ $data_json = json_encode($ro_arr);
             window.location.href = "ro_input";
         });
     });
+</script>
+<script>
+    function confirmDelete(roID) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Data akan dihapus permanen!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = 'ro_delete.php?ro_id=' + roID;
+            }
+        });
+    }
 </script>
 
 </head>
