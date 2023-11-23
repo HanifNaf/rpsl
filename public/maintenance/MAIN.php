@@ -9,7 +9,7 @@ require_once(SITE_ROOT . "/src/koneksi.php");
 if (isset($_GET['maintenance_id'])) {
     $maintenance_id = $_GET['maintenance_id'];
 
-    $edit_query = "SELECT maintenance_id, maintenance.lampiran_id, divisi, unit, problem, evaluasi, 
+    $edit_query = "SELECT maintenance_id, divisi, unit, problem, evaluasi, 
         penanganan, tanggal_mulai, tanggal_selesai, status, 
         tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
         satuan_sparepart
@@ -60,23 +60,13 @@ if (isset($_GET['maintenance_id'])) {
 <body>
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
-            <!--Nama Divisi-->
-            <div class="col-md-6 col-sm-12 col">
-            <h4 style="display: flex; float: left;">EDIT DATA MAINTENANCE</h4>
-            </div> 
             <!-- Display existing data for editing -->
+            <input type="hidden" name="maintenance_id" value="<?= $editData['maintenance_id'] ?>">
             <table class="table table-hover table-bordered table-sm">
                 <tr>
                     <!-- Divisi -->
                     <td class="custom-black-bg">Divisi</td>
-                    <td>
-                        <select name="divisi" class="form-control" style="width: 20%;">
-                            <option value="Mekanik" <?php echo ($editData['divisi'] == 'mekanik') ? 'selected' : ''; ?>>Mekanik</option>
-                            <option value="Listrik" <?php echo ($editData['divisi'] == 'listrik') ? 'selected' : ''; ?>>Listrik</option>
-                            <option value="Wtp" <?php echo ($editData['divisi'] == 'wtp') ? 'selected' : ''; ?>>WTP</option>
-                            <option value="Umum" <?php echo ($editData['divisi'] == 'umum') ? 'selected' : ''; ?>>Umum</option>
-                        </select>
-                    </td>
+                    <td><input type="text" value="<?= $editData['divisi'] ?>" name="divisi" class="form-control" width=20%></td>
                 </tr>
                 <tr>
                     <!-- Unit -->
@@ -116,10 +106,7 @@ if (isset($_GET['maintenance_id'])) {
                 <tr>
                     <!-- Tingkat Kerusakan -->
                     <td class="custom-black-bg">Tingkat Kerusakan</td>
-                    <td>
-                        <label><input type="radio" name="tingkat_kerusakan" value="Major" <?php echo ($editData['tingkat_kerusakan'] == 'major') ? 'checked' : ''; ?>> Major</label> <br>
-                        <label><input type="radio" name="tingkat_kerusakan" value="Minor" <?php echo ($editData['tingkat_kerusakan'] == 'minor') ? 'checked' : ''; ?>> Minor</label>
-                    </td>
+                    <td><input type="text" value="<?= $editData['tingkat_kerusakan'] ?>" name="tingkat_kerusakan" class="form-control" width=20%></td>
                 </tr>
                 <tr>
                     <!-- Tanggal Mulai -->
@@ -134,13 +121,9 @@ if (isset($_GET['maintenance_id'])) {
                 <tr>
                     <!-- Status -->
                     <td class="custom-black-bg">Status</td>
-                    <td>
-                        <select name="status" class="form-control" style="width: 20%;">
-                            <option value="Selesai" <?php echo ($editData['status'] == 'selesai') ? 'selected' : ''; ?>>Selesai</option>
-                            <option value="Tidak Selesai" <?php echo ($editData['status'] == 'tidak_selesai') ? 'selected' : ''; ?>>Tidak Selesai</option>
-                        </select>
-                    </td>
+                    <td><input type="text" value="<?= $editData['status'] ?>" name="status" class="form-control" width=20%></td>
                 </tr>
+                <tr>
                     <!-- Keterangan -->
                     <td class="custom-black-bg">Keterangan</td>
                     <td><input type="text" value="<?= $editData['keterangan'] ?>" name="keterangan" class="form-control" width=20%></td>
@@ -158,20 +141,20 @@ if (isset($_GET['maintenance_id'])) {
     // Update Data
     if (isset($_POST['update'])) {
         try {
-            $edit_id = $_GET['maintenance_id'];
+            $edit_id = $_POST['maintenance_id'];
             $divisi = emptyToNull($_POST['divisi']);
             $unit = emptyToNull($_POST['unit']);
             $problem = emptyToNull($_POST['problem']);
             $evaluasi = emptyToNull($_POST['evaluasi']);
             $penanganan = emptyToNull($_POST['penanganan']);
+            $sparepart = emptyToNull($_POST['sparepart']);
+            $jumlah_sparepart = emptyToNull($_POST['jumlah_sparepart']);
+            $satuan_sparepart = emptyToNull($_POST['satuan_sparepart']);
+            $tingkat_kerusakan = emptyToNull($_POST['tingkat_kerusakan']);
             $tanggal_mulai = emptyToNull($_POST['tanggal_mulai']);
             $tanggal_selesai = emptyToNull($_POST['tanggal_selesai']);
             $status = emptyToNull($_POST['status']);
-            $tingkat_kerusakan = emptyToNull($_POST['tingkat_kerusakan']);
             $keterangan = emptyToNull($_POST['keterangan']);
-            $sparepart = EmptyToNull($_POST['sparepart']);
-            $jumlah_sparepart = emptyToNull($_POST['jumlah_sparepart']);
-            $satuan_sparepart = emptyToNull($_POST['satuan_sparepart']);
 
             // Update data in the database
             $update_query = "UPDATE maintenance 
@@ -179,15 +162,15 @@ if (isset($_GET['maintenance_id'])) {
                                  unit = ?, 
                                  problem = ?, 
                                  evaluasi = ?, 
-                                 penanganan = ?, 
-                                 tanggal_mulai = ?, 
-                                 tanggal_selesai = ?, 
-                                 status = ?, 
-                                 tingkat_kerusakan = ?, 
-                                 keterangan = ?, 
+                                 penanganan = ?,
                                  sparepart = ?, 
                                  jumlah_sparepart = ?, 
-                                 satuan_sparepart = ? 
+                                 satuan_sparepart = ?,
+                                 tingkat_kerusakan = ?, 
+                                 tanggal_mulai = ?, 
+                                 tanggal_selesai = ?, 
+                                 status = ?,  
+                                 keterangan = ? 
                              WHERE maintenance_id = ?;";
 
             $prepare_update = $koneksi_maintenance->prepare($update_query);
@@ -196,14 +179,14 @@ if (isset($_GET['maintenance_id'])) {
             $prepare_update->bindParam(3, $problem);
             $prepare_update->bindParam(4, $evaluasi);
             $prepare_update->bindParam(5, $penanganan);
-            $prepare_update->bindParam(6, $tanggal_mulai);
-            $prepare_update->bindParam(7, $tanggal_selesai);
-            $prepare_update->bindParam(8, $status);
+            $prepare_update->bindParam(6, $sparepart);
+            $prepare_update->bindParam(7, $jumlah_sparepart);
+            $prepare_update->bindParam(8, $satuan_sparepart);
             $prepare_update->bindParam(9, $tingkat_kerusakan);
-            $prepare_update->bindParam(10, $keterangan);
-            $prepare_update->bindParam(11, $sparepart);
-            $prepare_update->bindParam(12, $jumlah_sparepart);
-            $prepare_update->bindParam(13, $satuan_sparepart);
+            $prepare_update->bindParam(10, $tanggal_mulai);
+            $prepare_update->bindParam(11, $tanggal_selesai);
+            $prepare_update->bindParam(12, $status);
+            $prepare_update->bindParam(13, $keterangan);
             $prepare_update->bindParam(14, $edit_id, PDO::PARAM_INT);
 
             $exec_update = $prepare_update->execute();
@@ -229,6 +212,11 @@ if (isset($_GET['maintenance_id'])) {
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
         }
+    }
+
+    function emptyToNull($value)
+    {
+        return empty($value) ? null : $value;
     }
     ?>
 </body>

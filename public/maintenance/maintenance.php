@@ -14,7 +14,7 @@ $data_json = json_encode($maintenance_arr);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JADWAL MAINTENANCE</title>
+    <title>MAINTENANCE</title>
     <style>
     body {
         font-family: Arial, sans-serif;
@@ -101,13 +101,14 @@ $data_json = json_encode($maintenance_arr);
 
         // Tambahkan tombol Tambah Data
         var tambahButton = '<button id="tambahButton" class="btn btn-info">Tambah Data</button>';
-        $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons
+                $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons
 
-        // Style untuk menengahkan tombol Tambah Data
-        $('#tambahButton').css({
-            'margin-left': '380px', // Sesuaikan dengan margin yang diinginkan
-            'margin-right': '380px', // Sesuaikan dengan margin yang diinginkan
-        });
+                // Style untuk menengahkan tombol Tambah Data
+                var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
+                $('#tambahButton').css({
+                    'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
+                    'margin-right': buttonMargin,
+                });
 
         // Center-align the text in the header cells
         $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
@@ -141,7 +142,7 @@ $data_json = json_encode($maintenance_arr);
 </head>
 
 <body class="container-fluid">
-    <center><h3>JADWAL MAINTENANCE</h3></center>
+    <center><h3> DATA MAINTENANCE</h3></center>
     <br>
     <!-- Menampilkan tabel -->
     <table id="myTable" class="table table-bordered">

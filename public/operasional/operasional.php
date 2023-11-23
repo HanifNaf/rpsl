@@ -62,7 +62,6 @@ ini_set('display_errors', 1);
                 { data: 'kg_sabutkelapa' },
                 { data: 'kg_efbpress' },
                 { data: 'kg_opt' },
-                { data: 'supervisor' },
                 { data: 'keterangan' },
                 {
                     "data": null,
@@ -98,13 +97,14 @@ ini_set('display_errors', 1);
 
         // Tambahkan tombol Tambah Data
         var tambahButton = '<button id="tambahButton" class="btn btn-info">Tambah Data</button>';
-        $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons
+                $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons
 
-        // Style untuk menengahkan tombol Tambah Data
-        $('#tambahButton').css({
-            'margin-left': '380px', // Sesuaikan dengan margin yang diinginkan
-            'margin-right': '380px', // Sesuaikan dengan margin yang diinginkan
-        });
+                // Style untuk menengahkan tombol Tambah Data
+                var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
+                $('#tambahButton').css({
+                    'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
+                    'margin-right': buttonMargin,
+                });
 
         // Center-align the text in the header cells
         $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
@@ -118,13 +118,13 @@ ini_set('display_errors', 1);
 <script>
     function confirmDelete(operasional_id, produksi_id, pemakaian_id, bahan_bakar_id) {
         Swal.fire({
-            title: 'Konfirmasi Penghapusan',
-            text: 'Apakah Anda yakin ingin menghapus data ini?',
+            title: 'Apakah Anda yakin?',
+            text: 'Data akan dihapus permanen!',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
             cancelButtonColor: '#3085d6',
-            confirmButtonText: 'Ya!',
+            confirmButtonText: 'Hapus',
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
@@ -138,7 +138,7 @@ ini_set('display_errors', 1);
 </head>
 
 <body class="container-fluid">
-    <center><h3>OPERASIONAL</h3></center>
+    <center><h3> DATA OPERASIONAL</h3></center>
     <br>
     <!-- Menampilkan tabel -->
     <table id="myTable" class="table table-bordered">
@@ -160,7 +160,6 @@ ini_set('display_errors', 1);
                 <th>Pemakaian Sabut Kelapa (kg)</th>
                 <th>Pemakaian EFB Press (kg)</th>
                 <th>Pemakaian OPT (kg)</th>
-                <th>Supervisor</th>
                 <th>Keterangan</th>
                 <th>Opsi</th>
             </tr>

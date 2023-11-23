@@ -22,7 +22,7 @@ require (SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
-		    <h2 style="display: flex; float: left;">OPERASIONAL</h2>
+		    <h2 style="display: flex; float: left;">INPUT DATA OPERASIONAL</h2>
             </div> 
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -42,24 +42,24 @@ require (SITE_ROOT."/src/koneksi.php");
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
                         <tr>
-                            <!-- Nomor -->
-                           	<td class="custom-black-bg">Nomor</td>
-                            <td><?= $i ?> </td>
-                        </tr>
-                        <tr>
                             <!-- Tanggal -->
                             <td class="custom-black-bg">Tanggal</td>
-                            <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
+                            <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=50%> </td>
                         </tr>
                         <tr>
                             <!-- Shift -->
                             <td class="custom-black-bg">Shift</td>
-                            <td><input type="number" name="shift-<?=$i?>" style="form-control"></td>
+                            <td>
+                                <select name="shift-<?=$i?>" class="form-control">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
                         </tr>
-                        <tr>
                             <!-- Generasi -->
                             <td class="custom-black-bg">Generasi</td>
-                            <td><input type="number" name="generasi-<?=$i?>" style="form-control"></td>
+                            <td><input type="number" name="generasi-<?=$i?>" style="form-control" width=50%></td>
                         </tr>
                         <tr>    
                             <!-- PM Kwh PLTBM -->
@@ -115,11 +115,6 @@ require (SITE_ROOT."/src/koneksi.php");
                             <!-- Pemakaian OPT -->
                             <td class="custom-black-bg">Pemakaian OPT</td>
                             <td><input type="number" name="opt-<?=$i?>" style="form-control"></td>
-                        </tr>
-                        <tr>
-                            <!-- Supervisor -->
-                            <td class="custom-black-bg">Supervisor</td>
-                            <td><input type="text" name="supervisor-<?=$i?>" style="form-control"></td>
                         </tr>
                         <tr>
                             <!-- keterangan -->

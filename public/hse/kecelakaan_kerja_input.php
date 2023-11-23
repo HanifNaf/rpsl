@@ -22,7 +22,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
-		    <h2 style="display: flex; float: left;">KECELAKAAN KERJA</h2>
+		    <h2 style="display: flex; float: left;">INPUT DATA KECELAKAAN KERJA</h2>
             </div> 
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -55,6 +55,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <!-- Jam -->
                             <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
                                 <td><select name="jenis-<?= $i ?>" class="form-control">
+                                        <option value="-">-- Pilih Jenis Kecelakaan Kerja --</option>
                                         <option value="Ringan">Ringan</option>
                                         <option value="Sedang">Sedang</option>
                                         <option value="Berat">Berat</option>
@@ -85,6 +86,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <!-- Jam Kerja -->
                             <td class="custom-black-bg" width="30%">Jam Kerja</td>
                             <td><select name="jam-<?= $i ?>" class="form-control">
+                                        <option value="-">-- Pilih Jam Kerja --</option>
                                         <option value="Pagi">Pagi</option>
                                         <option value="Sore">Sore</option>
                                         <option value="Malam">Malam</option>

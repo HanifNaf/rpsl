@@ -47,7 +47,7 @@ if (isset($_GET['boiler_id'])) {
     <meta charset="UTF-8">
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -60,17 +60,13 @@ if (isset($_GET['boiler_id'])) {
 
         <div class="row">
             <div class="col-md-6 col-sm-12 col">
-                <h2 style="display: flex; float: left;">PEMAKAIAN CHEMICAL BOILER - Edit</h2>
+                <h4 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL BOILER</h4>
             </div>
         </div>
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">
                 <input type="hidden" name="boiler_id" value="<?= $boilerData['boiler_id'] ?>">
                 <table class="table table-hover table-bordered table-sm">
-                    <tr>
-                        <td class="custom-black-bg">No</td>
-                        <td><?= $boilerData['nomor'] ?></td>
-                    </tr>
                     <tr>
                         <td class="custom-black-bg">Tanggal</td>
                         <td><input type="date" value="<?= $boilerData['tanggal'] ?>" name="tanggal" class="form-control" width=20%></td>

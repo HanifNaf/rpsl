@@ -48,6 +48,10 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
 <body>
     <div class="container">
         <form action="" method="post">
+            <!--Nama Divisi-->
+            <div class="col-md-6 col-sm-12 col">
+            <h2 style="display: flex; float: left;">EDIT DATA KECELAKAAN KERJA</h2>
+            </div> 
             <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
                 <input type="hidden" name="edit_id" value="<?= $kecelakaan_kerja_id ?>">
@@ -59,7 +63,13 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
                 <tr>
                     <!-- Jenis Kecelakaan Kerja -->
                     <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
-                    <td> <input type="text" value="<?= $editData['jenis_kecelakaan_kerja'] ?>" name="jenis" class="form-control" width=20%> </td>
+                    <td>
+                        <select name="jenis" class="form-control" style="width: 20%;">
+                            <option value="Ringan" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'ringan') ? 'selected' : ''; ?>>Ringan</option>
+                            <option value="Sedang" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'sedang') ? 'selected' : ''; ?>>Sedang</option>
+                            <option value="Berat" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'berat') ? 'selected' : ''; ?>>Berat</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <!-- Penanganan -->
@@ -79,7 +89,14 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
                 <tr>
                     <!-- Jam Kerja Kejadian -->
                     <td class="custom-black-bg">Jam Kerja</td>
-                    <td> <input type="text" value="<?= $editData['jam_kerja_kejadian'] ?>" name="jam" class="form-control" width=20%> </td>
+                    <td>
+                        <select name="jam" class="form-control" style="width: 20%;">
+                            <option value="Pagi" <?php echo ($editData['jam_kerja_kejadian'] == 'pagi') ? 'selected' : ''; ?>>Pagi</option>
+                            <option value="Sore" <?php echo ($editData['jam_kerja_kejadian'] == 'sore') ? 'selected' : ''; ?>>Sore</option>
+                            <option value="Malam" <?php echo ($editData['jam_kerja_kejadian'] == 'malam') ? 'selected' : ''; ?>>Malam</option>
+                            <option value="Nonshift" <?php echo ($editData['jam_kerja_kejadian'] == 'nonshift') ? 'selected' : ''; ?>>Nonshift</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <!-- Penyebab -->

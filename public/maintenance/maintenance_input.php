@@ -24,7 +24,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
             <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">Jadwal Maintenance</h2>
+            <h4 style="display: flex; float: left;">INPUT DATA MAINTENANCE</h4>
             </div> 
             <!--Input Jumlah Kolom-->
             <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -44,14 +44,10 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
                         <tr>
-                            <!-- Nomor -->
-                            <td class="custom-black-bg">No</td>
-                            <td> <?= $i ?> </td>
-                        </tr>
-                        <tr>
                             <!-- Divisi -->
                             <td class="custom-black-bg">Divisi</td>
                                 <td><select name="divisi-<?= $i ?>" class="form-control">
+                                        <option value="Umum">-- Pilih Divisi --</option>
                                         <option value="Umum">Umum</option>
                                         <option value="Elektrikal">Elektrikal</option>
                                         <option value="WTP">WTP</option>
@@ -134,7 +130,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <!-- Status -->
                             <td class="custom-black-bg">Status</td>
                             <td><select name="status-<?= $i ?>" class="form-control">
-                                        <option value="Dijadwalkan">Dijadwalkan</option>
+                                        <option value="-">-- Pilih Status --</option>
                                         <option value="Sedang Berlangsung">Sedang Berlangsung</option>
                                         <option value="Selesai">Selesai</option>
                                 </select>

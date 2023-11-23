@@ -45,7 +45,7 @@ if (isset($_GET['sungai_id'])) {
 
         <div class="row">
             <div class="col-md-6 col-sm-12 col">
-                <h2 style="display: flex; float: left;">EDIT DATA SUNGAI</h2>
+                <h4 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL SUNGAI</h4>
             </div>
         </div>
 
@@ -106,9 +106,9 @@ if (isset($_GET['sungai_id'])) {
         $sungai_id = $_POST['sungai_id'];
         $tanggal = $_POST['tanggal'];
         $m3_air = $_POST['m3_air'];
-        $koagulan = $_POST['koagulan'];
-        $soda = $_POST['soda'];
-        $flokulan = $_POST['flokulan'];
+        $koagulan = emptyToNull($_POST['koagulan']);
+        $soda = emptyToNull($_POST['soda']);
+        $flokulan = emptyToNull($_POST['flokulan']);
 
         // Update data in the database
         $update_query = "UPDATE sungai 

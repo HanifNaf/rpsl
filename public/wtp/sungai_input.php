@@ -24,7 +24,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
             <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">PEMAKAIAN CHEMICAL SUNGAI</h2>
+            <h4 style="display: flex; float: left;">INPUT DATA PEMAKAIAN CHEMICAL SUNGAI</h4>
             </div> 
             <!--Input Jumlah Kolom-->
             <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">

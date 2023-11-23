@@ -62,6 +62,12 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 ?>
 
 <head>
+    <style>
+        .custom-black-bg {
+            background-color: #2ca143;
+            color: white;
+        }
+    </style>
     <!-- Import JS Sweet Alert -->
     <script src="../js/sweetalert2.all.min.js"></script>
 </head>
@@ -70,25 +76,30 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
     <div class="row">
         <!-- Nama Divisi -->
         <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">OPERASIONAL</h2>
+            <h2 style="display: flex; float: left;">EDIT DATA OPERASIONAL</h2>
         </div>
     </div>
 
-    <div class="table-responsive-sm table-responsie-md table-responsive-lg">
-        <!-- Form for Data Editing -->
-        <form action="" method="post">
-            
+    <div class="container">
+        <form action="" method="post" enctype="multipart/form-data">
+            <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
-                
+                <tr>
                     <!-- Tanggal -->
-                    <tr>
                         <td class="custom-black-bg">Tanggal</td>
                         <td><input type="date" value="<?= $dataToEdit['tanggal'] ?>" name="tanggal" class="form-control" width=20%></td>
                     </tr>
                     <!-- Shift -->
                     <tr>
+                        <!-- Shift -->
                         <td class="custom-black-bg">Shift</td>
-                        <td><input type="number" value="<?= $dataToEdit['shift'] ?>" name="shift" class="form-control"></td>
+                        <td>
+                            <select name="shift-<?=$i?>" class="form-control">
+                                <option value="1" <?php echo ($editData['shift'] == 1) ? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo ($editData['shift'] == 2) ? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo ($editData['shift'] == 3) ? 'selected' : ''; ?>>3</option>
+                            </select>
+                        </td>
                     </tr>
                     <!-- Generasi -->
                     <tr>
@@ -150,11 +161,6 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
                         <td class="custom-black-bg">Pemakaian OPT (kg)</td>
                         <td><input type="number" value="<?= $dataToEdit['kg_opt'] ?>" name="kg_opt" class="form-control"></td>
                     </tr>
-                        <!-- Supervisor -->
-                    <tr>
-                        <td class="custom-black-bg">Supervisor</td>
-                        <td><input type="text" value="<?= $dataToEdit['supervisor'] ?>" name="supervisor" class="form-control"></td>
-                    </tr>
                         <!-- Keterangan -->
                     <tr>
                         <td class="custom-black-bg">Keterangan</td>
@@ -211,7 +217,6 @@ if (isset($_POST['update'])) {
                       UPDATE operasional
                       SET shift = ?,
                         keterangan = ?,
-                        supervisor = ?,
                         tanggal = ?
                       FROM up1, up2, up3
                       WHERE operasional.operasional_id = ? 
@@ -245,9 +250,8 @@ if (isset($_POST['update'])) {
 
     $prepare_update->bindParam(19, $_POST['shift']);
     $prepare_update->bindParam(20, $_POST['keterangan']);
-    $prepare_update->bindParam(21, $_POST['supervisor']);
-    $prepare_update->bindParam(22, $_POST['tanggal']);
-    $prepare_update->bindParam(23, $_GET['operasional_id']);
+    $prepare_update->bindParam(21, $_POST['tanggal']);
+    $prepare_update->bindParam(22, $_GET['operasional_id']);
 
     try {
         $koneksi_operasional->beginTransaction();

@@ -46,7 +46,7 @@ if (isset($_GET['cooling_tower_id'])) {
 
         <div class="row">
             <div class="col-md-6 col-sm-12 col">
-                <h2 style="display: flex; float: left;">EDIT DATA COOLING TOWER</h2>
+                <h4 style="display: flex; float: left;">EDIT DATA COOLING TOWER</h4>
             </div>
         </div>
 
@@ -106,10 +106,10 @@ if (isset($_GET['cooling_tower_id'])) {
     if (isset($_POST['update'])) {
         $cooling_tower_id = $_POST['cooling_tower_id'];
         $tanggal = $_POST['tanggal'];
-        $corrotion = $_POST['corrotion'];
-        $dispersant = $_POST['dispersant'];
-        $oxy = $_POST['oxy'];
-        $sulfur = $_POST['sulfur'];
+        $corrotion = emptyToNull($_POST['corrotion']);
+        $dispersant = emptyToNull($_POST['dispersant']);
+        $oxy = emptyToNull($_POST['oxy']);
+        $sulfur = emptyToNull($_POST['sulfur']);
 
         // Update data in the database
         $update_query = "UPDATE cooling_tower 

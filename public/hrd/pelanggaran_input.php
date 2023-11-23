@@ -23,7 +23,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
 		    <div class="col-md-6 col-sm-12 col">
-		    <h2 style="display: flex; float: left;">LAPORAN PELANGGARAN HRD</h2>
+		    <h2 style="display: flex; float: left;">INPUT DATA PELANGGARAN HRD</h2>
             </div> 
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -65,7 +65,15 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         <tr>
                             <!-- Shift -->
                             <td class="custom-black-bg">Shift</td>
-                            <td> <input type="text" name="shift-<?=$i?>" class="form-control" width=20%> </td>
+                            <td>
+                                <select name="shift-<?=$i?>" class="form-control" style="width: 20%;">
+                                    <option value="-">--Pilih Divisi--</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <!-- Pemisah -->
@@ -99,7 +107,15 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         <tr>
                             <!-- Sanksi -->
                             <td class="custom-black-bg">Sanksi</td>
-                            <td> <input type="text" name="sanksi-<?=$i?>" class="form-control" width=20%> </td>
+                            <td>
+                                <select name="sanksi-<?=$i?>" class="form-control" style="width: 20%;">
+                                    <option value="-">--Pilih Sanksi--</option>
+                                    <option value="SP1">SP1</option>
+                                    <option value="SP2">SP2</option>
+                                    <option value="SP3">SP3</option>
+                                    <option value="Teguran Lisan">Teguran Lisan</option>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <!-- Lampiran -->

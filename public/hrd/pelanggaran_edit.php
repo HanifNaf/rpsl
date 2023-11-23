@@ -44,7 +44,7 @@ if (isset($_GET['hrd_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Data Pelanggaran</title>
+    <title>EDIT DATA PELANGGARAN</title>
     <style>
         .custom-black-bg {
             background-color: #2ca143;
@@ -58,6 +58,11 @@ if (isset($_GET['hrd_id'])) {
 <body>
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
+            <div class="row">
+            <div class="col-md-6 col-sm-12 col">
+                <h4 style="display: flex; float: left;">EDIT DATA PELANGGARAN HRD</h4>
+            </div>
+        </div>
             <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
                 <tr>
@@ -83,7 +88,14 @@ if (isset($_GET['hrd_id'])) {
                 <tr>
                     <!-- Shift -->
                     <td class="custom-black-bg">Shift</td>
-                    <td><input type="text" value="<?= $editData['shift'] ?>" name="shift" class="form-control" width=20%></td>
+                    <td>
+                        <select name="shift" class="form-control" style="width: 20%;">
+                            <option value="A" <?php echo ($editData['shift'] == 'A') ? 'selected' : ''; ?>>A</option>
+                            <option value="B" <?php echo ($editData['shift'] == 'B') ? 'selected' : ''; ?>>B</option>
+                            <option value="C" <?php echo ($editData['shift'] == 'C') ? 'selected' : ''; ?>>C</option>
+                            <option value="D" <?php echo ($editData['shift'] == 'D') ? 'selected' : ''; ?>>D</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <!-- Waktu Pelanggaran -->
@@ -108,7 +120,14 @@ if (isset($_GET['hrd_id'])) {
                 <tr>
                     <!-- Sanksi -->
                     <td class="custom-black-bg">Sanksi</td>
-                    <td><input type="text" value="<?= $editData['sanksi'] ?>" name="sanksi" class="form-control" width=20%></td>
+                    <td>
+                        <select name="sanksi" class="form-control" style="width: 20%;">
+                            <option value="SP1" <?php echo ($editData['sanksi'] == 'SP1') ? 'selected' : ''; ?>>SP1</option>
+                            <option value="SP2" <?php echo ($editData['sanksi'] == 'SP2') ? 'selected' : ''; ?>>SP2</option>
+                            <option value="SP3" <?php echo ($editData['sanksi'] == 'SP3') ? 'selected' : ''; ?>>SP3</option>
+                            <option value="Teguran Lisan" <?php echo ($editData['sanksi'] == 'Teguran Lisan') ? 'selected' : ''; ?>>Teguran Lisan</option>
+                        </select>
+                    </td>
                 </tr>
             </table>
             <div class="form-group text-center" style="margin-top: 10px;">

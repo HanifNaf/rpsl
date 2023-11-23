@@ -46,7 +46,7 @@ if (isset($_GET['ro_id'])) {
 
         <div class="row">
             <div class="col-md-6 col-sm-12 col">
-                <h2 style="display: flex; float: left;">EDIT DATA RO</h2>
+                <h2 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL RO</h2>
             </div>
         </div>
 
