@@ -21,18 +21,28 @@ $query_sungai = "SELECT sungai_id, tanggal, koagulan, flokulan, soda_ash,
                 FROM sungai
                 ORDER BY tanggal DESC;";
 
+$query_ro = "SELECT ro_id, tanggal, anti_scalant, alkalinity_booster, asam_s4241, asam_hcl, basa_s4243, 
+                basa_caustik, cartridge_40, cartridge_30, cost_anti_scalant, cost_alkalinity_booster, 
+                cost_asam_s4241, cost_asam_hcl, cost_basa_s4243, cost_basa_caustik, cost_cartridge_40, cost_cartridge_30, m3_air
+                FROM ro
+                ORDER BY tanggal DESC;";                
+
 //Prepare Statements
 $prep_boiler = $koneksi_wtp -> prepare($query_boiler);
 $prep_ct = $koneksi_wtp -> prepare($query_ct);
 $prep_sungai = $koneksi_wtp -> prepare($query_sungai);
+$prep_ro = $koneksi_wtp -> prepare($query_ro);
 
 
 try{
         //Connection
         $koneksi_wtp -> beginTransaction();
+
         $prep_boiler -> execute();
         $prep_ct -> execute();
         $prep_sungai -> execute();
+        $prep_ro -> execute();
+
         $koneksi_wtp -> commit();
 
 }catch(PDOException $e){
@@ -49,12 +59,15 @@ try{
         
         $sungai_arr = $prep_sungai -> fetchAll(PDO::FETCH_ASSOC);
         $sungai_row = $koneksi_wtp -> query('select count(*) from sungai') -> fetchColumn();
+
+        $ro_arr = $prep_ro -> fetchAll(PDO::FETCH_ASSOC);
+        $ro_row = $koneksi_wtp -> query('select count(*) from ro') -> fetchColumn();
         
         ////Check Array Hasil
-        //if (!$sungai_arr){
+        //if (!$ro_arr){
         //        echo "error";
         //}else{
-        //        print_r($sungai_arr);
+        //        print_r($ro_arr);
         //}
 }
 ?>
