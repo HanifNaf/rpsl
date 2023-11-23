@@ -24,7 +24,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
         <div class="row">
             <!--Nama Divisi-->
             <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">PEMAKAIAN CHEMICAL COOLING TOWER</h2>
+            <h2 style="display: flex; float: left;">PEMAKAIAN CHEMICAL SUNGAI</h2>
             </div> 
             <!--Input Jumlah Kolom-->
             <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
@@ -50,13 +50,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         </tr>
                         <tr>
                             <!-- Tanggal -->
-                            <td class="custom-black-bg" width="30%">  Mulai  </td>
+                            <td class="custom-black-bg" width="30%">  Tanggal  </td>
                             <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
                             <!-- M3 Air -->
                             <td class="custom-black-bg" width="30%">  M<sup>3</sup>  </td>
-                            <td><input type="number" name="m3-air-<?=$i?>" class="form-control" width=20%> </td>
+                            <td><input type="number" step="any" name="m3-air-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
 
                         <tr>
@@ -65,30 +65,25 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         </tr>
                         <th>Pemakaian Chemical</th>
                         <tr>
-                            <!-- Corrotion -->
-                            <td class="custom-black-bg">Corrotion Inhibitor<br>(S-3006)</td>
-                            <td> <input type="number" name="corrotion-<?=$i?>" class="form-control" width=20%> </td>
+                            <!-- Koagulan -->
+                            <td class="custom-black-bg">Koagulan<br>(S-1009)</td>
+                            <td> <input type="number" step="any" name="koagulan-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
-                            <!-- Dispersant -->
-                            <td class="custom-black-bg">Cooling Water Dispersant<br>(S-3104)</td>
-                            <td> <input type="number" name="dispersant-<?=$i?>" class="form-control" width=20%> </td>
+                            <!-- Soda  -->
+                            <td class="custom-black-bg">Soda<br>(Ash)</td>
+                            <td> <input type="number" step="any" name="soda-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
-                            <!-- Oxy -->
-                            <td class="custom-black-bg">OXY HG<br>(S-1450)</td>
-                            <td> <input type="number" name="oxy-<?=$i?>" class="form-control" width=20%> </td>
+                            <!-- Flokulan -->
+                            <td class="custom-black-bg">Flokulan<br>(S-1101)</td>
+                            <td> <input type="number" step="any" name="flokulan-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>     
-                        <tr>
-                            <!-- Sulfur -->
-                            <td class="custom-black-bg">Sulfuric Acid<br>(H2SO4)</td>
-                            <td> <input type="number" name="sulfur-<?=$i?>" class="form-control" width=20%> </td>
-                        </tr>   
 
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="cooling_tower"></a></i> TAMBAH DATA</button>
+                <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="sungai"></a></i> TAMBAH DATA</button>
                 </div>
             </form>
         </div> 
@@ -105,26 +100,23 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $m3_air = emptyToNull($_REQUEST['m3-air-'.$i]);
 
             //Chemical
-            $corrotion = emptyToNull($_REQUEST['corrotion-'.$i]);
-            $dispersant = emptyToNull($_REQUEST['dispersant-'.$i]);
-            $oxy = emptyToNull($_REQUEST['oxy-'.$i]);
-            $sulfur = emptyToNull($_REQUEST['sulfur-'.$i]);
+            $koagulan = emptyToNull($_REQUEST['koagulan-'.$i]);
+            $soda = emptyToNull($_REQUEST['soda-'.$i]);
+            $flokulan = emptyToNull($_REQUEST['flokulan-'.$i]);
 
             //Query Insert
-            $query = "INSERT INTO cooling_tower(cooling_tower_id, tanggal, corrotion_inhibitor,
-                    cooling_water_dispersant, oxy_hg, sulphuric_acid, m3_air) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?);"; 
+            $query = "INSERT INTO sungai(sungai_id, tanggal, koagulan, soda_ash, flokulan, m3_air) 
+                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?);"; 
             
             //Prepare
             $prep = $koneksi_wtp -> prepare($query);
 
             //bind parameter
             $prep ->bindParam(1, $tanggal);
-            $prep ->bindParam(2, $corrotion);
-            $prep ->bindParam(3, $dispersant);
-            $prep ->bindParam(4, $oxy);
-            $prep ->bindParam(5, $sulfur);
-            $prep ->bindParam(6, $m3_air);
+            $prep ->bindParam(2, $koagulan);
+            $prep ->bindParam(3, $soda);
+            $prep ->bindParam(4, $flokulan);
+            $prep ->bindParam(5, $m3_air);
             
             //Insert
             try{
@@ -145,9 +137,9 @@ require_once(SITE_ROOT."/src/koneksi.php");
                         cancelButtonText: 'Tidak!',
                     }).then((result) => {
                         if (result.value) {
-                            window.location = 'cooling_tower_input';
+                            window.location = 'sungai_input';
                         } else {
-                            window.location = 'cooling_tower';
+                            window.location = 'sungai';
                         }
                     })
                 </script>
