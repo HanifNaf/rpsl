@@ -54,12 +54,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
                         </tr>
                         <tr>
-                            <!-- M3 Air -->
-                            <td class="custom-black-bg" width="30%">  M<sup>3</sup>  </td>
-                            <td><input type="number" name="m3-air-<?=$i?>" class="form-control" width=20%> </td>
-                        </tr>
-
-                        <tr>
                             <!-- Pemisah -->
                            <td> </td> 
                         </tr>
@@ -102,7 +96,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
         for($i=1; $i<=$total; $i++){
             
             $tanggal = $_REQUEST['tanggal-'.$i];
-            $m3_air = emptyToNull($_REQUEST['m3-air-'.$i]);
 
             //Chemical
             $corrotion = emptyToNull($_REQUEST['corrotion-'.$i]);
@@ -112,8 +105,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             //Query Insert
             $query = "INSERT INTO cooling_tower(cooling_tower_id, tanggal, corrotion_inhibitor,
-                    cooling_water_dispersant, oxy_hg, sulphuric_acid, m3_air) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?);"; 
+                    cooling_water_dispersant, oxy_hg, sulphuric_acid) 
+                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?);"; 
             
             //Prepare
             $prep = $koneksi_wtp -> prepare($query);
@@ -124,7 +117,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(3, $dispersant);
             $prep ->bindParam(4, $oxy);
             $prep ->bindParam(5, $sulfur);
-            $prep ->bindParam(6, $m3_air);
             
             //Insert
             try{

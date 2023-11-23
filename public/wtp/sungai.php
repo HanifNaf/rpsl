@@ -70,8 +70,9 @@ $data_json = json_encode($sungai_arr);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="sungai_edit?id=' + row.sungai_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
-                        var deleteButton = '<a href="sungai_delete?id=' + row.sungai_id + '" class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="return confirm(\'Apakah Anda yakin ingin menghapus data ini?\')">Hapus</a>';
+                        var encodedID = encodeURIComponent(row.sungai_id);
+                        var editButton = '<a href="sungai_edit.php?sungai_id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return editButton + deleteButton;
                     }
                 }
@@ -117,6 +118,24 @@ $data_json = json_encode($sungai_arr);
             window.location.href = "sungai_input";
         });
     });
+</script>
+<script>
+    function confirmDelete(sungaiID) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Data akan dihapus permanen!',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = 'sungai_delete.php?sungai_id=' + sungaiID;
+            }
+        });
+    }
 </script>
 
 </head>
