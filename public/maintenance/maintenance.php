@@ -144,14 +144,14 @@ $data_json = json_encode($maintenance_arr);
                 <th rowspan="2">Opsi</th>
             </tr>
             <tr>
-                <!-- Tanggal -->
-                <th>Before</th>
-                <th>After</th>
-
-				<!-- Sparepart -->
+                <!-- Sparepart -->
                 <th>Sparepart</th>
                 <th>Quantity</th>
 				<th>Satuan</th>
+
+                <!-- Tanggal -->
+                <th>Mulai</th>
+                <th>Selesai</th>
             </tr>
         </thead>
     </table>
