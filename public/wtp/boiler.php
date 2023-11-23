@@ -14,7 +14,7 @@ $data_json = json_encode($boiler_arr);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JADWAL MAINTENANCE</title>
+    <title>PEMAKAIAN CHEMICAL BOILER</title>
     <style>
     body {
         font-family: Arial, sans-serif;
@@ -53,11 +53,11 @@ $data_json = json_encode($boiler_arr);
 				{ data: 'm3_air' },
 				{ data: 'cost_solid_additive', 
 				render: function(data, type, row){ //kolom cost harian
-					return "Rp"+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive))
+					return "Rp."+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive))
 				} }, 
 				{ data: 'm3_air',
 				render: function(data, type, row){
-					return "Rp"+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive)/row.m3_air)
+					return "Rp."+Math.round((row.cost_alkalinity_booster+row.cost_oxygen_scavenger+row.cost_internal_treatment+row.cost_condensate_treatment+row.cost_solid_additive)/row.m3_air)
  				}}, //kolom cost/m3,
                 {
                     "data": null,
@@ -133,10 +133,10 @@ $data_json = json_encode($boiler_arr);
 			        <tr>
 			        	<!-- Pemakaian Chemical -->
 				        <th>Alkalinity Boster<br>(S–2001)</th>
-				        <th>Oxygen Scravenger<br>(S-2101)</th>
+				        <th>Oxygen Scavenger<br>(S-2101)</th>
 				        <th>Internal Treatment<br>(S-2201)</th>
 				        <th>Condensate Treatment<br>(S-2301)</th>
-				        <th>Solid Aditive<br>(S-6001)</th>
+				        <th>Solid Additive<br>(S-6001)</th>
 			       	</tr>
                 </tr>
         </thead>
