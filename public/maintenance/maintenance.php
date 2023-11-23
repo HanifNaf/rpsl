@@ -113,7 +113,7 @@ $data_json = json_encode($maintenance_arr);
         
         // Atur aksi klik untuk tombol Tambah Data
         $('#tambahButton').on('click', function() {
-            window.location.href = "operasional_maintenance_input";
+            window.location.href = "maintenance_input";
         });
     });
 </script>
@@ -143,14 +143,14 @@ $data_json = json_encode($maintenance_arr);
                 <th rowspan="2">Opsi</th>
             </tr>
             <tr>
-                <!-- Tanggal -->
-                <th>Before</th>
-                <th>After</th>
-
-				<!-- Sparepart -->
+                <!-- Sparepart -->
                 <th>Sparepart</th>
                 <th>Quantity</th>
 				<th>Satuan</th>
+
+                <!-- Tanggal -->
+                <th>Mulai</th>
+                <th>Selesai</th>
             </tr>
         </thead>
     </table>
