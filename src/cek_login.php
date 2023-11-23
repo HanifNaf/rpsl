@@ -15,17 +15,24 @@ if(isset($_REQUEST['username'], $_REQUEST['password'])){
 	try{
 		$prep->execute(array(":uname"=>$username));
 
+		//Fetch data sesuai username
 		$data = $prep->fetch(PDO::FETCH_ASSOC);
 
+		//cek jika fetch berhasil
 		if($data){
 			$stored_hash = $data['password'];
 
+			//cek jika password sesuai
 			if(password_verify($password, $stored_hash)){
+
+				//mulai session 
 				session_start();
 				$_SESSION['name'] = $data['username'];
 				$_SESSION['id'] = $data['users_id'];
 				$_SESSION['role'] = $data['role'];
 				$_SESSION['logged_in'] = true;
+
+				//mengarahkan ke index
 				header("location:../public/index.php");
 
 			} else{
