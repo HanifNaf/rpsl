@@ -118,7 +118,7 @@ ini_set('display_errors', 1);
     });
 </script>
 <script>
-    function confirmDelete(maintenanceID) {
+    function confirmDelete(hrdID) {
         Swal.fire({
             title: 'Apakah Anda yakin?',
             text: 'Data akan dihapus permanen!',
@@ -135,7 +135,6 @@ ini_set('display_errors', 1);
         });
     }
 </script>
-
 
 </head>
 
