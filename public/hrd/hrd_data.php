@@ -2,7 +2,7 @@
 require_once("../../config/config.php");
 require_once(SITE_ROOT."/src/koneksi.php");
 
-$query = "SELECT tanggal, nik, hrd.nama AS nama_hrd, bagian, shift, waktu_pelanggaran, 
+$query = "SELECT hrd_id, tanggal, nik, hrd.nama AS nama_hrd, bagian, shift, waktu_pelanggaran, 
         tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, lampiran.nama AS nama_lampiran,
         hrd.lampiran_id
         FROM hrd  

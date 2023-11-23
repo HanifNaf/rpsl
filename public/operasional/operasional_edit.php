@@ -1,219 +1,276 @@
 <?php
-require_once ("../../config/config.php");
+require_once("../../config/config.php");
 require_once("operasional_data.php");
-require_once(SITE_ROOT. "/src/header-admin.php");
-require_once(SITE_ROOT. "/src/footer-admin.php");
+require_once(SITE_ROOT . "/src/header-admin.php");
+require_once(SITE_ROOT . "/src/footer-admin.php");
+require_once(SITE_ROOT . "/src/koneksi.php");
+
+// Identify the Record to Edit
+//echo "prodid= ".$_GET['produksi_id']."\n";
+//echo "opid= ".$_GET['operasional_id']."\n";
+//echo "pemid= ".$_GET['pemakaian_id']."\n";
+//echo "bbid= ".$_GET['bahan_bakar_id']."\n";
+
+if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], $_GET['bahan_bakar_id'])){
+    $produksi = $_GET['produksi_id'];
+    $operasional = $_GET['operasional_id'];
+    $pemakaian = $_GET['pemakaian_id'];
+    $bahan_bakar = $_GET['bahan_bakar_id'];
+
+
+
+    $edit_query = "SELECT t1.produksi_id, t1.generation, t1.pm_kwh_pltbm, 
+        t2.operasional_id, t2.tanggal, t2.waktu, t2.shift, t2.supervisor, t2.keterangan, 
+        t3.pemakaian_id, t3.ekspor, t3.pemakaian_sendiri, t3.kwh_loss, 
+        t4.pemakaian_bahan_bakar_id, t4.kg_cangkang, t4.kg_palmfiber, t4.kg_woodchips, t4.kg_serbukkayu, t4.kg_sabutkelapa, t4.kg_efbpress, t4.kg_opt
+        FROM produksi_kwh t1
+        INNER JOIN operasional t2 ON t1.produksi_id=t2.produksi_id
+        INNER JOIN pemakaian_kwh t3 ON t2.pemakaian_id=t3.pemakaian_id
+        INNER JOIN pemakaian_bahan_bakar t4 ON t2.pemakaian_bahan_bakar_id=t4.pemakaian_bahan_bakar_id 
+        WHERE t1.produksi_id=? 
+        AND t2.operasional_id=?
+        AND t3.pemakaian_id=?
+        AND t4.pemakaian_bahan_bakar_id=?;";
+
+    $prepare_edit = $koneksi_operasional->prepare($edit_query);
+    $prepare_edit->bindParam(1, $produksi);
+    $prepare_edit->bindParam(2, $operasional);
+    $prepare_edit->bindParam(3, $pemakaian);
+    $prepare_edit->bindParam(4, $bahan_bakar);
+
+
+    $prepare_edit->execute();
+
+    $dataToEdit = $prepare_edit->fetch(PDO::FETCH_ASSOC);
+}else{
+    echo "Request Error";
+}
+
+
+//$idToEdit = isset($_GET['edit']) ? $_GET['edit'] : null;
+//$dataToEdit = [];
+//
+//// Fetch data for editing
+//if ($idToEdit) {
+//    $edit_query = "SELECT * FROM operasional WHERE operasional_id = $1;";
+//    $prepare_edit = $koneksi_operasional->prepare($edit_query);
+//    $prepare_edit->bindParam(1, $idToEdit);
+//    $prepare_edit->execute();
+//    $dataToEdit = $prepare_edit->fetch(PDO::FETCH_ASSOC);
+//}
+
 ?>
 
 <head>
+    <!-- Import JS Sweet Alert -->
+    <script src="../js/sweetalert2.all.min.js"></script>
 </head>
-<style>
-    .custom-black-bg {
-    background-color: #228B22;
-    color: white;
-}
 
-</style>
 <body>
-    <div class="container">
-        <!-- Import JS Sweet Alert -->
-        <script src="../js/sweetalert2.all.min.js"></script>
-
-        <!-- Buat Konfirmasi Penambahan Data -->
-        <?php if($_GET['m']=="simpan"){ ?>
-                <script type="text/javascript">
-                    Swal.fire({
-                      title: 'Tambah Data Lagi?',
-                      text: "Data Berhasil disimpan!",
-                      type: 'success',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Iya!',
-                      cancelButtonText : 'Tidak!',
-                    }).then((result) => {
-                      if (result.value) {
-                        window.location = 'operasional_input';
-                      }else{
-                        window.location = 'operasional';
-                      }
-                    })
-                </script>
-        <?php } ?>
-        <?php 
-                   $no = 1;
-                    if($row_operasional>0){
-                        foreach($operasional_arr as $array){ ?>
-
-        <div class="row">
-            <!--Nama Divisi-->
-            <div class="col-md-6 col-sm-12 col">
+    <div class="row">
+        <!-- Nama Divisi -->
+        <div class="col-md-6 col-sm-12 col">
             <h2 style="display: flex; float: left;">OPERASIONAL</h2>
-            </div> 
         </div>
-        <div class="table-responsive-sm table-responsie-md table-responsive-lg">
-            <form action="" method="post">
-                <table class="table table-hover table-bordered table-sm">
-                        <tr>
-                            <!-- Shift -->
-                            <td class="custom-black-bg">Shift</td>
-                            <td><input type="number" name="shift-<?=$i?>" style="form-control" value="<?= $array['shift']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Generasi -->
-                            <td class="custom-black-bg">Generasi</td>
-                            <td><input type="number" name="generasi-<?=$i?>" style="form-control" value="<?= $array['generation']; ?>"></td>
-                        </tr>
-                        <tr>    
-                            <!-- PM Kwh PLTBM -->
-                            <td class="custom-black-bg">PM Kwh PLTBM</td>
-                            <td><input type="number" name="pm-kwh-pltbm-<?=$i?>" style="form-control" value="<?= $array['pm_kwh_pltbm']; ?>"></td>
-                        </tr>
-                        <tr>    
-                            <!-- Ekspor -->
-                            <td class="custom-black-bg">Ekspor</td>
-                            <td><input type="number" name="ekspor-<?=$i?>" style="form-control" value="<?= $array['ekspor']; ?>"></td>
-                        </tr>
-                        <tr>    
-                            <!-- Pemakaian Sendiri -->
-                            <td class="custom-black-bg">Pemakaian Sendiri</td>
-                            <td><input type="number" name="pemakaian-sendiri-<?=$i?>" style="form-control" value="<?= $array['pemakaian_sendiri']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Kwh Loss -->
-                            <td class="custom-black-bg">Kwh Loss</td>
-                            <td><input type="number" name="kwh-loss-<?=$i?>" style="form-control" value="<?= $array['kwh_loss']; ?>"></td>
-                        </tr>
-                        <tr>    
-                            <!-- Pemakaian Cangkang -->
-                            <td class="custom-black-bg">Pemakaian Cangkang</td>
-                            <td><input type="number" name="cangkang-<?=$i?>" style="form-control" value="<?= $array['kg_cangkang']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian Palm Fiber -->
-                            <td class="custom-black-bg">Pemakaian Palm Fiber</td>
-                            <td><input type="number" name="palm-fiber-<?=$i?>" style="form-control" value="<?= $array['kg_palmfiber']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian Wood Chips -->
-                            <td class="custom-black-bg">Pemakaian Wood Chips</td>
-                            <td><input type="number" name="wood-chips-<?=$i?>" style="form-control" value="<?= $array['kg_woodchips']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian Serbuk Kayu -->
-                            <td class="custom-black-bg" width="20%">Pemakaian Serbuk Kayu</td>
-                            <td><input type="number" name="serbuk-kayu-<?=$i?>" style="form-control" value="<?= $array['kg_serbukkayu']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian Sabut Kelapa -->
-                            <td class="custom-black-bg">Pemakaian Serbuk Kelapa</td>
-                            <td><input type="number" name="sabut-kelapa-<?=$i?>" style="form-control" value="<?= $array['kg_sabutkelapa']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian EFB Press -->
-                            <td class="custom-black-bg">Pemakaian EFB Press</td>
-                            <td><input type="number" name="efb-press-<?=$i?>" style="form-control" value="<?= $array['kg_efbpress']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Pemakaian OPT -->
-                            <td class="custom-black-bg">Pemakaian OPT</td>
-                            <td><input type="number" name="opt-<?=$i?>" style="form-control" value="<?= $array['kg_opt']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- Supervisor -->
-                            <td class="custom-black-bg">Supervisor</td>
-                            <td><input type="text" name="supervisor-<?=$i?>" style="form-control" value="<?= $array['supervisor']; ?>"></td>
-                        </tr>
-                        <tr>
-                            <!-- keterangan -->
-                            <td class="custom-black-bg">Keterangan</td>
-                            <td><input type="text" name="keterangan-<?=$i?>" style="form-control" value="<?= $array['keterangan']; ?>"></td>
-                        </tr>
-                </table>
-             <?php }} ?>
-                <div class="form-group text-center" style="margin-top: 10px;">
-                <input type="hidden" name="total" value="<?= $no; ?>">
-                <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"><a href="operasional"></a></i> EDIT DATA</button>
-                </div>
-            </form>
-        </div> 
-    </div> <!--Akhir Container-->
-<!-- Menambahan ke Database -->
-<?php 
-    if(isset($_POST['update'])){
-        $total = $_POST['total'];
+    </div>
 
-        //Menyimpan input dalalm variabel (Menggunakan looping)
-        for($i=1; $i<=$total; $i++){
-            $tanggal = $_REQUEST['tanggal-'.$i];
-            $shift = $_REQUEST['shift-'.$i];
-            $generasi = $_REQUEST['generasi-'.$i];
-            $pm_kwh_pltbm = $_REQUEST['pm-kwh-pltbm-'.$i];
-            $ekspor = $_REQUEST['ekspor-'.$i];
-            $pemakaian_sendiri = $_REQUEST['pemakaian-sendiri-'.$i];
-            $kwh_loss = $_REQUEST['kwh-loss-'.$i];
-            $cangkang = $_REQUEST['cangkang-'.$i];
-            $palm_fiber = $_REQUEST['palm-fiber-'.$i];
-            $wood_chips = $_REQUEST['wood-chips-'.$i];
-            $serbuk_kayu = $_REQUEST['serbuk-kayu-'.$i];
-            $sabut_kelapa = $_REQUEST['sabut-kelapa-'.$i];
-            $efb = $_REQUEST['efb-press-'.$i];
-            $opt = $_REQUEST['opt-'.$i];
-            $supervisor = $_REQUEST['supervisor-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];
-
-            //Update ke database
-            $update_query = "WITH update_pemakaian_kwh AS (
-            UPDATE pemakaian_kwh 
-            SET ekspor=$ekspor,
-            pemakaian_sendiri=$pemakaian_sendiri,
-            kwh_loss=$kwh_loss,
-            tanggal=$1,
-            shift=$2
-            WHERE tanggal=$1 AND shift=$2
-            RETURNING pemakaian_id),
-
-            update_produksi_kwh AS (
-            UPDATE produksi_kwh
-            SET generation=$generasi,
-            pm_kwh_pltbm=$pm_kwh_pltbm,
-            tanggal=$1,
-            shift=$2
-            WHERE tanggal=$1 AND shift=$2
-            RETURNING produksi_id),
-
-            update_pemakaian_bahan_bakar AS(
-            UPDATE pemakaian_bahan_bakar 
-            SET kg_cangkang=$,
-            kg_palmfiber=$palm_fiber,
-            kg_woodchips=$wood_chips,
-            kg_serbukkayu=$serbuk_kayu,
-            kg_sabutkelapa=$sabut_kelapa,
-            kg_efbpress=$efb,
-            kg_opt=$opt,
-            tanggal=$1,
-            shift=$2
-            WHERE tanggal=$1 AND shift=$2
-            RETURNING pemakaian_bahan_bakar_id)
-
-            UPDATE operasional
-            SET keterangan=$keterangan,
-            supervisor=$supervisor,
-            tanggal=$1,
-            shift=$2
-            WHERE (produksi_id, pemakaian_id, pemakaian_bahan_bakar_id) IN (SELECT (SELECT produksi_id FROM update_produksi_kwh), (SELECT pemakaian_id FROM update_pemakaian_kwh), (SELECT pemakaian_bahan_bakar_id FROM update_pemakaian_bahan_bakar));"; 
-            $prepare_update = pg_prepare($koneksi_operasional, "my_update", $update_query);
-            $exec_update = pg_execute($koneksi_operasional, "my_update", array($tanggal, $shift));
-
-
-            $rs = pg_fetch_assoc($exec_update);
-            if (!$rs) {
-            echo "0 records";
-            }
-            ?> 
+    <div class="table-responsive-sm table-responsie-md table-responsive-lg">
+        <!-- Form for Data Editing -->
+        <form action="" method="post">
             
-            <?php
-        }
+            <table class="table table-hover table-bordered table-sm">
+                
+                    <!-- Tanggal -->
+                    <tr>
+                        <td class="custom-black-bg">Tanggal</td>
+                        <td><input type="date" value="<?= $dataToEdit['tanggal'] ?>" name="tanggal" class="form-control" width=20%></td>
+                    </tr>
+                    <!-- Shift -->
+                    <tr>
+                        <td class="custom-black-bg">Shift</td>
+                        <td><input type="number" value="<?= $dataToEdit['shift'] ?>" name="shift" class="form-control"></td>
+                    </tr>
+                    <!-- Generasi -->
+                    <tr>
+                        <td class="custom-black-bg">Generasi</td>
+                        <td><input type="text" value="<?= $dataToEdit['generation'] ?>" name="generation" class="form-control"></td>
+                    </tr>
+                    <!-- PM kWh PLTBM -->
+                    <tr>
+                        <td class="custom-black-bg">PM kWh PLTBM</td>
+                        <td><input type="number" value="<?= $dataToEdit['pm_kwh_pltbm'] ?>" name="pm_kwh_pltbm" class="form-control"></td>
+                    </tr>
+                    <!-- Ekspor -->
+                    <tr>
+                        <td class="custom-black-bg">Ekspor</td>
+                        <td><input type="number" value="<?= $dataToEdit['ekspor'] ?>" name="ekspor" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Sendiri -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Sendiri</td>
+                        <td><input type="number" value="<?= $dataToEdit['pemakaian_sendiri'] ?>" name="pemakaian_sendiri" class="form-control"></td>
+                    </tr>
+                    <!-- kWh Loss -->
+                    <tr>
+                        <td class="custom-black-bg">kWh Loss</td>
+                        <td><input type="number" value="<?= $dataToEdit['kwh_loss'] ?>" name="kwh_loss" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Cangkang (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Cangkang (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_cangkang'] ?>" name="kg_cangkang" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Palm Fiber (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Palm Fiber (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_palmfiber'] ?>" name="kg_palmfiber" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Wood Chips (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Wood Chips (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_woodchips'] ?>" name="kg_woodchips" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Serbuk Kayu (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Serbuk Kayu (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_serbukkayu'] ?>" name="kg_serbukkayu" class="form-control"></td>
+                    </tr>
+                    <!-- Pemakaian Sabut Kelapa (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian Sabut Kelapa (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_sabutkelapa'] ?>" name="kg_sabutkelapa" class="form-control"></td>
+                    </tr>
+                        <!-- Pemakaian EFB Press (kg) -->
+                    <tr>
+                        <td class="custom-black-bg">Pemakaian EFB Press (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_efbpress'] ?>" name="kg_efbpress" class="form-control"></td>
+                    </tr>
+                        <!-- Pemakaian OPT (kg) -->
+                        <tr>
+                        <td class="custom-black-bg">Pemakaian OPT (kg)</td>
+                        <td><input type="number" value="<?= $dataToEdit['kg_opt'] ?>" name="kg_opt" class="form-control"></td>
+                    </tr>
+                        <!-- Supervisor -->
+                    <tr>
+                        <td class="custom-black-bg">Supervisor</td>
+                        <td><input type="text" value="<?= $dataToEdit['supervisor'] ?>" name="supervisor" class="form-control"></td>
+                    </tr>
+                        <!-- Keterangan -->
+                    <tr>
+                        <td class="custom-black-bg">Keterangan</td>
+                        <td><input type="text" value="<?= $dataToEdit['keterangan'] ?>" name="keterangan" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <!-- Tombol Update -->
+                        <td colspan="2" class="text-center" style="margin-top: 10px;">
+                        <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> UPDATE DATA</button>
+                        <a href="operasional" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
+                        </td>
+                    </tr>
+                        
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+<?php
+if (isset($_POST['update'])) {
+    // Update data in the database
+    $update_query = "WITH 
+                      up1 AS (
+                        UPDATE produksi_kwh
+                        SET generation = ?, 
+                            pm_kwh_pltbm = ?,
+                            tanggal = ?
+                        WHERE produksi_id = ?
+                        RETURNING produksi_id
+                      ),
+                      up2 AS (
+                        UPDATE pemakaian_kwh
+                        SET ekspor = ?, 
+                            pemakaian_sendiri = ?, 
+                            kwh_loss = ?,
+                            tanggal = ?
+                        WHERE pemakaian_id = ?
+                        RETURNING pemakaian_id
+                      ),
+                      up3 AS (
+                        UPDATE pemakaian_bahan_bakar
+                        SET kg_cangkang = ?, 
+                            kg_palmfiber = ?, 
+                            kg_woodchips = ?, 
+                            kg_serbukkayu = ?, 
+                            kg_sabutkelapa = ?, 
+                            kg_efbpress = ?, 
+                            kg_opt = ?,
+                            tanggal = ?
+                        WHERE pemakaian_bahan_bakar_id = ?
+                        RETURNING pemakaian_bahan_bakar_id
+                      )
+                      UPDATE operasional
+                      SET shift = ?,
+                        keterangan = ?,
+                        supervisor = ?,
+                        tanggal = ?
+                      FROM up1, up2, up3
+                      WHERE operasional.operasional_id = ? 
+                        AND up1.produksi_id = up1.produksi_id
+                        AND up2.pemakaian_id = up2.pemakaian_id
+                        AND up3.pemakaian_bahan_bakar_id = up3.pemakaian_bahan_bakar_id;";
+    
+    $prepare_update = $koneksi_operasional->prepare($update_query);
+    
+    // Bind parameters
+    $prepare_update->bindParam(1, $_POST['generation']);
+    $prepare_update->bindParam(2, $_POST['pm_kwh_pltbm']);
+    $prepare_update->bindParam(3, $_POST['tanggal']);
+    $prepare_update->bindParam(4, $_GET['produksi_id']);
+    
+    $prepare_update->bindParam(5, $_POST['ekspor']);
+    $prepare_update->bindParam(6, $_POST['pemakaian_sendiri']);
+    $prepare_update->bindParam(7, $_POST['kwh_loss']);
+    $prepare_update->bindParam(8, $_POST['tanggal']);
+    $prepare_update->bindParam(9, $_GET['pemakaian_id']);
+
+    $prepare_update->bindParam(10, $_POST['kg_cangkang']);
+    $prepare_update->bindParam(11, $_POST['kg_palmfiber']);
+    $prepare_update->bindParam(12, $_POST['kg_woodchips']);
+    $prepare_update->bindParam(13, $_POST['kg_serbukkayu']);
+    $prepare_update->bindParam(14, $_POST['kg_sabutkelapa']);
+    $prepare_update->bindParam(15, $_POST['kg_efbpress']);
+    $prepare_update->bindParam(16, $_POST['kg_opt']);
+    $prepare_update->bindParam(17, $_POST['tanggal']);
+    $prepare_update->bindParam(18, $_GET['bahan_bakar_id']);
+
+    $prepare_update->bindParam(19, $_POST['shift']);
+    $prepare_update->bindParam(20, $_POST['keterangan']);
+    $prepare_update->bindParam(21, $_POST['supervisor']);
+    $prepare_update->bindParam(22, $_POST['tanggal']);
+    $prepare_update->bindParam(23, $_GET['operasional_id']);
+
+    try {
+        $koneksi_operasional->beginTransaction();
+        $prepare_update->execute();
+        $koneksi_operasional->commit();
+    ?>
+        <script type="text/javascript">
+            Swal.fire({
+                title: 'Update Successful',
+                text: "Data Berhasil diupdate!",
+                type: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+            }).then((result) => {
+                window.location = 'operasional';
+            });
+        </script>
+    <?php
+    } catch (PDOException $e) {
+        echo "PDO ERROR: " . $e->getMessage();
+        $koneksi_operasional->rollBack();
     }
+}
 ?>
-</body>
+
