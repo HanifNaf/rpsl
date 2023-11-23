@@ -1,4 +1,7 @@
 <?php
+//Start Session
+session_start();
+
 //Create Root Path
 define("BASE_FOLDER", "Magang NI/rpsl");
 define("SITE_ROOT", $_SERVER["DOCUMENT_ROOT"] . "/" . BASE_FOLDER);

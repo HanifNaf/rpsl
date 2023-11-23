@@ -1,5 +1,12 @@
 <?php
 require_once("../../config/config.php");
+
+// Cek role
+if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
+    print_r($_SESSION);
+    header("location: ../index.php");
+}
+
 require_once("wtp_data.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
@@ -152,7 +159,7 @@ if (isset($_GET['boiler_id'])) {
             echo "PDO ERROR: " . $e->getMessage();
             $koneksi_wtp->rollBack();
         } finally {
-            echo pg_last_error();
+            echo pg_result_error();
         }
     }
     ?>

@@ -1,5 +1,12 @@
 <?php 
 require_once ("../../config/config.php");
+
+// Cek role
+if (!in_array($_SESSION['role'], ['operasional', 'admin'])) {
+    print_r($_SESSION);
+    header("location: ../index.php");
+}
+
 require(SITE_ROOT."/src/header-admin.php");
 require(SITE_ROOT."/src/footer-admin.php");
 require (SITE_ROOT."/src/koneksi.php");
@@ -171,7 +178,7 @@ require (SITE_ROOT."/src/koneksi.php");
                 INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
                 SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), ?,?,?, LOCALTIME, ?;"; 
             
-            $prep = $koneksi_operasional -> prepare();
+            $prep = $koneksi_operasional -> prepare($insert_query);
 
             //bind parameter
             $prep ->bindParam(1, $shift);

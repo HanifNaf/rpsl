@@ -16,14 +16,9 @@
 
 <?php #script PHP untuk menampilkan data dari database
 
-  session_start(); 
   require_once("../config/config.php");
   require_once(SITE_ROOT. "/src/header-admin.php");
   require_once(SITE_ROOT. "/src/footer-admin.php");
-  
-  if($_SESSION['level']==""){
-    header("location:index.php?pesan=gagal");
-  }
 ?>
 
 <div class="container">

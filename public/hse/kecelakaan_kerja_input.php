@@ -1,5 +1,12 @@
 <?php 
 require_once("../../config/config.php");
+
+// Cek role
+if (!in_array($_SESSION['role'], ['hse', 'admin'])) {
+    print_r($_SESSION);
+    header("location: ../index.php");
+}
+
 require_once(SITE_ROOT."/src/header-admin.php");
 require_once(SITE_ROOT."/src/footer-admin.php");
 require_once(SITE_ROOT."/src/koneksi.php");
