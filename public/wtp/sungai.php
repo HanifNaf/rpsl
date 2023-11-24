@@ -3,8 +3,23 @@ require_once("../../config/config.php");
 
 // Cek role
 if (!in_array($_SESSION['role'], ['wtp', 'admin', 'manager'])) {
-    print_r($_SESSION);
-    header("location: ../index.php");
+   echo "<p style='color: white;'>Akses Dibatasi. Anda tidak memiliki izin yang cukup.</p>";
+
+    // Menambahkan skrip SweetAlert untuk notifikasi yang lebih menarik
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Dibatasi',
+                text: 'Anda tidak memiliki izin yang cukup.',
+            }).then(function() {
+                window.location.href = '../index.php';
+            });
+        </script>
+    ";
+
+    die(); // Menghentikan eksekusi skrip setelah menampilkan pesan dan notifikasi
 }
 
 require_once(SITE_ROOT."/src/header-admin.php");
