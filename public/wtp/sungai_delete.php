@@ -12,8 +12,7 @@ if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
             Swal.fire({
                 icon: 'error',
                 title: 'Akses Dibatasi',
-                text: 'Anda tidak memiliki izin yang cukup.',
-            }).then(function() {
+             }).then(function() {
                 window.location.href = '../wtp/sungai.php';
             });
         </script>

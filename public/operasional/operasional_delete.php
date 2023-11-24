@@ -12,7 +12,6 @@ if (!in_array($_SESSION['role'], ['operasional', 'admin'])) {
             Swal.fire({
                 icon: 'error',
                 title: 'Akses Dibatasi',
-                text: 'Anda tidak memiliki izin yang cukup.',
             }).then(function() {
                 window.location.href = '../operasional/operasional.php';
             });

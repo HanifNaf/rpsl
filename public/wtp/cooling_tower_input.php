@@ -12,9 +12,8 @@ if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
             Swal.fire({
                 icon: 'error',
                 title: 'Akses Dibatasi',
-                text: 'Anda tidak memiliki izin yang cukup.',
             }).then(function() {
-                window.location.href = '../index.php';
+                window.location.href = '../wtp/cooling_tower.php';
             });
         </script>
     ";
