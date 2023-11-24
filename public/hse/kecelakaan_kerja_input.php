@@ -14,7 +14,7 @@ if (!in_array($_SESSION['role'], ['hse', 'admin'])) {
                 title: 'Akses Dibatasi',
                 text: 'Anda tidak memiliki izin yang cukup.',
             }).then(function() {
-                window.location.href = '../index.php';
+                window.location.href = '../hse/kecelakaan_kerja.php';
             });
         </script>
     ";

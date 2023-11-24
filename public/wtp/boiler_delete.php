@@ -14,7 +14,7 @@ if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
                 title: 'Akses Dibatasi',
                 text: 'Anda tidak memiliki izin yang cukup.',
             }).then(function() {
-                window.location.href = '../index.php';
+                window.location.href = '../boiler/boiler.php';
             });
         </script>
     ";
