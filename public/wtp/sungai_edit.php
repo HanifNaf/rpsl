@@ -67,6 +67,7 @@ if (isset($_GET['sungai_id'])) {
                 <h4 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL SUNGAI</h4>
             </div>
         </div>
+        <br>
 
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">

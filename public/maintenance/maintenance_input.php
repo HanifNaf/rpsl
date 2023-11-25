@@ -57,6 +57,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 </form>
             </div>
         </div>
+        <br>
+
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">
@@ -66,7 +68,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <!-- Divisi -->
                             <td class="custom-black-bg">Divisi</td>
                                 <td><select name="divisi-<?= $i ?>" class="form-control">
-                                        <option value="Umum">-- Pilih Divisi --</option>
+                                        <option value="">-- Pilih Divisi --</option>
                                         <option value="Umum">Umum</option>
                                         <option value="Elektrikal">Elektrikal</option>
                                         <option value="WTP">WTP</option>

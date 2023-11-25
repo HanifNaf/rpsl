@@ -11,8 +11,8 @@ $query_boiler = "SELECT boiler_id, tanggal, alkalinity_booster, oxygen_scavenger
                 ORDER BY tanggal DESC;";
 
 $query_ct = "SELECT cooling_tower_id, tanggal, corrotion_inhibitor,
-                cooling_water_dispersant, oxy_hg, sulphuric_acid, 
-                cost_corrotion_inhibitor, cost_cooling_water_dispersant, cost_oxy_hg, cost_sulphuric_acid
+                cooling_water_dispersant, oxy_hg, sulfuric_acid, 
+                cost_corrotion_inhibitor, cost_cooling_water_dispersant, cost_oxy_hg, cost_sulfuric_acid
                 FROM cooling_tower
                 ORDER BY tanggal DESC;";
 

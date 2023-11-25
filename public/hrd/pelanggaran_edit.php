@@ -66,7 +66,7 @@ if (isset($_GET['hrd_id'])) {
     <title>EDIT DATA PELANGGARAN</title>
     <style>
         .custom-black-bg {
-            background-color: #2ca143;
+            background-color: #228B22;
             color: white;
         }
     </style>
@@ -76,13 +76,15 @@ if (isset($_GET['hrd_id'])) {
 
 <body>
     <div class="container">
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="row">
+        <div class="row">
             <div class="col-md-6 col-sm-12 col">
                 <h4 style="display: flex; float: left;">EDIT DATA PELANGGARAN HRD</h4>
             </div>
         </div>
+        <br>
+
             <!-- Display existing data for editing -->
+        <form action="" method="post" enctype="multipart/form-data">
             <table class="table table-hover table-bordered table-sm">
                 <tr>
                     <!-- Tanggal -->

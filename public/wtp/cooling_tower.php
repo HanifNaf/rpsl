@@ -70,15 +70,15 @@ $data_json = json_encode($ct_arr);
                 { data: 'corrotion_inhibitor' },
                 { data: 'cooling_water_dispersant' },
                 { data: 'oxy_hg' },
-				{ data: 'sulphuric_acid'},
+				{ data: 'sulfuric_acid'},
 				{ data: null,
 				render: function(data, type, row){
 					var cost_corrotion_inhibitor = (row.cost_corrotion_inhibitor || 0) * row.corrotion_inhibitor;
 					var cost_cooling_water_dispersant = (row.cost_cooling_water_dispersant || 0) * row.cooling_water_dispersant ;
 					var cost_oxy_hg = (row.cost_oxy_hg || 0) * row.oxy_hg;
-					var cost_sulphuric_acid = (row.cost_sulphuric_acid || 0) * row.sulphuric_acid;
+					var cost_sulfuric_acid = (row.cost_sulfuric_acid || 0) * row.sulfuric_acid;
 
-					return "Rp."+Math.round((cost_corrotion_inhibitor+cost_cooling_water_dispersant+cost_oxy_hg+cost_sulphuric_acid))
+					return "Rp."+Math.round((cost_corrotion_inhibitor+cost_cooling_water_dispersant+cost_oxy_hg+cost_sulfuric_acid))
 				} },
                 {
                     "data": null,
@@ -111,6 +111,25 @@ $data_json = json_encode($ct_arr);
                     }
                 }
             ]
+        });
+
+        // Tambahkan tombol Edit Harga Chemical
+        var editChemicalButton = '<button id="editChemicalButton" class="btn btn-info">Edit Harga</button>';
+                $('.dt-buttons').append(editChemicalButton); // Menambahkan tombol ke div dt-buttons
+
+                // Style untuk menengahkan tombol Edit Harga Chemical
+                var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
+                $('#editChemicalButton').css({
+                    'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
+                    'margin-right': buttonMargin,
+                });
+
+        // Center-align the text in the header cells
+        $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
+        
+        // Atur aksi klik untuk tombol Edit Harga Chemical
+        $('#editChemicalButton').on('click', function() {
+            window.location.href = "cooling_tower_harga";
         });
 
         // Tambahkan tombol Tambah Data

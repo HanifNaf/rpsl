@@ -65,9 +65,10 @@ if (isset($_GET['ro_id'])) {
 
         <div class="row">
             <div class="col-md-6 col-sm-12 col">
-                <h2 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL RO</h2>
+                <h4 style="display: flex; float: left;">EDIT DATA PEMAKAIAN CHEMICAL RO</h4>
             </div>
         </div>
+        <br>
 
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">

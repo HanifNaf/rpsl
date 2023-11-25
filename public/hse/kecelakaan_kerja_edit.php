@@ -58,7 +58,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
 <head>
     <style>
         .custom-black-bg {
-            background-color: #2ca143;
+            background-color: #228B22;
             color: white;
         }
     </style>
@@ -67,11 +67,15 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
 </head>
 <body>
     <div class="container">
-        <form action="" method="post">
+        <div class="row">
             <!--Nama Divisi-->
             <div class="col-md-6 col-sm-12 col">
             <h2 style="display: flex; float: left;">EDIT DATA KECELAKAAN KERJA</h2>
-            </div> 
+            </div>
+        </div>
+        <br>
+
+        <form action="" method="post">
             <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
                 <input type="hidden" name="edit_id" value="<?= $kecelakaan_kerja_id ?>">
@@ -84,10 +88,10 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
                     <!-- Jenis Kecelakaan Kerja -->
                     <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
                     <td>
-                        <select name="jenis" class="form-control" style="width: 20%;">
-                            <option value="Ringan" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'ringan') ? 'selected' : ''; ?>>Ringan</option>
-                            <option value="Sedang" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'sedang') ? 'selected' : ''; ?>>Sedang</option>
-                            <option value="Berat" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'berat') ? 'selected' : ''; ?>>Berat</option>
+                        <select name="jenis" class="form-control" style="width: 30%;">
+                            <option value="Ringan" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'Ringan') ? 'selected' : ''; ?>>Ringan</option>
+                            <option value="Sedang" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'Sedang') ? 'selected' : ''; ?>>Sedang</option>
+                            <option value="Berat" <?php echo ($editData['jenis_kecelakaan_kerja'] == 'Berat') ? 'selected' : ''; ?>>Berat</option>
                         </select>
                     </td>
                 </tr>
@@ -110,11 +114,11 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
                     <!-- Jam Kerja Kejadian -->
                     <td class="custom-black-bg">Jam Kerja</td>
                     <td>
-                        <select name="jam" class="form-control" style="width: 20%;">
-                            <option value="Pagi" <?php echo ($editData['jam_kerja_kejadian'] == 'pagi') ? 'selected' : ''; ?>>Pagi</option>
-                            <option value="Sore" <?php echo ($editData['jam_kerja_kejadian'] == 'sore') ? 'selected' : ''; ?>>Sore</option>
-                            <option value="Malam" <?php echo ($editData['jam_kerja_kejadian'] == 'malam') ? 'selected' : ''; ?>>Malam</option>
-                            <option value="Nonshift" <?php echo ($editData['jam_kerja_kejadian'] == 'nonshift') ? 'selected' : ''; ?>>Nonshift</option>
+                        <select name="jam" class="form-control" style="width: 30%;">
+                            <option value="Pagi" <?php echo ($editData['jam_kerja_kejadian'] == 'Pagi') ? 'selected' : ''; ?>>Pagi</option>
+                            <option value="Sore" <?php echo ($editData['jam_kerja_kejadian'] == 'Sore') ? 'selected' : ''; ?>>Sore</option>
+                            <option value="Malam" <?php echo ($editData['jam_kerja_kejadian'] == 'Malam') ? 'selected' : ''; ?>>Malam</option>
+                            <option value="Non-Shift" <?php echo ($editData['jam_kerja_kejadian'] == 'Non-Shift') ? 'selected' : ''; ?>>Non-Shift</option>
                         </select>
                     </td>
                 </tr>

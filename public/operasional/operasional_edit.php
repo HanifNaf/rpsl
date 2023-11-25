@@ -83,7 +83,7 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 <head>
     <style>
         .custom-black-bg {
-            background-color: #2ca143;
+            background-color: #228B22;
             color: white;
         }
     </style>
@@ -92,14 +92,16 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 </head>
 
 <body>
-    <div class="row">
-        <!-- Nama Divisi -->
-        <div class="col-md-6 col-sm-12 col">
-            <h2 style="display: flex; float: left;">EDIT DATA OPERASIONAL</h2>
-        </div>
-    </div>
-
     <div class="container">
+        <div class="row">
+            <!-- Nama Divisi -->
+            <div class="col-md-6 col-sm-12 col">
+                <h2 style="display: flex; float: left;">EDIT DATA OPERASIONAL</h2>
+            </div>
+        </div>
+        <br>
+
+    
         <form action="" method="post" enctype="multipart/form-data">
             <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
