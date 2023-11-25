@@ -36,7 +36,7 @@ $data_json = json_encode($sungai_arr);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PEMAKAIAN CHEMICAL SUNGAI</title>
+    <title>DATA PEMAKAIAN CHEMICAL SUNGAI</title>
     <style>
     body {
         font-family: Arial, sans-serif;
@@ -120,6 +120,25 @@ $data_json = json_encode($sungai_arr);
                     }
                 }
             ]
+        });
+
+        // Tambahkan tombol Edit Harga Chemical
+        var editChemicalButton = '<button id="editChemicalButton" class="btn btn-info">Edit Harga</button>';
+                $('.dt-buttons').append(editChemicalButton); // Menambahkan tombol ke div dt-buttons
+
+                // Style untuk menengahkan tombol Edit Harga Chemical
+                var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
+                $('#editChemicalButton').css({
+                    'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
+                    'margin-right': buttonMargin,
+                });
+
+        // Center-align the text in the header cells
+        $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
+        
+        // Atur aksi klik untuk tombol Edit Harga Chemical
+        $('#editChemicalButton').on('click', function() {
+            window.location.href = "sungai_harga";
         });
 
         // Tambahkan tombol Tambah Data

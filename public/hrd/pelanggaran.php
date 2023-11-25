@@ -163,7 +163,7 @@ ini_set('display_errors', 1);
 </head>
 
 <body class="container-fluid">
-    <center><h3>DATA PELANGGARAN</h3></center>
+    <center><h3>DATA PELANGGARAN HRD</h3></center>
     <br>
     <!-- Menampilkan tabel -->
     <table id="myTable" class="table table-bordered">

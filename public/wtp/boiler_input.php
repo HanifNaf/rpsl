@@ -30,7 +30,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 <meta charset="UTF-8">
     <style>
         .custom-black-bg {
-        background-color: #2ca143;
+        background-color: #228B22;
         color: white;
         }
     </style>
@@ -58,6 +58,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 </form>
             </div>
         </div>
+        <br>
+
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">

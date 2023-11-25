@@ -69,7 +69,7 @@ if (isset($_GET['maintenance_id'])) {
     <title>Edit Data Maintenance</title>
     <style>
         .custom-black-bg {
-            background-color: #2ca143;
+            background-color: #228B22;
             color: white;
         }
     </style>
@@ -79,21 +79,25 @@ if (isset($_GET['maintenance_id'])) {
 
 <body>
     <div class="container">
-        <form action="" method="post" enctype="multipart/form-data">
+        <div class="row">
             <!--Nama Divisi-->
             <div class="col-md-6 col-sm-12 col">
-            <h4 style="display: flex; float: left;">EDIT DATA MAINTENANCE</h4>
-            </div> 
-            <!-- Display existing data for editing -->
+                <h4 style="display: flex; float: left;">EDIT DATA MAINTENANCE</h4>
+            </div>
+        </div> 
+        <br>
+
+        <!-- Display existing data for editing -->
+        <form action="" method="post" enctype="multipart/form-data">
             <table class="table table-hover table-bordered table-sm">
                 <tr>
                     <!-- Divisi -->
                     <td class="custom-black-bg">Divisi</td>
                     <td>
                         <select name="divisi" class="form-control" style="width: 20%;">
-                            <option value="Mekanik" <?php echo ($editData['divisi'] == 'mekanik') ? 'selected' : ''; ?>>Mekanik</option>
-                            <option value="Listrik" <?php echo ($editData['divisi'] == 'listrik') ? 'selected' : ''; ?>>Listrik</option>
-                            <option value="Wtp" <?php echo ($editData['divisi'] == 'wtp') ? 'selected' : ''; ?>>WTP</option>
+                            <option value="Mekanikal" <?php echo ($editData['divisi'] == 'Mekanikal') ? 'selected' : ''; ?>>Mekanik</option>
+                            <option value="Elektrikal" <?php echo ($editData['divisi'] == 'Elektrikal') ? 'selected' : ''; ?>>Listrik</option>
+                            <option value="WTP" <?php echo ($editData['divisi'] == 'WTP') ? 'selected' : ''; ?>>WTP</option>
                             <option value="Umum" <?php echo ($editData['divisi'] == 'umum') ? 'selected' : ''; ?>>Umum</option>
                         </select>
                     </td>

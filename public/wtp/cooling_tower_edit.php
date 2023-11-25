@@ -69,6 +69,7 @@ if (isset($_GET['cooling_tower_id'])) {
                 <h4 style="display: flex; float: left;">EDIT DATA COOLING TOWER</h4>
             </div>
         </div>
+        <br>
 
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post" id="myForm" enctype="multipart/form-data">
@@ -108,7 +109,7 @@ if (isset($_GET['cooling_tower_id'])) {
                     <tr>
                         <!-- Sulfur -->
                         <td class="custom-black-bg">Sulfuric Acid (H2SO4)</td>
-                        <td><input type="number" value="<?= $editData['sulphuric_acid'] ?>" name="sulfur" class="form-control" width=20%></td>
+                        <td><input type="number" value="<?= $editData['sulfuric_acid'] ?>" name="sulfur" class="form-control" width=20%></td>
                     </tr>
                 </table>
 
@@ -137,7 +138,7 @@ if (isset($_GET['cooling_tower_id'])) {
                              corrotion_inhibitor = :corrotion, 
                              cooling_water_dispersant = :dispersant, 
                              oxy_hg = :oxy, 
-                             sulphuric_acid = :sulfur
+                             sulfuric_acid = :sulfur
                          WHERE cooling_tower_id = :cooling_tower_id";
 
         $prepare_update = $koneksi_wtp->prepare($update_query);

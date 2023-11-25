@@ -29,7 +29,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 </head>
 <style>
 	.custom-black-bg {
-    background-color: #2ca143;
+    background-color: #228B22;
     color: white;
 }
 
@@ -44,6 +44,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 		    <div class="col-md-6 col-sm-12 col">
 		    <h2 style="display: flex; float: left;">INPUT DATA KECELAKAAN KERJA</h2>
             </div> 
+
             <!--Input Jumlah Kolom-->
 		    <div class="col-md-6 col-sm-12 col" style="margin-left: auto; max-width:250px;">
                 <form action="" method="post">
@@ -56,6 +57,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
 			    </form>
 		    </div>
         </div>
+        <br>
+
         <div class="table-responsive-sm table-responsie-md table-responsive-lg">
             <form action="" method="post">
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">
