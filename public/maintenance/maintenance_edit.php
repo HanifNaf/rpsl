@@ -68,7 +68,7 @@ if (isset($_GET['maintenance_id'])) {
     <title>Edit Data Maintenance</title>
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -173,6 +173,7 @@ if (isset($_GET['maintenance_id'])) {
                 <button type="submit" name="update" class="btn btn-primary">
                     <i class="fas fa-save"></i> UPDATE DATA
                 </button>
+                <a href="maintenance" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
             </div>
         </form>
     </div>

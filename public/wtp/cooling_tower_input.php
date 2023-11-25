@@ -29,7 +29,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 <meta charset="UTF-8">
     <style>
         .custom-black-bg {
-        background-color: #228B22;
+        background-color: #2ca143;
         color: white;
         }
     </style>
@@ -65,11 +65,6 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
                         <tr>
-                            <!-- Nomor -->
-                            <td class="custom-black-bg">No</td>
-                            <td> <?= $i ?> </td>
-                        </tr>
-                        <tr>
                             <!-- Tanggal -->
                             <td class="custom-black-bg" width="30%">  Mulai  </td>
                             <td><input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
@@ -104,6 +99,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
                 <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="cooling_tower"></a></i> TAMBAH DATA</button>
+                <a href="cooling_tower" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
                 </div>
             </form>
         </div> 

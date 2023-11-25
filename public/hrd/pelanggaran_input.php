@@ -27,7 +27,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 <head>
 <style>
 	.custom-black-bg {
-    background-color: #228B22;
+    background-color: #2ca143;
     color: white;
     }
 </style>
@@ -89,7 +89,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <td class="custom-black-bg">Shift</td>
                             <td>
                                 <select name="shift-<?=$i?>" class="form-control" style="width: 20%;">
-                                    <option value="-">--Pilih Divisi--</option>
+                                    <option value="-">-- Pilih Shift --</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -130,8 +130,8 @@ require_once(SITE_ROOT."/src/koneksi.php");
                             <!-- Sanksi -->
                             <td class="custom-black-bg">Sanksi</td>
                             <td>
-                                <select name="sanksi-<?=$i?>" class="form-control" style="width: 20%;">
-                                    <option value="-">--Pilih Sanksi--</option>
+                                <select name="sanksi-<?=$i?>" class="form-control" style="width: 23%;">
+                                    <option value="-">-- Pilih Sanksi --</option>
                                     <option value="SP1">SP1</option>
                                     <option value="SP2">SP2</option>
                                     <option value="SP3">SP3</option>
@@ -148,6 +148,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
                 <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="pelanggaran"></a></i> TAMBAH DATA</button>
+                <a href="pelanggaran" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
             	</div>
             </form>
         </div> 

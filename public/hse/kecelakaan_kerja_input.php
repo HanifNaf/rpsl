@@ -29,7 +29,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 </head>
 <style>
 	.custom-black-bg {
-    background-color: #228B22;
+    background-color: #2ca143;
     color: white;
 }
 
@@ -130,6 +130,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
                 <button type="submit" name="add" class="btn btn-primary"><i class="fas fa-save"><a href="kecelakaan_kerja"></a></i> TAMBAH DATA</button>
+                <a href="kecelakaan_kerja" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
             	</div>
             </form>
         </div> 

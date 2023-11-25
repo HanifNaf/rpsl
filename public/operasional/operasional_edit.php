@@ -83,7 +83,7 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 <head>
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -186,16 +186,12 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
                     <tr>
                         <td class="custom-black-bg">Keterangan</td>
                         <td><input type="text" value="<?= $dataToEdit['keterangan'] ?>" name="keterangan" class="form-control"></td>
-                    </tr>
-                    <tr>
-                        <!-- Tombol Update -->
-                        <td colspan="2" class="text-center" style="margin-top: 10px;">
-                        <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> UPDATE DATA</button>
-                        <a href="operasional" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
-                        </td>
-                    </tr>
-                        
+                    </tr>    
                 </table>
+                <div class="form-group text-center" style="margin-top: 10px;">
+                    <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> UPDATE DATA</button>
+                    <a href="operasional" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
+                </div>
             </form>
         </div>
     </div>

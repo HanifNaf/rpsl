@@ -103,16 +103,16 @@
       <form class="form-inline my-2 my-lg-0">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <a id="log" href="user_data" data-toggle="tooltip" data-placement="bottom" title="Data Pengguna" class="nav-item nav-link">
+            <a id="log" href="<?= SITE_URL;?> /admin/user_data" data-toggle="tooltip" data-placement="bottom" title="Data Pengguna" class="nav-item nav-link">
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#FFFFFF" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
               </svg>
             </a>
           </li>
           <li class="nav-item"> <!--Bikin laman logout yang sesuai-->
-            <a href="<?= SITE_URL;?> /src/logout.php" id="log" data-toggle="tooltip" data-placement="bottom" title="Keluar" class="nav-item nav-link">
-              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                <path fill="#FFFFFF" d="M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20.5,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V9.67L19,7.67V5H5V19H19V16.33L21,14.33V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19Z" />
+            <a href="<?= SITE_URL;?> /src/logout.php" id="log" data-toggle="tooltip" data-placement="bottom" title="Logout" class="nav-item nav-link">
+              <svg style="width:24px;height:24px" viewBox="0 0 40 40">
+                <path fill="#FFFFFF"  d="M8.998,32.998h-2.5c-3.032,0-5.5-2.467-5.5-5.5V6.502c0-3.033,2.468-5.5,5.5-5.5h2.5   c0.828,0,1.5,0.671,1.5,1.5c0,0.829-0.672,1.5-1.5,1.5h-2.5c-1.379,0-2.5,1.122-2.5,2.5v20.996c0,1.379,1.121,2.5,2.5,2.5h2.5   c0.828,0,1.5,0.671,1.5,1.5C10.498,32.327,9.826,32.998,8.998,32.998z"/><path fill="#FFFFFF" d="M32.56,18.061l-10.5,10.5C21.77,28.851,21.39,29,21,29c-0.19,0-0.39-0.04-0.58-0.11   c-0.56-0.24-0.92-0.78-0.92-1.39V23H8c-0.83,0-1.5-0.67-1.5-1.5v-9c0-0.83,0.67-1.5,1.5-1.5h11.5V6.5c0-0.61,0.36-1.15,0.92-1.39   c0.56-0.23,1.21-0.1,1.64,0.33l10.5,10.5C33.149,16.531,33.149,17.48,32.56,18.061z" />
               </svg>
             </a>
           </li>

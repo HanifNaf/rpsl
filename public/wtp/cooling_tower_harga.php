@@ -56,7 +56,7 @@
     <meta charset="UTF-8">
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -98,6 +98,7 @@
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
                     <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> Update Data</button>
+                    <a href="cooling_tower" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
                 </div>
             </form>
         </div>

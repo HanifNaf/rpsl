@@ -66,7 +66,7 @@ if (isset($_GET['hrd_id'])) {
     <title>EDIT DATA PELANGGARAN</title>
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -152,10 +152,9 @@ if (isset($_GET['hrd_id'])) {
                 </tr>
             </table>
             <div class="form-group text-center" style="margin-top: 10px;">
-                <button type="submit" name="update" class="btn btn-primary">
-                    <i class="fas fa-save"></i> UPDATE DATA
-                </button>
-            </div>
+                    <button type="submit" name="update" class="btn btn-primary"><i class="fas fa-save"></i> UPDATE DATA</button>
+                    <a href="pelanggaran" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
+                </div>
         </form>
     </div>
 

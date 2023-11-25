@@ -51,7 +51,7 @@ if (isset($_GET['sungai_id'])) {
     <meta charset="UTF-8">
     <style>
         .custom-black-bg {
-            background-color: #228B22;
+            background-color: #2ca143;
             color: white;
         }
     </style>
@@ -75,11 +75,6 @@ if (isset($_GET['sungai_id'])) {
                 <input type="hidden" name="sungai_id" value="<?= $editData['sungai_id'] ?>">
 
                 <table class="table table-hover table-bordered table-sm">
-                    <tr>
-                        <!-- Nomor -->
-                        <td class="custom-black-bg">No</td>
-                        <td><?= $editData['nomor'] ?></td>
-                    </tr>
                     <tr>
                         <!-- Tanggal -->
                         <td class="custom-black-bg">Tanggal</td>
@@ -115,6 +110,7 @@ if (isset($_GET['sungai_id'])) {
                     <button type="submit" name="update" class="btn btn-primary">
                         <i class="fas fa-save"></i> UPDATE DATA
                     </button>
+                    <a href="sungai" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> CANCEL</a>
                 </div>
             </form>
         </div>
