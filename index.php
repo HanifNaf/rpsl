@@ -1,6 +1,13 @@
+<?php
+require_once("config/config.php");
+require_once(SITE_ROOT."/src/koneksi.php");
+error_reporting(0);
+?>
+
+
 <style>
   body {
-  background: url("<?= SITE_URL?>/public/assets/img/1.jpeg")
+  background: url("public/assets/img/backgrounnd2.png")
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -13,12 +20,6 @@
   filter: invert(1);
 	}
 </style>
-
-<?php
-require_once("config/config.php");
-require_once(SITE_ROOT."/src/koneksi.php");
-error_reporting(0);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
