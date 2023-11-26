@@ -42,13 +42,21 @@ ini_set('display_errors', 1);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OPERASIONAL</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .btn-custom {
-        width: 60px; /* Adjust the width as needed */
-        /* Add any other styles as needed */
-    }
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-container .btn {
+    margin-right: 5px; /* Adjust the margin to add space between buttons */
+  }
+
+  .btn-container .btn-danger,
+  .btn-container .btn-success {
+    font-size: 12px; /* Adjust the font size as needed */
+    width: 60px;
+  }
 </style>
 
     <!-- Inisialisasi variabel JSON -->
@@ -88,9 +96,9 @@ ini_set('display_errors', 1);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="operasional_edit.php?operasional_id=' + row.operasional_id + '&produksi_id=' + row.produksi_id + '&pemakaian_id=' + row.pemakaian_id + '&bahan_bakar_id=' + row.pemakaian_bahan_bakar_id + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="operasional_edit.php?operasional_id=' + row.operasional_id + '&produksi_id=' + row.produksi_id + '&pemakaian_id=' + row.pemakaian_id + '&bahan_bakar_id=' + row.pemakaian_bahan_bakar_id + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + row.operasional_id + '\', \'' + row.produksi_id + '\', \'' + row.pemakaian_id + '\', \'' + row.pemakaian_bahan_bakar_id + '\')">Hapus</button>';
-                        return editButton + deleteButton;
+                        return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
                 }
             ],

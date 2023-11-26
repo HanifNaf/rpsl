@@ -41,13 +41,21 @@ ini_set('display_errors', 1);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HRD</title>
     <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .btn-custom {
-        width: 60px; /* Adjust the width as needed */
-        /* Add any other styles as needed */
-    }
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-container .btn {
+    margin-right: 5px; /* Adjust the margin to add space between buttons */
+  }
+
+  .btn-container .btn-danger,
+  .btn-container .btn-success {
+    font-size: 12px; /* Adjust the font size as needed */
+    width: 60px;
+  }
 </style>
 
     <!-- Inisialisasi variabel JSON -->
@@ -91,9 +99,9 @@ ini_set('display_errors', 1);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.hrd_id);
-                        var editButton = '<a href="pelanggaran_edit.php?hrd_id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="pelanggaran_edit.php?hrd_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
-                        return editButton + deleteButton;
+                        return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
                 }
             ],

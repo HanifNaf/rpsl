@@ -37,14 +37,22 @@ $data_json = json_encode($ro_arr);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEMAKAIAN CHEMICAL RO</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-    .btn-custom {
-        width: 60px; /* Adjust the width as needed */
-        /* Add any other styles as needed */
-    }
+   <style>
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn-container .btn {
+    margin-right: 5px; /* Adjust the margin to add space between buttons */
+  }
+
+  .btn-container .btn-danger,
+  .btn-container .btn-success {
+    font-size: 12px; /* Adjust the font size as needed */
+    width: 60px;
+  }
 </style>
 
     <!-- Inisialisasi variabel JSON -->
@@ -109,9 +117,9 @@ $data_json = json_encode($ro_arr);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.ro_id);
-                        var editButton = '<a href="ro_edit.php?ro_id=' + encodedID + '" class="btn btn-warning btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="ro_edit.php?ro_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
-                        return editButton + deleteButton;
+                        return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
                 }
             ],

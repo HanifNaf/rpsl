@@ -70,7 +70,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ubah"])) {
             background-color: #28a745; /* Change this to the desired shade of green */
             color: #ffffff; /* Text color for better contrast */
         }
+
+        .password-container {
+            display: flex;
+            align-items: center; /* Vertically align items in the center */
+        }
+        
+        .password-toggle {
+            cursor: pointer;
+            margin-left: 10px; /* Adjust margin as needed */
+        }
     </style>
+
+    <script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        var passwordToggle = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.classList.remove("fa-eye");
+            passwordToggle.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.classList.remove("fa-eye-slash");
+            passwordToggle.classList.add("fa-eye");
+        }
+    }
+    </script>
+
     <title>Your Page Title</title>
 </head>
 
@@ -90,7 +118,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ubah"])) {
                         </tr>
                         <tr>
                             <th>Password Baru</th>
-                            <td><input type="text" class="form-control" name="passwordbaru" value="<?php echo $userData['password']; ?>"></td>
+                            <td>
+                                <div class="password-container">
+                                    <input type="password" class="form-control" name="passwordbaru" value="<?php echo $userData['password']; ?>" id="passwordInput">
+                                    <i class="password-toggle fas fa-eye" onclick="togglePassword()"></i>
+                                </div>
+                            </td>
                         </tr>
                     </table>
                 </div>

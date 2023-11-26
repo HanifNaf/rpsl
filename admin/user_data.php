@@ -25,11 +25,38 @@ try {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom style for green table header */
-        .green-header th {
+        .table th {
             background-color: #28a745; /* Change this to the desired shade of green */
             color: #ffffff; /* Text color for better contrast */
         }
+
+       .password-container {
+    display: flex;
+    align-items: center; /* Vertically align items in the center */
+}
+
+.password-toggle {
+    cursor: pointer;
+    margin-left: 10px; /* Adjust margin as needed */
+}
     </style>
+
+    <script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        var passwordToggle = document.querySelector(".password-toggle");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.classList.remove("fa-eye");
+            passwordToggle.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            passwordToggle.classList.remove("fa-eye-slash");
+            passwordToggle.classList.add("fa-eye");
+        }
+    }
+    </script>
     <title>Your Page Title</title>
 </head>
 <body>
@@ -49,19 +76,24 @@ try {
             </div>
             <br><hr>
         </div>
-        <div class="table-responsive">
+        <div class="table-responsive table-responsive-md table-responsive-sm table-responsive-lg">
             <table class="table table-striped table-condensed">
                 <tr class="green-header">
                     <th>Username</th>
                     <td><input type="text" value="<?php echo $userData['username']; ?>" class='form-control' readonly></td>
                 </tr>
                 <tr class="green-header">
-                    <th>Role</th>
-                    <td><input type="role" value="<?php echo $userData['role']; ?>" class='form-control' readonly></td>
+                    <th>Password</th>
+                    <td>
+                        <div class="password-container">
+                        <input type="password" value="<?php echo $userData['password']; ?>" class='form-control' id='passwordInput' readonly>
+                        <i class="password-toggle fas fa-eye" onclick="togglePassword()"></i>
+                    </div>
+                    </td>
                 </tr>
                 <tr class="green-header">
-                    <th>Password</th>
-                    <td><input type="text" value="<?php echo $userData['password']; ?>" class='form-control' readonly></td>
+                    <th>Role</th>
+                    <td><input type="role" value="<?php echo $userData['role']; ?>" class='form-control' readonly></td>
                 </tr>
             </table>
         </div>
