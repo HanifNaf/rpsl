@@ -80,7 +80,7 @@ try {
             <table class="table table-striped table-condensed">
                 <tr class="green-header">
                     <th>Username</th>
-                    <td><input type="text" value="<?php echo $userData['username']; ?>" class='form-control' readonly></td>
+                    <td><?php echo $userData['username']; ?></td>
                 </tr>
                 <tr class="green-header">
                     <th>Password</th>
@@ -93,7 +93,36 @@ try {
                 </tr>
                 <tr class="green-header">
                     <th>Role</th>
-                    <td><input type="role" value="<?php echo $userData['role']; ?>" class='form-control' readonly></td>
+                    <td><?php echo $userData['role']; ?></td>
+                </tr>
+                <tr class="green-header">
+                    <th>Access Level</th>
+                    <td>
+                        <?php
+                        if ($userData['role'] == 'admin') {
+                            echo 'Bisa mengakses semua divisi termasuk untuk menambah, mengedit, dan menghapus data semua divisi';
+                        } elseif ($userData['role'] == 'manager') {
+                            echo 'Bisa mengakses semua divisi untuk melihat data tapi tidak bisa mengakses menambah, mengedit, dan menghapus data';
+                        } elseif ($userData['role'] == 'mekanikal') {
+                            echo 'Hanya bisa mengakses maintenance, baik itu untuk menambah, mengedit, dan, menghapus data maintenance';
+
+                        }  elseif ($userData['role'] == 'elektrikal') {
+                            echo 'Hanya bisa mengakses maintenance, baik itu untuk menambah, mengedit, dan, menghapus data maintenance';
+                        
+                        } elseif ($userData['role'] == 'wtp') {
+                            echo 'Hanya bisa mengakses maintenance dan wtp, baik itu untuk menambah, mengedit, dan, menghapus data';
+
+                        } elseif ($userData['role'] == 'hrd') {
+                            echo 'Hanya bisa mengakses hrd, baik itu untuk menambah, mengedit, dan, menghapus data';
+
+                        } elseif ($userData['role'] == 'hse') {
+                            echo 'Hanya bisa mengakses hse, baik itu untuk menambah, mengedit, dan, menghapus data';
+
+                        } else {
+                        echo 'Unknown access level';
+                        }
+                        ?>
+                    </td>
                 </tr>
             </table>
         </div>
