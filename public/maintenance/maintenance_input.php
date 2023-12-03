@@ -179,10 +179,10 @@ require_once(SITE_ROOT."/src/koneksi.php");
 <!-- Menambahan ke Database -->
 <?php 
     if(isset($_POST['add'])){
-        $total = $_POST['total'];
-
+    $total = $_POST['total'];
         //Menyimpan input dalam variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
+            echo $i;
             //Tanggal
             $tanggal_mulai = $_REQUEST['tanggal-mulai-'.$i];
             $tanggal_selesai = emptyToNull($_REQUEST['tanggal-selesai-'.$i]);
@@ -193,9 +193,17 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $satuan = $_REQUEST['satuan-'.$i];
 
             //Lampiran
+            if ($_FILES['lampiran-'.$i]['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['lampiran-'.$i]['tmp_name'])) {
+            // File upload was successful, process the file
             $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
             $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
             $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
+            } else {
+            // File upload failed or no file was selected, handle accordingly
+            $nama_lampiran = null;
+            $tipe_lampiran = null;
+            $isi_lampiran = null;
+        }
 
             $divisi = $_REQUEST['divisi-'.$i];
             $unit = $_REQUEST['unit-'.$i];
@@ -204,7 +212,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $penanganan = $_REQUEST['penanganan-'.$i];
             $tingkat_kerusakan = $_REQUEST['tingkat-kerusakan-'.$i];
             $status = $_REQUEST['status-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];            
+            $keterangan = $_REQUEST['keterangan-'.$i];   
 
             //Query Insert
             $query = "WITH in1 AS(INSERT INTO lampiran (lampiran_id, nama, tipe, file) VALUES (uuid_generate_v4(),?,?,?) 
@@ -238,34 +246,42 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(16, $satuan);
             
             //Insert
-            try{
-                $koneksi_maintenance -> beginTransaction();
-                $prep -> execute();
-                $koneksi_maintenance -> commit();
+            try {
+    $koneksi_maintenance->beginTransaction();
+    $prep->execute();
+    $errorInfo = $prep->errorInfo();
+if ($errorInfo[0] !== PDO::ERR_NONE) {
+    echo "SQL Error: " . $errorInfo[2];
+}
+    $koneksi_maintenance->commit();
 
-                ?>
-                <script type="text/javascript">
-                    Swal.fire({
-                        title: 'Tambah Data Lagi?',
-                        text: "Data Berhasil disimpan!",
-                        type: 'success',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Iya!',
-                        cancelButtonText: 'Tidak!',
-                    }).then((result) => {
-                        if (result.value) {
-                            window.location = 'maintenance_input';
-                        } else {
-                            window.location = 'maintenance';
-                        }
-                    })
-                </script>
-                <?php
-            } catch(PDOException $e) {
-                echo "PDO ERROR: ". $e -> getMessage();
+    ?>
+    <script type="text/javascript">
+        Swal.fire({
+            title: 'Tambah Data Lagi?',
+            text: "Data Berhasil disimpan!",
+            type: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Iya!',
+            cancelButtonText: 'Tidak!',
+        }).then((result) => {
+            if (result.value) {
+                window.location = 'maintenance_input';
+            } else {
+                window.location = 'maintenance';
             }
+        })
+    </script>
+    <?php
+} catch (PDOException $e) {
+    $koneksi_maintenance->rollBack();
+    echo "PDO ERROR: " . $e->getMessage();
+} catch (Exception $e) {
+    $koneksi_maintenance->rollBack();
+    echo "ERROR: " . $e->getMessage();
+}
         }
     }
 ?>

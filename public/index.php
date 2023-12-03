@@ -35,6 +35,7 @@
         </div>
       </a>
     </div>
+    
     <div class="col-md-6 text-right">
       <img src="<?= SITE_URL?>/public/assets/img/rpsl1.png" style="width: 109px; filter: drop-shadow(3px 4px 3px black)">
     </div>

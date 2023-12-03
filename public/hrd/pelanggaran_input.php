@@ -161,9 +161,17 @@ require_once(SITE_ROOT."/src/koneksi.php");
         //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
             //Lampiran
+            if ($_FILES['lampiran-'.$i]['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['lampiran-'.$i]['tmp_name'])) {
+            // File upload was successful, process the file
             $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
             $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
             $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
+            } else {
+            // File upload failed or no file was selected, handle accordingly
+            $nama_lampiran = null;
+            $tipe_lampiran = null;
+            $isi_lampiran = null;
+        }
 
             $tanggal = $_REQUEST['tanggal-'.$i];
             $nama = $_REQUEST['nama-'.$i];
