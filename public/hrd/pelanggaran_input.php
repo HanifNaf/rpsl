@@ -183,16 +183,19 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $tempat = EmptyToNull($_REQUEST['tempat-'.$i]);
             $potensi_bahaya = EmptyToNull($_REQUEST['potensi-bahaya-'.$i]);
             $sanksi = EmptyToNull($_REQUEST['sanksi-'.$i]);
+
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
                         
             //QUERY INSERT
-            $query = "WITH in1 AS(INSERT INTO lampiran(lampiran_id, nama, tipe, file) 
+            $query = "WITH in1 AS(INSERT INTO lampiran_hrd(lampiran_id, nama, tipe, file) 
                     VALUES(uuid_generate_v4(), ?, ?, ?) RETURNING lampiran_id AS lampiran)
-                    INSERT INTO hrd (hrd_id, lampiran_id, tanggal, nik, nama, bagian, shift, 
-                    waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi)
-                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;";
+                    INSERT INTO pelanggaran (pelanggaran_id, lampiran_id, tanggal, nik, nama, bagian, shift, 
+                    waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, tanggal_id)
+                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;";
             
             //Prepare INSERT
-            $prep = $koneksi_hrd -> prepare($query);
+            $prep = $koneksi -> prepare($query);
 
             //bind parameter
             $prep ->bindParam(1, $nama_lampiran);
@@ -209,12 +212,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(11, $bentuk_pelanggaran);
             $prep ->bindParam(12, $potensi_bahaya);
             $prep ->bindParam(13, $sanksi);
+            $prep ->bindParam(14, $tanggalid);
 
             //INSERT
             try{
-                $koneksi_hrd -> beginTransaction();
+                $koneksi -> beginTransaction();
                 $prep -> execute();
-                $koneksi_hrd -> commit();
+                $koneksi -> commit();
 
                 ?>
                 <script type="text/javascript">
@@ -238,6 +242,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <?php
             }catch(PDOException $e){
                 echo "PDO ERROR: ". $e -> getMessage();
+            
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

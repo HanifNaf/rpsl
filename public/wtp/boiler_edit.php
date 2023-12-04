@@ -32,9 +32,9 @@ if (isset($_GET['boiler_id'])) {
         internal_treatment, condensate_treatment, m3_air,
         cost_alkalinity_booster, cost_oxygen_scavenger, 
         cost_internal_treatment,cost_condensate_treatment, solid_additive, cost_solid_additive
-        FROM chemical_boiler WHERE boiler_id = ?;";
+        FROM boiler WHERE boiler_id = ?;";
 
-    $prepare_edit = $koneksi_wtp->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->bindParam(1, $boiler_id, PDO::PARAM_INT);
     $prepare_edit->execute();
 
@@ -136,12 +136,15 @@ if (isset($_GET['boiler_id'])) {
         $condensate_treatment = emptyToNull($_POST['condensate_treatment']);
         $solid_additive = emptyToNull($_POST['solid_additive']);
 
-        $query = "UPDATE chemical_boiler 
+        //handle tanggal
+        $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+        
+        $query = "UPDATE boiler 
                   SET tanggal = ?, m3_air = ?, alkalinity_booster = ?, oxygen_scavenger = ?, 
-                  internal_treatment = ?, condensate_treatment = ?, solid_additive = ?
+                  internal_treatment = ?, condensate_treatment = ?, solid_additive = ?, tanggal_id=?
                   WHERE boiler_id = ?";
 
-        $prep = $koneksi_wtp->prepare($query);
+        $prep = $koneksi->prepare($query);
 
         $prep->bindParam(1, $tanggal);
         $prep->bindParam(2, $m3_air);
@@ -150,12 +153,14 @@ if (isset($_GET['boiler_id'])) {
         $prep->bindParam(5, $internal_treatment);
         $prep->bindParam(6, $condensate_treatment);
         $prep->bindParam(7, $solid_additive);
-        $prep->bindParam(8, $boilerId);
+        $prep->bindParam(8, $tanggalid);
+        $prep->bindParam(9, $boilerId);
+        
 
         try {
-            $koneksi_wtp->beginTransaction();
+            $koneksi->beginTransaction();
             $prep->execute();
-            $koneksi_wtp->commit();
+            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -172,9 +177,13 @@ if (isset($_GET['boiler_id'])) {
                   </script>";
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
-            $koneksi_wtp->rollBack();
-        } finally {
-            echo pg_result_error();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

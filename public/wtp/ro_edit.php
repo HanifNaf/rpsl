@@ -30,7 +30,7 @@ if (isset($_GET['ro_id'])) {
 
     // Fetch the data for the specified ro_id
     $query = "SELECT * FROM ro WHERE ro_id = ?;";
-    $prepare_edit = $koneksi_wtp->prepare($query);
+    $prepare_edit = $koneksi->prepare($query);
     $prepare_edit->bindParam(1, $ro_id, PDO::PARAM_STR);
     $prepare_edit->execute();
 
@@ -155,12 +155,15 @@ if (isset($_GET['ro_id'])) {
         $cartridge_40 = emptyToNull($_POST['cart_40']);
         $cartridge_30 = emptyToNull($_POST['cart_30']);
 
+        //handle tanggal
+        $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
         // Update Query
         $updateQuery = "UPDATE ro SET tanggal=?, m3_air=?, anti_scalant=?, alkalinity_booster=?, 
-            asam_s4241=?, asam_hcl=?, basa_s4243=?, basa_caustik=?, cartridge_40=?, cartridge_30=? WHERE ro_id=?;";
+            asam_s4241=?, asam_hcl=?, basa_s4243=?, basa_caustik=?, cartridge_40=?, cartridge_30=?, tanggal_id=? WHERE ro_id=?;";
 
         // Prepare
-        $prepUpdate = $koneksi_wtp->prepare($updateQuery);
+        $prepUpdate = $koneksi->prepare($updateQuery);
 
         // Bind parameters
         $prepUpdate->bindParam(1, $tanggal);
@@ -173,13 +176,14 @@ if (isset($_GET['ro_id'])) {
         $prepUpdate->bindParam(8, $basa_caustik);
         $prepUpdate->bindParam(9, $cartridge_40);
         $prepUpdate->bindParam(10, $cartridge_30);
-        $prepUpdate->bindParam(11, $ro_id);
+        $prepUpdate->bindParam(11, $tanggalid);
+        $prepUpdate->bindParam(12, $ro_id);
 
         // Execute the update
        try {
-            $koneksi_wtp->beginTransaction();
+            $koneksi->beginTransaction();
             $prepUpdate->execute();
-            $koneksi_wtp->commit();
+            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -196,9 +200,13 @@ if (isset($_GET['ro_id'])) {
                   </script>";
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
-            $koneksi_wtp->rollBack();
-        } finally {
-            echo pg_last_error();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

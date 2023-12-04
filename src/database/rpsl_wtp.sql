@@ -67,11 +67,11 @@ CREATE TABLE public.cooling_tower (
     corrotion_inhibitor real,
     cooling_water_dispersant real,
     oxy_hg real,
-    sulphuric_acid real,
+    sulfuric_acid real,
     cost_corrotion_inhibitor real DEFAULT 37000,
     cost_cooling_water_dispersant real DEFAULT 49500,
     cost_oxy_hg real DEFAULT 44000,
-    cost_sulphuric_acid real DEFAULT 3135
+    cost_sulfuric_acid real DEFAULT 3135
 );
 
 
@@ -160,7 +160,7 @@ f8852ee3-4309-4fad-9413-97bf886d478b	2023-08-01	0.5	1	0.4	1.5	12520	24000	34500	
 -- Data for Name: cooling_tower; Type: TABLE DATA; Schema: public; Owner: rpsl
 --
 
-COPY public.cooling_tower (cooling_tower_id, tanggal, corrotion_inhibitor, cooling_water_dispersant, oxy_hg, sulphuric_acid, cost_corrotion_inhibitor, cost_cooling_water_dispersant, cost_oxy_hg, cost_sulphuric_acid) FROM stdin;
+COPY public.cooling_tower (cooling_tower_id, tanggal, corrotion_inhibitor, cooling_water_dispersant, oxy_hg, sulfuric_acid, cost_corrotion_inhibitor, cost_cooling_water_dispersant, cost_oxy_hg, cost_sulfuric_acid) FROM stdin;
 0af2f3cf-6d9f-4484-b7b4-3a3b8d69e07e	2023-08-01	5	5	5	\N	37000	49500	44000	3135
 \.
 

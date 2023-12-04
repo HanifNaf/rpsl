@@ -31,7 +31,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
 
     $edit_query = "SELECT * FROM kecelakaan_kerja WHERE kecelakaan_kerja_id = ?;";
 
-    $prepare_edit = $koneksi_hse->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->bindParam(1, $kecelakaan_kerja_id, PDO::PARAM_INT);
     $prepare_edit->execute();
 
@@ -149,27 +149,32 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
         $jam_kerja = $_POST['jam'];
         $penyebab = $_POST['penyebab'];
 
+        //handle tanggal
+        $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
         // Update data in the database
         $update_query = "UPDATE kecelakaan_kerja 
-                         SET tanggal = :tanggal, 
-                             jenis_kecelakaan_kerja = :jenis, 
-                             penanganan = :penanganan, 
-                             area_kejadian = :area, 
-                             waktu_kejadian = :waktu, 
-                             jam_kerja_kejadian = :jam_kerja, 
-                             penyebab = :penyebab
-                         WHERE kecelakaan_kerja_id = :edit_id";
+                         SET tanggal = ?, 
+                             jenis_kecelakaan_kerja = ?, 
+                             penanganan = ?, 
+                             area_kejadian = ?, 
+                             waktu_kejadian = ?, 
+                             jam_kerja_kejadian = ?, 
+                             penyebab = ?,
+                             tanggal_id = ?
+                         WHERE kecelakaan_kerja_id = ?";
         
-        $prepare_update = $koneksi_hse->prepare($update_query);
+        $prepare_update = $koneksi->prepare($update_query);
         
-        $prepare_update->bindParam(':tanggal', $tanggal);
-        $prepare_update->bindParam(':jenis', $jenis);
-        $prepare_update->bindParam(':penanganan', $penanganan);
-        $prepare_update->bindParam(':area', $area);
-        $prepare_update->bindParam(':waktu', $waktu);
-        $prepare_update->bindParam(':jam_kerja', $jam_kerja);
-        $prepare_update->bindParam(':penyebab', $penyebab);
-        $prepare_update->bindParam(':edit_id', $edit_id);
+        $prepare_update->bindParam(1, $tanggal);
+        $prepare_update->bindParam(2, $jenis);
+        $prepare_update->bindParam(3, $penanganan);
+        $prepare_update->bindParam(4, $area);
+        $prepare_update->bindParam(5, $waktu);
+        $prepare_update->bindParam(6, $jam_kerja);
+        $prepare_update->bindParam(7, $penyebab);
+        $prepare_update->bindParam(8, $tanggalid);
+        $prepare_update->bindParam(9, $edit_id);
 
         try {
             $prepare_update->execute();
@@ -189,6 +194,13 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
             <?php
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

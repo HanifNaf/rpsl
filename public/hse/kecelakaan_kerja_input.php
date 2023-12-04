@@ -149,14 +149,17 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $waktu = $_REQUEST['waktu-'.$i].':00';
             $jam_kerja = $_REQUEST['jam-'.$i];
             $penyebab = $_REQUEST['penyebab-'.$i];
+
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
                         
             //Insert ke database
             $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, 
-                            penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab) 
-                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?);";
+                            penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab, tanggal_id) 
+                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?,?);";
 
             //Prepare INSERT
-            $prep = $koneksi_hse -> prepare($insert_query);
+            $prep = $koneksi -> prepare($insert_query);
 
             //bind parameter
             $prep ->bindParam(1, $tanggal);
@@ -166,12 +169,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(5, $waktu);
             $prep ->bindParam(6, $jam_kerja);
             $prep ->bindParam(7, $penyebab);
+            $prep ->bindParam(8, $tanggalid);
 
             //INSERT
             try{
-                $koneksi_hse -> beginTransaction();
+                $koneksi -> beginTransaction();
                 $prep -> execute();
-                $koneksi_hse -> commit();
+                $koneksi -> commit();
 
                 ?>
                 <script type="text/javascript">
@@ -195,6 +199,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <?php
             }catch(PDOException $e){
                 echo "PDO ERROR: ". $e -> getMessage();
+            
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

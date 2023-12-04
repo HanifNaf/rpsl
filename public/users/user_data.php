@@ -1,12 +1,12 @@
 <?php
-require_once("../config/config.php");
+require_once("../../config/config.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 
 // Retrieve user data based on the session information
 $userId = $_SESSION['id'];
 $query = "SELECT users_id, username, role, password FROM users WHERE users_id = :userId;";
-$prep = $koneksi_users->prepare($query);
+$prep = $koneksi->prepare($query);
 
 try {
     $prep->execute(array(":userId" => $userId));
@@ -57,7 +57,6 @@ try {
         }
     }
     </script>
-    <title>Your Page Title</title>
 </head>
 <body>
 
