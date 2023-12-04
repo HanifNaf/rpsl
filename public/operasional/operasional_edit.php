@@ -115,9 +115,9 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
                         <td class="custom-black-bg">Shift</td>
                         <td>
                             <select name="shift" class="form-control">
-                                <option value="1" <?php echo ($editData['shift'] == 1) ? 'selected' : ''; ?>>1</option>
-                                <option value="2" <?php echo ($editData['shift'] == 2) ? 'selected' : ''; ?>>2</option>
-                                <option value="3" <?php echo ($editData['shift'] == 3) ? 'selected' : ''; ?>>3</option>
+                                <option value="1" <?php echo ($dataToEdit['shift'] == 1) ? 'selected' : ''; ?>>1</option>
+                                <option value="2" <?php echo ($dataToEdit['shift'] == 2) ? 'selected' : ''; ?>>2</option>
+                                <option value="3" <?php echo ($dataToEdit['shift'] == 3) ? 'selected' : ''; ?>>3</option>
                             </select>
                         </td>
                     </tr>
