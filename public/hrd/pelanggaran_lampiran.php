@@ -25,20 +25,28 @@ if(isset($_GET['id'])){
     $id = $_GET['id'];
 
     //Query Select
-    $query = "SELECT lampiran_id, nama, tipe, file FROM lampiran WHERE lampiran_id=:id";
+    $query = "SELECT lampiran_id, nama, tipe, file 
+            FROM lampiran_hrd WHERE lampiran_id=:id";
     
     //Prepare 
-    $prep = $koneksi_hrd -> prepare($query);
+    $prep = $koneksi -> prepare($query);
     $prep->bindParam(":id", $id);
 
     try{
         //Select lampiran
-        $koneksi_hrd -> beginTransaction();
+        $koneksi -> beginTransaction();
         $prep -> execute();
-        $koneksi_hrd -> commit();
+        $koneksi -> commit();
 
     }catch(PDOException $e){
         echo "PDO ERROR: ". $e -> getMessage();
+            
+        echo "PDO ERROR: ". $e -> getMessage();
+            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+            echo "Code: " . $errorInfo[1] . "<br>";
+            echo "Message: " . $errorInfo[2] . "<br>";
+
+            $koneksi -> rollBack();
     }finally{
         //Fetch Lampiran
         $lampiran = $prep -> fetch(PDO::FETCH_ASSOC);

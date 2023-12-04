@@ -1,12 +1,12 @@
 <?php
-require_once("../config/config.php");
+require_once("../../config/config.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 require_once(SITE_ROOT."/src/header-admin.php");
 
 // Retrieve user data based on the session information
 $userId = $_SESSION['id'];
 $query = "SELECT users_id, username, password FROM users WHERE users_id = :userId;";
-$prep = $koneksi_users->prepare($query);
+$prep = $koneksi->prepare($query);
 
 try {
     $prep->execute(array(":userId" => $userId));
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ubah"])) {
     
     $updateQuery .= " WHERE users_id = :userId;";
     
-    $updatePrep = $koneksi_users->prepare($updateQuery);
+    $updatePrep = $koneksi->prepare($updateQuery);
 
     try {
         $updatePrep->bindParam(":username", $username, PDO::PARAM_STR);
@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ubah"])) {
                             <th>Password Baru</th>
                             <td>
                                 <div class="password-container">
-                                    <input type="password" class="form-control" name="passwordbaru" value="<?php echo $userData['password']; ?>" id="passwordInput">
+                                    <input type="password" class="form-control" name="passwordbaru" placeholder="Masukkan Password Baru Anda" id="passwordInput">
                                     <i class="password-toggle fas fa-eye" onclick="togglePassword()"></i>
                                 </div>
                             </td>

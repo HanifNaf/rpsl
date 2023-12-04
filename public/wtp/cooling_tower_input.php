@@ -120,13 +120,16 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $oxy = emptyToNull($_REQUEST['oxy-'.$i]);
             $sulfur = emptyToNull($_REQUEST['sulfur-'.$i]);
 
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
             //Query Insert
             $query = "INSERT INTO cooling_tower(cooling_tower_id, tanggal, corrotion_inhibitor,
-                    cooling_water_dispersant, oxy_hg, sulfuric_acid) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?);"; 
+                    cooling_water_dispersant, oxy_hg, sulfuric_acid, tanggal_id) 
+                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?);"; 
             
             //Prepare
-            $prep = $koneksi_wtp -> prepare($query);
+            $prep = $koneksi -> prepare($query);
 
             //bind parameter
             $prep ->bindParam(1, $tanggal);
@@ -134,12 +137,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(3, $dispersant);
             $prep ->bindParam(4, $oxy);
             $prep ->bindParam(5, $sulfur);
+            $prep ->bindParam(6, $tanggalid);
             
             //Insert
             try{
-                $koneksi_wtp -> beginTransaction();
+                $koneksi -> beginTransaction();
                 $prep -> execute();
-                $koneksi_wtp -> commit();
+                $koneksi -> commit();
 
                 ?>
                 <script type="text/javascript">
@@ -164,10 +168,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             } catch(PDOException $e) {
                 echo "PDO ERROR: ". $e -> getMessage();
-                $koneksi_wtp -> rollBack();
-
-            } finally{
-                echo pg_last_error();
+            
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

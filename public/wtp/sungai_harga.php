@@ -34,7 +34,7 @@
                 AND    pg_get_expr(d.adbin, d.adrelid) IS NOT NULL
                 AND    a.attrelid = 'public.sungai'::regclass;";
 
-    $prepare_edit = $koneksi_wtp->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->execute();
 
     $roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
@@ -126,9 +126,9 @@
                 ALTER COLUMN cost_flokulan SET DEFAULT $flokulan;";
 
         try {
-            $koneksi_wtp->beginTransaction();
-            $koneksi_wtp->exec($query);
-            $koneksi_wtp->commit();
+            $koneksi->beginTransaction();
+            $koneksi->exec($query);
+            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -145,9 +145,13 @@
                   </script>";
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
-            $koneksi_wtp->rollBack();
-        } finally {
-            echo pg_result_error();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

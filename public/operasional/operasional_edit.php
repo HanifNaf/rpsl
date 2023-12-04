@@ -39,7 +39,7 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 
 
     $edit_query = "SELECT t1.produksi_id, t1.generation, t1.pm_kwh_pltbm, 
-        t2.operasional_id, t2.tanggal, t2.waktu, t2.shift, t2.supervisor, t2.keterangan, 
+        t2.operasional_id, t2.tanggal, t2.waktu, t2.shift, t2.keterangan, 
         t3.pemakaian_id, t3.ekspor, t3.pemakaian_sendiri, t3.kwh_loss, 
         t4.pemakaian_bahan_bakar_id, t4.kg_cangkang, t4.kg_palmfiber, t4.kg_woodchips, t4.kg_serbukkayu, t4.kg_sabutkelapa, t4.kg_efbpress, t4.kg_opt
         FROM produksi_kwh t1
@@ -51,7 +51,7 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
         AND t3.pemakaian_id=?
         AND t4.pemakaian_bahan_bakar_id=?;";
 
-    $prepare_edit = $koneksi_operasional->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->bindParam(1, $produksi);
     $prepare_edit->bindParam(2, $operasional);
     $prepare_edit->bindParam(3, $pemakaian);
@@ -72,7 +72,7 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 //// Fetch data for editing
 //if ($idToEdit) {
 //    $edit_query = "SELECT * FROM operasional WHERE operasional_id = $1;";
-//    $prepare_edit = $koneksi_operasional->prepare($edit_query);
+//    $prepare_edit = $koneksi->prepare($edit_query);
 //    $prepare_edit->bindParam(1, $idToEdit);
 //    $prepare_edit->execute();
 //    $dataToEdit = $prepare_edit->fetch(PDO::FETCH_ASSOC);
@@ -198,13 +198,17 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 
 <?php
 if (isset($_POST['update'])) {
+    //handle tanggal
+    $tanggalid = insertOrSelectTanggal($_POST['tanggal'], $koneksi);
+
     // Update data in the database
     $update_query = "WITH 
                       up1 AS (
                         UPDATE produksi_kwh
                         SET generation = ?, 
                             pm_kwh_pltbm = ?,
-                            tanggal = ?
+                            tanggal = ?,
+                            tanggal_id =?
                         WHERE produksi_id = ?
                         RETURNING produksi_id
                       ),
@@ -213,7 +217,8 @@ if (isset($_POST['update'])) {
                         SET ekspor = ?, 
                             pemakaian_sendiri = ?, 
                             kwh_loss = ?,
-                            tanggal = ?
+                            tanggal = ?,
+                            tanggal_id =?
                         WHERE pemakaian_id = ?
                         RETURNING pemakaian_id
                       ),
@@ -226,53 +231,59 @@ if (isset($_POST['update'])) {
                             kg_sabutkelapa = ?, 
                             kg_efbpress = ?, 
                             kg_opt = ?,
-                            tanggal = ?
+                            tanggal = ?,
+                            tanggal_id =?
                         WHERE pemakaian_bahan_bakar_id = ?
                         RETURNING pemakaian_bahan_bakar_id
                       )
                       UPDATE operasional
                       SET shift = ?,
                         keterangan = ?,
-                        tanggal = ?
+                        tanggal = ?,
+                        tanggal_id =?
                       FROM up1, up2, up3
                       WHERE operasional.operasional_id = ? 
                         AND up1.produksi_id = up1.produksi_id
                         AND up2.pemakaian_id = up2.pemakaian_id
                         AND up3.pemakaian_bahan_bakar_id = up3.pemakaian_bahan_bakar_id;";
     
-    $prepare_update = $koneksi_operasional->prepare($update_query);
+    $prepare_update = $koneksi->prepare($update_query);
     
     // Bind parameters
     $prepare_update->bindParam(1, $_POST['generation']);
     $prepare_update->bindParam(2, $_POST['pm_kwh_pltbm']);
     $prepare_update->bindParam(3, $_POST['tanggal']);
     $prepare_update->bindParam(4, $_GET['produksi_id']);
+    $prepare_update->bindParam(5, $tanggalid);
     
-    $prepare_update->bindParam(5, $_POST['ekspor']);
-    $prepare_update->bindParam(6, $_POST['pemakaian_sendiri']);
-    $prepare_update->bindParam(7, $_POST['kwh_loss']);
-    $prepare_update->bindParam(8, $_POST['tanggal']);
-    $prepare_update->bindParam(9, $_GET['pemakaian_id']);
+    $prepare_update->bindParam(6, $_POST['ekspor']);
+    $prepare_update->bindParam(7, $_POST['pemakaian_sendiri']);
+    $prepare_update->bindParam(8, $_POST['kwh_loss']);
+    $prepare_update->bindParam(9, $_POST['tanggal']);
+    $prepare_update->bindParam(10, $_GET['pemakaian_id']);
+    $prepare_update->bindParam(11, $tanggalid);
 
-    $prepare_update->bindParam(10, $_POST['kg_cangkang']);
-    $prepare_update->bindParam(11, $_POST['kg_palmfiber']);
-    $prepare_update->bindParam(12, $_POST['kg_woodchips']);
-    $prepare_update->bindParam(13, $_POST['kg_serbukkayu']);
-    $prepare_update->bindParam(14, $_POST['kg_sabutkelapa']);
-    $prepare_update->bindParam(15, $_POST['kg_efbpress']);
-    $prepare_update->bindParam(16, $_POST['kg_opt']);
-    $prepare_update->bindParam(17, $_POST['tanggal']);
-    $prepare_update->bindParam(18, $_GET['bahan_bakar_id']);
+    $prepare_update->bindParam(12, $_POST['kg_cangkang']);
+    $prepare_update->bindParam(13, $_POST['kg_palmfiber']);
+    $prepare_update->bindParam(14, $_POST['kg_woodchips']);
+    $prepare_update->bindParam(15, $_POST['kg_serbukkayu']);
+    $prepare_update->bindParam(16, $_POST['kg_sabutkelapa']);
+    $prepare_update->bindParam(17, $_POST['kg_efbpress']);
+    $prepare_update->bindParam(18, $_POST['kg_opt']);
+    $prepare_update->bindParam(19, $_POST['tanggal']);
+    $prepare_update->bindParam(20, $_GET['bahan_bakar_id']);
+    $prepare_update->bindParam(21, $tanggalid);
 
-    $prepare_update->bindParam(19, $_POST['shift']);
-    $prepare_update->bindParam(20, $_POST['keterangan']);
-    $prepare_update->bindParam(21, $_POST['tanggal']);
-    $prepare_update->bindParam(22, $_GET['operasional_id']);
+    $prepare_update->bindParam(22, $_POST['shift']);
+    $prepare_update->bindParam(23, $_POST['keterangan']);
+    $prepare_update->bindParam(24, $_POST['tanggal']);
+    $prepare_update->bindParam(25, $tanggalid);
+    $prepare_update->bindParam(26, $_GET['operasional_id']);
 
     try {
-        $koneksi_operasional->beginTransaction();
+        $koneksi->beginTransaction();
         $prepare_update->execute();
-        $koneksi_operasional->commit();
+        $koneksi->commit();
     ?>
         <script type="text/javascript">
             Swal.fire({
@@ -289,7 +300,13 @@ if (isset($_POST['update'])) {
     <?php
     } catch (PDOException $e) {
         echo "PDO ERROR: " . $e->getMessage();
-        $koneksi_operasional->rollBack();
+            
+        echo "PDO ERROR: ". $e -> getMessage();
+            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+            echo "Code: " . $errorInfo[1] . "<br>";
+            echo "Message: " . $errorInfo[2] . "<br>";
+
+            $koneksi -> rollBack();
     }
 }
 ?>

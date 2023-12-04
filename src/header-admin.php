@@ -39,8 +39,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-	
-	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/popper.min.js"></script>
 	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/bootstrap.min.js"></script>
 	<script src="<?= SITE_URL?>/public/assets/bootstrap4/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -103,14 +101,18 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <ul class="nav nav-pills">
+
+          <!--user-->
           <li class="nav-item">
-            <a id="log" href="<?= SITE_URL;?> /admin/user_data" data-toggle="tooltip" data-placement="bottom" title="Data Pengguna" class="nav-item nav-link">
+            <a id="log" href="<?= SITE_URL;?> /public/users/user_data" data-toggle="tooltip" data-placement="bottom" title="Data Pengguna" class="nav-item nav-link">
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#FFFFFF" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
               </svg>
             </a>
           </li>
-          <li class="nav-item"> <!--Bikin laman logout yang sesuai-->
+
+          <!--logout-->
+          <li class="nav-item">
             <a href="<?= SITE_URL;?> /src/logout.php" id="log" data-toggle="tooltip" data-placement="bottom" title="Logout" class="nav-item nav-link">
               <svg style="width:24px;height:24px" viewBox="0 0 24 24">
                 <path fill="#FFFFFF" d="M14.08,15.59L16.67,13H7V11H16.67L14.08,8.41L15.5,7L20.5,12L15.5,17L14.08,15.59M19,3A2,2 0 0,1 21,5V9.67L19,7.67V5H5V19H19V16.33L21,14.33V19A2,2 0 0,1 19,21H5C3.89,21 3,20.1 3,19V5C3,3.89 3.89,3 5,3H19Z" />

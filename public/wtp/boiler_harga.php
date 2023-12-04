@@ -32,9 +32,9 @@
                 WHERE  NOT a.attisdropped           
                 AND    a.attnum   > 0               
                 AND    pg_get_expr(d.adbin, d.adrelid) IS NOT NULL
-                AND    a.attrelid = 'public.chemical_boiler'::regclass;";
+                AND    a.attrelid = 'public.boiler'::regclass;";
 
-    $prepare_edit = $koneksi_wtp->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->execute();
 
     $boilerData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
@@ -130,7 +130,7 @@
         }
 
         // Query
-        $query = "ALTER TABLE chemical_boiler 
+        $query = "ALTER TABLE boiler 
                 ALTER COLUMN cost_alkalinity_booster SET DEFAULT $alkalinity_booster,
                 ALTER COLUMN cost_oxygen_scavenger SET DEFAULT $oxygen_scavenger,
                 ALTER COLUMN cost_internal_treatment SET DEFAULT $internal_treatment,
@@ -138,9 +138,9 @@
                 ALTER COLUMN cost_solid_additive SET DEFAULT $solid_additive;";
 
         try {
-            $koneksi_wtp->beginTransaction();
-            $koneksi_wtp->exec($query);
-            $koneksi_wtp->commit();
+            $koneksi->beginTransaction();
+            $koneksi->exec($query);
+            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -157,9 +157,13 @@
                   </script>";
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
-            $koneksi_wtp->rollBack();
-        } finally {
-            echo pg_result_error();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

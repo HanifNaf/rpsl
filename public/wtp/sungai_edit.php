@@ -29,7 +29,7 @@ if (isset($_GET['sungai_id'])) {
 
     // Fetch the data for the specified sungai_id
     $query = "SELECT * FROM sungai WHERE sungai_id = ?;";
-    $prepare_edit = $koneksi_wtp->prepare($query);
+    $prepare_edit = $koneksi->prepare($query);
     $prepare_edit->bindParam(1, $sungai_id, PDO::PARAM_STR);
     $prepare_edit->execute();
 
@@ -126,23 +126,28 @@ if (isset($_GET['sungai_id'])) {
         $soda = emptyToNull($_POST['soda']);
         $flokulan = emptyToNull($_POST['flokulan']);
 
+        //handle tanggal
+        $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
         // Update data in the database
         $update_query = "UPDATE sungai 
-                         SET tanggal = :tanggal, 
-                             m3_air = :m3_air, 
-                             koagulan = :koagulan, 
-                             soda_ash = :soda, 
-                             flokulan = :flokulan
-                         WHERE sungai_id = :sungai_id";
+                         SET tanggal = ?, 
+                             m3_air = ?, 
+                             koagulan = ?, 
+                             soda_ash = ?, 
+                             flokulan = ?,
+                             tanggal_id = ?
+                         WHERE sungai_id = ?";
 
-        $prepare_update = $koneksi_wtp->prepare($update_query);
+        $prepare_update = $koneksi->prepare($update_query);
 
-        $prepare_update->bindParam(':tanggal', $tanggal);
-        $prepare_update->bindParam(':m3_air', $m3_air);
-        $prepare_update->bindParam(':koagulan', $koagulan);
-        $prepare_update->bindParam(':soda', $soda);
-        $prepare_update->bindParam(':flokulan', $flokulan);
-        $prepare_update->bindParam(':sungai_id', $sungai_id);
+        $prepare_update->bindParam(1, $tanggal);
+        $prepare_update->bindParam(2, $m3_air);
+        $prepare_update->bindParam(3, $koagulan);
+        $prepare_update->bindParam(4, $soda);
+        $prepare_update->bindParam(5, $flokulan);
+        $prepare_update->bindParam(6, $tanggalid);
+        $prepare_update->bindParam(7, $sungai_id);
 
         try {
             $prepare_update->execute();
@@ -162,6 +167,13 @@ if (isset($_GET['sungai_id'])) {
             <?php
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

@@ -30,7 +30,7 @@ if (isset($_GET['cooling_tower_id'])) {
 
     // Fetch the data for the specified cooling_tower_id
     $query = "SELECT * FROM cooling_tower WHERE cooling_tower_id = ?;";
-    $prepare_edit = $koneksi_wtp->prepare($query);
+    $prepare_edit = $koneksi->prepare($query);
     $prepare_edit->bindParam(1, $cooling_tower_id, PDO::PARAM_STR);
     $prepare_edit->execute();
 
@@ -127,23 +127,28 @@ if (isset($_GET['cooling_tower_id'])) {
         $oxy = emptyToNull($_POST['oxy']);
         $sulfur = emptyToNull($_POST['sulfur']);
 
+        //handle tanggal
+        $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
         // Update data in the database
         $update_query = "UPDATE cooling_tower 
-                         SET tanggal = :tanggal, 
-                             corrotion_inhibitor = :corrotion, 
-                             cooling_water_dispersant = :dispersant, 
-                             oxy_hg = :oxy, 
-                             sulfuric_acid = :sulfur
-                         WHERE cooling_tower_id = :cooling_tower_id";
+                         SET tanggal = ?, 
+                             corrotion_inhibitor = ?, 
+                             cooling_water_dispersant = ?, 
+                             oxy_hg = ?, 
+                             sulfuric_acid = ?,
+                             tanggal_id = ?
+                         WHERE cooling_tower_id = ?";
 
-        $prepare_update = $koneksi_wtp->prepare($update_query);
+        $prepare_update = $koneksi->prepare($update_query);
 
-        $prepare_update->bindParam(':tanggal', $tanggal);
-        $prepare_update->bindParam(':corrotion', $corrotion);
-        $prepare_update->bindParam(':dispersant', $dispersant);
-        $prepare_update->bindParam(':oxy', $oxy);
-        $prepare_update->bindParam(':sulfur', $sulfur);
-        $prepare_update->bindParam(':cooling_tower_id', $cooling_tower_id);
+        $prepare_update->bindParam(1, $tanggal);
+        $prepare_update->bindParam(2, $corrotion);
+        $prepare_update->bindParam(3, $dispersant);
+        $prepare_update->bindParam(4, $oxy);
+        $prepare_update->bindParam(5, $sulfur);
+        $prepare_update->bindParam(6, $tanggalid);
+        $prepare_update->bindParam(7, $cooling_tower_id);
 
         try {
             $prepare_update->execute();
@@ -163,6 +168,13 @@ if (isset($_GET['cooling_tower_id'])) {
             <?php
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

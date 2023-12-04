@@ -34,7 +34,7 @@ if (isset($_GET['maintenance_id'])) {
         satuan_sparepart
         FROM maintenance WHERE maintenance_id = ?;";
 
-    $prepare_edit = $koneksi_maintenance->prepare($edit_query);
+    $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->bindParam(1, $maintenance_id, PDO::PARAM_INT);
     $prepare_edit->execute();
 
@@ -197,6 +197,9 @@ if (isset($_GET['maintenance_id'])) {
             $jumlah_sparepart = emptyToNull($_POST['jumlah_sparepart']);
             $satuan_sparepart = emptyToNull($_POST['satuan_sparepart']);
 
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal_mulai, $koneksi);
+
             // Update data in the database
             $update_query = "UPDATE maintenance 
                              SET divisi = ?, 
@@ -211,10 +214,11 @@ if (isset($_GET['maintenance_id'])) {
                                  keterangan = ?, 
                                  sparepart = ?, 
                                  jumlah_sparepart = ?, 
-                                 satuan_sparepart = ? 
+                                 satuan_sparepart = ?,
+                                 tanggal_id = ?
                              WHERE maintenance_id = ?;";
 
-            $prepare_update = $koneksi_maintenance->prepare($update_query);
+            $prepare_update = $koneksi->prepare($update_query);
             $prepare_update->bindParam(1, $divisi);
             $prepare_update->bindParam(2, $unit);
             $prepare_update->bindParam(3, $problem);
@@ -228,7 +232,8 @@ if (isset($_GET['maintenance_id'])) {
             $prepare_update->bindParam(11, $sparepart);
             $prepare_update->bindParam(12, $jumlah_sparepart);
             $prepare_update->bindParam(13, $satuan_sparepart);
-            $prepare_update->bindParam(14, $edit_id, PDO::PARAM_INT);
+            $prepare_update->bindParam(14, $tanggalid);
+            $prepare_update->bindParam(15, $edit_id, PDO::PARAM_INT);
 
             $exec_update = $prepare_update->execute();
 
@@ -252,6 +257,13 @@ if (isset($_GET['maintenance_id'])) {
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

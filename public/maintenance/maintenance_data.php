@@ -8,23 +8,23 @@ $query = "SELECT maintenance_id, maintenance.lampiran_id, divisi, unit, problem,
         tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
         satuan_sparepart, nama 
         FROM maintenance 
-        LEFT JOIN lampiran ON maintenance.lampiran_id=lampiran.lampiran_id         
+        LEFT JOIN lampiran_maintenance ON maintenance.lampiran_id=lampiran_maintenance.lampiran_id         
         ORDER BY tanggal_mulai DESC;";
 
 //Prepare Query
-$prep = $koneksi_maintenance -> prepare($query);
+$prep = $koneksi -> prepare($query);
 
 //Commit Query dan mengambil Data
 try{
-        $koneksi_maintenance -> beginTransaction();
+        $koneksi -> beginTransaction();
         $prep -> execute();
-        $koneksi_maintenance -> commit();
+        $koneksi -> commit();
 }catch(PDOException $e){
         echo "PDO Error: ". $e -> getMessage();
 }finally{
         
         $maintenance_arr = $prep -> fetchAll(PDO::FETCH_ASSOC);
-        $maintenance_row = $koneksi_maintenance -> query('select count(*) from maintenance') -> fetchColumn();
+        $maintenance_row = $koneksi -> query('select count(*) from maintenance') -> fetchColumn();
         
         //Check Array Hasil
         //if (!$maintenance_arr){
