@@ -23,14 +23,14 @@ require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Pastikan parameter maintenance_id telah diterima
-if (isset($_GET['hrd_id'])) {
-    $hrd_id = $_GET['hrd_id'];
+if (isset($_GET['pelanggaran_id'])) {
+    $pelanggaran_id = $_GET['pelanggaran_id'];
 
     // Proses penghapusan data berdasarkan ID
     try {
-        $delete_query = "DELETE FROM hrd WHERE hrd_id = ?";
-        $prepare_delete = $koneksi_hrd->prepare($delete_query);
-        $prepare_delete->bindParam(1, $hrd_id, PDO::PARAM_INT);
+        $delete_query = "DELETE FROM pelanggaran WHERE pelanggaran_id = ?";
+        $prepare_delete = $koneksi->prepare($delete_query);
+        $prepare_delete->bindParam(1, $pelanggaran_id, PDO::PARAM_INT);
 
         if ($prepare_delete->execute()) {
             // Set pesan JavaScript untuk notifikasi

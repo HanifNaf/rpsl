@@ -29,7 +29,7 @@ if (isset($_GET['maintenance_id'])) {
     // Proses penghapusan data berdasarkan ID
     try {
         $delete_query = "DELETE FROM maintenance WHERE maintenance_id = ?";
-        $prepare_delete = $koneksi_maintenance->prepare($delete_query);
+        $prepare_delete = $koneksi->prepare($delete_query);
         $prepare_delete->bindParam(1, $maintenance_id, PDO::PARAM_INT);
 
         if ($prepare_delete->execute()) {

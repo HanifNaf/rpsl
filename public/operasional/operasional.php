@@ -125,6 +125,25 @@ ini_set('display_errors', 1);
             ]
         });
 
+         // Tambahkan tombol Edit Harga Bahan Bakar
+         var editBBButton = '<button id="editChemicalButton" class="btn btn-info">Edit Harga</button>';
+                $('.dt-buttons').append(editBBButton); // Menambahkan tombol ke div dt-buttons
+
+                // Style untuk menengahkan tombol Edit Harga Chemical
+                var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
+                $('#editChemicalButton').css({
+                    'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
+                    'margin-right': buttonMargin,
+                });
+
+        // Center-align the text in the header cells
+        $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
+        
+        // Atur aksi klik untuk tombol Edit Harga Chemical
+        $('#editChemicalButton').on('click', function() {
+            window.location.href = "operasional_harga";
+        });
+
         // Tambahkan tombol Tambah Data
         var tambahButton = '<button id="tambahButton" class="btn btn-info">Tambah Data</button>';
                 $('.dt-buttons').append(tambahButton); // Menambahkan tombol ke div dt-buttons

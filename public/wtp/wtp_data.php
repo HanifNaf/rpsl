@@ -7,7 +7,7 @@ $query_boiler = "SELECT boiler_id, tanggal, alkalinity_booster, oxygen_scavenger
                 internal_treatment, condensate_treatment, m3_air,
                 cost_alkalinity_booster, cost_oxygen_scavenger, 
                 cost_internal_treatment,cost_condensate_treatment, solid_additive, cost_solid_additive
-                FROM chemical_boiler
+                FROM boiler
                 ORDER BY tanggal DESC;";
 
 $query_ct = "SELECT cooling_tower_id, tanggal, corrotion_inhibitor,
@@ -28,22 +28,22 @@ $query_ro = "SELECT ro_id, tanggal, anti_scalant, alkalinity_booster, asam_s4241
                 ORDER BY tanggal DESC;";                
 
 //Prepare Statements
-$prep_boiler = $koneksi_wtp -> prepare($query_boiler);
-$prep_ct = $koneksi_wtp -> prepare($query_ct);
-$prep_sungai = $koneksi_wtp -> prepare($query_sungai);
-$prep_ro = $koneksi_wtp -> prepare($query_ro);
+$prep_boiler = $koneksi -> prepare($query_boiler);
+$prep_ct = $koneksi -> prepare($query_ct);
+$prep_sungai = $koneksi -> prepare($query_sungai);
+$prep_ro = $koneksi -> prepare($query_ro);
 
 
 try{
         //Connection
-        $koneksi_wtp -> beginTransaction();
+        $koneksi -> beginTransaction();
 
         $prep_boiler -> execute();
         $prep_ct -> execute();
         $prep_sungai -> execute();
         $prep_ro -> execute();
 
-        $koneksi_wtp -> commit();
+        $koneksi -> commit();
 
 }catch(PDOException $e){
         echo "PDO Error: ". $e -> getMessage();
@@ -52,16 +52,16 @@ try{
         
         //Fetch Data
         $boiler_arr = $prep_boiler -> fetchAll(PDO::FETCH_ASSOC);
-        $boiler_row = $koneksi_wtp -> query('select count(*) from chemical_boiler') -> fetchColumn();
+        $boiler_row = $koneksi -> query('select count(*) from boiler') -> fetchColumn();
 
         $ct_arr = $prep_ct -> fetchAll(PDO::FETCH_ASSOC);
-        $ct_row = $koneksi_wtp -> query('select count(*) from cooling_tower') -> fetchColumn();
+        $ct_row = $koneksi -> query('select count(*) from cooling_tower') -> fetchColumn();
         
         $sungai_arr = $prep_sungai -> fetchAll(PDO::FETCH_ASSOC);
-        $sungai_row = $koneksi_wtp -> query('select count(*) from sungai') -> fetchColumn();
+        $sungai_row = $koneksi -> query('select count(*) from sungai') -> fetchColumn();
 
         $ro_arr = $prep_ro -> fetchAll(PDO::FETCH_ASSOC);
-        $ro_row = $koneksi_wtp -> query('select count(*) from ro') -> fetchColumn();
+        $ro_row = $koneksi -> query('select count(*) from ro') -> fetchColumn();
         
         ////Check Array Hasil
         //if (!$ro_arr){

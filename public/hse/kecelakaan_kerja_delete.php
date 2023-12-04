@@ -30,7 +30,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
     // Proses penghapusan data berdasarkan ID
     try {
         $delete_query = "DELETE FROM kecelakaan_kerja WHERE kecelakaan_kerja_id = ?";
-        $prepare_delete = $koneksi_hse->prepare($delete_query);
+        $prepare_delete = $koneksi->prepare($delete_query);
         $prepare_delete->bindParam(1, $kecelakaan_kerja_id, PDO::PARAM_INT);
 
         if ($prepare_delete->execute()) {

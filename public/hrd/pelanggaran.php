@@ -98,8 +98,8 @@ ini_set('display_errors', 1);
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var encodedID = encodeURIComponent(row.hrd_id);
-                        var editButton = '<a href="pelanggaran_edit.php?hrd_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var encodedID = encodeURIComponent(row.pelanggaran_id);
+                        var editButton = '<a href="pelanggaran_edit.php?pelanggaran_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -162,7 +162,7 @@ ini_set('display_errors', 1);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'pelanggaran_delete.php?hrd_id=' + hrdID;
+                window.location.href = 'pelanggaran_delete.php?pelanggaran_id=' + hrdID;
             }
         });
     }

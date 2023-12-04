@@ -25,15 +25,15 @@ require_once(SITE_ROOT . "/src/footer-admin.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 
 // Retrieve Data for Editing
-if (isset($_GET['hrd_id'])) {
-    $hrd_id = $_GET['hrd_id'];
+if (isset($_GET['pelanggaran_id'])) {
+    $pelanggaran_id = $_GET['pelanggaran_id'];
 
-    $edit_query = "SELECT hrd_id, tanggal, nik, nama, bagian, shift, waktu_pelanggaran, 
+    $edit_query = "SELECT pelanggaran_id, tanggal, nik, nama, bagian, shift, waktu_pelanggaran, 
         tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi
-        FROM hrd WHERE hrd_id = ?;";
+        FROM pelanggaran WHERE pelanggaran_id = ?;";
 
-    $prepare_edit = $koneksi_hrd->prepare($edit_query);
-    $prepare_edit->bindParam(1, $hrd_id, PDO::PARAM_INT);
+    $prepare_edit = $koneksi->prepare($edit_query);
+    $prepare_edit->bindParam(1, $pelanggaran_id, PDO::PARAM_INT);
     $prepare_edit->execute();
 
     $editData = $prepare_edit->fetch(PDO::FETCH_ASSOC);
@@ -162,7 +162,7 @@ if (isset($_GET['hrd_id'])) {
     // Update Data
     if (isset($_POST['update'])) {
         try {
-            $edit_id = $_GET['hrd_id'];
+            $edit_id = $_GET['pelanggaran_id'];
             $tanggal = $_POST['tanggal'];
             $nik = $_POST['nik'];
             $nama = $_POST['nama'];
@@ -174,8 +174,11 @@ if (isset($_GET['hrd_id'])) {
             $potensi_bahaya = $_POST['potensi'];
             $sanksi = $_POST['sanksi'];
 
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
             // Update data in the database
-            $update_query = "UPDATE hrd 
+            $update_query = "UPDATE pelanggaran
                              SET tanggal = ?, 
                                  nik = ?, 
                                  nama = ?, 
@@ -185,10 +188,11 @@ if (isset($_GET['hrd_id'])) {
                                  tempat_pelanggaran = ?, 
                                  bentuk_pelanggaran = ?, 
                                  potensi_bahaya = ?, 
-                                 sanksi = ?
-                             WHERE hrd_id = ?;";
+                                 sanksi = ?,
+                                 tanggal_id = ?
+                             WHERE pelanggaran_id = ?;";
 
-            $prepare_update = $koneksi_hrd->prepare($update_query);
+            $prepare_update = $koneksi->prepare($update_query);
             $prepare_update->bindParam(1, $tanggal);
             $prepare_update->bindParam(2, $nik);
             $prepare_update->bindParam(3, $nama);
@@ -199,7 +203,8 @@ if (isset($_GET['hrd_id'])) {
             $prepare_update->bindParam(8, $bentuk_pelanggaran);
             $prepare_update->bindParam(9, $potensi_bahaya);
             $prepare_update->bindParam(10, $sanksi);
-            $prepare_update->bindParam(11, $edit_id, PDO::PARAM_INT);
+            $prepare_update->bindParam(11, $tanggalid);
+            $prepare_update->bindParam(12, $edit_id);
 
             $exec_update = $prepare_update->execute();
 
@@ -223,6 +228,13 @@ if (isset($_GET['hrd_id'])) {
             }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
+            
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
         }
     }
     ?>

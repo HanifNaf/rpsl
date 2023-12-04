@@ -24,7 +24,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <a href="https://app.powerbi.com/reportEmbed?reportId=b5db4e96-18a6-4758-ab2f-445f7307160f&autoAuth=true&ctid=a1fe51c7-a2dc-4275-be53-27bd31e8c551" target="_blank" style="text-decoration: none;">
+
+    <?php if(in_array($_SESSION['role'], ['manager', 'admin'])){?>
+      <a href="dashboard.php" target="_blank" style="text-decoration: none;">
         <div class="card text-white mb-3" style="background-color: #006A4E; max-width: 11rem; filter: drop-shadow(3px 4px 3px black)">
           <div class="card-body">
             <svg style="width:40px;height:40px; float: right; margin-top: 5px;" viewBox="0 0 69 69">
@@ -34,6 +36,8 @@
           </div>
         </div>
       </a>
+    <?php }  ?>
+
     </div>
     
     <div class="col-md-6 text-right">

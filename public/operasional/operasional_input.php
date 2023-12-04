@@ -180,52 +180,58 @@ require (SITE_ROOT."/src/koneksi.php");
             $supervisor = $_REQUEST['supervisor-'.$i];
             $keterangan = emptyToNull($_REQUEST['keterangan-'.$i]);
 
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($_REQUEST['tanggal-'.$i], $koneksi);
+
             //Insert ke database
             $insert_query = "WITH in1 AS(
-                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, waktu) VALUES (uuid_generate_v4(), ?,?,?,?, LOCALTIME)
+                INSERT INTO produksi_kwh (produksi_id, shift, generation, pm_kwh_pltbm, tanggal, tanggal_id, waktu) VALUES (uuid_generate_v4(), ?,?,?,?,?, LOCALTIME)
                 RETURNING produksi_id AS produksi),
                 in2 AS (
-                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, waktu) VALUES (uuid_generate_v4(), ?,?,?,?,?, LOCALTIME)
+                INSERT INTO pemakaian_kwh (pemakaian_id, shift, ekspor, pemakaian_sendiri, kwh_loss, tanggal, tanggal_id, waktu) VALUES (uuid_generate_v4(), ?,?,?,?,?,?, LOCALTIME)
                 RETURNING pemakaian_id AS pakai),
                 in3 AS (
-                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt) VALUES (uuid_generate_v4(), ?,?, LOCALTIME, ?,?,?,?,?,?,?)
+                INSERT INTO pemakaian_bahan_bakar (pemakaian_bahan_bakar_id, shift, tanggal, waktu, kg_cangkang, kg_palmfiber, kg_woodchips, kg_serbukkayu, kg_sabutkelapa, kg_efbpress, kg_opt, tanggal_id) VALUES (uuid_generate_v4(), ?,?, LOCALTIME, ?,?,?,?,?,?,?,?)
                 RETURNING pemakaian_bahan_bakar_id AS bahan_bakar)
-                INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, supervisor, shift, tanggal, waktu, keterangan)
-                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), ?,?,?, LOCALTIME, ?;"; 
+                INSERT INTO operasional (operasional_id, produksi_id, pemakaian_id, pemakaian_bahan_bakar_id, shift, tanggal, waktu, keterangan, tanggal_id)
+                SELECT uuid_generate_v4(), (SELECT produksi FROM in1), (SELECT pakai FROM in2), (SELECT bahan_bakar FROM in3), ?,?, LOCALTIME, ?,?;"; 
             
-            $prep = $koneksi_operasional -> prepare($insert_query);
+            $prep = $koneksi -> prepare($insert_query);
 
             //bind parameter
             $prep ->bindParam(1, $shift);
             $prep ->bindParam(2, $generasi);
             $prep ->bindParam(3, $pm_kwh_pltbm);
             $prep ->bindParam(4, $tanggal);
+            $prep ->bindParam(5, $tanggalid);
 
-            $prep ->bindParam(5, $shift);
-            $prep ->bindParam(6, $ekspor);
-            $prep ->bindParam(7, $pemakaian_sendiri);
-            $prep ->bindParam(8, $kwh_loss);
-            $prep ->bindParam(9, $tanggal);
+            $prep ->bindParam(6, $shift);
+            $prep ->bindParam(7, $ekspor);
+            $prep ->bindParam(8, $pemakaian_sendiri);
+            $prep ->bindParam(9, $kwh_loss);
+            $prep ->bindParam(10, $tanggal);
+            $prep ->bindParam(11, $tanggalid);
 
-            $prep ->bindParam(10, $shift);
-            $prep ->bindParam(11, $tanggal);
-            $prep ->bindParam(12, $cangkang);
-            $prep ->bindParam(13, $palm_fiber);
-            $prep ->bindParam(14, $wood_chips);
-            $prep ->bindParam(15, $serbuk_kayu);
-            $prep ->bindParam(16, $sabut_kelapa);
-            $prep ->bindParam(17, $efb);
-            $prep ->bindParam(18, $opt);
+            $prep ->bindParam(12, $shift);
+            $prep ->bindParam(13, $tanggal);
+            $prep ->bindParam(14, $cangkang);
+            $prep ->bindParam(15, $palm_fiber);
+            $prep ->bindParam(16, $wood_chips);
+            $prep ->bindParam(17, $serbuk_kayu);
+            $prep ->bindParam(18, $sabut_kelapa);
+            $prep ->bindParam(19, $efb);
+            $prep ->bindParam(20, $opt);
+            $prep ->bindParam(21, $tanggalid);
 
-            $prep ->bindParam(19, $supervisor);
-            $prep ->bindParam(20, $shift);
-            $prep ->bindParam(21, $tanggal);
-            $prep ->bindParam(22, $keterangan);
+            $prep ->bindParam(22, $shift);
+            $prep ->bindParam(23, $tanggal);
+            $prep ->bindParam(24, $keterangan);
+            $prep ->bindParam(25, $tanggalid);
 
             try{
-                $koneksi_operasional -> beginTransaction();
+                $koneksi -> beginTransaction();
                 $prep -> execute();
-                $koneksi_operasional -> commit();
+                $koneksi -> commit();
 
             ?>
                 <script type="text/javascript">
@@ -250,6 +256,13 @@ require (SITE_ROOT."/src/koneksi.php");
                 <?php
             } catch(PDOException $e) {
                 echo "PDO ERROR: ". $e -> getMessage();
+            
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

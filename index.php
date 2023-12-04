@@ -28,7 +28,7 @@ error_reporting(0);
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <link href="<?= SITE_URL?>/public/assets/img/rpsl1.png" rel='icon' type='image/x-icon'/>
   <title>Login Website Inputan PT. RPSL</title>
-  <script src="js/sweetalert2.all.min.js"></script>
+  
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap.min.css.map">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-grid.min.css">
@@ -36,6 +36,8 @@ error_reporting(0);
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/bootstrap4/dist/css/bootstrap-reboot.min.css.map">
   <link rel="stylesheet" href="<?= SITE_URL?>/public/assets/css/style-index.css">
+
+  <script src="<?= SITE_URL?>public/assets/js/sweetalert2.all.min.js"></script>
 </head>
 <body>
 

@@ -29,7 +29,7 @@ if (isset($_GET['sungai_id'])) {
     // Proses penghapusan data berdasarkan ID
     try {
         $delete_query = "DELETE FROM sungai WHERE sungai_id = ?";
-        $prepare_delete = $koneksi_wtp->prepare($delete_query);
+        $prepare_delete = $koneksi->prepare($delete_query);
         $prepare_delete->bindParam(1, $hrd_id, PDO::PARAM_INT);
 
         if ($prepare_delete->execute()) {

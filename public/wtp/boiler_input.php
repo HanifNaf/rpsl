@@ -133,13 +133,16 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $condensate = emptyToNull($_REQUEST['condensate-'.$i]);
             $solid = emptyToNull($_REQUEST['solid-'.$i]);
 
+            //handle tanggal
+            $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
             //Query Insert
-            $query = "INSERT INTO chemical_boiler(boiler_id, tanggal, alkalinity_booster, oxygen_scavenger, 
-                    internal_treatment, condensate_treatment, solid_additive, m3_air) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?, ?);"; 
+            $query = "INSERT INTO boiler(boiler_id, tanggal, alkalinity_booster, oxygen_scavenger, 
+                    internal_treatment, condensate_treatment, solid_additive, m3_air, tanggal_id) 
+                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?, ?,?);"; 
             
             //Prepare
-            $prep = $koneksi_wtp -> prepare($query);
+            $prep = $koneksi -> prepare($query);
 
             //bind parameter
             $prep ->bindParam(1, $tanggal);
@@ -149,12 +152,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $prep ->bindParam(5, $condensate);
             $prep ->bindParam(6, $solid);
             $prep ->bindParam(7, $m3_air);
+            $prep -> bindParam(8, $tanggalid);
             
             //Insert
             try{
-                $koneksi_wtp -> beginTransaction();
+                $koneksi -> beginTransaction();
                 $prep -> execute();
-                $koneksi_wtp -> commit();
+                $koneksi -> commit();
 
                 ?>
                 <script type="text/javascript">
@@ -178,11 +182,15 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <?php
 
             } catch(PDOException $e) {
-                echo "PDO ERROR: ". $e -> getMessage();
-                $koneksi_wtp -> rollBack();
+                $errorInfo = $stmt->errorInfo();
 
-            } finally{
-                echo pg_last_error();
+                echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
+
+                $koneksi -> rollBack();
+
             }
         }
     }

@@ -32,25 +32,25 @@ if (isset($_GET['operasional_id'], $_GET['produksi_id'], $_GET['pemakaian_id'], 
     try {
         // Hapus data dari tabel 'operasional'
         $delete_operasional_query = "DELETE FROM operasional WHERE operasional_id = ?";
-        $prep_delete_operasional = $koneksi_operasional->prepare($delete_operasional_query);
+        $prep_delete_operasional = $koneksi->prepare($delete_operasional_query);
         $prep_delete_operasional->bindParam(1, $operasional_id, PDO::PARAM_STR);
         $prep_delete_operasional->execute();
 
         // Hapus data dari tabel 'produksi'
         $delete_produksi_query = "DELETE FROM produksi_kwh WHERE produksi_id = ?";
-        $prep_delete_produksi = $koneksi_operasional->prepare($delete_produksi_query);
+        $prep_delete_produksi = $koneksi->prepare($delete_produksi_query);
         $prep_delete_produksi->bindParam(1, $produksi_id, PDO::PARAM_STR);
         $prep_delete_produksi->execute();
 
         // Hapus data dari tabel 'pemakaian'
         $delete_pemakaian_query = "DELETE FROM pemakaian_kwh WHERE pemakaian_id = ?";
-        $prep_delete_pemakaian = $koneksi_operasional->prepare($delete_pemakaian_query);
+        $prep_delete_pemakaian = $koneksi->prepare($delete_pemakaian_query);
         $prep_delete_pemakaian->bindParam(1, $pemakaian_id, PDO::PARAM_STR);
         $prep_delete_pemakaian->execute();
 
         // Hapus data dari tabel 'bahan_bakar'
         $delete_bahan_bakar_query = "DELETE FROM pemakaian_bahan_bakar WHERE pemakaian_bahan_bakar_id = ?";
-        $prep_delete_bahan_bakar = $koneksi_operasional->prepare($delete_bahan_bakar_query);
+        $prep_delete_bahan_bakar = $koneksi->prepare($delete_bahan_bakar_query);
         $prep_delete_bahan_bakar->bindParam(1, $bahan_bakar_id, PDO::PARAM_STR);
         $prep_delete_bahan_bakar->execute();
 
@@ -69,6 +69,13 @@ if (isset($_GET['operasional_id'], $_GET['produksi_id'], $_GET['pemakaian_id'], 
             </script>";
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+            
+        echo "PDO ERROR: ". $e -> getMessage();
+            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+            echo "Code: " . $errorInfo[1] . "<br>";
+            echo "Message: " . $errorInfo[2] . "<br>";
+
+            $koneksi -> rollBack();
     }
 } else {
     // Jika parameter tidak diterima, kembali ke halaman utama
