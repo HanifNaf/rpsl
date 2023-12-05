@@ -1,17 +1,16 @@
 <?php
-//Define DNS
-$dns = "pgsql:host=localhost;dbname=rpsl";
+// Define DNS
+$dns = "mysql:host=localhost;dbname=rpsl";
 
-//DB Credentials
+// DB Credentials for MySQL
 $user = "rpsl";
 $pass = "pass_rpsl";
 $errmode = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
-//cek koneksi
-try{
+// Cek Koneksi
+try {
     $koneksi = new PDO($dns, $user, $pass, $errmode);
-
-}catch(PDOException $e){
-    echo "Error: ". $e->getMessage();
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>

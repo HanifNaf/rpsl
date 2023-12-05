@@ -180,17 +180,15 @@ require_once(SITE_ROOT."/src/koneksi.php");
 <?php 
     if(isset($_POST['add'])){
     $total = $_POST['total'];
-        //Menyimpan input dalam variabel (Menggunakan looping)
+        //
         for($i=1; $i<=$total; $i++){
-            echo $i;
-            //Tanggal
-            $tanggal_mulai = $_REQUEST['tanggal-mulai-'.$i];
-            $tanggal_selesai = emptyToNull($_REQUEST['tanggal-selesai-'.$i]);
+
+            //Menyimpan input dalam variabel
 
             //Sparepart
-            $sparepart = $_REQUEST['sparepart-'.$i];
-            $quantity = emptyToNull($_REQUEST['quantity-'.$i]);
-            $satuan = $_REQUEST['satuan-'.$i];
+            $sparepart = $_POST['sparepart-'.$i];
+            $quantity = emptyToNull($_POST['quantity-'.$i]);
+            $satuan = $_POST['satuan-'.$i];
 
             //Lampiran
             if ($_FILES['lampiran-'.$i]['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['lampiran-'.$i]['tmp_name'])) {
@@ -205,18 +203,22 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 $isi_lampiran = null;
             }
 
-            $divisi = $_REQUEST['divisi-'.$i];
-            $unit = $_REQUEST['unit-'.$i];
-            $problem = $_REQUEST['problem-'.$i];
-            $evaluasi = $_REQUEST['evaluasi-'.$i];
-            $penanganan = $_REQUEST['penanganan-'.$i];
-            $tingkat_kerusakan = $_REQUEST['tingkat-kerusakan-'.$i];
-            $status = $_REQUEST['status-'.$i];
-            $keterangan = $_REQUEST['keterangan-'.$i];          
+            $divisi = $_POST['divisi-'.$i];
+            $unit = $_POST['unit-'.$i];
+            $problem = $_POST['problem-'.$i];
+            $evaluasi = $_POST['evaluasi-'.$i];
+            $penanganan = $_POST['penanganan-'.$i];
+            $tingkat_kerusakan = $_POST['tingkat-kerusakan-'.$i];
+            $status = $_POST['status-'.$i];
+            $keterangan = $_POST['keterangan-'.$i];          
             
             //handle tanggal
+            $tanggal_mulai = $_POST['tanggal-mulai-'.$i];
+            $tanggal_selesai = emptyToNull($_POST['tanggal-selesai-'.$i]);
             $tanggalid = insertOrSelectTanggal($tanggal_mulai, $koneksi);
 
+
+            //Sesuaikan querynya
             //Query Insert
             $query = "WITH in1 AS(INSERT INTO lampiran_maintenance (lampiran_id, nama, tipe, file) VALUES (uuid_generate_v4(),?,?,?) 
                     RETURNING lampiran_id AS lampiran)
@@ -224,7 +226,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
                                 penanganan, tanggal_mulai, tanggal_selesai, status, 
                                 tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
                                 satuan_sparepart, tanggal_id)   
-                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;"; 
+                    SELECT UUID(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;"; 
             
             //Prepare
             $prep = $koneksi -> prepare($query);

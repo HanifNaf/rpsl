@@ -25,10 +25,10 @@ require_once(SITE_ROOT . "/src/footer-admin.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 
 // Retrieve Data for Editing
-if (isset($_GET['maintenance_id'])) {
-    $maintenance_id = $_GET['maintenance_id'];
+if (isset($_GET['ma'])) {
+    $maintenance_id = $_GET['ma'];
 
-    $edit_query = "SELECT maintenance_id, maintenance.lampiran_id, divisi, unit, problem, evaluasi, 
+    $edit_query = "SELECT maintenance_id, divisi, unit, problem, evaluasi, 
         penanganan, tanggal_mulai, tanggal_selesai, status, 
         tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
         satuan_sparepart
@@ -39,6 +39,7 @@ if (isset($_GET['maintenance_id'])) {
     $prepare_edit->execute();
 
     $editData = $prepare_edit->fetch(PDO::FETCH_ASSOC);
+    var_dump($editData);
 
 } else {
     ?>
@@ -182,7 +183,8 @@ if (isset($_GET['maintenance_id'])) {
     // Update Data
     if (isset($_POST['update'])) {
         try {
-            $edit_id = $_GET['maintenance_id'];
+
+            //Simpan input kedalam variabel
             $divisi = emptyToNull($_POST['divisi']);
             $unit = emptyToNull($_POST['unit']);
             $problem = emptyToNull($_POST['problem']);
@@ -233,7 +235,7 @@ if (isset($_GET['maintenance_id'])) {
             $prepare_update->bindParam(12, $jumlah_sparepart);
             $prepare_update->bindParam(13, $satuan_sparepart);
             $prepare_update->bindParam(14, $tanggalid);
-            $prepare_update->bindParam(15, $edit_id, PDO::PARAM_INT);
+            $prepare_update->bindParam(15, $maintenance_id);
 
             $exec_update = $prepare_update->execute();
 

@@ -64,68 +64,68 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <input type="hidden" name="total" value="<?= @$_POST['count_add'] ?>">
                 <table class="table table-hover table-bordered table-sm">
                     <?php for($i=1; $i<=$_POST['count_add']; $i++){ ?>
-                        <tr>
-                            <!-- Tanggal -->
-                            <td class="custom-black-bg">Tanggal</td>
-                            <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
-                        </tr>
-                        <tr>
-                           <!-- Pemisah -->
-                           <td> </td>
-                        </tr>
-                        <th>Kecelakaan Kerja</th>
-                        <tr>
-                            <!-- Jam -->
-                            <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
-                                <td><select name="jenis-<?= $i ?>" class="form-control">
-                                        <option value="-">-- Pilih Jenis Kecelakaan Kerja --</option>
-                                        <option value="Ringan">Ringan</option>
-                                        <option value="Sedang">Sedang</option>
-                                        <option value="Berat">Berat</option>
-                                </select>
+                            <tr>
+                                <!-- Tanggal -->
+                                <td class="custom-black-bg">Tanggal</td>
+                                <td> <input type="date" value="<? date('Y-m-d') ?>" name="tanggal-<?=$i?>" class="form-control" width=20%> </td>
+                            </tr>
+                            <tr>
+                               <!-- Pemisah -->
+                               <td> </td>
+                            </tr>
+                            <th>Kecelakaan Kerja</th>
+                            <tr>
+                                <!-- Jam -->
+                                <td class="custom-black-bg">Jenis Kecelakaan Kerja</td>
+                                    <td><select name="jenis-<?= $i ?>" class="form-control">
+                                            <option value="-">-- Pilih Jenis Kecelakaan Kerja --</option>
+                                            <option value="Ringan">Ringan</option>
+                                            <option value="Sedang">Sedang</option>
+                                            <option value="Berat">Berat</option>
+                                    </select>
+                                    </td>
+                            </tr>
+                            <tr>
+                                <!-- Penanganan -->
+                                <td class="custom-black-bg" width="30%">Penanganan</td>
+                                <td><input type="text" name="penanganan-<?=$i?>" style="form-control"></td>
+                            </tr>
+                            <tr>
+                               <!-- Pemisah -->
+                               <td> </td>
+                            </tr>
+                            <th>Kejadian</th>
+                            <tr>
+                                <!-- Area -->
+                                <td class="custom-black-bg" width="30%">Area</td>
+                                <td><input type="text" name="area-<?=$i?>" style="form-control"></td>
+                            </tr>
+                            <tr>
+                                <!-- Waktu -->
+                                <td class="custom-black-bg" width="30%">Waktu</td>
+                                <td><input type="time" name="waktu-<?=$i?>" style="form-control"></td>
+                            </tr>
+                            <tr>
+                                <!-- Jam Kerja -->
+                                <td class="custom-black-bg" width="30%">Jam Kerja</td>
+                                <td><select name="jam-<?= $i ?>" class="form-control">
+                                            <option value="-">-- Pilih Jam Kerja --</option>
+                                            <option value="Pagi">Pagi</option>
+                                            <option value="Sore">Sore</option>
+                                            <option value="Malam">Malam</option>
+                                            <option value="Non-Shift">Non-Shift</option>
+                                    </select>
                                 </td>
-                        </tr>
-                        <tr>
-                            <!-- Penanganan -->
-                            <td class="custom-black-bg" width="30%">Penanganan</td>
-                            <td><input type="text" name="penanganan-<?=$i?>" style="form-control"></td>
-                        </tr>
-                        <tr>
-                           <!-- Pemisah -->
-                           <td> </td>
-                        </tr>
-                        <th>Kejadian</th>
-                        <tr>
-                            <!-- Area -->
-                            <td class="custom-black-bg" width="30%">Area</td>
-                            <td><input type="text" name="area-<?=$i?>" style="form-control"></td>
-                        </tr>
-                        <tr>
-                            <!-- Waktu -->
-                            <td class="custom-black-bg" width="30%">Waktu</td>
-                            <td><input type="time" name="waktu-<?=$i?>" style="form-control"></td>
-                        </tr>
-                        <tr>
-                            <!-- Jam Kerja -->
-                            <td class="custom-black-bg" width="30%">Jam Kerja</td>
-                            <td><select name="jam-<?= $i ?>" class="form-control">
-                                        <option value="-">-- Pilih Jam Kerja --</option>
-                                        <option value="Pagi">Pagi</option>
-                                        <option value="Sore">Sore</option>
-                                        <option value="Malam">Malam</option>
-                                        <option value="Non-Shift">Non-Shift</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                           <!-- Pemisah -->
-                           <td> </td>
-                        </tr>
-                       <tr>    
-                            <!-- Penyebab -->
-                            <td class="custom-black-bg">Penyebab</td>
-                            <td><input type="text" name="penyebab-<?=$i?>" style="form-control"></td>
-                        </tr>
+                            </tr>
+                            <tr>
+                               <!-- Pemisah -->
+                               <td> </td>
+                            </tr>
+                            <tr>    
+                                <!-- Penyebab -->
+                                <td class="custom-black-bg">Penyebab</td>
+                                <td><input type="text" name="penyebab-<?=$i?>" style="form-control"></td>
+                            </tr>
                     <?php } ?>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
@@ -140,23 +140,25 @@ require_once(SITE_ROOT."/src/koneksi.php");
     if(isset($_POST['add'])){
         $total = $_POST['total'];
 
-        //Menyimpan input dalalm variabel (Menggunakan looping)
+        //Loop setiap iterasi input
         for($i=1; $i<=$total; $i++){
-            $tanggal = $_REQUEST['tanggal-'.$i];
-            $jenis_kecelakaan_kerja = $_REQUEST['jenis-'.$i];
-            $penanganan = $_REQUEST['penanganan-'.$i];
-            $area = $_REQUEST['area-'.$i];
-            $waktu = $_REQUEST['waktu-'.$i].':00';
-            $jam_kerja = $_REQUEST['jam-'.$i];
-            $penyebab = $_REQUEST['penyebab-'.$i];
+
+            //Menyimpan input dalalm variabel
+            $jenis_kecelakaan_kerja = $_POST['jenis-'.$i];
+            $penanganan = $_POST['penanganan-'.$i];
+            $area = $_POST['area-'.$i];
+            $waktu = $_POST['waktu-'.$i].':00';
+            $jam_kerja = $_POST['jam-'.$i];
+            $penyebab = $_POST['penyebab-'.$i];
 
             //handle tanggal
+            $tanggal = $_POST['tanggal-'.$i];
             $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
                         
             //Insert ke database
             $insert_query = "INSERT INTO kecelakaan_kerja (kecelakaan_kerja_id, tanggal, jenis_kecelakaan_kerja, 
                             penanganan, area_kejadian, waktu_kejadian, jam_kerja_kejadian, penyebab, tanggal_id) 
-                            VALUES (uuid_generate_v4(), ?,?,?,?,?,?,?,?);";
+                            VALUES (UUID(), ?,?,?,?,?,?,?,?);";
 
             //Prepare INSERT
             $prep = $koneksi -> prepare($insert_query);
@@ -200,12 +202,11 @@ require_once(SITE_ROOT."/src/koneksi.php");
             }catch(PDOException $e){
                 echo "PDO ERROR: ". $e -> getMessage();
             
-                echo "PDO ERROR: ". $e -> getMessage();
-                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                    echo "Code: " . $errorInfo[1] . "<br>";
-                    echo "Message: " . $errorInfo[2] . "<br>";
-    
-                    $koneksi -> rollBack();
+                $koneksi -> rollBack();
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+
+                $koneksi -> rollBack();
             }
         }
     }

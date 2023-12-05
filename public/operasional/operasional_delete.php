@@ -22,11 +22,11 @@ if (!in_array($_SESSION['role'], ['operasional', 'admin'])) {
 require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
-if (isset($_GET['operasional_id'], $_GET['produksi_id'], $_GET['pemakaian_id'], $_GET['bahan_bakar_id'])) {
-    $operasional_id = $_GET['operasional_id'];
-    $produksi_id = $_GET['produksi_id'];
-    $pemakaian_id = $_GET['pemakaian_id'];
-    $bahan_bakar_id = $_GET['bahan_bakar_id'];
+if (isset($_GET['op'], $_GET['pr'], $_GET['pe'], $_GET['ba'])) {
+    $operasional_id = $_GET['op'];
+    $produksi_id = $_GET['pr'];
+    $pemakaian_id = $_GET['pe'];
+    $bahan_bakar_id = $_GET['ba'];
 
     // Proses penghapusan data berdasarkan ID
     try {

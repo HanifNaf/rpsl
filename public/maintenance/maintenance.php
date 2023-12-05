@@ -99,7 +99,7 @@ $data_json = json_encode($maintenance_arr);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.maintenance_id);
-                        var editButton = '<a href="maintenance_edit.php?maintenance_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="maintenance_edit.php?ma=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -161,7 +161,7 @@ $data_json = json_encode($maintenance_arr);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'maintenance_delete.php?maintenance_id=' + maintenanceID;
+                window.location.href = 'maintenance_delete.php?ma=' + maintenanceID;
             }
         });
     }

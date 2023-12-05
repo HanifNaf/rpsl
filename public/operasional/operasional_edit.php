@@ -21,25 +21,19 @@ if (!in_array($_SESSION['role'], ['operasional', 'admin'])) {
 
 require_once("operasional_data.php");
 require_once(SITE_ROOT . "/src/header-admin.php");
-require_once(SITE_ROOT . "/src/footer-admin.php");
-require_once(SITE_ROOT . "/src/koneksi.php");
 
-// Identify the Record to Edit
-//echo "prodid= ".$_GET['produksi_id']."\n";
-//echo "opid= ".$_GET['operasional_id']."\n";
-//echo "pemid= ".$_GET['pemakaian_id']."\n";
-//echo "bbid= ".$_GET['bahan_bakar_id']."\n";
 
-if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], $_GET['bahan_bakar_id'])){
-    $produksi = $_GET['produksi_id'];
-    $operasional = $_GET['operasional_id'];
-    $pemakaian = $_GET['pemakaian_id'];
-    $bahan_bakar = $_GET['bahan_bakar_id'];
+// Cek id
+if (isset($_GET['pr'], $_GET['op'], $_GET['pe'], $_GET['ba'])){
+    $produksi = $_GET['pr'];
+    $operasional = $_GET['op'];
+    $pemakaian = $_GET['pe'];
+    $bahan_bakar = $_GET['ba'];
 
 
 
     $edit_query = "SELECT t1.produksi_id, t1.generation, t1.pm_kwh_pltbm, 
-        t2.operasional_id, t2.tanggal, t2.waktu, t2.shift, t2.keterangan, 
+        t2.operasional_id, t2.tanggal, t2.waktu, t2.shift, t2.keterangan, t2.downtime, 
         t3.pemakaian_id, t3.ekspor, t3.pemakaian_sendiri, t3.kwh_loss, 
         t4.pemakaian_bahan_bakar_id, t4.kg_cangkang, t4.kg_palmfiber, t4.kg_woodchips, t4.kg_serbukkayu, t4.kg_sabutkelapa, t4.kg_efbpress, t4.kg_opt
         FROM produksi_kwh t1
@@ -181,6 +175,11 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
                         <td class="custom-black-bg">Pemakaian OPT (kg)</td>
                         <td><input type="number" value="<?= $dataToEdit['kg_opt'] ?>" name="kg_opt" class="form-control"></td>
                     </tr>
+                        <!-- Downtime -->
+                        <tr>
+                            <td class="custom-black-bg">Downtime (Jam)</td>
+                            <td><input type="number" value="<?= $dataToEdit['downtime'] ?>" name="downtime" class="form-control"></td>
+                        </tr>
                         <!-- Keterangan -->
                     <tr>
                         <td class="custom-black-bg">Keterangan</td>
@@ -198,92 +197,129 @@ if (isset($_GET['produksi_id'], $_GET['operasional_id'], $_GET['pemakaian_id'], 
 
 <?php
 if (isset($_POST['update'])) {
-    //handle tanggal
-    $tanggalid = insertOrSelectTanggal($_POST['tanggal'], $koneksi);
 
-    // Update data in the database
-    $update_query = "WITH 
-                      up1 AS (
-                        UPDATE produksi_kwh
-                        SET generation = ?, 
+    // Produksi
+    $shift = $_POST['shift'];
+    $generasi = $_POST['generasi'];
+    $pm_kwh_pltbm = $_POST['pm-kwh-pltbm'];
+
+    //Pemakaian
+    $ekspor = $_POST['ekspor'];
+    $pemakaian_sendiri = $_POST['pemakaian-sendiri'];
+    $kwh_loss = $_POST['kwh-loss'];
+
+    //Bahan Bakar
+    $cangkang = $_POST['kg_cangkang'];
+    $palm_fiber = $_POST['kg_palmfiber'];
+    $wood_chips = $_POST['kg_woodchips'];
+    $serbuk_kayu = $_POST['kg_serbukkayu'];
+    $sabut_kelapa = $_POST['kg_sabutkelapa'];
+    $efb = $_POST['kg_efbpress'];
+    $opt = $_POST['kg_opt'];
+
+    //Operasional
+    $downtime = $_POST['downtime'];
+    $keterangan = emptyToNull($_POST['keterangan']);
+
+    // Tanggal
+    $tanggal = $_POST['tanggal'];
+    $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
+
+
+    // Mulai Statement
+    $koneksi->beginTransaction();
+
+    try {
+        // Update produksi_kwh
+        $produksi_query = "UPDATE produksi_kwh 
+                        SET shift = ?,
+                            generation = ?, 
                             pm_kwh_pltbm = ?,
                             tanggal = ?,
                             tanggal_id =?
-                        WHERE produksi_id = ?
-                        RETURNING produksi_id
-                      ),
-                      up2 AS (
-                        UPDATE pemakaian_kwh
-                        SET ekspor = ?, 
+                        WHERE produksi_id = ?;";
+
+        $prep_produksi = $koneksi->prepare($produksi_query);
+        $prep_produksi->bindParam(1, $shift);
+        $prep_produksi->bindParam(2, $generasi);
+        $prep_produksi->bindParam(3, $pm_kwh_pltbm);
+        $prep_produksi->bindParam(4, $tanggal);
+        $prep_produksi->bindParam(5, $tanggalid);
+        $prep_produksi->bindParam(6, $produksi);
+
+        $prep_produksi->execute();   
+
+
+        // Update pemakaian_kwh
+        $pemakaian_query = "UPDATE pemakaian_kwh
+                        SET shift =?,
+                            ekspor = ?, 
                             pemakaian_sendiri = ?, 
                             kwh_loss = ?,
                             tanggal = ?,
                             tanggal_id =?
-                        WHERE pemakaian_id = ?
-                        RETURNING pemakaian_id
-                      ),
-                      up3 AS (
-                        UPDATE pemakaian_bahan_bakar
-                        SET kg_cangkang = ?, 
-                            kg_palmfiber = ?, 
-                            kg_woodchips = ?, 
-                            kg_serbukkayu = ?, 
-                            kg_sabutkelapa = ?, 
-                            kg_efbpress = ?, 
-                            kg_opt = ?,
-                            tanggal = ?,
-                            tanggal_id =?
-                        WHERE pemakaian_bahan_bakar_id = ?
-                        RETURNING pemakaian_bahan_bakar_id
-                      )
-                      UPDATE operasional
-                      SET shift = ?,
-                        keterangan = ?,
-                        tanggal = ?,
-                        tanggal_id =?
-                      FROM up1, up2, up3
-                      WHERE operasional.operasional_id = ? 
-                        AND up1.produksi_id = up1.produksi_id
-                        AND up2.pemakaian_id = up2.pemakaian_id
-                        AND up3.pemakaian_bahan_bakar_id = up3.pemakaian_bahan_bakar_id;";
-    
-    $prepare_update = $koneksi->prepare($update_query);
-    
-    // Bind parameters
-    $prepare_update->bindParam(1, $_POST['generation']);
-    $prepare_update->bindParam(2, $_POST['pm_kwh_pltbm']);
-    $prepare_update->bindParam(3, $_POST['tanggal']);
-    $prepare_update->bindParam(4, $_GET['produksi_id']);
-    $prepare_update->bindParam(5, $tanggalid);
-    
-    $prepare_update->bindParam(6, $_POST['ekspor']);
-    $prepare_update->bindParam(7, $_POST['pemakaian_sendiri']);
-    $prepare_update->bindParam(8, $_POST['kwh_loss']);
-    $prepare_update->bindParam(9, $_POST['tanggal']);
-    $prepare_update->bindParam(10, $_GET['pemakaian_id']);
-    $prepare_update->bindParam(11, $tanggalid);
+                        WHERE pemakaian_id = ?";
+        $prep_pemakaian = $koneksi->prepare($pemakaian_query);
+        $prep_pemakaian->bindParam(1, $shift);
+        $prep_pemakaian->bindParam(2, $ekspor);
+        $prep_pemakaian->bindParam(3, $pemakaian_sendiri);
+        $prep_pemakaian->bindParam(4, $kwh_loss);
+        $prep_pemakaian->bindParam(5, $tanggal);
+        $prep_pemakaian->bindParam(6, $tanggalid);
+        $prep_pemakaian->bindParam(7, $pemakaian);
 
-    $prepare_update->bindParam(12, $_POST['kg_cangkang']);
-    $prepare_update->bindParam(13, $_POST['kg_palmfiber']);
-    $prepare_update->bindParam(14, $_POST['kg_woodchips']);
-    $prepare_update->bindParam(15, $_POST['kg_serbukkayu']);
-    $prepare_update->bindParam(16, $_POST['kg_sabutkelapa']);
-    $prepare_update->bindParam(17, $_POST['kg_efbpress']);
-    $prepare_update->bindParam(18, $_POST['kg_opt']);
-    $prepare_update->bindParam(19, $_POST['tanggal']);
-    $prepare_update->bindParam(20, $_GET['bahan_bakar_id']);
-    $prepare_update->bindParam(21, $tanggalid);
+        $prep_pemakaian->execute();
 
-    $prepare_update->bindParam(22, $_POST['shift']);
-    $prepare_update->bindParam(23, $_POST['keterangan']);
-    $prepare_update->bindParam(24, $_POST['tanggal']);
-    $prepare_update->bindParam(25, $tanggalid);
-    $prepare_update->bindParam(26, $_GET['operasional_id']);
 
-    try {
-        $koneksi->beginTransaction();
-        $prepare_update->execute();
-        $koneksi->commit();
+        // Update pemakaian_bahan_bakar
+        $bahan_bakar_query = "UPDATE pemakaian_bahan_bakar
+                            SET shift = ?,
+                                tanggal = ?,
+                                kg_cangkang = ?, 
+                                kg_palmfiber = ?, 
+                                kg_woodchips = ?, 
+                                kg_serbukkayu = ?, 
+                                kg_sabutkelapa = ?, 
+                                kg_efbpress = ?, 
+                                kg_opt = ?,
+                                tanggal_id =?
+                            WHERE pemakaian_bahan_bakar_id = ?;";
+        $prep_bahan_bakar = $koneksi->prepare($bahan_bakar_query);
+        $prep_bahan_bakar->bindParam(1, $shift);
+        $prep_bahan_bakar->bindParam(2, $tanggal);
+        $prep_bahan_bakar->bindParam(3, $cangkang);
+        $prep_bahan_bakar->bindParam(4, $palm_fiber);
+        $prep_bahan_bakar->bindParam(5, $wood_chips);
+        $prep_bahan_bakar->bindParam(6, $serbuk_kayu);
+        $prep_bahan_bakar->bindParam(7, $sabut_kelapa);
+        $prep_bahan_bakar->bindParam(8, $efb);
+        $prep_bahan_bakar->bindParam(9, $opt);
+        $prep_bahan_bakar->bindParam(10, $tanggalid);
+        $prep_bahan_bakar->bindParam(11, $bahan_bakar);
+
+        $prep_bahan_bakar->execute();
+
+
+        // Insert operasional
+        $operasional_query = "UPDATE operasional
+                            SET shift = ?,
+                              tanggal = ?,
+                              downtime = ?,
+                              keterangan = ?,
+                              tanggal_id =?                              
+                            WHERE operasional_id = ?";
+        $prep_operasional = $koneksi->prepare($operasional_query);
+        $prep_operasional->bindParam(1, $shift);
+        $prep_operasional->bindParam(2, $tanggal);
+        $prep_operasional->bindParam(3, $downtime);
+        $prep_operasional->bindParam(4, $keterangan);
+        $prep_operasional->bindParam(5, $tanggalid);
+        $prep_operasional->bindParam(6, $operasional);
+
+        $prep_operasional->execute();
+        
+        // Commit Statement
+        $koneksi->commit();  
     ?>
         <script type="text/javascript">
             Swal.fire({
@@ -300,13 +336,12 @@ if (isset($_POST['update'])) {
     <?php
     } catch (PDOException $e) {
         echo "PDO ERROR: " . $e->getMessage();
-            
-        echo "PDO ERROR: ". $e -> getMessage();
-            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-            echo "Code: " . $errorInfo[1] . "<br>";
-            echo "Message: " . $errorInfo[2] . "<br>";
 
-            $koneksi -> rollBack();
+        $koneksi -> rollBack();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+
+        $koneksi -> rollBack();
     }
 }
 ?>

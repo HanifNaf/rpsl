@@ -26,18 +26,15 @@
     require_once(SITE_ROOT."/src/koneksi.php");
 
     // Retrieve Data for Editing
-    $edit_query = "SELECT a.attname, pg_get_expr(d.adbin, d.adrelid) AS default_value
-                FROM   pg_catalog.pg_attribute    a
-                LEFT   JOIN pg_catalog.pg_attrdef d ON (a.attrelid, a.attnum) = (d.adrelid, d.adnum)
-                WHERE  NOT a.attisdropped           
-                AND    a.attnum   > 0               
-                AND    pg_get_expr(d.adbin, d.adrelid) IS NOT NULL
-                AND    a.attrelid = 'public.pemakaian_bahan_bakar'::regclass;";
+    $edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
+                FROM information_schema.columns
+                WHERE TABLE_NAME = 'pemakaian_bahan_bakar' AND TABLE_SCHEMA = 'rpsl';";
 
     $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->execute();
 
     $data = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($data);
 
     // Pivot boilerData Array
     $pivotedArray = [];
@@ -45,7 +42,7 @@
     // loop setiap elemen array
     foreach ($data as $row) {
         // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['attname']] = $row['default_value'];
+        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
     }
 ?>
 
@@ -143,20 +140,20 @@
             exit;
         }
 
-        // Query
-        $query = "ALTER TABLE pemakaian_bahan_bakar 
-                ALTER COLUMN rpkg_cangkang SET DEFAULT $cangkang,
-                ALTER COLUMN rpkg_palmfiber SET DEFAULT $palm_fiber,
-                ALTER COLUMN rpkg_woodchips SET DEFAULT $wood_chips,
-                ALTER COLUMN rpkg_serbukkayu SET DEFAULT $serbuk_kayu,
-                ALTER COLUMN rpkg_sabutkelapa SET DEFAULT $sabut_kelapa,
-                ALTER COLUMN rpkg_efbpress SET DEFAULT $efb,
-                ALTER COLUMN rpkg_opt SET DEFAULT $opt;";
-
         try {
-            $koneksi->beginTransaction();
+            // Query
+            $query = "ALTER TABLE pemakaian_bahan_bakar 
+                    ALTER COLUMN rpkg_cangkang SET DEFAULT $cangkang,
+                    ALTER COLUMN rpkg_palmfiber SET DEFAULT $palm_fiber,
+                    ALTER COLUMN rpkg_woodchips SET DEFAULT $wood_chips,
+                    ALTER COLUMN rpkg_serbukkayu SET DEFAULT $serbuk_kayu,
+                    ALTER COLUMN rpkg_sabutkelapa SET DEFAULT $sabut_kelapa,
+                    ALTER COLUMN rpkg_efbpress SET DEFAULT $efb,
+                    ALTER COLUMN rpkg_opt SET DEFAULT $opt;";
+
+        
+
             $koneksi->exec($query);
-            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -174,12 +171,11 @@
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
 
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
         }
     }
     ?>
