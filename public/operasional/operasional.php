@@ -92,11 +92,12 @@ ini_set('display_errors', 1);
                 { data: 'kg_sabutkelapa' },
                 { data: 'kg_efbpress' },
                 { data: 'kg_opt' },
+                { data: 'downtime' },
                 { data: 'keterangan' },
                 {
                     "data": null,
                     "render": function(data, type, row, meta) {
-                        var editButton = '<a href="operasional_edit.php?operasional_id=' + row.operasional_id + '&produksi_id=' + row.produksi_id + '&pemakaian_id=' + row.pemakaian_id + '&bahan_bakar_id=' + row.pemakaian_bahan_bakar_id + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="operasional_edit.php?op=' + row.operasional_id + '&pr=' + row.produksi_id + '&pe=' + row.pemakaian_id + '&ba=' + row.pemakaian_bahan_bakar_id + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + row.operasional_id + '\', \'' + row.produksi_id + '\', \'' + row.pemakaian_id + '\', \'' + row.pemakaian_bahan_bakar_id + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -126,12 +127,12 @@ ini_set('display_errors', 1);
         });
 
          // Tambahkan tombol Edit Harga Bahan Bakar
-         var editBBButton = '<button id="editChemicalButton" class="btn btn-info">Edit Harga</button>';
-                $('.dt-buttons').append(editBBButton); // Menambahkan tombol ke div dt-buttons
+         var editHargaButton = '<button id="editHargaButton" class="btn btn-info">Edit Harga</button>';
+                $('.dt-buttons').append(editHargaButton); // Menambahkan tombol ke div dt-buttons
 
-                // Style untuk menengahkan tombol Edit Harga Chemical
+                // Style untuk menengahkan tombol Edit Harga Bahan Bakar
                 var buttonMargin = 'auto'; // Sesuaikan dengan margin yang diinginkan atau gunakan 'auto' untuk tengah
-                $('#editChemicalButton').css({
+                $('#editHargaButton').css({
                     'margin-left': '10px',  // Sesuaikan dengan jarak yang diinginkan dari tombol sebelumnya
                     'margin-right': buttonMargin,
                 });
@@ -139,10 +140,11 @@ ini_set('display_errors', 1);
         // Center-align the text in the header cells
         $('#myTable thead th, #myTable tbody td').css('text-align', 'center');
         
-        // Atur aksi klik untuk tombol Edit Harga Chemical
-        $('#editChemicalButton').on('click', function() {
-            window.location.href = "operasional_harga";
+        // Atur aksi klik untuk tombol Edit Harga Bahan Bakar
+        $('#editHargaButton').on('click', function() {
+            window.location.href = "operasional_harga.php";
         });
+
 
         // Tambahkan tombol Tambah Data
         var tambahButton = '<button id="tambahButton" class="btn btn-info">Tambah Data</button>';
@@ -178,7 +180,7 @@ ini_set('display_errors', 1);
         }).then((result) => {
             if (result.value) {
                 // Redirect to the delete page if user confirms
-                window.location.href = 'operasional_delete.php?operasional_id=' + operasional_id + '&produksi_id=' + produksi_id + '&pemakaian_id=' + pemakaian_id + '&bahan_bakar_id=' + bahan_bakar_id;
+                window.location.href = 'operasional_delete.php?op=' + operasional_id + '&pr=' + produksi_id + '&pe=' + pemakaian_id + '&ba=' + bahan_bakar_id;
             }
         });
     }
@@ -209,6 +211,7 @@ ini_set('display_errors', 1);
                 <th>Pemakaian Sabut Kelapa (kg)</th>
                 <th>Pemakaian EFB Press (kg)</th>
                 <th>Pemakaian OPT (kg)</th>
+                <th>Downtime (Jam)</th>
                 <th>Keterangan</th>
                 <th>Opsi</th>
             </tr>

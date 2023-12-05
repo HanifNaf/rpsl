@@ -28,6 +28,7 @@ require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Konversi data menjadi format JSON
 $data_json = json_encode($kecelakaan_kerja_arr);
+
 // Tampilkan semua jenis error
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -88,7 +89,7 @@ ini_set('display_errors', 1);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.kecelakaan_kerja_id);
-                        var editButton = '<a href="kecelakaan_kerja_edit.php?kecelakaan_kerja_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="kecelakaan_kerja_edit.php?ke=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -150,7 +151,7 @@ ini_set('display_errors', 1);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'kecelakaan_kerja_delete.php?kecelakaan_kerja_id=' + kecelakaankerjaID;
+                window.location.href = 'kecelakaan_kerja_delete.php?ke=' + kecelakaankerjaID;
             }
         });
     }

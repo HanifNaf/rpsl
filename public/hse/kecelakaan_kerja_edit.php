@@ -26,8 +26,8 @@ require_once(SITE_ROOT . "/src/footer-admin.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 
 // Retrieve Data for Editing
-if (isset($_GET['kecelakaan_kerja_id'])) {
-    $kecelakaan_kerja_id = $_GET['kecelakaan_kerja_id'];
+if (isset($_GET['ke'])) {
+    $kecelakaan_kerja_id = $_GET['ke'];
 
     $edit_query = "SELECT * FROM kecelakaan_kerja WHERE kecelakaan_kerja_id = ?;";
 
@@ -78,7 +78,6 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
         <form action="" method="post">
             <!-- Display existing data for editing -->
             <table class="table table-hover table-bordered table-sm">
-                <input type="hidden" name="edit_id" value="<?= $kecelakaan_kerja_id ?>">
                 <tr>
                     <!-- Tanggal -->
                     <td class="custom-black-bg">Tanggal</td>
@@ -140,8 +139,8 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
     <?php
     // Update Data
     if (isset($_POST['update'])) {
-        $edit_id = $_POST['edit_id'];
-        $tanggal = $_POST['tanggal'];
+        
+        //Simpat input dalam variabel
         $jenis = $_POST['jenis'];
         $penanganan = $_POST['penanganan'];
         $area = $_POST['area'];
@@ -150,6 +149,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
         $penyebab = $_POST['penyebab'];
 
         //handle tanggal
+        $tanggal = $_POST['tanggal'];
         $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
 
         // Update data in the database
@@ -165,7 +165,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
                          WHERE kecelakaan_kerja_id = ?";
         
         $prepare_update = $koneksi->prepare($update_query);
-        
+
         $prepare_update->bindParam(1, $tanggal);
         $prepare_update->bindParam(2, $jenis);
         $prepare_update->bindParam(3, $penanganan);
@@ -174,7 +174,7 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
         $prepare_update->bindParam(6, $jam_kerja);
         $prepare_update->bindParam(7, $penyebab);
         $prepare_update->bindParam(8, $tanggalid);
-        $prepare_update->bindParam(9, $edit_id);
+        $prepare_update->bindParam(9, $kecelakaan_kerja_id);
 
         try {
             $prepare_update->execute();
@@ -195,13 +195,12 @@ if (isset($_GET['kecelakaan_kerja_id'])) {
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
+            $koneksi -> rollBack();
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
 
                 $koneksi -> rollBack();
-        }
+            }
     }
     ?>
 

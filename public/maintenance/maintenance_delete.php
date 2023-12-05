@@ -23,8 +23,8 @@ require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Pastikan parameter maintenance_id telah diterima
-if (isset($_GET['maintenance_id'])) {
-    $maintenance_id = $_GET['maintenance_id'];
+if (isset($_GET['ma'])) {
+    $maintenance_id = $_GET['ma'];
 
     // Proses penghapusan data berdasarkan ID
     try {
