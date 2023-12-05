@@ -10,7 +10,7 @@ if(isset($_REQUEST['username'], $_REQUEST['password'])){
     $query = "SELECT users_id, username, password, role
             FROM users
             WHERE username= :uname;";
-    $prep = $koneksi_users->prepare($query);
+    $prep = $koneksi->prepare($query);
 
     try{
         $prep->execute(array(":uname"=>$username));
