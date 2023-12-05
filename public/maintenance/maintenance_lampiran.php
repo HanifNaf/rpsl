@@ -62,7 +62,7 @@ if(isset($_GET['la'])){
             //download lampiran
             header("Content-Type: $tipe");
             header("Content-Disposition: attachment; filename=$nama");
-            fpassthru($isi);
+            fpassthru($stream);
 
             fclose($stream);
             exit;
