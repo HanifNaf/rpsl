@@ -24,8 +24,8 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 require_once(SITE_ROOT."/src/koneksi.php");
 
 // Assuming you have sungai_id as the unique identifier
-if (isset($_GET['sungai_id'])) {
-    $sungai_id = $_GET['sungai_id'];
+if (isset($_GET['su'])) {
+    $sungai_id = $_GET['su'];
 
     // Fetch the data for the specified sungai_id
     $query = "SELECT * FROM sungai WHERE sungai_id = ?;";
@@ -168,12 +168,11 @@ if (isset($_GET['sungai_id'])) {
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
-
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            
+            $koneksi -> rollBack();
         }
     }
     ?>

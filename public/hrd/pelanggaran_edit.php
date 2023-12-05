@@ -25,8 +25,8 @@ require_once(SITE_ROOT . "/src/footer-admin.php");
 require_once(SITE_ROOT . "/src/koneksi.php");
 
 // Retrieve Data for Editing
-if (isset($_GET['pelanggaran_id'])) {
-    $pelanggaran_id = $_GET['pelanggaran_id'];
+if (isset($_GET['pe'])) {
+    $pelanggaran_id = $_GET['pe'];
 
     $edit_query = "SELECT pelanggaran_id, tanggal, nik, nama, bagian, shift, waktu_pelanggaran, 
         tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi
@@ -161,9 +161,10 @@ if (isset($_GET['pelanggaran_id'])) {
     <?php
     // Update Data
     if (isset($_POST['update'])) {
+        echo 'test \n';
         try {
-            $edit_id = $_GET['pelanggaran_id'];
-            $tanggal = $_POST['tanggal'];
+
+            //Simpan input kedalam variabels
             $nik = $_POST['nik'];
             $nama = $_POST['nama'];
             $bagian = $_POST['bagian'];
@@ -175,6 +176,7 @@ if (isset($_GET['pelanggaran_id'])) {
             $sanksi = $_POST['sanksi'];
 
             //handle tanggal
+            $tanggal = $_POST['tanggal'];
             $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
 
             // Update data in the database
@@ -204,14 +206,14 @@ if (isset($_GET['pelanggaran_id'])) {
             $prepare_update->bindParam(9, $potensi_bahaya);
             $prepare_update->bindParam(10, $sanksi);
             $prepare_update->bindParam(11, $tanggalid);
-            $prepare_update->bindParam(12, $edit_id);
+            $prepare_update->bindParam(12, $pelanggaran_id);
 
             $exec_update = $prepare_update->execute();
 
             if (!$exec_update) {
                 throw new Exception("Error in SQL query: " . $prepare_update->errorInfo()[2]);
-            } else {
-                ?>
+            } else{
+    ?>
                 <script type="text/javascript">
                     Swal.fire({
                         text: "Data Berhasil diedit!",
@@ -229,15 +231,13 @@ if (isset($_GET['pelanggaran_id'])) {
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
-
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            
+            $koneksi -> rollBack();
         }
-    }
-    ?>
+    }?>
 </body>
 
 </html>

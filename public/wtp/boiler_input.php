@@ -182,16 +182,14 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <?php
 
             } catch(PDOException $e) {
-                $errorInfo = $stmt->errorInfo();
-
-                echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
+                echo "PDO Error: ". $e->getMessage();
 
                 $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
 
-            }
+            $koneksi -> rollBack();
+        }
         }
     }
 ?>

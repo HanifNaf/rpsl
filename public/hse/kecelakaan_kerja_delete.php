@@ -52,6 +52,12 @@ if (isset($_GET['ke'])) {
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
     }
 } else {
     // Jika parameter maintenance_id tidak diterima, kembali ke halaman utama

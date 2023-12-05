@@ -23,8 +23,8 @@ require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Pastikan parameter maintenance_id telah diterima
-if (isset($_GET['pelanggaran_id'])) {
-    $pelanggaran_id = $_GET['pelanggaran_id'];
+if (isset($_GET['pe'])) {
+    $pelanggaran_id = $_GET['pe'];
 
     // Proses penghapusan data berdasarkan ID
     try {
@@ -51,6 +51,12 @@ if (isset($_GET['pelanggaran_id'])) {
         }
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
     }
 } else {
     // Jika parameter maintenance_id tidak diterima, kembali ke halaman utama

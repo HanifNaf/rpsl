@@ -117,7 +117,7 @@ $data_json = json_encode($ro_arr);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.ro_id);
-                        var editButton = '<a href="ro_edit.php?ro_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="ro_edit.php?ro=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -198,7 +198,7 @@ $data_json = json_encode($ro_arr);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'ro_delete.php?ro_id=' + roID;
+                window.location.href = 'ro_delete.php?ro=' + roID;
             }
         });
     }

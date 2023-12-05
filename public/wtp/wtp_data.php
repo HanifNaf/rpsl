@@ -48,7 +48,12 @@ try{
 }catch(PDOException $e){
         echo "PDO Error: ". $e -> getMessage();
 
-}finally{
+        $koneksi -> rollBack();
+} catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
+
+    $koneksi -> rollBack();
+} finally{
         
         //Fetch Data
         $boiler_arr = $prep_boiler -> fetchAll(PDO::FETCH_ASSOC);

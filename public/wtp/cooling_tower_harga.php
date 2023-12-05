@@ -26,13 +26,9 @@
     require_once(SITE_ROOT."/src/koneksi.php");
 
     // Retrieve Data for Editing
-    $edit_query = "SELECT a.attname, pg_get_expr(d.adbin, d.adrelid) AS default_value
-                FROM   pg_catalog.pg_attribute    a
-                LEFT   JOIN pg_catalog.pg_attrdef d ON (a.attrelid, a.attnum) = (d.adrelid, d.adnum)
-                WHERE  NOT a.attisdropped           
-                AND    a.attnum   > 0               
-                AND    pg_get_expr(d.adbin, d.adrelid) IS NOT NULL
-                AND    a.attrelid = 'public.cooling_tower'::regclass;";
+    $edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
+                FROM information_schema.columns
+                WHERE TABLE_NAME = 'cooling_tower' AND TABLE_SCHEMA = 'rpsl';";
 
     $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->execute();
@@ -45,7 +41,7 @@
     // loop setiap elemen array
     foreach ($roData as $row) {
         // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['attname']] = $row['default_value'];
+        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
     }
 ?>
 
@@ -125,17 +121,15 @@
             exit;
         }
 
-        // Query
-        $query = "ALTER TABLE cooling_tower
-                ALTER COLUMN cost_corrotion_inhibitor SET DEFAULT $corrotion,
-                ALTER COLUMN cost_cooling_water_dispersant SET DEFAULT $cooling,
-                ALTER COLUMN cost_oxy_hg SET DEFAULT $oxy_hg,
-                ALTER COLUMN cost_sulfuric_acid SET DEFAULT $sulfuric;";
-
         try {
-            $koneksi->beginTransaction();
+            // Query
+            $query = "ALTER TABLE cooling_tower
+                    ALTER COLUMN cost_corrotion_inhibitor SET DEFAULT $corrotion,
+                    ALTER COLUMN cost_cooling_water_dispersant SET DEFAULT $cooling,
+                    ALTER COLUMN cost_oxy_hg SET DEFAULT $oxy_hg,
+                    ALTER COLUMN cost_sulfuric_acid SET DEFAULT $sulfuric;";
+
             $koneksi->exec($query);
-            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -153,12 +147,11 @@
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
 
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
         }
     }
     ?>

@@ -158,67 +158,90 @@ require_once(SITE_ROOT."/src/koneksi.php");
     if(isset($_POST['add'])){
         $total = $_POST['total'];
 
-        //Menyimpan input dalalm variabel (Menggunakan looping)
         for($i=1; $i<=$total; $i++){
+
+            //Menyimpan input dalam variabel
+
             //Lampiran
             if ($_FILES['lampiran-'.$i]['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['lampiran-'.$i]['tmp_name'])) {
-            // File upload was successful, process the file
-            $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
-            $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
-            $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
+                // Upload berhasil
+                $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
+                $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
+                $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
             } else {
-            // File upload failed or no file was selected, handle accordingly
-            $nama_lampiran = null;
-            $tipe_lampiran = null;
-            $isi_lampiran = null;
-        }
+                // Upoad gagal
+                $nama_lampiran = null;
+                $tipe_lampiran = null;
+                $isi_lampiran = null;
+            }
 
-            $tanggal = $_REQUEST['tanggal-'.$i];
-            $nama = $_REQUEST['nama-'.$i];
-            $bagian = $_REQUEST['bagian-'.$i];
-            $shift = $_REQUEST['shift-'.$i];
-            $bentuk_pelanggaran = $_REQUEST['bentuk-pelanggaran-'.$i];
-            $nik = EmptyToNull($_REQUEST['nik-'.$i]);
-            $waktu = EmptyToNull($_REQUEST['waktu-'.$i]).":00";
-            $tempat = EmptyToNull($_REQUEST['tempat-'.$i]);
-            $potensi_bahaya = EmptyToNull($_REQUEST['potensi-bahaya-'.$i]);
-            $sanksi = EmptyToNull($_REQUEST['sanksi-'.$i]);
+            $nama = $_POST['nama-'.$i];
+            $bagian = $_POST['bagian-'.$i];
+            $shift = $_POST['shift-'.$i];
+            $nik = EmptyToNull($_POST['nik-'.$i]);
+            $bentuk_pelanggaran = $_POST['bentuk-pelanggaran-'.$i];
+            $waktu_pelanggaran = EmptyToNull($_POST['waktu-'.$i]).":00";
+            $tempat_pelanggaran = EmptyToNull($_POST['tempat-'.$i]);
+            $potensi_bahaya = EmptyToNull($_POST['potensi-bahaya-'.$i]);
+            $sanksi = EmptyToNull($_POST['sanksi-'.$i]);
 
             //handle tanggal
+            $tanggal = $_POST['tanggal-'.$i];
             $tanggalid = insertOrSelectTanggal($tanggal, $koneksi);
-                        
-            //QUERY INSERT
-            $query = "WITH in1 AS(INSERT INTO lampiran_hrd(lampiran_id, nama, tipe, file) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?) RETURNING lampiran_id AS lampiran)
-                    INSERT INTO pelanggaran (pelanggaran_id, lampiran_id, tanggal, nik, nama, bagian, shift, 
-                    waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, tanggal_id)
-                    SELECT uuid_generate_v4(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;";
-            
-            //Prepare INSERT
-            $prep = $koneksi -> prepare($query);
 
-            //bind parameter
-            $prep ->bindParam(1, $nama_lampiran);
-            $prep ->bindParam(2, $tipe_lampiran);
-            $prep ->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
+            //Mulai statement
+            $koneksi->beginTransaction();
 
-            $prep ->bindParam(4, $tanggal);
-            $prep ->bindParam(5, $nik);
-            $prep ->bindParam(6, $nama);
-            $prep ->bindParam(7, $bagian);
-            $prep ->bindParam(8, $shift);
-            $prep ->bindParam(9, $waktu);
-            $prep ->bindParam(10, $tempat);
-            $prep ->bindParam(11, $bentuk_pelanggaran);
-            $prep ->bindParam(12, $potensi_bahaya);
-            $prep ->bindParam(13, $sanksi);
-            $prep ->bindParam(14, $tanggalid);
-
-            //INSERT
             try{
-                $koneksi -> beginTransaction();
-                $prep -> execute();
-                $koneksi -> commit();
+                // Insert lampiran
+                $lampiran_query = "INSERT INTO lampiran_hrd (lampiran_id, nama, tipe, file) 
+                                VALUES (UUID(),?,?,?)";
+                $prep_lampiran = $koneksi->prepare($lampiran_query);
+                $prep_lampiran->bindParam(1, $nama_lampiran);
+                $prep_lampiran->bindParam(2, $tipe_lampiran);
+                $prep_lampiran->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
+
+                $prep_lampiran->execute();
+
+                // Mulai mengambil lampiran_id
+                $lampiran_index = $koneksi->lastInsertId(); //Mengambil index dari kolom kolom_index
+
+                $query = "SELECT lampiran_id FROM lampiran_hrd WHERE kolom_index=:indeks";
+                $prep_index = $koneksi->prepare($query);
+                $prep_index->bindParam(':indeks', $lampiran_index);
+                $prep_index->execute();
+
+                // Fetch data sesuai kolom_index
+                $row = $prep_index->fetch(PDO::FETCH_ASSOC);
+
+                // Get lampiran_id
+                $lampiran_id = $row['lampiran_id'];
+                //Selesai mengambil lampiran_id
+                
+
+                // Insert pelanggaran
+                $pelanggaran_query = "INSERT INTO pelanggaran (pelanggaran_id, lampiran_id, tanggal, nik, nama, bagian, shift, 
+                                    waktu_pelanggaran, tempat_pelanggaran, bentuk_pelanggaran, potensi_bahaya, sanksi, tanggal_id)
+                                    VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $prep_pelanggaran = $koneksi->prepare($pelanggaran_query);
+                $prep_pelanggaran->bindParam(1, $lampiran_id);
+                $prep_pelanggaran->bindParam(2, $tanggal);
+                $prep_pelanggaran->bindParam(3, $nik);
+                $prep_pelanggaran->bindParam(4, $nama);
+                $prep_pelanggaran->bindParam(5, $bagian);
+                $prep_pelanggaran->bindParam(6, $shift);
+                $prep_pelanggaran->bindParam(7, $waktu_pelanggaran);
+                $prep_pelanggaran->bindParam(8, $tempat_pelanggaran);
+                $prep_pelanggaran->bindParam(9, $bentuk_pelanggaran);
+                $prep_pelanggaran->bindParam(10, $potensi_bahaya);
+                $prep_pelanggaran->bindParam(11, $sanksi);
+                $prep_pelanggaran->bindParam(12, $tanggalid);
+
+                $prep_pelanggaran->execute();
+
+                
+                // Commit Statement
+                $koneksi->commit();
 
                 ?>
                 <script type="text/javascript">
@@ -243,12 +266,11 @@ require_once(SITE_ROOT."/src/koneksi.php");
             }catch(PDOException $e){
                 echo "PDO ERROR: ". $e -> getMessage();
             
-                echo "PDO ERROR: ". $e -> getMessage();
-                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                    echo "Code: " . $errorInfo[1] . "<br>";
-                    echo "Message: " . $errorInfo[2] . "<br>";
-    
-                    $koneksi -> rollBack();
+                $koneksi -> rollBack();
+            } catch(Exception $e) {
+                echo "Error: " . $e->getMessage();
+                
+                $koneksi -> rollBack();
             }
         }
     }

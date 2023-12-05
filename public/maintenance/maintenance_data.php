@@ -21,7 +21,13 @@ try{
         $koneksi -> commit();
 }catch(PDOException $e){
         echo "PDO Error: ". $e -> getMessage();
-}finally{
+
+        $koneksi -> rollBack();
+} catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+
+        $koneksi -> rollBack();
+} finally{
         
         $maintenance_arr = $prep -> fetchAll(PDO::FETCH_ASSOC);
         $maintenance_row = $koneksi -> query('select count(*) from maintenance') -> fetchColumn();

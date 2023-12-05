@@ -176,11 +176,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             </form>
         </div> 
     </div> <!--Akhir Container-->
+
 <!-- Menambahan ke Database -->
 <?php 
+
     if(isset($_POST['add'])){
     $total = $_POST['total'];
-        //
+
         for($i=1; $i<=$total; $i++){
 
             //Menyimpan input dalam variabel
@@ -192,12 +194,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             //Lampiran
             if ($_FILES['lampiran-'.$i]['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['lampiran-'.$i]['tmp_name'])) {
-                // File upload was successful, process the file
+                // Upload berhasil
                 $nama_lampiran = $_FILES['lampiran-'.$i]['name'];
                 $tipe_lampiran = pathinfo($nama_lampiran)['extension'];
                 $isi_lampiran = fopen($_FILES['lampiran-'.$i]['tmp_name'], 'rb');
             } else {
-                // File upload failed or no file was selected, handle accordingly
+                // Upload gagal
                 $nama_lampiran = null;
                 $tipe_lampiran = null;
                 $isi_lampiran = null;
@@ -212,50 +214,70 @@ require_once(SITE_ROOT."/src/koneksi.php");
             $status = $_POST['status-'.$i];
             $keterangan = $_POST['keterangan-'.$i];          
             
-            //handle tanggal
+            //Handle tanggal
             $tanggal_mulai = $_POST['tanggal-mulai-'.$i];
             $tanggal_selesai = emptyToNull($_POST['tanggal-selesai-'.$i]);
             $tanggalid = insertOrSelectTanggal($tanggal_mulai, $koneksi);
 
+            //Mulai Statement
+            $koneksi->beginTransaction();
 
-            //Sesuaikan querynya
-            //Query Insert
-            $query = "WITH in1 AS(INSERT INTO lampiran_maintenance (lampiran_id, nama, tipe, file) VALUES (uuid_generate_v4(),?,?,?) 
-                    RETURNING lampiran_id AS lampiran)
-                    INSERT INTO maintenance (maintenance_id, lampiran_id, divisi, unit, problem, evaluasi, 
-                                penanganan, tanggal_mulai, tanggal_selesai, status, 
-                                tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
-                                satuan_sparepart, tanggal_id)   
-                    SELECT UUID(), (SELECT lampiran FROM in1), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?;"; 
-            
-            //Prepare
-            $prep = $koneksi -> prepare($query);
-
-            //bind parameter
-            $prep ->bindParam(1, $nama_lampiran);
-            $prep ->bindParam(2, $tipe_lampiran);
-            $prep ->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
-
-            $prep ->bindParam(4, $divisi);
-            $prep ->bindParam(5, $unit);
-            $prep ->bindParam(6, $problem);
-            $prep ->bindParam(7, $evaluasi);
-            $prep ->bindParam(8, $penanganan);
-            $prep ->bindParam(9, $tanggal_mulai);
-            $prep ->bindParam(10, $tanggal_selesai);
-            $prep ->bindParam(11, $status);
-            $prep ->bindParam(12, $tingkat_kerusakan);
-            $prep ->bindParam(13, $keterangan);
-            $prep ->bindParam(14, $sparepart);
-            $prep ->bindParam(15, $quantity);
-            $prep ->bindParam(16, $satuan);
-            $prep ->bindParam(17, $tanggalid);
-            
-            //Insert
             try{
-                $koneksi -> beginTransaction();
-                $prep -> execute();
-                $koneksi -> commit();
+                // Insert lampiran
+                $lampiran_query = "INSERT INTO lampiran_maintenance (lampiran_id, nama, tipe, file) 
+                                VALUES (UUID(),?,?,?)";
+                $prep_lampiran = $koneksi->prepare($lampiran_query);
+                $prep_lampiran->bindParam(1, $nama_lampiran);
+                $prep_lampiran->bindParam(2, $tipe_lampiran);
+                $prep_lampiran->bindParam(3, $isi_lampiran, PDO::PARAM_LOB);
+
+                $prep_lampiran->execute();
+
+                // Mulai mengambil lampiran_id
+                $lampiran_index = $koneksi->lastInsertId(); //Mengambil index dari kolom kolom_index
+
+                $query = "SELECT lampiran_id FROM lampiran_maintenance WHERE kolom_index=:indeks";
+                $prep_index = $koneksi->prepare($query);
+                $prep_index->bindParam(':indeks', $lampiran_index);
+                $prep_index->execute();
+
+                // Fetch data sesuai kolom_index
+                $row = $prep_index->fetch(PDO::FETCH_ASSOC);
+
+                // Get lampiran_id
+                $lampiran_id = $row['lampiran_id'];
+                //Selesai mengambil lampiran_id
+                
+
+                // Insert maintenance
+                $maintenance_query = "INSERT INTO maintenance (maintenance_id, lampiran_id, divisi, unit, problem, evaluasi, 
+                                                penanganan, tanggal_mulai, tanggal_selesai, status, 
+                                                tingkat_kerusakan, keterangan, sparepart, jumlah_sparepart, 
+                                                satuan_sparepart, tanggal_id)   
+                                    VALUES (UUID(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $prep_maintenance = $koneksi->prepare($maintenance_query);
+                $prep_maintenance->bindParam(1, $lampiran_id);
+                $prep_maintenance->bindParam(2, $divisi);
+                $prep_maintenance->bindParam(3, $unit);
+                $prep_maintenance->bindParam(4, $problem);
+                $prep_maintenance->bindParam(5, $evaluasi);
+                $prep_maintenance->bindParam(6, $penanganan);
+                $prep_maintenance->bindParam(7, $tanggal_mulai);
+                $prep_maintenance->bindParam(8, $tanggal_selesai);
+                $prep_maintenance->bindParam(9, $status);
+                $prep_maintenance->bindParam(10, $tingkat_kerusakan);
+                $prep_maintenance->bindParam(11, $keterangan);
+
+                $prep_maintenance->bindParam(12, $sparepart);
+                $prep_maintenance->bindParam(13, $jumlah_sparepart);
+                $prep_maintenance->bindParam(14, $satuan);
+                $prep_maintenance->bindParam(15, $tanggalid);
+
+                $prep_maintenance->execute();
+
+                
+                // Commit Statement
+                $koneksi->commit();
 
             ?>
             <script type="text/javascript">
@@ -278,14 +300,13 @@ require_once(SITE_ROOT."/src/koneksi.php");
             </script>
             <?php
             } catch (PDOException $e) {
-                $koneksi->rollBack();
+                echo "PDO Error: " . $e->getMessage();
 
-                echo "PDO ERROR: ". $e -> getMessage();
-                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                    echo "Code: " . $errorInfo[1] . "<br>";
-                    echo "Message: " . $errorInfo[2] . "<br>";
-            
-                    $koneksi -> rollBack();
+                $koneksi -> rollBack();
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
+
+                $koneksi -> rollBack();
             }
         }
     }

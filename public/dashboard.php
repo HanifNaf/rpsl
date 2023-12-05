@@ -63,5 +63,5 @@ body {
 </head>
 
 <body>
-<iframe title="Dashboard Operasional" src="https://app.powerbi.com/view?r=eyJrIjoiNjIzNDkzZWEtZjlhNy00ODU5LTkzZjItM2M4OTExYzU1MDAxIiwidCI6ImExZmU1MWM3LWEyZGMtNDI3NS1iZTUzLTI3YmQzMWU4YzU1MSIsImMiOjEwfQ%3D%3D" navContentPaneEnabled=false frameborder="0" allowFullScreen="true" marginwidth="0" marginheight="0"></iframe>
+<iframe title="Dashboard Operasional" src="https://app.powerbi.com/reportEmbed?reportId=1c59b26a-33e4-4963-b98a-d53402115ae7&autoAuth=true&ctid=a1fe51c7-a2dc-4275-be53-27bd31e8c551&navContentPaneEnabled=false" navContentPaneEnabled=false frameborder="0" allowFullScreen="true" marginwidth="0" marginheight="0"></iframe>
 </body>

@@ -13,6 +13,11 @@ try {
     $userData = $prep->fetch(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "PDO ERROR: " . $e->getMessage();
+    
+    exit();
+} catch(Exception $e) {
+    echo "Error: " . $e->getMessage();
+    
     exit();
 }
 ?>

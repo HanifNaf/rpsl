@@ -22,8 +22,8 @@ if (!in_array($_SESSION['role'], ['elektrikal', 'wtp', 'mekanikal', 'admin', 'ma
 require_once("maintenance_data.php");
 
 //Mengambil data file lampiran
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
+if(isset($_GET['la'])){
+    $id = $_GET['la'];
 
     //Query Select lampiran
     $query = "SELECT nama, tipe, file
@@ -37,16 +37,15 @@ if(isset($_GET['id'])){
         $prep->execute();
         $koneksi->commit();
 
-    }catch(PDOException $e){
+    } catch(PDOException $e){
         echo "PDO ERROR: ". $e->getMessage();
             
-        echo "PDO ERROR: ". $e -> getMessage();
-            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-            echo "Code: " . $errorInfo[1] . "<br>";
-            echo "Message: " . $errorInfo[2] . "<br>";
-
-            $koneksi -> rollBack();
-    }finally{
+        $koneksi -> rollBack();
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
+    } finally{
         //Fetch lampiran
         $lampiran = $prep->fetch(PDO::FETCH_ASSOC);
 
@@ -55,18 +54,24 @@ if(isset($_GET['id'])){
             $isi = $lampiran['file'];
             $tipe = $lampiran['tipe'];
 
+            // Create stream
+            $stream = fopen('php://memory', 'r+');
+            fwrite($stream, $isi);
+            rewind($stream);
+
             //download lampiran
             header("Content-Type: $tipe");
             header("Content-Disposition: attachment; filename=$nama");
             fpassthru($isi);
 
-            
+            fclose($stream);
             exit;
-        }else{
-            echo "tidak ada data"; //buat sweetalert
+
+        } else{
+            echo "tidak ada data";
         }
     }
-}else{
-    echo "Invalid Request"; //buat sweetalert
+} else{
+    echo "Invalid Request";
 }
 ?>

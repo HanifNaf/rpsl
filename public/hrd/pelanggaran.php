@@ -90,7 +90,7 @@ ini_set('display_errors', 1);
                   render: function(data, type, row){
                     if (data){
                     var encodedLampiranId = encodeURIComponent(row.lampiran_id);
-                    return '<a href= "pelanggaran_lampiran.php?id='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
+                    return '<a href= "pelanggaran_lampiran.php?la='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
                     }else{
                       return data;
                     }
@@ -99,7 +99,7 @@ ini_set('display_errors', 1);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.pelanggaran_id);
-                        var editButton = '<a href="pelanggaran_edit.php?pelanggaran_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="pelanggaran_edit.php?pe=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -162,7 +162,7 @@ ini_set('display_errors', 1);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'pelanggaran_delete.php?pelanggaran_id=' + hrdID;
+                window.location.href = 'pelanggaran_delete.php?pe=' + hrdID;
             }
         });
     }

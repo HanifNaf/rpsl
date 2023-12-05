@@ -25,8 +25,8 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 require_once(SITE_ROOT."/src/koneksi.php");
 
 // Retrieve Data for Editing
-if (isset($_GET['boiler_id'])) {
-    $boiler_id = $_GET['boiler_id'];
+if (isset($_GET['bo'])) {
+    $boiler_id = $_GET['bo'];
 
     $edit_query = "SELECT boiler_id, tanggal, alkalinity_booster, oxygen_scavenger, 
         internal_treatment, condensate_treatment, m3_air,
@@ -178,12 +178,11 @@ if (isset($_GET['boiler_id'])) {
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
-
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            
+            $koneksi -> rollBack();
         }
     }
     ?>

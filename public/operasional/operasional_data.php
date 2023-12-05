@@ -22,8 +22,14 @@ try{
 
 }catch(PDOException $e){
     echo "PDO ERROR: ". $e -> getMessage();
+    
+    $koneksi -> rollBack();
+} catch(Exception $e) {
+    echo "Error: " . $e->getMessage();
+    
+    $koneksi -> rollBack();
+} finally{
 
-}finally{
     $operasional_arr = $prep -> fetchAll(PDO::FETCH_ASSOC);
     $operasional_row = $koneksi -> query('SELECT count(*) FROM operasional') -> fetchColumn();
 

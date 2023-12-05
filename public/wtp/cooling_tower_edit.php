@@ -25,8 +25,8 @@ require_once(SITE_ROOT."/src/footer-admin.php");
 require_once(SITE_ROOT."/src/koneksi.php");
 
 // Assuming you have cooling_tower_id as the unique identifier
-if (isset($_GET['cooling_tower_id'])) {
-    $cooling_tower_id = $_GET['cooling_tower_id'];
+if (isset($_GET['co'])) {
+    $cooling_tower_id = $_GET['co'];
 
     // Fetch the data for the specified cooling_tower_id
     $query = "SELECT * FROM cooling_tower WHERE cooling_tower_id = ?;";
@@ -169,12 +169,11 @@ if (isset($_GET['cooling_tower_id'])) {
         } catch (PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
-
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            
+            $koneksi -> rollBack();
         }
     }
     ?>

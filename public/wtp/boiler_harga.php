@@ -26,13 +26,9 @@
     require_once(SITE_ROOT."/src/koneksi.php");
 
     // Retrieve Data for Editing
-    $edit_query = "SELECT a.attname, pg_get_expr(d.adbin, d.adrelid) AS default_value
-                FROM   pg_catalog.pg_attribute    a
-                LEFT   JOIN pg_catalog.pg_attrdef d ON (a.attrelid, a.attnum) = (d.adrelid, d.adnum)
-                WHERE  NOT a.attisdropped           
-                AND    a.attnum   > 0               
-                AND    pg_get_expr(d.adbin, d.adrelid) IS NOT NULL
-                AND    a.attrelid = 'public.boiler'::regclass;";
+    $edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
+                FROM information_schema.columns
+                WHERE TABLE_NAME = 'boiler' AND TABLE_SCHEMA = 'rpsl';";
 
     $prepare_edit = $koneksi->prepare($edit_query);
     $prepare_edit->execute();
@@ -45,7 +41,7 @@
     // loop setiap elemen array
     foreach ($boilerData as $row) {
         // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['attname']] = $row['default_value'];
+        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
     }
 ?>
 
@@ -129,18 +125,17 @@
             exit;
         }
 
-        // Query
-        $query = "ALTER TABLE boiler 
-                ALTER COLUMN cost_alkalinity_booster SET DEFAULT $alkalinity_booster,
-                ALTER COLUMN cost_oxygen_scavenger SET DEFAULT $oxygen_scavenger,
-                ALTER COLUMN cost_internal_treatment SET DEFAULT $internal_treatment,
-                ALTER COLUMN cost_condensate_treatment SET DEFAULT $condensate_treatment,
-                ALTER COLUMN cost_solid_additive SET DEFAULT $solid_additive;";
-
         try {
-            $koneksi->beginTransaction();
+            // Query
+            $query = "ALTER TABLE boiler 
+                    ALTER COLUMN cost_alkalinity_booster SET DEFAULT $alkalinity_booster,
+                    ALTER COLUMN cost_oxygen_scavenger SET DEFAULT $oxygen_scavenger,
+                    ALTER COLUMN cost_internal_treatment SET DEFAULT $internal_treatment,
+                    ALTER COLUMN cost_condensate_treatment SET DEFAULT $condensate_treatment,
+                    ALTER COLUMN cost_solid_additive SET DEFAULT $solid_additive;";
+
+        
             $koneksi->exec($query);
-            $koneksi->commit();
 
             echo "<script>
                     Swal.fire({
@@ -158,12 +153,11 @@
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
 
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
         }
     }
     ?>

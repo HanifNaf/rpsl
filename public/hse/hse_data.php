@@ -15,7 +15,14 @@ try{
         $koneksi -> commit();
 }catch(PDOException $e){
         echo "PDO ERROR: ". $e -> getMessage();
-}finally{
+        
+        $koneksi -> rollBack();
+} catch(Exception $e) {
+    echo "Error: " . $e->getMessage();
+    
+    $koneksi -> rollBack();
+} finally{
+        
         $kecelakaan_kerja_arr = $prep -> fetchAll(PDO::FETCH_ASSOC);
         $kecelakan_kerja_row = $koneksi -> query('SELECT count(*) FROM kecelakaan_kerja') -> fetchColumn();
 
