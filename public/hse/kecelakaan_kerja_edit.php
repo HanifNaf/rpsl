@@ -192,15 +192,15 @@ if (isset($_GET['ke'])) {
                 });
             </script>
             <?php
-        } catch (PDOException $e) {
+        } catch(PDOException $e) {
             echo "Error in SQL query: " . $e->getMessage();
             
             $koneksi -> rollBack();
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
+        } catch(Exception $e) {
+            echo "Error: " . $e->getMessage();
 
-                $koneksi -> rollBack();
-            }
+            $koneksi -> rollBack();
+        }
     }
     ?>
 

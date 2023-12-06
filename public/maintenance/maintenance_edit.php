@@ -35,7 +35,7 @@ if (isset($_GET['ma'])) {
         FROM maintenance WHERE maintenance_id = ?;";
 
     $prepare_edit = $koneksi->prepare($edit_query);
-    $prepare_edit->bindParam(1, $maintenance_id, PDO::PARAM_INT);
+    $prepare_edit->bindParam(1, $maintenance_id);
     $prepare_edit->execute();
 
     $editData = $prepare_edit->fetch(PDO::FETCH_ASSOC);
@@ -260,12 +260,11 @@ if (isset($_GET['ma'])) {
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             
-            echo "PDO ERROR: ". $e -> getMessage();
-                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-                echo "Code: " . $errorInfo[1] . "<br>";
-                echo "Message: " . $errorInfo[2] . "<br>";
-
-                $koneksi -> rollBack();
+            $koneksi -> rollBack();
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            
+            $koneksi -> rollBack();
         }
     }
     ?>

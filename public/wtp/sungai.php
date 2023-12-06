@@ -101,7 +101,7 @@ $data_json = json_encode($sungai_arr);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.sungai_id);
-                        var editButton = '<a href="sungai_edit.php?sungai_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="sungai_edit.php?su=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -182,7 +182,7 @@ $data_json = json_encode($sungai_arr);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'sungai_delete.php?sungai_id=' + sungaiID;
+                window.location.href = 'sungai_delete.php?su=' + sungaiID;
             }
         });
     }

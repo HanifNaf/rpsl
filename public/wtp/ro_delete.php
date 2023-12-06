@@ -23,8 +23,8 @@ require_once(SITE_ROOT . "/src/header-admin.php");
 require_once(SITE_ROOT . "/src/footer-admin.php");
 
 // Pastikan parameter maintenance_id telah diterima
-if (isset($_GET['ro_id'])) {
-    $hrd_id = $_GET['ro_id'];
+if (isset($_GET['ro'])) {
+    $hrd_id = $_GET['ro'];
 
     // Proses penghapusan data berdasarkan ID
     try {
@@ -49,8 +49,14 @@ if (isset($_GET['ro_id'])) {
         } else {
             echo "Gagal menghapus data.";
         }
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
+
+        $koneksi -> rollBack();
     }
 } else {
     // Jika parameter maintenance_id tidak diterima, kembali ke halaman utama

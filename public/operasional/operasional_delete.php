@@ -67,15 +67,14 @@ if (isset($_GET['op'], $_GET['pr'], $_GET['pe'], $_GET['ba'])) {
                     }
                 });
             </script>";
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
+    } catch (PDOException $e) {
+        echo "PDO Error: " . $e->getMessage();
             
-        echo "PDO ERROR: ". $e -> getMessage();
-            echo "SQLSTATE: " . $errorInfo[0] . "<br>";
-            echo "Code: " . $errorInfo[1] . "<br>";
-            echo "Message: " . $errorInfo[2] . "<br>";
-
-            $koneksi -> rollBack();
+        $koneksi -> rollBack();
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+        
+        $koneksi -> rollBack();
     }
 } else {
     // Jika parameter tidak diterima, kembali ke halaman utama

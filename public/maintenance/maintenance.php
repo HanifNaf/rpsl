@@ -90,7 +90,7 @@ $data_json = json_encode($maintenance_arr);
 				  render: function(data, type, row) {
 					if (data){
 						var encodedLampiranId = encodeURIComponent(row.lampiran_id);
-						return '<a href="maintenance_lampiran.php?id='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
+						return '<a href="maintenance_lampiran.php?la='+ encodedLampiranId +'" target="_blank">'+ data +'</a>';
 				}else{
 					return data;
 				}

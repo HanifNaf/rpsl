@@ -49,9 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ubah"])) {
 
         // Redirect to a success page or perform other actions
         header("Location: success.php");
+
         exit();
     } catch (PDOException $e) {
-        echo "PDO ERROR: " . $e->getMessage();
+        echo "PDO SError: " . $e->getMessage();
+        
+        exit();
+    } catch(Exception $e) {
+        echo "Error: " . $e->getMessage();
+        
         exit();
     }
 }

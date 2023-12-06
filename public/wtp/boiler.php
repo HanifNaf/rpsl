@@ -105,7 +105,7 @@ $data_json = json_encode($boiler_arr);
                     "data": null,
                     "render": function(data, type, row, meta) {
                         var encodedID = encodeURIComponent(row.boiler_id);
-                        var editButton = '<a href="boiler_edit.php?boiler_id=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
+                        var editButton = '<a href="boiler_edit.php?bo=' + encodedID + '" class="btn btn-success btn-custom d-flex justify-content-center align-items-center">Edit</a>';
                         var deleteButton = '<button class="btn btn-danger btn-custom d-flex justify-content-center align-items-center" onclick="confirmDelete(\'' + encodedID + '\')">Hapus</button>';
                         return '<div class="btn-container">' + editButton + deleteButton + '</div>';
                     }
@@ -188,7 +188,7 @@ $data_json = json_encode($boiler_arr);
             cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
-                window.location.href = 'boiler_delete.php?boiler_id=' + boilerID;
+                window.location.href = 'boiler_delete.php?bo=' + boilerID;
             }
         });
     }

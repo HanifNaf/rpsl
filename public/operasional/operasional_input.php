@@ -160,11 +160,10 @@ require (SITE_ROOT."/src/koneksi.php");
             	</div>
             </form>
         </div> 
-    </div> <!--Akhir Container-->
+    </div> <!--Akhir Container-->\
+    
 <!-- Menambahan ke Database -->
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
     if(isset($_POST['add'])){
         $total = $_POST['total'];
@@ -215,9 +214,6 @@ ini_set('display_errors', 1);
                 $prep_produksi->bindParam(5, $tanggalid);
 
                 $prep_produksi->execute();
-            
-                // produksi_id
-                $produksi_id = $koneksi->lastInsertId();
 
 
                 // Insert pemakaian_kwh
@@ -232,9 +228,6 @@ ini_set('display_errors', 1);
                 $prep_pemakaian->bindParam(6, $tanggalid);
 
                 $prep_pemakaian->execute();
-
-                // pemakaian_id
-                $pemakaian_id = $koneksi->lastInsertId();
 
 
                 // Insert pemakaian_bahan_bakar
@@ -253,9 +246,6 @@ ini_set('display_errors', 1);
                 $prep_bahan_bakar->bindParam(10, $tanggalid);
 
                 $prep_bahan_bakar->execute();
-
-                // bahan_bakar_id
-                $bahan_bakar_id = $koneksi->lastInsertId();
 
 
                 // Insert operasional
