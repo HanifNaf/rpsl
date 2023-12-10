@@ -12,6 +12,33 @@
   .card-body:hover{
   filter: invert(1);
   }
+  /* Tampilan untuk perangkat dengan lebar layar kurang dari 600px */
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+    
+    /* Aturan CSS lainnya untuk tampilan mobile */
+}
+
+/* Tampilan untuk perangkat dengan lebar layar antara 601px dan 1024px */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    body {
+        background-color: lightgreen;
+    }
+    
+    /* Aturan CSS lainnya untuk tampilan tablet */
+}
+.container {
+    width: 80%; /* 80% dari lebar parent element */
+    margin: 0 auto; /* Tengahkan di dalam parent element */
+}
+
+/* Gunakan em untuk ukuran font */
+body {
+    font-size: 1em;
+}
+
 </style>
 
 <?php #script PHP untuk menampilkan data dari database

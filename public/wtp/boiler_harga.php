@@ -30,19 +30,19 @@
                 FROM information_schema.columns
                 WHERE TABLE_NAME = 'boiler' AND TABLE_SCHEMA = 'rpsl';";
 
-    $prepare_edit = $koneksi->prepare($edit_query);
-    $prepare_edit->execute();
+$prepare_edit = $koneksi->prepare($edit_query);
+$prepare_edit->execute();
 
-    $boilerData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
+$roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
 
-    // Pivot boilerData Array
-    $pivotedArray = [];
+// Pivot sungaiData Array
+$pivotedArray = [];
 
-    // loop setiap elemen array
-    foreach ($boilerData as $row) {
-        // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
-    }
+// loop through each array element
+foreach ($roData as $row) {
+    // set attname as key and default_value as its value
+    $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -125,16 +125,15 @@
             exit;
         }
 
-        try {
-            // Query
-            $query = "ALTER TABLE boiler 
-                    ALTER COLUMN cost_alkalinity_booster SET DEFAULT $alkalinity_booster,
-                    ALTER COLUMN cost_oxygen_scavenger SET DEFAULT $oxygen_scavenger,
-                    ALTER COLUMN cost_internal_treatment SET DEFAULT $internal_treatment,
-                    ALTER COLUMN cost_condensate_treatment SET DEFAULT $condensate_treatment,
-                    ALTER COLUMN cost_solid_additive SET DEFAULT $solid_additive;";
+        // Query
+        $query = "ALTER TABLE boiler 
+                ALTER COLUMN cost_alkalinity_booster SET DEFAULT $alkalinity_booster,
+                ALTER COLUMN cost_oxygen_scavenger SET DEFAULT $oxygen_scavenger,
+                ALTER COLUMN cost_internal_treatment SET DEFAULT $internal_treatment,
+                ALTER COLUMN cost_condensate_treatment SET DEFAULT $condensate_treatment,
+                ALTER COLUMN cost_solid_additive SET DEFAULT $solid_additive;";
 
-        
+        try {
             $koneksi->exec($query);
 
             echo "<script>
@@ -153,11 +152,12 @@
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            $koneksi -> rollBack();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
 
-            $koneksi -> rollBack();
+                $koneksi -> rollBack();
         }
     }
     ?>

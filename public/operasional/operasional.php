@@ -112,11 +112,23 @@ ini_set('display_errors', 1);
                     }
                 },
                 {
-                    extend: 'pdf', className: 'btn-info',
+                    extend: 'pdf',
+                    className: 'btn-info',
+                    orientation: 'landscape',
                     exportOptions: {
                         columns: ':visible:not(:last-child)' // Exclude the last visible column (Opsi column)
+                    },
+                    customize: function (doc) {
+                        // Define custom column widths for each of the 18 columns
+                        var customWidths = [20, 55, 30, 45, 42, 40, 40, 45, 40, 40, 40, 40, 40, 35, 40, 45, 35, 70];
+
+                        // Apply custom column widths
+                        doc.content[1].table.widths = customWidths;
+                        // Set margins (top, right, bottom, left)
+                        doc.pageMargins = [20, 25, 20, 25];
                     }
                 },
+
                 {
                     extend: 'print', className: 'btn-info',
                     exportOptions: {

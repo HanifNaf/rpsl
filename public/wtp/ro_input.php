@@ -157,7 +157,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             //Query Insert
             $query = "INSERT INTO ro(ro_id, tanggal, anti_scalant, alkalinity_booster, asam_s4241, 
                     asam_hcl, basa_s4243, basa_caustik, cartridge_40, cartridge_30, m3_air, tanggal_id) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
+                    VALUES(uuid(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"; 
             
             //Prepare
             $prep = $koneksi -> prepare($query);
@@ -206,11 +206,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
             } catch(PDOException $e) {
                 echo "PDO ERROR: ". $e -> getMessage();
             
-                $koneksi -> rollBack();
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
-            
-                $koneksi -> rollBack();
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

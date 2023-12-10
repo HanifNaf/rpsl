@@ -139,7 +139,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             //Query Insert
             $query = "INSERT INTO boiler(boiler_id, tanggal, alkalinity_booster, oxygen_scavenger, 
                     internal_treatment, condensate_treatment, solid_additive, m3_air, tanggal_id) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?, ?,?);"; 
+                    VALUES(uuid(), ?, ?, ?, ?, ?, ?, ?,?);"; 
             
             //Prepare
             $prep = $koneksi -> prepare($query);
@@ -182,14 +182,16 @@ require_once(SITE_ROOT."/src/koneksi.php");
                 <?php
 
             } catch(PDOException $e) {
-                echo "PDO Error: ". $e->getMessage();
+                $errorInfo = $stmt->errorInfo();
+
+                echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
 
                 $koneksi -> rollBack();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
 
-            $koneksi -> rollBack();
-        }
+            }
         }
     }
 ?>

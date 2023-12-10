@@ -126,7 +126,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
             //Query Insert
             $query = "INSERT INTO cooling_tower(cooling_tower_id, tanggal, corrotion_inhibitor,
                     cooling_water_dispersant, oxy_hg, sulfuric_acid, tanggal_id) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?);"; 
+                    VALUES(uuid(), ?, ?, ?, ?, ?, ?);"; 
             
             //Prepare
             $prep = $koneksi -> prepare($query);
@@ -169,11 +169,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
             } catch(PDOException $e) {
                 echo "PDO ERROR: ". $e -> getMessage();
             
-                $koneksi -> rollBack();
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
-                
-                $koneksi -> rollBack();
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }

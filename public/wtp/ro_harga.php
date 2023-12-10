@@ -27,22 +27,22 @@
 
     // Retrieve Data for Editing
     $edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
-    FROM information_schema.columns
-    WHERE TABLE_NAME = 'ro' AND TABLE_SCHEMA = 'rpsl';";
+                FROM information_schema.columns
+                WHERE TABLE_NAME = 'ro' AND TABLE_SCHEMA = 'rpsl';";
 
-    $prepare_edit = $koneksi->prepare($edit_query);
-    $prepare_edit->execute();
+$prepare_edit = $koneksi->prepare($edit_query);
+$prepare_edit->execute();
 
-    $roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
+$roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
 
-    // Pivot boilerData Array
-    $pivotedArray = [];
+// Pivot sungaiData Array
+$pivotedArray = [];
 
-    // loop setiap elemen array
-    foreach ($roData as $row) {
-        // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
-    }
+// loop through each array element
+foreach ($roData as $row) {
+    // set attname as key and default_value as its value
+    $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -144,8 +144,7 @@
             echo "Invalid input detected.";
             exit;
         }
-        
-        try{
+
         // Query
         $query = "ALTER TABLE ro
                 ALTER COLUMN cost_anti_scalant SET DEFAULT $anti,
@@ -157,7 +156,8 @@
                 ALTER COLUMN cost_cartridge_30 SET DEFAULT $cart_30,
                 ALTER COLUMN cost_cartridge_40 SET DEFAULT $cart_40;";
 
-            $koneksi->exec($query);
+        try {
+           $koneksi->exec($query);
 
             echo "<script>
                     Swal.fire({
@@ -175,12 +175,13 @@
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
             
-            $koneksi -> rollBack();
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
+            echo "PDO ERROR: ". $e -> getMessage();
+                echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                echo "Code: " . $errorInfo[1] . "<br>";
+                echo "Message: " . $errorInfo[2] . "<br>";
 
                 $koneksi -> rollBack();
-            }
+        }
     }
     ?>
 </body>

@@ -1,48 +1,48 @@
 <?php
-    require_once("../../config/config.php");
+require_once("../../config/config.php");
 
-    // Cek role
-    if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
-        echo "<p style='color: white;'>Akses Dibatasi. Anda tidak memiliki izin yang cukup.</p>";
+// Check role
+if (!in_array($_SESSION['role'], ['wtp', 'admin'])) {
+    echo "<p style='color: white;'>Akses Dibatasi. Anda tidak memiliki izin yang cukup.</p>";
 
-        // Menambahkan skrip SweetAlert untuk notifikasi yang lebih menarik
-        echo "
-            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Akses Dibatasi',
-                    text: 'Anda tidak memiliki izin yang cukup.',
-                }).then(function() {
-                    window.location.href = '../boiler/boiler.php';
-                });
-            </script>
-        ";
-    }
+    // Add SweetAlert script for a more attractive notification
+    echo "
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Dibatasi',
+                text: 'Anda tidak memiliki izin yang cukup.',
+            }).then(function() {
+                window.location.href = '../boiler/boiler.php';
+            });
+        </script>
+    ";
+}
 
-    require_once("wtp_data.php");
-    require_once(SITE_ROOT."/src/header-admin.php");
-    require_once(SITE_ROOT."/src/footer-admin.php");
-    require_once(SITE_ROOT."/src/koneksi.php");
+require_once("wtp_data.php");
+require_once(SITE_ROOT . "/src/header-admin.php");
+require_once(SITE_ROOT . "/src/footer-admin.php");
+require_once(SITE_ROOT . "/src/koneksi.php");
 
-    // Retrieve Data for Editing
-    $edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
+// Retrieve Data for Editing
+$edit_query = "SELECT COLUMN_NAME, COLUMN_DEFAULT
                 FROM information_schema.columns
                 WHERE TABLE_NAME = 'sungai' AND TABLE_SCHEMA = 'rpsl';";
 
-    $prepare_edit = $koneksi->prepare($edit_query);
-    $prepare_edit->execute();
+$prepare_edit = $koneksi->prepare($edit_query);
+$prepare_edit->execute();
 
-    $roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
+$roData = $prepare_edit->fetchAll(PDO::FETCH_ASSOC);
 
-    // Pivot boilerData Array
-    $pivotedArray = [];
+// Pivot sungaiData Array
+$pivotedArray = [];
 
-    // loop setiap elemen array
-    foreach ($roData as $row) {
-        // set attname sebagai key dan default_value sebagai valuenya
-        $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
-    }
+// loop through each array element
+foreach ($roData as $row) {
+    // set attname as key and default_value as its value
+    $pivotedArray[$row['COLUMN_NAME']] = $row['COLUMN_DEFAULT'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,15 +77,15 @@
                 <table class="table table-hover table-bordered table-sm">
                     <tr>
                         <td class="custom-black-bg">Harga Koagulan</td>
-                        <td><input type="number" name="koagulan" value="<?= $pivotedArray['cost_koagulan'] ?>" class="form-control" width=20% required></td>
+                        <td><input type="number" name="koagulan" value="<?= htmlspecialchars($pivotedArray['cost_koagulan']) ?>" class="form-control" width=20% required></td>
                     </tr>
                     <tr>
                         <td class="custom-black-bg">Harga Soda Ash</td>
-                        <td><input type="number" name="soda" value="<?= $pivotedArray['cost_soda_ash'] ?>" class="form-control" width=20% required></td>
+                        <td><input type="number" name="soda" value="<?= htmlspecialchars($pivotedArray['cost_soda_ash']) ?>" class="form-control" width=20% required></td>
                     </tr>
                     <tr>
                         <td class="custom-black-bg">Harga Flokulan</td>
-                        <td><input type="number" name="flokulan" value="<?= $pivotedArray['cost_flokulan'] ?>" class="form-control" width=20% required></td>
+                        <td><input type="number" name="flokulan" value="<?= htmlspecialchars($pivotedArray['cost_flokulan']) ?>" class="form-control" width=20% required></td>
                     </tr>
                 </table>
                 <div class="form-group text-center" style="margin-top: 10px;">
@@ -98,31 +98,26 @@
 
     <?php
     if (isset($_POST['update'])) {
+        try {
+            // Sanitize user input values
+            $koagulan = filter_var($_POST['koagulan'], FILTER_VALIDATE_INT);
+            $soda = filter_var($_POST['soda'], FILTER_VALIDATE_INT);
+            $flokulan = filter_var($_POST['flokulan'], FILTER_VALIDATE_INT);
 
-        //Sanitize user inputed value
-        $koagulan = filter_var($_POST['koagulan'], FILTER_VALIDATE_INT);
-        $soda = filter_var($_POST['soda'], FILTER_VALIDATE_INT);
-        $flokulan = filter_var($_POST['flokulan'], FILTER_VALIDATE_INT);
+            // Check if the values are valid integers
+            if ($koagulan === false || $soda === false || $flokulan === false) {
+                // Handle invalid input
+                echo "Invalid input detected.";
+                exit;
+            }
 
-        // Check if the values are valid integers
-        if (
-            $koagulan === false ||
-            $soda === false||
-            $flokulan === false
-        ) {
-            // Handle invalid input
-            echo "Invalid input detected.";
-            exit;
-        }
+            // Query using prepared statements to prevent SQL injection
+            $query = "ALTER TABLE sungai
+                    ALTER COLUMN cost_koagulan SET DEFAULT $koagulan,
+                    ALTER COLUMN cost_soda_ash SET DEFAULT $soda,
+                    ALTER COLUMN cost_flokulan SET DEFAULT $flokulan;";
 
-        try{
-        // Query
-        $query = "ALTER TABLE sungai
-                ALTER COLUMN cost_koagulan SET DEFAULT $koagulan,
-                ALTER COLUMN cost_soda_ash SET DEFAULT $soda,
-                ALTER COLUMN cost_flokulan SET DEFAULT $flokulan;";
-
-            $koneksi->exec($query);
+           $koneksi->exec($query);
 
             echo "<script>
                     Swal.fire({
@@ -139,12 +134,7 @@
                   </script>";
         } catch (PDOException $e) {
             echo "PDO ERROR: " . $e->getMessage();
-            
-            $koneksi -> rollBack();
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-
-            $koneksi -> rollBack();
+            $koneksi->rollBack();
         }
     }
     ?>

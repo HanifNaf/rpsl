@@ -127,7 +127,7 @@ require_once(SITE_ROOT."/src/koneksi.php");
 
             //Query Insert
             $query = "INSERT INTO sungai(sungai_id, tanggal, koagulan, soda_ash, flokulan, m3_air, tanggal_id) 
-                    VALUES(uuid_generate_v4(), ?, ?, ?, ?, ?, ?);"; 
+                    VALUES(uuid(), ?, ?, ?, ?, ?, ?);"; 
             
             //Prepare
             $prep = $koneksi -> prepare($query);
@@ -170,11 +170,12 @@ require_once(SITE_ROOT."/src/koneksi.php");
             } catch(PDOException $e) {
                 echo "PDO ERROR: ". $e -> getMessage();
             
-                $koneksi -> rollBack();
-            } catch (Exception $e) {
-                echo "Error: " . $e->getMessage();
-
-                $koneksi -> rollBack();
+                echo "PDO ERROR: ". $e -> getMessage();
+                    echo "SQLSTATE: " . $errorInfo[0] . "<br>";
+                    echo "Code: " . $errorInfo[1] . "<br>";
+                    echo "Message: " . $errorInfo[2] . "<br>";
+    
+                    $koneksi -> rollBack();
             }
         }
     }
